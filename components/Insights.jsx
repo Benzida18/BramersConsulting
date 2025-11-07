@@ -1,3 +1,4 @@
+"use client";
 export default function InsightsSection() {
     return (
         <section style={{ padding: "110px 0", width: "100%", display: "flex", justifyContent: "center" }}>
