@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.next/
+dist/
+
+# System files
+.DS_Store
+
+# Build artifacts
+out/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Vercel output
+.vercel/
