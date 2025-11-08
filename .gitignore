@@ -23,4 +23,3 @@ pnpm-debug.log*
 
 # Vercel output
 .vercel/
-public/videos/*.mp4
