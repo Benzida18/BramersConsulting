@@ -23,15 +23,16 @@ const INDUSTRY_DATA = {
         tagline: "Strategic Capital & Investment Guidance",
         video: "/videos/finance.mp4"
     },
-    "football": {
+    "football-advisory": {
         title: "Sports & Football Consulting",
         tagline: "Performance, Talent & Governance",
-        video: "/videos/football.mp4"
+        video: "/videos/football-advisory.mp4"
     },
-    "hospitality": {
+
+    "catering-hospitality": {
         title: "Hospitality & Tourism",
         tagline: "Elevating Guest Experience & Service Excellence",
-        video: "/videos/hospitality.mp4"
+        video: "/videos/catering-hospitality.mp4"
     },
     "international-trade": {
         title: "International Trade & Export",

@@ -72,47 +72,65 @@ nav a:hover,
 }
 
 /* ======================= */
-/* INDUSTRIES DROPDOWN     */
+/* DROPDOWNS (UNIFIED)     */
 /* ======================= */
+/* Base dropdown: hidden by default */
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     background: #ffffff;
-    border-radius: 16px;
-    padding: 26px 36px;
-    min-width: 520px;
-    box-shadow: 0 18px 48px rgba(0,0,0,0.17);
+    border-radius: 14px;
+    padding: 18px 26px;
+    min-width: 180px;
+    box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    z-index: 99999;
+
+    /* hidden state */
+    display: none;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.28s ease;
-    z-index: 9999;
-
-    display: grid;
-    grid-template-columns: repeat(3, max-content); /* ✅ 3×3 layout stays */
-    column-gap: 42px;
-    row-gap: 16px;
 }
 
-/* Show dropdown */
-.nav-item:hover .dropdown-menu {
+/* Show dropdown (generic vertical list) */
+.dropdown-menu.show {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     opacity: 1;
     pointer-events: auto;
 }
 
-.dropdown-menu a {
+/* Industries only (its <li> already has class="nav-item") → 3×3 grid */
+.nav-item .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 520px;
+    padding: 26px 36px;
+}
+.nav-item .dropdown-menu.show {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    column-gap: 42px;
+    row-gap: 16px;
+}
+
+/* Items */
+.dropdown-menu a,
+.dropdown-menu li span {
     font-family: var(--font-inter), sans-serif;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;          /* ✅ bold like Industries */
     color: var(--color-black) !important;
     white-space: nowrap;
-    padding: 6px 0;
-    display: block;
+    text-decoration: none !important;
     transition: 0.25s ease;
 }
 
-.dropdown-menu a:hover {
+/* Hover */
+.dropdown-menu a:hover,
+.dropdown-menu li span:hover {
     color: var(--color-primary) !important;
     transform: translateX(4px);
 }
@@ -120,30 +138,8 @@ nav a:hover,
 /* ======================= */
 /* LANGUAGE SELECT MENU    */
 /* ======================= */
-.language-menu {
-    position: absolute;
-    right: 0;
-    top: 38px;
-    background: white;
-    border-radius: 10px;
-    padding: 6px 0;
-    min-width: 160px;
-    box-shadow: 0 14px 32px rgba(0,0,0,0.14);
-    z-index: 9999;
-}
-
-.language-menu li {
-    padding: 10px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    font-family: var(--font-inter), sans-serif;
-    color: black;
-}
-
-.language-menu li:hover {
-    background: var(--color-primary);
-    color: white;
-}
+/* (No special class needed now; the unified rules above handle it.
+   If you align it to the right in JSX, it will sit flush to the edge.) */
 
 /* ============================= */
 /* INDUSTRY SECTION / HOMEPAGE   */
@@ -189,4 +185,28 @@ nav a:hover,
     object-fit: cover;
     border-radius: 26px;
     box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+}
+
+/* ---- NAV DROPDOWN VISIBILITY VIA HOVER (optional helper) ---- */
+/* If you also want classic hover to work without state, keep this: */
+.nav-item:hover .dropdown-menu {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    column-gap: 42px;
+    row-gap: 16px;
+    opacity: 1;
+    pointer-events: auto;
+}
+.language-menu {
+    position: absolute;
+    right: 0;
+    top: 38px;
+    background: white;
+    border-radius: 10px;
+    /* SIZE → tweak these two */
+    min-width: 200px;     /* 180–240 typically looks great */
+    padding: 14px 20px;   /* adjust padding as you like */
+
+    box-shadow: 0 14px 32px rgba(0,0,0,0.14);
+    z-index: 9999;
 }
