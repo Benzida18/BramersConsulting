@@ -1,7 +1,9 @@
 // app/layout.jsx
 import "./globals.css";
 import { Inter, Playfair_Display } from "next/font/google";
-import Header from "../components/Header.jsx"; // ← NOTE the .. (one level up)
+import Header from "../components/Header";
+import ScrollProgress from "../components/ScrollProgress";
+import Footer from "../components/Footer";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -23,10 +25,13 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.className} ${playfair.className}`}>
         <body>
-        {/* Header stays fixed; it overlays the hero video */}
         <Header />
-        {/* No padding-top here so it can sit on top of hero videos */}
+
         {children}
+
+        {/* ✅ Scroll Progress Bar Component */}
+        <ScrollProgress />
+        <Footer />
         </body>
         </html>
     );

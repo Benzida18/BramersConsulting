@@ -5,7 +5,6 @@ import Mission from "@/components/Mission";
 import IndustryCard from "@/components/IndustryCard";
 import IndustrySection from "@/components/IndustrySection";
 import Insights from "@/components/Insights";
-import Footer from "@/components/Footer";
 
 export default function Home() {
     return (
@@ -16,7 +15,6 @@ export default function Home() {
             <IndustryCard/>
             <IndustrySection/>
             <Insights />
-            <Footer />
             {/* Industries & Insights coming next */}
         </main>
     );
