@@ -2,16 +2,10 @@ export const metadata = {
     title: "Studio",
 };
 
-export default function StudioRootLayout({
-                                             children,
-                                         }: {
-    children: React.ReactNode;
-}) {
+export default function StudioRootLayout({ children }) {
     return (
-        <html lang="en">
-        <body style={{ background: "#111", minHeight: "100vh" }}>
-        {children}
-        </body>
-        </html>
+        <div style={{ background: "#fff", minHeight: "100vh" }}>
+            {children}
+        </div>
     );
 }

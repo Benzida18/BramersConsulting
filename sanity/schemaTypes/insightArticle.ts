@@ -1,6 +1,6 @@
-import {defineField, defineType} from "sanity";
+import { defineField, defineType } from "sanity";
 
-export const insightArticle = defineType({
+export default defineType({
     name: "insightArticle",
     title: "Insight Article",
     type: "document",
@@ -17,5 +17,11 @@ export const insightArticle = defineType({
         defineField({ name: "publishedAt", type: "datetime", initialValue: () => new Date().toISOString() }),
         defineField({ name: "body", type: "array", of: [{ type: "block" }, { type: "image" }] }),
     ],
-    preview: { select: { title: "title", media: "cover", subtitle: "publishedAt" } }
+    preview: {
+        select: {
+            title: "title",
+            media: "cover",
+            subtitle: "publishedAt"
+        }
+    }
 });

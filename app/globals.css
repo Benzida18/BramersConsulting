@@ -212,3 +212,17 @@ nav a:hover,
 }
 :root{ --headerHeight: 120px; }
 .page-offset{ padding-top: var(--headerHeight); }
+/* =================================================== */
+/* DIFFERENTIATE SITE VS. STUDIO                      */
+/* =================================================== */
+.site-body {
+    background: var(--color-background);
+    color: var(--color-text);
+}
+
+.studio-body {
+    background: #fff !important;
+    color: #000 !important;
+    min-height: 100vh;
+    overflow: visible !important;
+}
