@@ -1,26 +1,35 @@
-# Dependencies
+# === Dependencies ===
 node_modules/
 .next/
 dist/
 
-# System files
-.DS_Store
-
-# Build artifacts
+# === Build Artifacts ===
 out/
 build/
 
-# Logs
+# === Logs ===
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Environment variables
+# === Environment Files ===
 .env
 .env.local
 .env.*.local
 
-# Vercel output
+# === Vercel Deployment Output ===
 .vercel/
 
+# === System Files ===
+.DS_Store
+
+# === IDE / Editor Settings ===
+.idea/
+.vscode/
+
+# === Sanity Studio Files (optional) ===
+# Ignore Sanity's build output if you ever export it
+.sanity/
+sanity-build/
+sanity-studio/dist/

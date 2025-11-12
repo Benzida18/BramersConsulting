@@ -210,3 +210,5 @@ nav a:hover,
     box-shadow: 0 14px 32px rgba(0,0,0,0.14);
     z-index: 9999;
 }
+:root{ --headerHeight: 120px; }
+.page-offset{ padding-top: var(--headerHeight); }

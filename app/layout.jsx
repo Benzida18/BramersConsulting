@@ -1,20 +1,11 @@
-// app/layout.jsx
 import "./globals.css";
 import { Inter, Playfair_Display } from "next/font/google";
-import Header from "../components/Header";
-import ScrollProgress from "../components/ScrollProgress";
-import Footer from "../components/Footer";
+import HeaderGate from "./HeaderGate";
+import FooterGate from "./FooterGate";
+import ScrollGate from "./ScrollGate";
 
-const inter = Inter({
-    subsets: ["latin"],
-    weight: ["300", "400", "500", "600", "700"],
-    display: "swap",
-});
-const playfair = Playfair_Display({
-    subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    display: "swap",
-});
+const inter = Inter({ subsets: ["latin"] });
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 export const metadata = {
     title: "Bramers Consulting",
@@ -25,13 +16,11 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.className} ${playfair.className}`}>
         <body>
-        <Header />
-
+        {/* ✅ These gates automatically hide themselves on /studio */}
+        <HeaderGate />
         {children}
-
-        {/* ✅ Scroll Progress Bar Component */}
-        <ScrollProgress />
-        <Footer />
+        <ScrollGate />
+        <FooterGate />
         </body>
         </html>
     );
