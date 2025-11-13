@@ -1,339 +1,532 @@
-// app/contact/page.jsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { FaFacebookF, FaEnvelope, FaWhatsapp } from "react-icons/fa";
+
+const WEB3FORMS_KEY = "5a66e110-fd2a-4438-b396-186835357006";
 
 export default function ContactPage() {
-    const [progress, setProgress] = useState(0);
+    const [status, setStatus] = useState("idle"); // idle | loading | success | error
 
-    // Smooth scroll progress bar
-    useEffect(() => {
-        const onScroll = () => {
-            const h = document.documentElement;
-            const total = h.scrollHeight - h.clientHeight;
-            setProgress(total ? h.scrollTop / total : 0);
-        };
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("loading");
+
+        try {
+            const form = e.currentTarget;
+            const formData = new FormData(form);
+            formData.append("access_key", WEB3FORMS_KEY);
+
+            // optional: subject + from name
+            formData.append("subject", "New enquiry from Bramers Consulting website");
+            formData.append("from_name", "Bramers Consulting Website");
+
+            const res = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                setStatus("success");
+                form.reset();
+            } else {
+                console.error(data);
+                setStatus("error");
+            }
+        } catch (err) {
+            console.error(err);
+            setStatus("error");
+        }
+    };
 
     return (
-        <main style={{ fontFamily: "var(--font-inter)", color: "#0A0A0A" }}>
-            {/* progress line (sits at the very top; keeps header unchanged) */}
-            <div className="scroll-progress" aria-hidden>
-                <span style={{ transform: `scaleX(${progress})` }} />
-            </div>
+        <main
+            style={{
+                background: "#f7f7fa",
+                minHeight: "100vh",
+                paddingTop: "140px",
+                paddingBottom: "80px",
+            }}
+        >
+            {/* TOP SECTION */}
+            <section
+                style={{
+                    width: "92%",
+                    maxWidth: "1200px",
+                    margin: "0 auto 60px",
+                    display: "grid",
+                    gridTemplateColumns: "minmax(0, 1.2fr) minmax(0, 1fr)",
+                    gap: "52px",
+                    alignItems: "center",
+                }}
+            >
+                {/* LEFT – TEXT */}
+                <div className="fade-in-up">
+                    <p
+                        style={{
+                            fontFamily: "var(--font-inter)",
+                            fontSize: "13px",
+                            letterSpacing: "0.26em",
+                            textTransform: "uppercase",
+                            color: "#999",
+                            marginBottom: "16px",
+                        }}
+                    >
+                        Contact
+                    </p>
 
-            {/* HERO (centered title over video) */}
-            <section className="hero">
-                <video
-                    src="/videos/contact.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="hero-video"
-                />
-                <div className="hero-shade" />
-                <div className="hero-copy">
-                    <h1 className="hero-title">Contact us</h1>
+                    <h1
+                        style={{
+                            fontFamily: "var(--font-playfair)",
+                            fontSize: "42px",
+                            lineHeight: 1.25,
+                            margin: "0 0 20px",
+                            color: "#111",
+                        }}
+                    >
+                        Start a conversation about your next cross-border decision.
+                    </h1>
+
+                    <p
+                        style={{
+                            fontFamily: "var(--font-inter)",
+                            fontSize: "17px",
+                            lineHeight: 1.7,
+                            color: "#333",
+                            maxWidth: "540px",
+                        }}
+                    >
+                        Share a brief outline of your organisation, the markets you operate
+                        in and the question you are currently working through. We will
+                        respond with a considered reply rather than a generic template.
+                    </p>
+
+                    <ul
+                        style={{
+                            marginTop: "24px",
+                            paddingLeft: "18px",
+                            fontFamily: "var(--font-inter)",
+                            fontSize: "15px",
+                            color: "#555",
+                            lineHeight: 1.7,
+                        }}
+                    >
+                        <li>Discreet, partner-level response – no mailing lists.</li>
+                        <li>We are comfortable signing NDAs where appropriate.</li>
+                        <li>Advisory across the UK, Europe and African markets.</li>
+                    </ul>
                 </div>
-            </section>
 
-            {/* CONTACT CARD */}
-            <section className="wrap">
-                <div className="card">
-                    <div className="card-top">
-                        <div>
-                            <h2 className="card-title">Tell us about your enquiry</h2>
-                            <p className="card-sub">
-                                We’ll review and get back to you with a simple proposal or clarifying
-                                questions.
+                {/* RIGHT – FORM CARD */}
+                <div className="form-card fade-in-up">
+                    <form onSubmit={handleSubmit}>
+                        {/* bot check (spam protection) */}
+                        <input
+                            type="checkbox"
+                            name="botcheck"
+                            style={{ display: "none" }}
+                            tabIndex={-1}
+                            autoComplete="off"
+                        />
+
+                        <div style={{ marginBottom: "18px" }}>
+                            <label
+                                htmlFor="name"
+                                style={{
+                                    display: "block",
+                                    marginBottom: "6px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#555",
+                                }}
+                            >
+                                Name
+                            </label>
+                            <input
+                                id="name"
+                                name="name"
+                                required
+                                placeholder="Your full name"
+                                style={inputStyle}
+                            />
+                        </div>
+
+                        <div style={{ marginBottom: "18px" }}>
+                            <label
+                                htmlFor="organisation"
+                                style={{
+                                    display: "block",
+                                    marginBottom: "6px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#555",
+                                }}
+                            >
+                                Organisation
+                            </label>
+                            <input
+                                id="organisation"
+                                name="organisation"
+                                placeholder="Company, fund or institution"
+                                style={inputStyle}
+                            />
+                        </div>
+
+                        <div style={{ marginBottom: "18px" }}>
+                            <label
+                                htmlFor="email"
+                                style={{
+                                    display: "block",
+                                    marginBottom: "6px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#555",
+                                }}
+                            >
+                                Email
+                            </label>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                required
+                                placeholder="you@example.com"
+                                style={inputStyle}
+                            />
+                        </div>
+
+                        <div style={{ marginBottom: "18px", display: "grid", gap: "14px" }}>
+                            <div>
+                                <label
+                                    htmlFor="markets"
+                                    style={{
+                                        display: "block",
+                                        marginBottom: "6px",
+                                        fontFamily: "var(--font-inter)",
+                                        fontSize: "14px",
+                                        color: "#555",
+                                    }}
+                                >
+                                    Markets
+                                </label>
+                                <input
+                                    id="markets"
+                                    name="markets"
+                                    placeholder="e.g. UK, Côte d’Ivoire, Ghana"
+                                    style={inputStyle}
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="timeline"
+                                    style={{
+                                        display: "block",
+                                        marginBottom: "6px",
+                                        fontFamily: "var(--font-inter)",
+                                        fontSize: "14px",
+                                        color: "#555",
+                                    }}
+                                >
+                                    Timeline
+                                </label>
+                                <input
+                                    id="timeline"
+                                    name="timeline"
+                                    placeholder="e.g. exploring / next 3–6 months"
+                                    style={inputStyle}
+                                />
+                            </div>
+                        </div>
+
+                        <div style={{ marginBottom: "22px" }}>
+                            <label
+                                htmlFor="message"
+                                style={{
+                                    display: "block",
+                                    marginBottom: "6px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#555",
+                                }}
+                            >
+                                How can we help?
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
+                                rows={5}
+                                placeholder="Share a short summary of the decision, opportunity or challenge you’d like to discuss."
+                                style={{
+                                    ...inputStyle,
+                                    resize: "vertical",
+                                    minHeight: "120px",
+                                }}
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={status === "loading"}
+                            style={{
+                                width: "100%",
+                                border: "none",
+                                borderRadius: "999px",
+                                padding: "13px 20px",
+                                fontFamily: "var(--font-inter)",
+                                fontSize: "15px",
+                                fontWeight: 500,
+                                cursor: status === "loading" ? "wait" : "pointer",
+                                background:
+                                    "linear-gradient(135deg, #1E90FF, #0044cc)",
+                                color: "#fff",
+                                boxShadow: "0 14px 28px rgba(0, 80, 170, 0.35)",
+                                transition: "transform 0.18s ease, box-shadow 0.18s ease",
+                            }}
+                            className="submit-button"
+                        >
+                            {status === "loading" ? "Sending…" : "Send message"}
+                        </button>
+
+                        {status === "success" && (
+                            <p
+                                style={{
+                                    marginTop: "14px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#0c8c4a",
+                                }}
+                            >
+                                Thank you – your message has been sent. We’ll come back to you
+                                shortly.
                             </p>
-                        </div>
+                        )}
 
-                        {/* Only icons (Facebook + WhatsApp) */}
-                        <div className="actions">
-                            <a
-                                href="https://www.facebook.com/bouraima.zida"
-                                target="_blank"
-                                rel="noopener"
-                                aria-label="Open Facebook profile"
-                                className="action-btn"
-                                title="Facebook"
+                        {status === "error" && (
+                            <p
+                                style={{
+                                    marginTop: "14px",
+                                    fontFamily: "var(--font-inter)",
+                                    fontSize: "14px",
+                                    color: "#b00020",
+                                }}
                             >
-                                {/* FB icon */}
-                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                    <path
-                                        d="M22 12.06C22 6.51 17.52 2 12 2S2 6.51 2 12.06c0 5.01 3.66 9.16 8.44 9.94v-7.03H7.9v-2.91h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.78 8.44-4.93 8.44-9.94Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-                            </a>
-                            <a
-                                href="https://wa.me/447534259556"
-                                target="_blank"
-                                rel="noopener"
-                                aria-label="Chat on WhatsApp"
-                                className="action-btn"
-                                title="WhatsApp"
-                            >
-                                {/* WA icon */}
-                                <svg viewBox="0 0 32 32" width="18" height="18" aria-hidden="true">
-                                    <path
-                                        d="M19.1 17.3c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2.1-.3 0-.5-.1-.1-.7-1.7-.9-2.2-.2-.5-.5-.4-.7-.4h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.4 3.3c.2.3 2.4 3.7 5.8 5.1.8.4 1.5.6 2 .7.8.3 1.5.2 2 .1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.2-.3-.2-.6-.3Z"
-                                        fill="currentColor"
-                                    />
-                                    <path
-                                        d="M27 5a13 13 0 0 0-22 13.7L4 28l9.5-2A13 13 0 0 0 27 5Zm-2.8 14.9a10.3 10.3 0 0 1-12.1 2.1l-.3-.2-5.6 1.2 1.2-5.4-.2-.4a10.3 10.3 0 1 1 17 2.7Z"
-                                        fill="currentColor"
-                                    />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                    <form className="grid">
-                        {/* Row 1 */}
-                        <div className="field">
-                            <label>First name *</label>
-                            <input type="text" name="firstName" placeholder="Jane" required />
-                        </div>
-                        <div className="field">
-                            <label>Last name *</label>
-                            <input type="text" name="lastName" placeholder="Doe" required />
-                        </div>
-
-                        {/* Row 2 */}
-                        <div className="field">
-                            <label>Email *</label>
-                            <input type="email" name="email" placeholder="you@example.com" required />
-                        </div>
-                        <div className="field">
-                            <label>Company (optional)</label>
-                            <input type="text" name="company" placeholder="Company name" />
-                        </div>
-
-                        {/* Row 3 */}
-                        <div className="field field--full">
-                            <label>Phone (optional)</label>
-                            <input type="tel" name="phone" placeholder="+44 …" />
-                        </div>
-
-                        {/* Row 4 */}
-                        <div className="field field--full">
-                            <label>Message *</label>
-                            <textarea name="message" placeholder="Write your message…" required />
-                        </div>
-
-                        <div className="actions-bottom">
-                            <button type="submit" className="btn">
-                                Send message
-                            </button>
-                        </div>
+                                Something went wrong while sending your message. Please try
+                                again or email us directly.
+                            </p>
+                        )}
                     </form>
                 </div>
             </section>
 
+            {/* DIRECT CONTACT CARDS */}
+            <section
+                style={{
+                    width: "92%",
+                    maxWidth: "1200px",
+                    margin: "0 auto",
+                }}
+            >
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                        gap: "22px",
+                    }}
+                >
+                    {/* Email */}
+                    <div className="contact-card">
+                        <div className="contact-icon">
+                            <FaEnvelope size={18} />
+                        </div>
+                        <h3 className="contact-title">Email</h3>
+                        <p className="contact-text">
+                            For detailed briefs, documents or formal correspondence.
+                        </p>
+                        <a
+                            href="mailto:lentrepreuneuriat40@gmail.com"
+                            className="contact-link"
+                        >
+                            lentrepreuneuriat40@gmail.com
+                        </a>
+                    </div>
+
+                    {/* WhatsApp */}
+                    <div className="contact-card">
+                        <div className="contact-icon">
+                            <FaWhatsapp size={20} />
+                        </div>
+                        <h3 className="contact-title">WhatsApp</h3>
+                        <p className="contact-text">
+                            For quick questions, scheduling calls or sharing context.
+                        </p>
+                        <a
+                            href="https://wa.me/447534259556"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="contact-link"
+                        >
+                            +44 7534 259 556
+                        </a>
+                    </div>
+
+                    {/* Facebook */}
+                    <div className="contact-card">
+                        <div className="contact-icon">
+                            <FaFacebookF size={18} />
+                        </div>
+                        <h3 className="contact-title">Facebook</h3>
+                        <p className="contact-text">
+                            Connect with{" "}
+                            <span style={{ fontWeight: 600 }}>Bouraima Zida</span> for
+                            ongoing updates and conversations.
+                        </p>
+                        <a
+                            href="https://www.facebook.com/bouraima.zida"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="contact-link"
+                        >
+                            View profile →
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* local styles */}
             <style jsx>{`
-                /* progress line */
-                .scroll-progress {
-                    position: fixed;
-                    top: 0; /* sits at the very top; header stays unchanged */
-                    left: 0;
-                    width: 100%;
-                    height: 3px;
-                    z-index: 99999;
+                .form-card {
+                    background: #ffffff;
+                    border-radius: 24px;
+                    padding: 26px 30px 30px;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+                    border: 1px solid rgba(0, 0, 0, 0.06);
+                    backdrop-filter: blur(10px);
+                    transform: translateY(0);
+                    transition: transform 0.25s ease, box-shadow 0.25s ease;
+                }
+
+                .form-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.16);
+                }
+
+                .submit-button:hover {
+                    transform: translateY(-1px);
+                    box-shadow: 0 18px 36px rgba(0, 80, 170, 0.4);
+                }
+
+                .fade-in-up {
+                    opacity: 0;
+                    transform: translateY(16px);
+                    animation: fadeUp 0.55s ease forwards;
+                }
+
+                .fade-in-up:nth-child(2) {
+                    animation-delay: 0.08s;
+                }
+
+                .contact-card {
+                    position: relative;
+                    background: #ffffff;
+                    border-radius: 20px;
+                    padding: 22px 22px 24px;
+                    border: 1px solid rgba(0, 0, 0, 0.05);
+                    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.06);
+                    overflow: hidden;
+                    transition: transform 0.25s ease, box-shadow 0.25s ease,
+                    border-color 0.25s ease, background 0.25s ease;
+                }
+
+                .contact-card::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    background: radial-gradient(
+                            circle at top left,
+                            rgba(30, 144, 255, 0.22),
+                            transparent 55%
+                    );
+                    opacity: 0;
+                    transition: opacity 0.25s ease;
                     pointer-events: none;
                 }
-                .scroll-progress span {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
-                    background: #1e90ff;
-                    transform-origin: 0 50%;
-                    transform: scaleX(0);
-                    transition: transform 120ms linear;
-                    box-shadow: 0 0 12px rgba(30, 144, 255, 0.55);
-                }
 
-                /* hero */
-                .hero {
-                    position: relative;
-                    height: 78vh;
-                    min-height: 520px;
-                    overflow: hidden;
-                }
-                .hero-video {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    filter: brightness(65%);
-                }
-                .hero-shade {
-                    position: absolute;
-                    inset: 0;
+                .contact-card:hover {
+                    transform: translateY(-6px);
+                    box-shadow: 0 22px 48px rgba(15, 52, 96, 0.22);
+                    border-color: rgba(30, 144, 255, 0.6);
                     background: linear-gradient(
-                            0deg,
-                            rgba(0, 0, 0, 0.55) 0%,
-                            rgba(0, 0, 0, 0.28) 40%,
-                            rgba(0, 0, 0, 0.15) 100%
+                            135deg,
+                            rgba(255, 255, 255, 1),
+                            rgba(244, 248, 255, 1)
                     );
                 }
-                .hero-copy {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-align: center;
-                    color: #fff;
-                    padding: 0 24px;
-                }
-                .hero-title {
-                    font-family: var(--font-playfair), serif;
-                    font-size: 64px;
-                    line-height: 1.06;
-                    margin: 0;
-                    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+
+                .contact-card:hover::before {
+                    opacity: 1;
                 }
 
-                /* page wrap */
-                .wrap {
-                    background: linear-gradient(180deg, #f5f9ff 0%, #ffffff 30%);
-                    padding: 90px 24px 140px;
-                }
-
-                /* card */
-                .card {
-                    max-width: 1120px;
-                    margin: 0 auto;
-                    background: #ffffff;
-                    border-radius: 22px;
-                    border: 1px solid rgba(0, 0, 0, 0.06);
-                    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
-                    padding: 32px 32px 28px;
-                }
-                .card-top {
+                .contact-icon {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 999px;
                     display: flex;
-                    align-items: flex-start;
-                    justify-content: space-between;
-                    gap: 18px;
-                    margin-bottom: 12px;
-                }
-                .card-title {
-                    font-family: var(--font-playfair), serif;
-                    font-size: 32px;
-                    margin: 0 0 6px;
-                }
-                .card-sub {
-                    color: #565a61;
-                    margin: 0;
-                    line-height: 1.6;
-                }
-
-                /* action icons */
-                .actions {
-                    display: flex;
-                    gap: 10px;
-                }
-                .action-btn {
-                    width: 42px;
-                    height: 42px;
-                    border-radius: 9999px;
-                    display: inline-flex;
                     align-items: center;
                     justify-content: center;
-                    background: #f3f7ff;
+                    margin-bottom: 10px;
+                    background: rgba(30, 144, 255, 0.12);
                     color: #1e90ff;
-                    border: 1px solid rgba(30, 144, 255, 0.25);
-                    box-shadow: 0 8px 24px rgba(30, 144, 255, 0.15);
-                    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-                }
-                .action-btn:hover {
-                    transform: translateY(-2px);
-                    background: #eaf2ff;
-                    box-shadow: 0 14px 36px rgba(30, 144, 255, 0.22);
                 }
 
-                /* grid form */
-                .grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, minmax(300px, 1fr));
-                    gap: 22px 22px; /* spacious */
-                    margin-top: 12px;
+                .contact-title {
+                    font-family: var(--font-playfair);
+                    font-size: 19px;
+                    margin: 0 0 6px;
+                    color: #111;
                 }
-                .field {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
-                }
-                .field--full {
-                    grid-column: 1 / -1;
-                }
-                label {
+
+                .contact-text {
+                    font-family: var(--font-inter);
                     font-size: 14px;
-                    color: #333;
-                    letter-spacing: 0.2px;
-                }
-                input,
-                textarea {
-                    width: 100%;
-                    background: #fff;
-                    border: 1px solid rgba(0, 0, 0, 0.12);
-                    border-radius: 14px;
-                    padding: 14px 16px;
-                    font-size: 16px;
-                    line-height: 1.3;
-                    outline: none;
-                    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
-                }
-                input {
-                    height: 56px; /* bigger inputs */
-                }
-                textarea {
-                    min-height: 220px; /* generous message area */
-                    resize: vertical;
-                }
-                input:focus,
-                textarea:focus {
-                    border-color: #1e90ff;
-                    box-shadow: 0 0 0 4px rgba(30, 144, 255, 0.18);
-                    background: #fcfdff;
+                    line-height: 1.7;
+                    color: #555;
+                    margin: 0 0 10px;
                 }
 
-                .actions-bottom {
-                    grid-column: 1 / -1;
-                    display: flex;
-                    justify-content: flex-end;
-                    margin-top: 6px;
-                }
-                .btn {
-                    height: 48px;
-                    padding: 0 18px;
-                    border-radius: 12px;
-                    font-weight: 700;
-                    font-size: 15.5px;
-                    color: #fff;
-                    background: #1e90ff;
-                    border: 1px solid #1e90ff;
-                    box-shadow: 0 14px 36px rgba(30, 144, 255, 0.22);
-                    transition: transform 160ms ease, box-shadow 160ms ease;
-                }
-                .btn:hover {
-                    transform: translateY(-1px);
-                    box-shadow: 0 18px 44px rgba(30, 144, 255, 0.28);
+                .contact-link {
+                    font-family: var(--font-inter);
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #1e90ff;
+                    text-decoration: none;
                 }
 
-                @media (max-width: 900px) {
-                    .hero-title { font-size: 46px; }
-                    .grid { grid-template-columns: 1fr; }
-                    .actions-bottom { justify-content: stretch; }
-                    .btn { width: 100%; }
+                .contact-link:hover {
+                    text-decoration: underline;
+                }
+
+                @keyframes fadeUp {
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
                 }
             `}</style>
         </main>
     );
 }
+
+const inputStyle = {
+    width: "100%",
+    borderRadius: "999px",
+    border: "1px solid rgba(0,0,0,0.12)",
+    padding: "11px 16px",
+    fontFamily: "var(--font-inter)",
+    fontSize: "14px",
+    outline: "none",
+    background: "rgba(255,255,255,0.96)",
+    transition: "border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease",
+};
