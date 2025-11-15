@@ -1,7 +1,7 @@
 // app/case-studies/[slug]/page.jsx
 import Link from "next/link";
 import { client } from "@/sanity/client";
-import "./case-studies.css";
+import "../case-studies.css";  //
 
 async function getCaseStudy(slug) {
     const query = `
