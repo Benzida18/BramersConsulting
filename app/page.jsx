@@ -15,7 +15,7 @@ export default function Home() {
             <Mission />
             <IndustryCard />
             <IndustrySection />
-            <HowWeWork />   {/* 👈 replaces <Insights /> */}
+            <HowWeWork />   
         </main>
     );
 }

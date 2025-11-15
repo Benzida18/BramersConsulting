@@ -436,11 +436,16 @@ function ServiceCard({ service }) {
             </div>
 
             <div ref={btnRef} style={btnWrapStyle}>
-                {/* Placeholder route; you can later create /book/[slug] */}
-                <Link href={`/book/${service.slug}`} style={btnStyle}>
-                    Book
+                <Link href={`/industries/${service.slug}`} style={{ textDecoration: "none" }}>
+                    <button className="learn-more">
+      <span className="circle" aria-hidden="true">
+        <span className="icon arrow"></span>
+      </span>
+                        <span className="button-text">Learn More</span>
+                    </button>
                 </Link>
             </div>
+
         </div>
     );
 }

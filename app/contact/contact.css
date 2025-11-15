@@ -1,0 +1,293 @@
+/* PAGE BASE */
+.contact-page {
+    background: #f7f7fa;
+    color: #111;
+    min-height: 100vh;
+    font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto;
+}
+
+/* ======================= */
+/* HERO WITH VIDEO         */
+/* ======================= */
+
+.contact-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 380px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.contact-hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+.contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 14px 38px rgba(0, 0, 0, 0.55);
+    padding: 0 20px;
+}
+
+.contact-hero-title {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 48px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* ======================= */
+/* BODY LAYOUT             */
+/* ======================= */
+
+.contact-body {
+    width: 92%;
+    max-width: 1200px;
+    margin: 80px auto 120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* LEFT COPY */
+
+.contact-eyebrow-small {
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.contact-copy-title {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 34px;
+    line-height: 1.2;
+    margin: 0 0 18px;
+}
+
+.contact-copy-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333;
+    margin: 0 0 16px;
+    max-width: 520px;
+}
+
+.contact-copy-bullets {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #444;
+}
+
+/* ======================= */
+/* FORM CARD               */
+/* ======================= */
+
+.contact-card {
+    background: #ffffff;
+    padding: 30px 32px 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.16);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 540px;       /* keeps everything nicely inside */
+    margin-left: auto;
+}
+
+/* Blue gradients (echoing neo-card) */
+.contact-card::before,
+.contact-card::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(32px);
+    opacity: 0.22;
+    z-index: -1;
+}
+
+.contact-card::before {
+    top: -70px;
+    left: -70px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(30, 144, 255, 0.45), transparent 70%);
+}
+
+.contact-card::after {
+    bottom: -70px;
+    right: -70px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(30, 144, 255, 0.45), transparent 70%);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ======================= */
+/* INPUT GROUPS            */
+/* ======================= */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #05060f99;
+    transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.contact-card .input,
+.contact-card select,
+.contact-card .textarea {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    background-color: #05060f0a;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    font-size: 1rem;
+    font-family: inherit;
+    transition:
+            border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1),
+            color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1),
+            background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1);
+}
+
+.contact-card .input,
+.contact-card select {
+    height: 48px;
+    padding: 0 1rem;
+}
+
+.contact-card .textarea {
+    min-height: 140px;
+    padding: 0.75rem 1rem;
+    resize: vertical;
+}
+
+.contact-card .input:hover,
+.contact-card .input:focus,
+.contact-card .textarea:hover,
+.contact-card .textarea:focus,
+.contact-card .input-group:hover .input,
+.contact-card .input-group:hover .textarea {
+    outline: none;
+    border-color: #05060f;
+    background-color: #ffffff;
+}
+
+.contact-card .input-group:hover .label,
+.contact-card .input-group:focus-within .label {
+    color: #05060fc2;
+}
+
+/* ======================= */
+/* PHONE – react-international-phone */
+/* ======================= */
+
+.phone-row {
+    width: 100%;
+}
+
+.contact-card .react-international-phone-input-container {
+    width: 100%;
+    background-color: #05060f0a;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    height: 48px;
+    padding: 0 0.6rem;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    transition:
+            border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1),
+            background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1);
+}
+
+.contact-card
+.react-international-phone-input-container
+.react-international-phone-input {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-card
+.react-international-phone-input-container
+.react-international-phone-country-selector {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* hover / focus to match other inputs */
+.contact-card .react-international-phone-input-container:hover,
+.contact-card .react-international-phone-input-container:focus-within {
+    border-color: #05060f;
+    background-color: #ffffff;
+}
+
+/* BUTTON AREA */
+
+.contact-actions {
+    margin-top: 24px;
+}
+
+/* ======================= */
+/* RESPONSIVE              */
+/* ======================= */
+
+@media (max-width: 900px) {
+    .contact-body {
+        grid-template-columns: 1fr;
+        margin-top: 60px;
+        gap: 40px;
+    }
+
+    .contact-copy-title {
+        font-size: 30px;
+    }
+
+    .contact-card {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 24px 20px 26px;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-hero {
+        height: 56vh;
+        min-height: 320px;
+    }
+
+    .contact-hero-title {
+        font-size: 36px;
+    }
+}

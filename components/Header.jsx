@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
@@ -7,7 +8,6 @@ export default function Header() {
     const [indOpen, setIndOpen] = useState(false);
     const [langOpen, setLangOpen] = useState(false);
 
-    // 🔵 blue progress bar ref
     const barRef = useRef(null);
     const ticking = useRef(false);
 
@@ -21,12 +21,10 @@ export default function Header() {
                     const maxScroll = docHeight - winHeight || 1;
                     const progress = Math.min(Math.max(scrollPos / maxScroll, 0), 1);
 
-                    // update blue bar width
                     if (barRef.current) {
                         barRef.current.style.transform = `scaleX(${progress})`;
                     }
 
-                    // existing “shrink + darken on scroll”
                     setScrolled(scrollPos > 50);
                     ticking.current = false;
                 });
@@ -34,11 +32,10 @@ export default function Header() {
             }
         };
 
-        // run once on mount so bar is correct even at reload mid-page
         handleScroll();
-
         window.addEventListener("scroll", handleScroll);
         window.addEventListener("resize", handleScroll);
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleScroll);
@@ -47,7 +44,7 @@ export default function Header() {
 
     return (
         <>
-            {/* 🔵 Blue scroll progress bar (sits on very top of screen) */}
+            {/* blue scroll bar */}
             <div
                 ref={barRef}
                 style={{
@@ -60,11 +57,10 @@ export default function Header() {
                     transformOrigin: "0 0",
                     transform: "scaleX(0)",
                     transition: "transform 0.12s linear",
-                    zIndex: 10000, // above header
+                    zIndex: 10000,
                 }}
             />
 
-            {/* Your original header – unchanged in structure / styling */}
             <header
                 style={{
                     position: "fixed",
@@ -73,10 +69,7 @@ export default function Header() {
                     width: "100%",
                     zIndex: 9999,
                     padding: scrolled ? "10px 42px" : "26px 42px",
-                    // sits on top of video, visible from first paint
-                    background: scrolled
-                        ? "rgba(0,0,0,0.85)"
-                        : "rgba(0,0,0,0.35)",
+                    background: scrolled ? "rgba(0,0,0,0.85)" : "rgba(0,0,0,0.35)",
                     backdropFilter: "blur(12px)",
                     transition: "0.3s ease",
                 }}
@@ -89,8 +82,8 @@ export default function Header() {
                         overflow: "visible",
                     }}
                 >
-                    {/* LOGO (keep your size/position logic) */}
-                    <Link href="/public" style={{ display: "flex", alignItems: "center" }}>
+                    {/* ✅ logo now always takes you home */}
+                    <Link href="/" style={{ display: "flex", alignItems: "center" }}>
                         <img
                             src="/logo.jpg"
                             alt="Bramers Consulting"
@@ -110,162 +103,125 @@ export default function Header() {
                             gap: "48px",
                             listStyle: "none",
                             alignItems: "center",
-                            // keep your left shift so long French labels still fit
                             transform: "translateX(-200px)",
                         }}
                     >
-                        {/* INDUSTRIES (white dropdown) */}
+                        {/* INDUSTRIES DROPDOWN */}
                         <li
+                            className="nav-item"
                             onMouseEnter={() => setIndOpen(true)}
                             onMouseLeave={() => setIndOpen(false)}
-                            style={{
-                                position: "relative",
-                                color: "white",
-                                fontSize: "20px",
-                                cursor: "pointer",
-                                userSelect: "none",
-                            }}
                         >
-                            <span className="dropdown-trigger">Industries ▾</span>
+                            <button
+                                type="button"
+                                className="dropdown-trigger"
+                                style={{
+                                    background: "none",
+                                    border: "none",
+                                    padding: 0,
+                                    cursor: "pointer",
+                                }}
+                            >
+                                Industries <span className="chevron">▾</span>
+                            </button>
 
-                            {indOpen && (
-                                <ul className="dropdown-menu show" style={menuBoxStyle}>
-                                    {[
-                                        ["Agribusiness", "/industries/agribusiness"],
-                                        ["Real Estate", "/industries/real-estate"],
-                                        ["Finance", "/industries/finance"],
-                                        ["Catering & Hospitality", "/industries/catering-hospitality"],
-                                        ["International Trade", "/industries/international-trade"],
-                                        ["Football Advisory", "/industries/football-advisory"],
-                                        ["Coaching & Training", "/industries/coaching-training"],
-                                        ["AI Strategy", "/industries/ai-strategy"],
-                                        ["Mining", "/industries/mining"],
-                                    ].map(([label, href]) => (
-                                        <li key={href}>
-                                            <Link href={href} style={menuItemStyle}>
-                                                {label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                            <ul className={`dropdown-menu ${indOpen ? "show" : ""}`}>
+                                {[
+                                    ["Agribusiness", "/industries/agribusiness"],
+                                    ["Real Estate", "/industries/real-estate"],
+                                    ["Finance", "/industries/finance"],
+                                    ["Catering & Hospitality", "/industries/catering-hospitality"],
+                                    ["International Trade", "/industries/international-trade"],
+                                    ["Football Advisory", "/industries/football-advisory"],
+                                    ["Coaching & Training", "/industries/coaching-training"],
+                                    ["AI Strategy", "/industries/ai-strategy"],
+                                    ["Mining", "/industries/mining"],
+                                ].map(([label, href]) => (
+                                    <li key={href}>
+                                        {/* ⬇️ no inline styles: uses globals, so black text on white */}
+                                        <Link href={href}>{label}</Link>
+                                    </li>
+                                ))}
+                            </ul>
                         </li>
 
+                        {/* SIMPLE LINKS */}
                         <li>
-                            <Link className="nav-link" href="/services" style={linkStyle}>
+                            <Link className="nav-link" href="/services">
                                 Services
                             </Link>
                         </li>
                         <li>
-                            <Link className="nav-link" href="/case-studies" style={linkStyle}>
+                            <Link className="nav-link" href="/case-studies">
                                 Case Studies
                             </Link>
                         </li>
                         <li>
-                            <Link className="nav-link" href="/insights" style={linkStyle}>
+                            <Link className="nav-link" href="/insights">
                                 Insights
                             </Link>
                         </li>
                         <li>
-                            <Link className="nav-link" href="/about" style={linkStyle}>
+                            <Link className="nav-link" href="/about">
                                 About
                             </Link>
                         </li>
                         <li>
-                            <Link className="nav-link" href="/contact" style={linkStyle}>
+                            <Link className="nav-link" href="/contact">
                                 Contact
                             </Link>
                         </li>
 
-                        {/* LANGUAGE (white dropdown, bold options) */}
+                        {/* LANGUAGE DROPDOWN */}
                         <li
+                            className="nav-item"
                             onMouseEnter={() => setLangOpen(true)}
                             onMouseLeave={() => setLangOpen(false)}
-                            style={{
-                                position: "relative",
-                                color: "white",
-                                fontSize: "19px",
-                                cursor: "pointer",
-                                userSelect: "none",
-                            }}
                         >
-                            EN ▾
-                            {langOpen && (
-                                <ul
-                                    className="dropdown-menu show"
-                                    style={{ ...menuBoxStyle, right: 0, left: "auto" }}
-                                >
-                                    {[
-                                        { label: "English", code: "en" },
-                                        { label: "Français", code: "fr" },
-                                    ].map(({ label, code }) => (
-                                        <li key={code}>
-                                            <span
-                                                style={menuItemStyle}
-                                                // placeholder handlers (you’ll wire these later)
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                {label}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
+                            <button
+                                type="button"
+                                className="dropdown-trigger"
+                                style={{
+                                    background: "none",
+                                    border: "none",
+                                    padding: 0,
+                                    cursor: "pointer",
+                                }}
+                            >
+                                EN <span className="chevron">▾</span>
+                            </button>
+
+                            <ul
+                                className={`dropdown-menu language-menu ${
+                                    langOpen ? "show" : ""
+                                }`}
+                                style={{ right: 0, left: "auto" }}
+                            >
+                                <li>
+                                    <span onClick={(e) => e.preventDefault()}>English</span>
+                                </li>
+                                <li>
+                                    <span onClick={(e) => e.preventDefault()}>Français</span>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
 
-                {/* Local styles for hover effects to match your look */}
+                {/* top links colour / hover */}
                 <style jsx>{`
                     .nav-link {
                         font-family: var(--font-playfair);
-                        color: #fff;
+                        color: #ffffff;
                         text-decoration: none;
+                        font-size: 20px;
                     }
                     .nav-link:hover,
                     .dropdown-trigger:hover {
-                        color: #1e90ff;
+                        color: var(--color-primary);
                     }
                 `}</style>
             </header>
         </>
     );
 }
-
-/* ---------- tiny style objects so we don't depend on globals ---------- */
-const linkStyle = {
-    color: "#ffffff",
-    textDecoration: "none",
-    fontFamily: "var(--font-playfair)",
-    fontSize: "20px",
-};
-
-const menuBoxStyle = {
-    position: "absolute",
-    top: "36px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    background: "#ffffff",
-    borderRadius: "14px",
-    padding: "18px 26px",
-    display: "grid",
-    gridTemplateColumns: "repeat(3, max-content)",
-    columnGap: "42px",
-    rowGap: "13px",
-    minWidth: "520px",
-    boxShadow: "0 18px 48px rgba(0,0,0,0.17)",
-    zIndex: 10000,
-};
-
-const menuItemStyle = {
-    display: "block",
-    fontFamily: "var(--font-inter)",
-    fontSize: "18px",
-    fontWeight: 600,
-    color: "#0A0A0A",
-    textDecoration: "none",
-    whiteSpace: "nowrap",
-    padding: "6px 0",
-    transition: "0.25s ease",
-    cursor: "pointer",
-};

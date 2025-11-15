@@ -1,9 +1,15 @@
+/* ============================================== */
+/* ROOT VARIABLES                                 */
+/* ============================================== */
 :root {
     --color-primary: #1E90FF;
     --color-black: #0A0A0A;
     --color-white: #FFFFFF;
     --color-text: #111111;
     --color-background: #FFFFFF;
+
+    --card-radius: 22px;
+    --transition: 0.3s ease;
 }
 
 /* Base */
@@ -12,47 +18,47 @@ html, body {
     padding: 0;
     background: var(--color-background);
     color: var(--color-text);
-    font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto;
 }
 
-/* Remove bullets */
 ul, li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Media defaults */
 img, video {
     display: block;
     max-width: 100%;
 }
 
-/* ======================= */
-/* TOP NAV (Playfair) */
-/* ======================= */
+/* ============================================== */
+/* NAVIGATION + DROPDOWNS (unchanged, kept clean) */
+/* ============================================== */
+
 nav ul {
     display: flex;
-    align-items: center; /* ✅ ensures even vertical alignment */
+    align-items: center;
     gap: 64px;
 }
 
 nav ul > li {
     position: relative;
-    padding: 0 0 14px; /* ✅ equal padding for ALL nav items */
+    padding: 0 0 14px;
 }
 
-nav a,
+/* top-level nav links only */
+nav > ul > li > a,
 .dropdown-trigger {
-    color: #ffffff !important;
-    text-decoration: none !important;
+    color: #ffffff;
+    text-decoration: none;
     font-family: var(--font-playfair), serif;
     font-size: 21px;
     font-weight: 400;
     letter-spacing: 0.3px;
     display: inline-flex;
     align-items: center;
-    height: 38px; /* ✅ equal click height */
+    height: 38px;
     transition: color 0.25s ease;
 }
 
@@ -61,20 +67,18 @@ nav a:hover,
     color: var(--color-primary) !important;
 }
 
-/* Arrow */
+/* Chevron Arrow */
 .chevron {
     font-size: 14px;
     margin-left: 6px;
     transition: transform 0.28s ease;
 }
+
 .nav-item:hover .chevron {
     transform: rotate(180deg);
 }
 
-/* ======================= */
-/* DROPDOWNS (UNIFIED)     */
-/* ======================= */
-/* Base dropdown: hidden by default */
+/* DROPDOWN MENU BASE */
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 6px);
@@ -85,15 +89,12 @@ nav a:hover,
     min-width: 180px;
     box-shadow: 0 18px 48px rgba(0,0,0,0.18);
     z-index: 99999;
-
-    /* hidden state */
     display: none;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.28s ease;
 }
 
-/* Show dropdown (generic vertical list) */
 .dropdown-menu.show {
     display: flex;
     flex-direction: column;
@@ -102,13 +103,14 @@ nav a:hover,
     pointer-events: auto;
 }
 
-/* Industries only (its <li> already has class="nav-item") → 3×3 grid */
+/* INDUSTRIES = 3×3 GRID */
 .nav-item .dropdown-menu {
     left: 50%;
     transform: translateX(-50%);
     min-width: 520px;
     padding: 26px 36px;
 }
+
 .nav-item .dropdown-menu.show {
     display: grid;
     grid-template-columns: repeat(3, max-content);
@@ -116,105 +118,41 @@ nav a:hover,
     row-gap: 16px;
 }
 
-/* Items */
+/* Dropdown items */
 .dropdown-menu a,
 .dropdown-menu li span {
     font-family: var(--font-inter), sans-serif;
     font-size: 18px;
-    font-weight: 600;          /* ✅ bold like Industries */
-    color: var(--color-black) !important;
+    font-weight: 600;
+    color: var(--color-black);
     white-space: nowrap;
-    text-decoration: none !important;
-    transition: 0.25s ease;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-/* Hover */
 .dropdown-menu a:hover,
 .dropdown-menu li span:hover {
-    color: var(--color-primary) !important;
+    color: var(--color-primary);
     transform: translateX(4px);
 }
 
-/* ======================= */
-/* LANGUAGE SELECT MENU    */
-/* ======================= */
-/* (No special class needed now; the unified rules above handle it.
-   If you align it to the right in JSX, it will sit flush to the edge.) */
-
-/* ============================= */
-/* INDUSTRY SECTION / HOMEPAGE   */
-/* ============================= */
-
-.industry-grid-2col {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 22px 26px;
-    max-width: 520px;
-}
-
-@media (max-width: 850px) {
-    .industry-grid-2col {
-        grid-template-columns: 1fr;
-    }
-}
-
-.industry-card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 22px 26px;
-    font-size: 17px;
-    font-family: var(--font-inter), sans-serif;
-    font-weight: 500;
-    color: #0A0A0A;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.085);
-    transition: 0.35s ease;
-    border: 1px solid rgba(0,0,0,0.06);
-    cursor: pointer;
-}
-
-.industry-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(30, 144, 255, 0.22);
-    border-color: #1E90FF;
-    color: #1E90FF;
-}
-
-.industry-image-wrap img {
-    width: 100%;
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 26px;
-    box-shadow: 0 10px 32px rgba(0,0,0,0.18);
-}
-
-/* ---- NAV DROPDOWN VISIBILITY VIA HOVER (optional helper) ---- */
-/* If you also want classic hover to work without state, keep this: */
-.nav-item:hover .dropdown-menu {
-    display: grid;
-    grid-template-columns: repeat(3, max-content);
-    column-gap: 42px;
-    row-gap: 16px;
-    opacity: 1;
-    pointer-events: auto;
-}
+/* LANGUAGE MENU */
 .language-menu {
     position: absolute;
     right: 0;
     top: 38px;
     background: white;
     border-radius: 10px;
-    /* SIZE → tweak these two */
-    min-width: 200px;     /* 180–240 typically looks great */
-    padding: 14px 20px;   /* adjust padding as you like */
-
+    min-width: 200px;
+    padding: 14px 20px;
     box-shadow: 0 14px 32px rgba(0,0,0,0.14);
     z-index: 9999;
 }
-:root{ --headerHeight: 120px; }
-.page-offset{ padding-top: var(--headerHeight); }
-/* =================================================== */
-/* DIFFERENTIATE SITE VS. STUDIO                      */
-/* =================================================== */
+
+:root { --headerHeight: 120px; }
+.page-offset { padding-top: var(--headerHeight); }
+
+/* Studio / Site difference */
 .site-body {
     background: var(--color-background);
     color: var(--color-text);
@@ -224,11 +162,161 @@ nav a:hover,
     background: #fff !important;
     color: #000 !important;
     min-height: 100vh;
-    overflow: visible !important;
 }
-/* ========================= */
-/* SOFT SCROLL ANIMATIONS    */
-/* ========================= */
+
+/* ============================================== */
+/* ANIMATED BUTTON (Uiverse – global class)       */
+/* ============================================== */
+
+.fancy-btn {
+    background-color: transparent;
+    border: 2px solid #000;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1.25em 2em;
+    position: relative;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+}
+
+.fancy-btn::before {
+    content: "";
+    width: 1.6rem;
+    height: 2px;
+    background: black;
+    top: 50%;
+    left: 1.5em;
+    position: absolute;
+    transform: translateY(-50%);
+    transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy-btn .text {
+    font-size: 1.1em;
+    padding-left: 2em;
+    display: block;
+    text-align: left;
+    transition: var(--transition);
+    text-transform: uppercase;
+    color: black;
+}
+
+.fancy-btn:hover {
+    color: white;
+    background: black;
+}
+
+.fancy-btn:hover::before {
+    width: 1rem;
+    background: white;
+}
+
+.fancy-btn:hover .text {
+    color: white;
+    padding-left: 1.5em;
+}
+
+/* Top and bottom keys */
+.fancy-btn .top-key,
+.fancy-btn .bottom-key-1,
+.fancy-btn .bottom-key-2 {
+    position: absolute;
+    background: #e8e8e8;
+    height: 2px;
+    transition: 0.5s ease-out;
+}
+
+.fancy-btn .top-key {
+    width: 1.6rem;
+    top: -2px;
+    left: 0.6rem;
+}
+
+.fancy-btn .bottom-key-1 {
+    width: 1.6rem;
+    right: 1.9rem;
+    bottom: -2px;
+}
+
+.fancy-btn .bottom-key-2 {
+    width: 0.6rem;
+    right: 0.6rem;
+    bottom: -2px;
+}
+
+.fancy-btn:hover .top-key {
+    left: -2px;
+    width: 0;
+}
+
+.fancy-btn:hover .bottom-key-1,
+.fancy-btn:hover .bottom-key-2 {
+    right: 0;
+    width: 0;
+}
+
+/* ============================================== */
+/* GLOBAL NEO CARD (your neumorphic box)          */
+/* ============================================== */
+
+.neo-card {
+    background: #e0e0e0;
+    width: 100%;
+    border-radius: var(--card-radius);
+    padding: 28px 26px;
+    box-shadow:
+            15px 15px 30px #bebebe,
+            -15px -15px 30px #ffffff;
+    position: relative;
+    transition: 0.35s ease;
+    border: none;
+}
+
+/* Hover lift + blue glow */
+.neo-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+            0 12px 36px rgba(30,144,255,0.25),
+            15px 15px 30px #bebebe,
+            -15px -15px 30px #ffffff;
+}
+
+/* Blue corner accents */
+.neo-card::before,
+.neo-card::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(34px);
+    opacity: 0.22;
+    z-index: -1;
+}
+
+.neo-card::before {
+    top: -70px;
+    left: -70px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(30,144,255,0.45), transparent 70%);
+}
+
+.neo-card::after {
+    bottom: -70px;
+    right: -70px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(30,144,255,0.45), transparent 70%);
+}
+
+/* ============================================== */
+/* SCROLL ANIMATIONS (unchanged)                  */
+/* ============================================== */
 
 .fade-section {
     opacity: 0;
@@ -241,20 +329,196 @@ nav a:hover,
     opacity: 1;
     transform: translateY(0);
 }
+/* ============================================== */
+/* LEARN MORE BUTTON (Uiverse)                    */
+/* ============================================== */
 
-/* Generic hover elevation for cards */
-.hover-card {
-    /* base styles come from inline, this just enhances hover */
+button.learn-more {
+    position: relative;
+    display: inline-block;
+    width: 12rem;
+    height: auto;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
 }
 
-.hover-card:hover,
-.insight-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16);
-    border-color: rgba(30, 144, 255, 0.55) !important;
+button.learn-more .circle {
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
+    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
 }
 
-/* Make insight image zoom very slightly on hover */
-.insight-card:hover img {
-    transform: scale(1.06);
+button.learn-more .circle .icon.arrow {
+    position: absolute;
+    left: 0.625rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
 }
+
+button.learn-more .circle .icon.arrow::before {
+    content: "";
+    position: absolute;
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+    position: absolute;
+    inset: 0;
+    padding: 0.75rem 0;
+    margin-left: 1.85rem;
+    color: #282936;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.6;
+    text-align: center;
+    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
+}
+
+button.learn-more:hover .circle {
+    width: 100%;
+}
+
+button.learn-more:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem,0);
+}
+
+button.learn-more:hover .button-text {
+    color: #fff;
+}
+/* ============================================== */
+/* ANIMATED FANCY BUTTON (Uiverse – global class) */
+/* ============================================== */
+
+.fancy {
+    background-color: transparent;
+    border: 2px solid #000;
+    border-radius: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1.25em 2em;
+    position: relative;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.3s ease-in-out;
+    color: black;
+}
+
+.fancy::before {
+    content: "";
+    width: 1.5625rem;
+    height: 2px;
+    background: black;
+    top: 50%;
+    left: 1.5em;
+    position: absolute;
+    transform: translateY(-50%);
+    transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+    font-size: 1.125em;
+    padding-left: 2em;
+    display: block;
+    text-align: left;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    color: black;
+}
+
+.fancy .top-key,
+.fancy .bottom-key-1,
+.fancy .bottom-key-2 {
+    position: absolute;
+    background: #e8e8e8;
+    height: 2px;
+    transition: width 0.5s ease-out, left 0.3s ease-out, right 0.3s ease-out;
+}
+
+.fancy .top-key {
+    width: 1.5625rem;
+    top: -2px;
+    left: 0.625rem;
+}
+
+.fancy .bottom-key-1 {
+    width: 1.5625rem;
+    right: 1.875rem;
+    bottom: -2px;
+}
+
+.fancy .bottom-key-2 {
+    width: 0.625rem;
+    right: 0.625rem;
+    bottom: -2px;
+}
+
+.fancy:hover {
+    color: white;
+    background: black;
+}
+
+.fancy:hover::before {
+    width: 0.9375rem;
+    background: white;
+}
+
+.fancy:hover .text {
+    color: white;
+    padding-left: 1.5em;
+}
+
+.fancy:hover .top-key {
+    left: -2px;
+    width: 0;
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
+    right: 0;
+    width: 0;
+}
+.dropdown-menu a,
+.dropdown-menu li span {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-black);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu li span:hover {
+    color: var(--color-primary);
+    transform: translateX(4px);
+}
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,293 @@
+/* PAGE BASE */
+.case-page {
+    background: #f7f7fa;
+    color: #111;
+    min-height: 100vh;
+    font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto;
+}
+
+/* HERO WITH VIDEO – centred title only */
+.case-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 380px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.case-hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(58%);
+}
+
+.case-hero-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 0 6vw;
+    display: flex;
+    flex-direction: column;      /* stack title + subtitle */
+    align-items: center;         /* centre horizontally */
+    justify-content: center;     /* centre vertically */
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 14px 38px rgba(0, 0, 0, 0.55);
+}
+
+.case-hero-overlay h1 {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 54px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* BODY LAYOUT */
+.case-body {
+    width: 92%;
+    max-width: 1200px;
+    margin: 90px auto 140px;
+}
+
+/* INTRO */
+.case-intro {
+    max-width: 680px;
+    margin-bottom: 40px;
+}
+
+.case-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.case-intro-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* SHELVES WRAPPER */
+.case-shelves {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* EACH SHELF (divider line + books row) */
+.case-shelf {
+    position: relative;
+    padding: 28px 0 8px;
+}
+
+/* line separating each shelf */
+.case-shelf-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+            90deg,
+            rgba(10, 10, 10, 0.1),
+            rgba(10, 10, 10, 0.35),
+            rgba(10, 10, 10, 0.1)
+    );
+    margin-bottom: 22px;
+}
+
+/* ROW OF BOOKS */
+.case-books-row {
+    display: flex;
+    gap: 26px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* BOOK CARD BASE */
+.book-card {
+    position: relative;
+    flex: 1 1 0;
+    max-width: 340px;
+    min-height: 210px;
+    background: #fdfdfb;
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    padding: 20px 22px 22px;
+    display: flex;
+    transform: rotate(-2deg);
+    transform-origin: bottom center;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease,
+    background 0.28s ease;
+    overflow: hidden;
+}
+
+/* spine on the left */
+.book-spine {
+    width: 10px;
+    margin-right: 14px;
+    border-radius: 10px;
+    background: linear-gradient(
+            180deg,
+            rgba(30, 144, 255, 0.85),
+            rgba(10, 10, 10, 0.9)
+    );
+}
+
+/* inner content */
+.book-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TAG (sector · country · year) */
+.book-tag {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* TITLE */
+.book-title {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 0 0 8px;
+    color: #111;
+}
+
+/* SUMMARY */
+.book-summary {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+    margin: 0 0 12px;
+}
+
+/* LINK */
+.book-link {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #1e90ff;
+    border-bottom: 1px solid rgba(30, 144, 255, 0.45);
+    padding-bottom: 2px;
+}
+
+/* HOVER EFFECT – book straightens / lifts */
+.book-card:hover {
+    transform: rotate(0deg) translateY(-6px);
+    box-shadow: 0 26px 70px rgba(0, 0, 0, 0.18);
+    border-color: rgba(30, 144, 255, 0.6);
+    background: linear-gradient(
+            135deg,
+            #ffffff,
+            #f4f7ff
+    );
+}
+
+/* PLACEHOLDER BOOKS */
+.book-placeholder {
+    opacity: 0.7;
+    border-style: dashed;
+    border-color: rgba(0, 0, 0, 0.18);
+    background: #fafafa;
+}
+
+.book-placeholder .book-spine {
+    background: linear-gradient(
+            180deg,
+            rgba(180, 180, 180, 0.85),
+            rgba(90, 90, 90, 0.9)
+    );
+}
+
+.book-coming-soon {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #333;
+    margin: 10px 0 6px;
+}
+
+.book-coming-note {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .case-books-row {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    .case-body {
+        margin-top: 70px;
+    }
+
+    .case-books-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .book-card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 640px) {
+    .case-hero {
+        height: 52vh;
+        min-height: 320px;
+    }
+
+    .case-hero-overlay h1 {
+        font-size: 36px;
+    }
+}
+/* Shelf wrapper */
+.case-shelf {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+/* Bold header above each shelf */
+.case-shelf-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.case-shelf-label {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.case-shelf-title {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 24px;
+    margin: 0;
+    color: #111;
+}
+
+.case-shelf-intro {
+    font-size: 14px;
+    color: #555;
+    max-width: 520px;
+    margin: 0;
+}
