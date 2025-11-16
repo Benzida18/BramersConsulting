@@ -1,22 +1,21 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-// 🔽 adjust these imports to match your actual paths
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export default function SiteShell({ children }) {
     const pathname = usePathname();
 
-    // Any route that starts with /studio should NOT show the site chrome
+    // Any /studio route ( /studio, /studio/structure, etc. )
     const isStudioRoute = pathname.startsWith("/studio");
 
     if (isStudioRoute) {
-        // No header, no footer – just render the Studio
+        // Studio: no site chrome at all
         return <>{children}</>;
     }
 
-    // Normal website pages: header + content + footer
+    // Normal website pages: show header + footer
     return (
         <>
             <Header />

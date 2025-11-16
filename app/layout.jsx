@@ -1,8 +1,7 @@
 // app/layout.jsx
 import "./globals.css";
 import { Inter, Playfair_Display } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer"; // ✅ NEW
+import SiteShell from "@/components/SiteShell"; // ⬅️ new import
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -16,13 +15,8 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.className} ${playfair.className}`}>
         <body className="site-body">
-        {/* ✅ Navbar on ALL pages */}
-        <Header />
-
-        {children}
-
-        {/* ✅ Footer on ALL pages */}
-        <Footer />
+        {/* SiteShell decides if header/footer should show */}
+        <SiteShell>{children}</SiteShell>
         </body>
         </html>
     );
