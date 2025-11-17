@@ -775,6 +775,107 @@ button.learn-more:hover .button-text {
         text-align: left;      /* keeps the “Bramers.” feel */
     }
 }
+/* HERO BASE */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-heading {
+    position: absolute;
+    bottom: 18vh;
+    left: 7vw;
+    font-family: var(--font-playfair), serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.18;
+    text-shadow: 0px 6px 24px rgba(0, 0, 0, 0.55);
+}
+.hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* DESKTOP + MOBILE CLAMPED HEADING */
+.hero-heading {
+    position: absolute;
+
+    /* replaces bottom:18vh to something fluid */
+    bottom: clamp(6vh, 15vh, 20vh);
+
+    left: clamp(4vw, 7vw, 10vw);
+
+    /* CLAMP FONT SIZES */
+    font-size: clamp(28px, 6vw, 64px);
+    line-height: 1.15;
+
+    font-family: var(--font-playfair), serif;
+    text-shadow: 0px 6px 24px rgba(0,0,0,0.55);
+    font-weight: 400;
+}
+
+/* ensures lines don’t collapse awkwardly */
+.hero-heading div {
+    white-space: nowrap;
+}
+/* ============================================== */
+/* HEADER RESPONSIVE FIXES — GLOBAL               */
+/* ============================================== */
+
+/* Auto-resize padding based on screen width */
+header {
+    padding-left: clamp(16px, 5vw, 42px) !important;
+    padding-right: clamp(16px, 5vw, 42px) !important;
+}
+
+/* Auto-scale logo height on all screens */
+header img {
+    height: clamp(48px, 10vw, 100px) !important;
+    width: auto !important;
+}
+
+/* Ensure language dropdown stays aligned */
+.nav-item-language .dropdown-menu {
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+}
+
+/* Make desktop nav links scale down on smaller laptops */
+@media (max-width: 1200px) {
+    .nav-list .nav-link,
+    .dropdown-trigger {
+        font-size: clamp(16px, 1.6vw, 20px);
+    }
+
+    nav ul {
+        gap: clamp(28px, 4vw, 48px);
+    }
+}
+
+/* Fix burger alignment on mobile */
+.mobile-controls {
+    padding-left: 8px;
+}
 /* Tailwind */
 @tailwind base;
 @tailwind components;

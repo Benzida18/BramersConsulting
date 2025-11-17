@@ -249,6 +249,82 @@ export default function HowWeWork() {
                     color: #6b7280;
                 }
 
+                <
+                style jsx > {
+                    \` /* EXISTING STYLES ABOVE… */ /* =============================== */ /*   MOBILE ENHANCEMENTS           */ /* =============================== */ @media (
+                    max-width: 900px) {
+                    section {
+                        padding: 80px 0 90px !important;
+                    }
+
+                    /* Column layout already applied — now tighten spacing */
+
+                    section > div {
+                        gap: 36px !important;
+                    }
+
+                    /* Flip cards: make full width, taller, nicer spacing */
+
+                    .flip-card {
+                        width: 100% !important;
+                    }
+
+                    .flip-inner {
+                        min-height: 200px !important; /* More room for back text */
+                    }
+
+                    .flip-face {
+                        padding: 20px 20px 18px !important;
+                    }
+
+                    .flip-title {
+                        font-size: 16px !important;
+                    }
+
+                    .flip-text {
+                        font-size: 14px !important;
+                        line-height: 1.55 !important;
+                    }
+
+                    .flip-tag {
+                        font-size: 11px !important;
+                    }
+
+                    /* Right-side heading & paragraph */
+
+                    h2 {
+                        font-size: 30px !important;
+                        line-height: 1.25 !important;
+                    }
+
+                    p[style] {
+                        font-size: 14px !important;
+                        line-height: 1.6 !important;
+                        max-width: 100% !important;
+                    }
+                }
+
+                    @media (max-width: 540px) {
+                        section {
+                            padding: 70px 0 80px !important;
+                        }
+
+                        .flip-inner {
+                            min-height: 220px !important; /* Extra room on phones */
+                        }
+
+                        h2 {
+                            font-size: 26px !important;
+                        }
+
+                        .flip-title {
+                            font-size: 15px !important;
+                        }
+                    }
+                <
+                /
+                style >
+
                 @media (max-width: 960px) {
                     section > div {
                         grid-template-columns: 1fr !important;

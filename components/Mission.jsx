@@ -27,6 +27,7 @@ export default function Mission() {
 
     return (
         <section
+            className="mission-section"
             style={{
                 width: "100%",
                 background: "#FFFFFF",
@@ -36,6 +37,7 @@ export default function Mission() {
             }}
         >
             <div
+                className="mission-grid"
                 style={{
                     width: "100%",
                     maxWidth: "1320px",
@@ -45,6 +47,7 @@ export default function Mission() {
                     gap: "72px"
                 }}
             >
+
                 {/* LEFT – copy */}
                 <div>
                     <p
@@ -208,10 +211,10 @@ export default function Mission() {
                 }
 
                 @media (max-width: 1024px) {
-                    section {
+                    .mission-section {
                         padding: 80px 0 90px;
                     }
-                    div[style*="grid-template-columns"] {
+                    .mission-grid {
                         grid-template-columns: 1fr;
                         gap: 44px;
                     }

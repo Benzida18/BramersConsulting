@@ -68,6 +68,42 @@ export default function IndustryCard() {
                     ))}
                 </div>
             </div>
+            <style jsx>{`
+    @media (max-width: 900px) {
+        section {
+            padding: 26px 0 34px !important;
+        }
+
+        /* Wrapper */
+        div[style*="maxWidth: 1200px"] {
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            gap: 18px !important;
+        }
+
+        p {
+            font-size: 12px !important;
+            letter-spacing: 0.14em !important;
+        }
+
+        span {
+            font-size: 12px !important;
+            padding: 6px 12px !important;
+        }
+    }
+
+    @media (max-width: 540px) {
+        section {
+            padding: 22px 0 30px !important;
+        }
+
+        span {
+            font-size: 11px !important;
+            padding: 6px 10px !important;
+        }
+    }
+`}</style>
         </section>
     );
 }

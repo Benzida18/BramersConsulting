@@ -64,6 +64,34 @@ export default function IndustryGrid() {
                     ))}
                 </div>
             </div>
+
+            {/* *** Add this *** */}
+            <style jsx>{`
+                @media (max-width: 900px) {
+                    section {
+                        padding: 50px 0 70px !important;
+                    }
+
+                    h2 {
+                        font-size: 30px !important;
+                        margin-bottom: 32px !important;
+                        text-align: center;
+                    }
+
+                    .industry-card {
+                        padding: 20px 18px !important;
+                        font-size: 16px !important;
+                        border-radius: 10px !important;
+                    }
+
+                    @media (max-width: 540px) {
+                        .industry-card {
+                            padding: 18px 16px !important;
+                            font-size: 15px !important;
+                        }
+                    }
+                }
+            `}</style>
         </section>
     );
 }

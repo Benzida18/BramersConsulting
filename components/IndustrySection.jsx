@@ -51,6 +51,7 @@ export default function IndustrySection() {
 
     return (
         <section
+            className="industry-section"
             style={{
                 width: "100%",
                 padding: "120px 0 140px",
@@ -60,6 +61,7 @@ export default function IndustrySection() {
             }}
         >
             <div
+                className="industry-grid"
                 style={{
                     width: "100%",
                     maxWidth: "1400px",
@@ -211,6 +213,45 @@ export default function IndustrySection() {
                     transform: translateY(-5px);
                     box-shadow: 0 18px 42px rgba(15, 23, 42, 0.15);
                     border-color: #1e90ff;
+                < style jsx > {
+                    \` .
+
+                    sector-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.15);
+                        border-color: #1e90ff;
+                    }
+
+                    /* --- MOBILE LAYOUT FIX — ONLY FOR THIS SECTION --- */
+                    @media (max-width: 1024px) {
+                        .industry-grid {
+                            grid-template-columns: 1fr;
+                            padding: 0 24px;
+                            row-gap: 48px;
+                        }
+
+                        .industry-section {
+                            padding: 80px 0 100px;
+                        }
+
+                        /* left text + image */
+                        .industry-section h2 {
+                            font-size: 36px !important;
+                            line-height: 1.2 !important;
+                        }
+
+                        .industry-section img {
+                            max-width: 100% !important;
+                        }
+
+                        /* cards */
+                        .industry-grid > div:last-child {
+                            display: grid;
+                            grid-template-columns: 1fr;
+                            gap: 18px;
+                        }
+                    }
+                } < / style >
                 }
             `}</style>
         </section>
