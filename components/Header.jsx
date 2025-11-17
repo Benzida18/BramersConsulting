@@ -7,11 +7,10 @@ export default function Header() {
     const [scrolled, setScrolled] = useState(false);
     const [indOpen, setIndOpen] = useState(false);
     const [langOpen, setLangOpen] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const barRef = useRef(null);
     const ticking = useRef(false);
-
-    // timeouts to avoid instant close when mouse leaves for a moment
     const indCloseTimeout = useRef(null);
     const langCloseTimeout = useRef(null);
 
@@ -33,6 +32,7 @@ export default function Header() {
         langCloseTimeout.current = setTimeout(() => setLangOpen(false), 150);
     };
 
+    // scroll bar + header shrink
     useEffect(() => {
         const handleScroll = () => {
             if (!ticking.current) {
@@ -65,6 +65,32 @@ export default function Header() {
             if (langCloseTimeout.current) clearTimeout(langCloseTimeout.current);
         };
     }, []);
+
+    // lock body scroll when mobile nav is open
+    useEffect(() => {
+        if (mobileOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [mobileOpen]);
+
+    const INDUSTRIES = [
+        ["Agribusiness", "/industries/agribusiness"],
+        ["Real Estate", "/industries/real-estate"],
+        ["Finance", "/industries/finance"],
+        ["Catering & Hospitality", "/industries/catering-hospitality"],
+        ["International Trade", "/industries/international-trade"],
+        ["Football Advisory", "/industries/football-advisory"],
+        ["Coaching & Training", "/industries/coaching-training"],
+        ["AI Strategy", "/industries/ai-strategy"],
+        ["Mining", "/industries/mining"],
+    ];
+
+    const closeMobile = () => setMobileOpen(false);
 
     return (
         <>
@@ -120,8 +146,9 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* NAV LINKS */}
+                    {/* DESKTOP NAV LIST (hidden on mobile via CSS @media) */}
                     <ul
+                        className="nav-list"
                         style={{
                             display: "flex",
                             gap: "48px",
@@ -154,17 +181,7 @@ export default function Header() {
                                 onMouseEnter={openIndustries}
                                 onMouseLeave={closeIndustries}
                             >
-                                {[
-                                    ["Agribusiness", "/industries/agribusiness"],
-                                    ["Real Estate", "/industries/real-estate"],
-                                    ["Finance", "/industries/finance"],
-                                    ["Catering & Hospitality", "/industries/catering-hospitality"],
-                                    ["International Trade", "/industries/international-trade"],
-                                    ["Football Advisory", "/industries/football-advisory"],
-                                    ["Coaching & Training", "/industries/coaching-training"],
-                                    ["AI Strategy", "/industries/ai-strategy"],
-                                    ["Mining", "/industries/mining"],
-                                ].map(([label, href]) => (
+                                {INDUSTRIES.map(([label, href]) => (
                                     <li key={href}>
                                         <Link href={href}>{label}</Link>
                                     </li>
@@ -199,7 +216,7 @@ export default function Header() {
                             </Link>
                         </li>
 
-                        {/* LANGUAGE DROPDOWN */}
+                        {/* LANGUAGE DROPDOWN (desktop) */}
                         <li
                             className="nav-item nav-item-language"
                             onMouseEnter={openLang}
@@ -234,6 +251,33 @@ export default function Header() {
                             </ul>
                         </li>
                     </ul>
+
+                    {/* MOBILE CONTROLS (shown only on mobile via CSS) */}
+                    <div className="mobile-controls">
+                        {/* simple language label next to burger */}
+                        <span
+                            style={{
+                                color: "#ffffff",
+                                fontFamily: "var(--font-playfair)",
+                                fontSize: "18px",
+                                marginRight: "12px",
+                            }}
+                        >
+                            EN
+                        </span>
+
+                        <label className="burger">
+                            <input
+                                type="checkbox"
+                                checked={mobileOpen}
+                                onChange={() => setMobileOpen((open) => !open)}
+                                aria-label="Toggle navigation menu"
+                            />
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                    </div>
                 </nav>
 
                 {/* top links colour / hover */}
@@ -249,6 +293,75 @@ export default function Header() {
                         color: var(--color-primary);
                     }
                 `}</style>
+
+                {/* MOBILE FULL-SCREEN OVERLAY */}
+                {mobileOpen && (
+                    <div className="mobile-nav-overlay">
+                        <div className="mobile-nav-main">
+                            {/* Main links */}
+                            <div className="mobile-nav-group">
+                                <div className="mobile-nav-label">Main</div>
+                                <ul className="mobile-nav-links">
+                                    <li>
+                                        <Link href="/services" onClick={closeMobile}>
+                                            Services
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/case-studies" onClick={closeMobile}>
+                                            Case Studies
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/insights" onClick={closeMobile}>
+                                            Insights
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/about" onClick={closeMobile}>
+                                            About
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/contact" onClick={closeMobile}>
+                                            Contact
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {/* Industries list */}
+                            <div className="mobile-nav-group" style={{ marginTop: 32 }}>
+                                <div className="mobile-nav-label">Industries</div>
+                                <ul className="mobile-nav-industry-list">
+                                    {INDUSTRIES.map(([label, href]) => (
+                                        <li key={href}>
+                                            <Link href={href} onClick={closeMobile}>
+                                                {label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Footer inside overlay: language pills */}
+                        <div className="mobile-nav-footer">
+                            <div className="mobile-nav-label">Language</div>
+                            <div className="mobile-lang-row">
+                                <button
+                                    type="button"
+                                    className="mobile-lang-pill active"
+                                >
+                                    English
+                                </button>
+                                <button type="button" className="mobile-lang-pill">
+                                    Français
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </header>
         </>
     );
