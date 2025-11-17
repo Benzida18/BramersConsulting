@@ -291,3 +291,410 @@
     max-width: 520px;
     margin: 0;
 }
+/* ------------ Case study detail page ------------ */
+
+.case-detail-page {
+    padding-top: 7rem; /* clears the fixed header */
+    padding-bottom: 4rem;
+    background: #f6f5f7;
+}
+
+.case-detail-hero {
+    max-width: 960px;
+    margin: 0 auto 3rem;
+    padding: 2.5rem 1.5rem 0;
+}
+
+.case-detail-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.8rem;
+    color: #7d7b86;
+    margin-bottom: 0.75rem;
+}
+
+.case-detail-title {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    color: #18171f;
+}
+
+.case-detail-meta {
+    font-size: 0.95rem;
+    color: #7d7b86;
+    margin-bottom: 1.25rem;
+}
+
+.case-detail-summary {
+    font-size: 1.02rem;
+    color: #3c3a44;
+    max-width: 52rem;
+}
+
+/* Content body */
+
+.case-detail-body {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.case-detail-section {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 18px 45px rgba(12, 11, 24, 0.06);
+}
+
+.case-detail-section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8c8aa0;
+    margin-bottom: 0.75rem;
+}
+
+.case-detail-section p {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #2b2935;
+}
+
+.case-detail-section ul,
+.case-detail-section ol {
+    margin: 0.75rem 0 0 1.1rem;
+    padding: 0;
+    font-size: 0.96rem;
+    line-height: 1.6;
+}
+
+.case-detail-section li + li {
+    margin-top: 0.35rem;
+}
+
+/* Footer nav */
+
+.case-detail-footer-nav {
+    max-width: 960px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+}
+
+.case-detail-back {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #1b6ffb;
+}
+
+.case-detail-back:hover {
+    text-decoration: underline;
+}
+/* ─────────────────────────────── */
+/* DETAIL PAGE LAYOUT              */
+/* ─────────────────────────────── */
+
+.case-detail-page {
+    background: #f8f8fb;           /* soft grey like your shelves */
+    padding: 7rem 1.5rem 5rem;     /* 7rem top so header doesn't overlap */
+}
+
+.case-detail-hero,
+.case-detail-body,
+.case-detail-footer-nav {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* Top overview block */
+
+.case-detail-hero {
+    margin-bottom: 3rem;
+}
+
+.case-detail-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+}
+
+.case-detail-title {
+    font-family: "Playfair Display", "Times New Roman", serif;
+    font-size: 2.4rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    color: #111827;
+}
+
+.case-detail-meta {
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: 0.05em;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.case-detail-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #374151;
+}
+
+/* Sections / “chapters” */
+
+.case-detail-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 3rem;
+}
+
+.case-detail-section {
+    background: #f9fafb;
+    border-radius: 1.75rem;
+    padding: 1.75rem 2rem 1.9rem;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.case-detail-section h2 {
+    font-size: 0.9rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 0.75rem;
+}
+
+.case-detail-section p {
+    font-size: 0.99rem;
+    line-height: 1.7;
+    color: #1f2933;
+}
+
+.case-detail-section ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.99rem;
+    line-height: 1.7;
+    color: #1f2933;
+}
+
+.case-detail-section li + li {
+    margin-top: 0.4rem;
+}
+
+/* Back button – styled similar to your contact SEND MESSAGE button */
+
+.case-detail-footer-nav {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.case-detail-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2.7rem;
+    border: 2px solid #111827;
+    background: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111827;
+    position: relative;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.case-detail-back-line {
+    position: relative;
+    width: 2.6rem;
+    height: 2px;
+    background: #111827;
+}
+
+.case-detail-back-text {
+    position: relative;
+}
+
+/* Little “cut” effect on top + bottom border corners like your contact button */
+.case-detail-back-btn::before,
+.case-detail-back-btn::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 2px;
+    background: #ffffff; /* same as background so it “cuts” the border */
+}
+
+.case-detail-back-btn::before {
+    top: -1px;
+    left: 36px;
+}
+
+.case-detail-back-btn::after {
+    bottom: -1px;
+    right: 40px;
+}
+
+.case-detail-back-btn:hover {
+    background: #111827;
+    color: #ffffff;
+    transition: background 180ms ease, color 180ms ease;
+}
+
+.case-detail-back-btn:hover .case-detail-back-line {
+    background: #ffffff;
+}
+
+/* Mobile tweaks */
+
+@media (max-width: 768px) {
+    .case-detail-page {
+        padding-top: 6rem;
+        padding-inline: 1.25rem;
+    }
+
+    .case-detail-title {
+        font-size: 1.9rem;
+    }
+
+    .case-detail-section {
+        padding: 1.4rem 1.5rem 1.6rem;
+        border-radius: 1.25rem;
+    }
+
+    .case-detail-back-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .case-detail-back-btn::before,
+    .case-detail-back-btn::after {
+        display: none; /* keep mobile clean if the cuts look too fussy */
+    }
+}
+/* ======================= */
+/* DETAIL PAGE – BACK BTN  */
+/* ======================= */
+
+.case-detail-footer-nav {
+    max-width: 880px;
+    margin: 40px auto 80px;
+}
+
+/* Button wrapper */
+.case-detail-back {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 36px;
+    border: 2px solid #111;
+    background: #ffffff;
+    color: #111;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Little horizontal line on the left */
+.case-detail-back-line {
+    width: 32px;
+    height: 2px;
+    background: #111;
+    transition: transform 0.35s ease;
+}
+
+/* Text part */
+.case-detail-back-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* Top + bottom frame pieces that slide in on hover */
+.case-detail-back::before,
+.case-detail-back::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 40%;
+    background: #111;
+    transition: transform 0.35s ease;
+}
+
+/* Top border piece */
+.case-detail-back::before {
+    top: 0;
+    left: 0;
+    transform: translateX(-110%);
+}
+
+/* Bottom border piece */
+.case-detail-back::after {
+    bottom: 0;
+    right: 0;
+    transform: translateX(110%);
+}
+
+/* Hover animation – lines slide in, left bar stretches a bit */
+.case-detail-back:hover::before,
+.case-detail-back:focus-visible::before {
+    transform: translateX(0);
+}
+
+.case-detail-back:hover::after,
+.case-detail-back:focus-visible::after {
+    transform: translateX(0);
+}
+
+.case-detail-back:hover .case-detail-back-line,
+.case-detail-back:focus-visible .case-detail-back-line {
+    transform: scaleX(1.3);
+}
+
+/* Small-screen spacing tweak */
+@media (max-width: 640px) {
+    .case-detail-footer-nav {
+        margin: 32px auto 60px;
+    }
+
+    .case-detail-back {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Small version of the fancy button for cards */
+.fancy-small {
+    font-size: 11px;
+    padding: 0.7em 1.4em;
+    margin-top: 18px;
+    float: none;              /* override any global float */
+}
+
+/* Keep the line a bit shorter on small version */
+.fancy-small::before {
+    width: 1.1rem;
+    left: 1.1em;
+}
+
+.fancy-small .text {
+    font-size: 0.95em;
+    padding-left: 1.6em;
+}
+
+/* Make sure it sits nicely in the card */
+.book-card .book-link {
+    align-self: flex-start;
+}

@@ -1,4 +1,6 @@
 // app/case-studies/page.jsx
+export const dynamic = "force-dynamic";
+
 import Link from "next/link";
 import { client } from "@/sanity/client";
 import "./case-studies.css";
@@ -27,16 +29,17 @@ const SHELF_META = [
 // Fetch case studies from Sanity
 async function getCaseStudies() {
     const query = `
-      *[_type == "caseStudy"] | order(orderRank asc, _createdAt desc) {
-        _id,
-        title,
-        slug,
-        sector,
-        summary,
-        country,
-        year
-      }
-    `;
+    *[_type == "caseStudy"]{
+      _id,
+      title,
+      slug,
+      shelf,
+      tag,
+      summary,
+      order,
+      meta
+    } | order(coalesce(order, 9999) asc, _createdAt desc)
+  `;
     return client.fetch(query);
 }
 
@@ -56,11 +59,7 @@ export default async function CaseStudiesPage() {
     ];
 
     // Split into 3 shelves of 3
-    const rows = [
-        cards.slice(0, 3),
-        cards.slice(3, 6),
-        cards.slice(6, 9),
-    ];
+    const rows = [cards.slice(0, 3), cards.slice(3, 6), cards.slice(6, 9)];
 
     return (
         <main className="case-page">
@@ -76,7 +75,8 @@ export default async function CaseStudiesPage() {
                 <div className="case-hero-overlay">
                     <h1>Case Studies</h1>
                     <p className="case-hero-sub">
-                        A working library of Bramers mandates across markets, capital and people.
+                        A working library of Bramers mandates across markets, capital and
+                        people.
                     </p>
                 </div>
             </section>
@@ -96,7 +96,6 @@ export default async function CaseStudiesPage() {
 
                         return (
                             <div className="case-shelf" key={rowIdx}>
-
                                 {meta && (
                                     <header className="case-shelf-header">
                                         <p className="case-shelf-label">{meta.label}</p>
@@ -104,7 +103,6 @@ export default async function CaseStudiesPage() {
                                         <p className="case-shelf-intro">{meta.intro}</p>
                                     </header>
                                 )}
-
 
                                 <div className="case-shelf-line" />
 
@@ -114,11 +112,9 @@ export default async function CaseStudiesPage() {
 
                                         if (card.type === "real") {
                                             const c = card.data;
-                                            const metaBits = [
-                                                c.sector || "Multi-sector",
-                                                c.country,
-                                                c.year,
-                                            ].filter(Boolean);
+                                            const metaBits = [c.tag || "Multi-sector", c.meta].filter(
+                                                Boolean,
+                                            );
 
                                             return (
                                                 <article className="book-card" key={c._id}>
@@ -131,16 +127,17 @@ export default async function CaseStudiesPage() {
                                                         )}
                                                         <h3 className="book-title">{c.title}</h3>
                                                         {c.summary && (
-                                                            <p className="book-summary">
-                                                                {c.summary}
-                                                            </p>
+                                                            <p className="book-summary">{c.summary}</p>
                                                         )}
                                                         {c.slug?.current && (
                                                             <Link
                                                                 href={`/case-studies/${c.slug.current}`}
-                                                                className="book-link"
+                                                                className="fancy fancy-small book-link"
                                                             >
-                                                                Read case study →
+                                                                <span className="top-key"></span>
+                                                                <span className="text">Read case study</span>
+                                                                <span className="bottom-key-1"></span>
+                                                                <span className="bottom-key-2"></span>
                                                             </Link>
                                                         )}
                                                     </div>

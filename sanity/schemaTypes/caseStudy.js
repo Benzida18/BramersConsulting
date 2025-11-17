@@ -1,31 +1,33 @@
-// /sanity/schemaTypes/caseStudy.js
+// sanity/schemaTypes/caseStudy.js
+import { defineType, defineField } from "sanity";
 
-export default {
+export default defineType({
     name: "caseStudy",
     title: "Case Study",
     type: "document",
 
     fields: [
         // ───────── OVERVIEW / LIST CARD ─────────
-        {
+        defineField({
             name: "title",
             title: "Title",
             type: "string",
-            description: "Short, client-safe title (e.g. ‘Scaling export routes for a West African agribusiness’).",
+            description:
+                "Short, client-safe title (e.g. ‘Scaling export routes for a West African agribusiness’).",
             validation: (Rule) => Rule.required().min(8).max(120),
-        },
-        {
+        }),
+        defineField({
             name: "slug",
             title: "Slug",
             type: "slug",
-            description: "This is used in the URL, e.g. /case-studies/your-slug-here.",
+            description: "Used in the URL, e.g. /case-studies/your-slug-here.",
             options: {
                 source: "title",
                 maxLength: 96,
             },
             validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
             name: "shelf",
             title: "Shelf / Category",
             type: "string",
@@ -39,72 +41,80 @@ export default {
                 ],
             },
             validation: (Rule) => Rule.required(),
-        },
-        {
+        }),
+        defineField({
             name: "tag",
             title: "Tag (e.g. Trade · Markets)",
             type: "string",
-            description: "Short meta line above the title on the card (e.g. ‘Trade · Markets · West Africa’).",
-        },
-        {
+            description:
+                "Short meta line above the title on the card (e.g. ‘Trade · Markets · West Africa’).",
+        }),
+        defineField({
             name: "summary",
             title: "Short summary",
             type: "text",
             rows: 3,
-            description: "One paragraph for the front of the ‘book’ – what this case is about.",
-        },
-        {
+            description:
+                "One paragraph for the front of the ‘book’ – what this case is about.",
+        }),
+        defineField({
             name: "meta",
             title: "Meta line",
             type: "string",
-            description: "e.g. ‘Cross-border · 12–18 months · UK–West Africa’. Optional.",
-        },
-        {
+            description:
+                "e.g. ‘Cross-border · 12–18 months · UK–West Africa’. Optional.",
+        }),
+        defineField({
             name: "order",
             title: "Order within shelf",
             type: "number",
-            description: "Lower numbers appear earlier in that shelf. Leave blank to use created date.",
-        },
+            description:
+                "Lower numbers appear earlier in that shelf. Leave blank to use created date.",
+        }),
 
         // ───────── BOOK CONTENT / CHAPTERS ─────────
-        {
+        defineField({
             name: "context",
             title: "Context",
             type: "text",
             rows: 4,
-            description: "Where the client was starting from – markets, challenges, constraints.",
-        },
-        {
+            description:
+                "Where the client was starting from – markets, challenges, constraints.",
+        }),
+        defineField({
             name: "mandate",
             title: "Mandate",
             type: "text",
             rows: 4,
-            description: "What Bramers was asked to do. The brief / question / scope in plain language.",
-        },
-        {
+            description:
+                "What Bramers was asked to do. The brief / question / scope in plain language.",
+        }),
+        defineField({
             name: "whatWeDid",
             title: "What we did (bullet points)",
             type: "array",
             of: [{ type: "string" }],
-            description: "3–7 bullet points explaining the work (diagnostics, models, negotiations, etc.).",
-        },
-        {
+            description:
+                "3–7 bullet points explaining the work (diagnostics, models, negotiations, etc.).",
+        }),
+        defineField({
             name: "outcomes",
             title: "What changed",
             type: "text",
             rows: 4,
-            description: "Concrete shifts: agreements, decisions, performance changes, improved governance, etc.",
-        },
-        {
+            description:
+                "Concrete shifts: agreements, decisions, performance changes, improved governance, etc.",
+        }),
+        defineField({
             name: "reflections",
             title: "Reflections / Afterword (optional)",
             type: "text",
             rows: 3,
-            description: "Optional: learning, patterns, or advice you’d share with similar clients.",
-        },
+            description:
+                "Optional: learning, patterns, or advice you’d share with similar clients.",
+        }),
     ],
 
-    // ───────── PREVIEW IN STUDIO LISTS ─────────
     preview: {
         select: {
             title: "title",
@@ -136,4 +146,4 @@ export default {
             };
         },
     },
-};
+});

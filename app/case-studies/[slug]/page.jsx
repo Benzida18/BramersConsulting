@@ -1,16 +1,19 @@
 // app/case-studies/[slug]/page.jsx
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { client } from "@/sanity/client";
 import "../case-studies.css";
+
+export const dynamic = "force-dynamic";
 
 async function getCaseStudy(slug) {
     const query = `
     *[_type == "caseStudy" && slug.current == $slug][0]{
+      _id,
       title,
-      shelf,
       tag,
-      summary,
       meta,
+      summary,
       context,
       mandate,
       whatWeDid,
@@ -21,104 +24,86 @@ async function getCaseStudy(slug) {
     return client.fetch(query, { slug });
 }
 
-const SHELF_LABELS = {
-    "markets-trade": "Markets & Trade",
-    "capital-assets": "Capital & Assets",
-    "people-performance": "People & Performance",
-};
-
-export default async function CaseStudyBookPage({ params }) {
+export default async function CaseStudyDetailPage({ params }) {
     const { slug } = params;
-    const book = await getCaseStudy(slug);
+    const data = await getCaseStudy(slug);
 
-    if (!book) {
-        return (
-            <main className="cs-book-page">
-                <section className="cs-book-notfound">
-                    <h1>Case study coming soon</h1>
-                    <p>
-                        This case book hasn&apos;t been written yet. It will appear here
-                        once content is added and published in the Studio.
-                    </p>
-                    <Link href="/case-studies" className="cs-book-backlink">
-                        ← Back to case studies
-                    </Link>
-                </section>
-            </main>
-        );
+    if (!data) {
+        notFound();
     }
 
-    const shelfLabel = SHELF_LABELS[book.shelf] || "Case study";
+    const {
+        title,
+        tag,
+        meta,
+        summary,
+        context,
+        mandate,
+        whatWeDid,
+        outcomes,
+        reflections,
+    } = data;
 
     return (
-        <main className="cs-book-page">
-            <section className="cs-book-hero">
-                <div className="cs-book-hero-inner">
-                    <p className="cs-book-shelf">{shelfLabel}</p>
-                    <h1 className="cs-book-main-title">{book.title}</h1>
-                    <div className="cs-book-tag-meta">
-                        {book.tag && (
-                            <span className="cs-book-tag-pill">{book.tag}</span>
-                        )}
-                        {book.meta && (
-                            <span className="cs-book-meta-text">{book.meta}</span>
-                        )}
-                    </div>
-                    <Link href="/case-studies" className="cs-book-backlink">
-                        ← Back to case studies
-                    </Link>
-                </div>
+        <main className="case-detail-page">
+            {/* HERO / OVERVIEW */}
+            <section className="case-detail-hero">
+                {tag && <p className="case-detail-eyebrow">{tag}</p>}
+                <h1 className="case-detail-title">{title}</h1>
+                {meta && <p className="case-detail-meta">{meta}</p>}
+                {summary && <p className="case-detail-summary">{summary}</p>}
             </section>
 
-            <section className="cs-book-layout">
-                <div className="cs-book-page-shell">
-                    <div className="cs-book-page-edge" aria-hidden="true" />
-                    <article className="cs-book-page-inner">
-                        {book.context && (
-                            <section className="cs-book-section">
-                                <p className="cs-book-section-label">Chapter 1</p>
-                                <h2 className="cs-book-section-title">Context</h2>
-                                <p className="cs-book-body">{book.context}</p>
-                            </section>
-                        )}
-
-                        {book.mandate && (
-                            <section className="cs-book-section">
-                                <p className="cs-book-section-label">Chapter 2</p>
-                                <h2 className="cs-book-section-title">Mandate</h2>
-                                <p className="cs-book-body">{book.mandate}</p>
-                            </section>
-                        )}
-
-                        {book.whatWeDid && book.whatWeDid.length > 0 && (
-                            <section className="cs-book-section">
-                                <p className="cs-book-section-label">Chapter 3</p>
-                                <h2 className="cs-book-section-title">What we did</h2>
-                                <ul className="cs-book-list">
-                                    {book.whatWeDid.map((item, idx) => (
-                                        <li key={idx}>{item}</li>
-                                    ))}
-                                </ul>
-                            </section>
-                        )}
-
-                        {book.outcomes && (
-                            <section className="cs-book-section">
-                                <p className="cs-book-section-label">Chapter 4</p>
-                                <h2 className="cs-book-section-title">What changed</h2>
-                                <p className="cs-book-body">{book.outcomes}</p>
-                            </section>
-                        )}
-
-                        {book.reflections && (
-                            <section className="cs-book-section">
-                                <p className="cs-book-section-label">Afterword</p>
-                                <h2 className="cs-book-section-title">Reflections</h2>
-                                <p className="cs-book-body">{book.reflections}</p>
-                            </section>
-                        )}
+            {/* CHAPTERS */}
+            <section className="case-detail-body">
+                {context && (
+                    <article className="case-detail-section">
+                        <h2>Context</h2>
+                        <p>{context}</p>
                     </article>
-                </div>
+                )}
+
+                {mandate && (
+                    <article className="case-detail-section">
+                        <h2>Mandate</h2>
+                        <p>{mandate}</p>
+                    </article>
+                )}
+
+                {Array.isArray(whatWeDid) && whatWeDid.length > 0 && (
+                    <article className="case-detail-section">
+                        <h2>What we did</h2>
+                        <ol>
+                            {whatWeDid.map((item, i) => (
+                                <li key={i}>{item}</li>
+                            ))}
+                        </ol>
+                    </article>
+                )}
+
+                {outcomes && (
+                    <article className="case-detail-section">
+                        <h2>What changed</h2>
+                        <p>{outcomes}</p>
+                    </article>
+                )}
+
+                {reflections && (
+                    <article className="case-detail-section">
+                        <h2>Reflections</h2>
+                        <p>{reflections}</p>
+                    </article>
+                )}
+            </section>
+
+            {/* BACK BUTTON */}
+            <section className="case-detail-footer-nav">
+                <Link href="/case-studies" className="fancy case-detail-back-btn">
+                    <span className="top-key"></span>
+                    <span className="text">Back to case studies</span>
+                    <span className="bottom-key-1"></span>
+                    <span className="bottom-key-2"></span>
+                </Link>
             </section>
         </main>
     );
