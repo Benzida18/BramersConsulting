@@ -7,7 +7,7 @@ import MobileIndustries from "./MobileIndustries";
 export default function MobileMenu() {
     const [isMobile, setIsMobile] = useState(false);
     const [open, setOpen] = useState(false);
-    const [view, setView] = useState<"main" | "industries">("main");
+    const [view, setView] = useState("main");
 
     // Only render this on small screens
     useEffect(() => {
