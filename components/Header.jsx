@@ -11,6 +11,28 @@ export default function Header() {
     const barRef = useRef(null);
     const ticking = useRef(false);
 
+    // timeouts to avoid instant close when mouse leaves for a moment
+    const indCloseTimeout = useRef(null);
+    const langCloseTimeout = useRef(null);
+
+    const openIndustries = () => {
+        if (indCloseTimeout.current) clearTimeout(indCloseTimeout.current);
+        setIndOpen(true);
+    };
+
+    const closeIndustries = () => {
+        indCloseTimeout.current = setTimeout(() => setIndOpen(false), 150);
+    };
+
+    const openLang = () => {
+        if (langCloseTimeout.current) clearTimeout(langCloseTimeout.current);
+        setLangOpen(true);
+    };
+
+    const closeLang = () => {
+        langCloseTimeout.current = setTimeout(() => setLangOpen(false), 150);
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             if (!ticking.current) {
@@ -39,6 +61,8 @@ export default function Header() {
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleScroll);
+            if (indCloseTimeout.current) clearTimeout(indCloseTimeout.current);
+            if (langCloseTimeout.current) clearTimeout(langCloseTimeout.current);
         };
     }, []);
 
@@ -82,7 +106,7 @@ export default function Header() {
                         overflow: "visible",
                     }}
                 >
-                    {/* ✅ logo now always takes you home */}
+                    {/* logo */}
                     <Link href="/" style={{ display: "flex", alignItems: "center" }}>
                         <img
                             src="/logo.jpg"
@@ -108,9 +132,9 @@ export default function Header() {
                     >
                         {/* INDUSTRIES DROPDOWN */}
                         <li
-                            className="nav-item"
-                            onMouseEnter={() => setIndOpen(true)}
-                            onMouseLeave={() => setIndOpen(false)}
+                            className="nav-item nav-item-industries"
+                            onMouseEnter={openIndustries}
+                            onMouseLeave={closeIndustries}
                         >
                             <button
                                 type="button"
@@ -125,7 +149,11 @@ export default function Header() {
                                 Industries <span className="chevron">▾</span>
                             </button>
 
-                            <ul className={`dropdown-menu ${indOpen ? "show" : ""}`}>
+                            <ul
+                                className={`dropdown-menu ${indOpen ? "show" : ""}`}
+                                onMouseEnter={openIndustries}
+                                onMouseLeave={closeIndustries}
+                            >
                                 {[
                                     ["Agribusiness", "/industries/agribusiness"],
                                     ["Real Estate", "/industries/real-estate"],
@@ -138,7 +166,6 @@ export default function Header() {
                                     ["Mining", "/industries/mining"],
                                 ].map(([label, href]) => (
                                     <li key={href}>
-                                        {/* ⬇️ no inline styles: uses globals, so black text on white */}
                                         <Link href={href}>{label}</Link>
                                     </li>
                                 ))}
@@ -174,9 +201,9 @@ export default function Header() {
 
                         {/* LANGUAGE DROPDOWN */}
                         <li
-                            className="nav-item"
-                            onMouseEnter={() => setLangOpen(true)}
-                            onMouseLeave={() => setLangOpen(false)}
+                            className="nav-item nav-item-language"
+                            onMouseEnter={openLang}
+                            onMouseLeave={closeLang}
                         >
                             <button
                                 type="button"
@@ -195,7 +222,8 @@ export default function Header() {
                                 className={`dropdown-menu language-menu ${
                                     langOpen ? "show" : ""
                                 }`}
-                                style={{ right: 0, left: "auto" }}
+                                onMouseEnter={openLang}
+                                onMouseLeave={closeLang}
                             >
                                 <li>
                                     <span onClick={(e) => e.preventDefault()}>English</span>
