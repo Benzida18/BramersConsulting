@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import "../../public/mobile.css";
+import "./mobile.css";
 
 export default function MobileShell({ children }) {
     const [open, setOpen] = useState(false);
