@@ -7,9 +7,9 @@ import MobileIndustries from "./MobileIndustries";
 export default function MobileMenu() {
     const [isMobile, setIsMobile] = useState(false);
     const [open, setOpen] = useState(false);
-    const [view, setView] = useState("main");
+    const [view, setView] = useState("main"); // MAIN FIX
 
-    // Only render this on small screens
+    // Detect screen size
     useEffect(() => {
         const update = () => {
             setIsMobile(window.innerWidth <= 900);
@@ -19,14 +19,12 @@ export default function MobileMenu() {
         return () => window.removeEventListener("resize", update);
     }, []);
 
-    // Lock body scroll when the overlay is open
+    // Lock scroll when open
     useEffect(() => {
         if (!isMobile) return;
-        if (open) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
+
+        document.body.style.overflow = open ? "hidden" : "";
+
         return () => {
             document.body.style.overflow = "";
         };
@@ -41,7 +39,7 @@ export default function MobileMenu() {
 
     return (
         <>
-            {/* TOP BAR (logo + hamburger) */}
+            {/* TOP BAR */}
             <div className="mobile-nav-bar">
                 <Link href="/" className="mobile-nav-logo-link">
                     <img
@@ -51,6 +49,7 @@ export default function MobileMenu() {
                     />
                 </Link>
 
+                {/* Hamburger */}
                 <button
                     type="button"
                     aria-label={open ? "Close navigation" : "Open navigation"}
@@ -69,11 +68,12 @@ export default function MobileMenu() {
                 </button>
             </div>
 
-            {/* FULL-SCREEN OVERLAY */}
+            {/* FULL SCREEN MAIN MENU */}
             {open && view === "main" && (
                 <div className="mobile-menu-overlay">
                     <div className="mobile-menu-header">
                         <span className="mobile-menu-label">Navigation</span>
+
                         <button
                             type="button"
                             className="mobile-menu-close"
@@ -110,7 +110,8 @@ export default function MobileMenu() {
                                 Contact
                             </Link>
                         </li>
-                        {/* Industries – goes to second panel */}
+
+                        {/* INDUSTRIES PAGE */}
                         <li>
                             <button
                                 type="button"
@@ -125,6 +126,7 @@ export default function MobileMenu() {
                 </div>
             )}
 
+            {/* INDUSTRIES SUB-PAGE */}
             {open && view === "industries" && (
                 <MobileIndustries
                     onBack={() => setView("main")}
