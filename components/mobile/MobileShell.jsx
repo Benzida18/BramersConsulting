@@ -1,25 +1,72 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import MobileMenu from "./MobileMenu";
-import "./mobile.css";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import "../../public/mobile.css";
 
 export default function MobileShell({ children }) {
-    const [isMobile, setIsMobile] = useState(false);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 900);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
-
-    if (!isMobile) return null; // Desktop will not use this shell
+        if (open) document.body.style.overflow = "hidden";
+        else document.body.style.overflow = "";
+        return () => (document.body.style.overflow = "");
+    }, [open]);
 
     return (
-        <div className="mobile-shell">
-            <MobileMenu />
-            {children}
-        </div>
+        <>
+            {/* TOP BAR */}
+            <header className="m-header">
+                <Link href="/" className="m-logo-link">
+                    <img src="/logo.jpg" className="m-logo" alt="Bramers" />
+                </Link>
+
+                <button
+                    className={`m-burger ${open ? "open" : ""}`}
+                    onClick={() => setOpen(!open)}
+                    aria-label="Toggle menu"
+                >
+                    <span></span>
+                    <span></span>
+                </button>
+            </header>
+
+            {/* FULL-SCREEN OVERLAY */}
+            {open && (
+                <div className="m-menu-overlay">
+                    <button
+                        className="m-close"
+                        onClick={() => setOpen(false)}
+                        aria-label="Close"
+                    >
+                        ×
+                    </button>
+
+                    <nav className="m-menu-list">
+                        <Link href="/services" onClick={() => setOpen(false)}>
+                            Services
+                        </Link>
+                        <Link href="/case-studies" onClick={() => setOpen(false)}>
+                            Case Studies
+                        </Link>
+                        <Link href="/insights" onClick={() => setOpen(false)}>
+                            Insights
+                        </Link>
+                        <Link href="/about" onClick={() => setOpen(false)}>
+                            About
+                        </Link>
+                        <Link href="/contact" onClick={() => setOpen(false)}>
+                            Contact
+                        </Link>
+                        <Link href="/industries" onClick={() => setOpen(false)}>
+                            Industries →
+                        </Link>
+                    </nav>
+                </div>
+            )}
+
+            {/* MAIN CONTENT */}
+            <div className="m-page">{children}</div>
+        </>
     );
 }
