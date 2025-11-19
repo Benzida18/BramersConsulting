@@ -1,137 +1,94 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import MobileIndustries from "./MobileIndustries";
 
-export default function MobileMenu() {
-    const [isMobile, setIsMobile] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [view, setView] = useState("main"); // MAIN FIX
-
-    // Detect screen size
-    useEffect(() => {
-        const update = () => {
-            setIsMobile(window.innerWidth <= 900);
-        };
-        update();
-        window.addEventListener("resize", update);
-        return () => window.removeEventListener("resize", update);
-    }, []);
-
-    // Lock scroll when open
-    useEffect(() => {
-        if (!isMobile) return;
-
-        document.body.style.overflow = open ? "hidden" : "";
-
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [open, isMobile]);
-
-    if (!isMobile) return null;
-
-    const closeAll = () => {
-        setOpen(false);
-        setView("main");
-    };
+export default function MobileHeader() {
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [submenuOpen, setSubmenuOpen] = useState(false);
 
     return (
         <>
-            {/* TOP BAR */}
-            <div className="mobile-nav-bar">
-                <Link href="/" className="mobile-nav-logo-link">
-                    <img
-                        src="/logo.jpg"
-                        alt="Bramers Consulting"
-                        className="mobile-nav-logo"
-                    />
+            {/* HEADER */}
+            <header className="simple-header">
+                <Link href="/" className="simple-logo-wrap">
+                    <img src="/logo.jpg" className="simple-logo" alt="Bramers Consulting" />
                 </Link>
 
-                {/* Hamburger */}
+                {/* BURGER */}
                 <button
-                    type="button"
-                    aria-label={open ? "Close navigation" : "Open navigation"}
-                    className={`mobile-hamburger ${open ? "mobile-hamburger-open" : ""}`}
+                    className={`simple-burger ${menuOpen ? "open" : ""}`}
                     onClick={() => {
-                        if (open) {
-                            closeAll();
-                        } else {
-                            setOpen(true);
-                            setView("main");
-                        }
+                        setMenuOpen(!menuOpen);
+                        setSubmenuOpen(false);
                     }}
                 >
-                    <span />
-                    <span />
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
-            </div>
+            </header>
 
-            {/* FULL SCREEN MAIN MENU */}
-            {open && view === "main" && (
-                <div className="mobile-menu-overlay">
-                    <div className="mobile-menu-header">
-                        <span className="mobile-menu-label">Navigation</span>
+            {/* BLACK FULLSCREEN MENU */}
+            {menuOpen && (
+                <div
+                    className="simple-menu"
+                    onClick={() => setMenuOpen(false)}  // CLICK OUTSIDE TO CLOSE
+                >
+                    <div
+                        className="simple-menu-inner"
+                        onClick={(e) => e.stopPropagation()} // PREVENT CLOSE WHEN TAPPING INSIDE
+                    >
+                        {!submenuOpen && (
+                            <div className="simple-menu-list">
+                                <Link href="/services" onClick={() => setMenuOpen(false)}>Services</Link>
+                                <Link href="/case-studies" onClick={() => setMenuOpen(false)}>Case Studies</Link>
+                                <Link href="/insights" onClick={() => setMenuOpen(false)}>Insights</Link>
+                                <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
+                                <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
 
-                        <button
-                            type="button"
-                            className="mobile-menu-close"
-                            aria-label="Close navigation"
-                            onClick={closeAll}
-                        >
-                            ×
-                        </button>
+                                <button
+                                    className="simple-menu-item"
+                                    onClick={() => setSubmenuOpen(true)}
+                                >
+                                    Industries →
+                                </button>
+                            </div>
+                        )}
+
+                        {/* INDUSTRIES SUBMENU */}
+                        {submenuOpen && (
+                            <div className="simple-menu-list">
+                                <button
+                                    className="simple-back"
+                                    onClick={() => setSubmenuOpen(false)}
+                                >
+                                    ← Back
+                                </button>
+
+                                {[
+                                    "Agribusiness",
+                                    "Real Estate",
+                                    "Finance",
+                                    "Catering & Hospitality",
+                                    "International Trade",
+                                    "Football Advisory",
+                                    "Coaching & Training",
+                                    "AI Strategy",
+                                    "Mining"
+                                ].map((i) => (
+                                    <Link
+                                        key={i}
+                                        href={`/industries/${i.toLowerCase().replace(/ /g, "")}`}
+                                        onClick={() => setMenuOpen(false)}
+                                    >
+                                        {i}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
                     </div>
-
-                    <ul className="mobile-menu-list">
-                        <li>
-                            <Link href="/services" onClick={closeAll}>
-                                Services
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/case-studies" onClick={closeAll}>
-                                Case Studies
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/insights" onClick={closeAll}>
-                                Insights
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/about" onClick={closeAll}>
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/contact" onClick={closeAll}>
-                                Contact
-                            </Link>
-                        </li>
-
-                        {/* INDUSTRIES PAGE */}
-                        <li>
-                            <button
-                                type="button"
-                                className="mobile-menu-industries-link"
-                                onClick={() => setView("industries")}
-                            >
-                                <span>Industries</span>
-                                <span className="mobile-menu-arrow">→</span>
-                            </button>
-                        </li>
-                    </ul>
                 </div>
-            )}
-
-            {/* INDUSTRIES SUB-PAGE */}
-            {open && view === "industries" && (
-                <MobileIndustries
-                    onBack={() => setView("main")}
-                    onClose={closeAll}
-                />
             )}
         </>
     );

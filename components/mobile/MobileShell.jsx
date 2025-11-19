@@ -1,71 +1,80 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import "./mobile.css";
+import MobileNavOverlay from "./MobileNavOverlay";
 
 export default function MobileShell({ children }) {
-    const [open, setOpen] = useState(false);
+    // view: "none" | "nav" | "industries" | "language"
+    const [view, setView] = useState("none");
 
+    const menuOpen = view !== "none";
+
+    // lock body scroll when overlays open
     useEffect(() => {
-        if (open) document.body.style.overflow = "hidden";
-        else document.body.style.overflow = "";
-        return () => (document.body.style.overflow = "");
-    }, [open]);
+        if (menuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [menuOpen]);
+
+    const closeAll = () => setView("none");
 
     return (
         <>
-            {/* TOP BAR */}
+            {/* FIXED TOP BAR */}
             <header className="m-header">
-                <Link href="/" className="m-logo-link">
-                    <img src="/logo.jpg" className="m-logo" alt="Bramers" />
+                <Link href="/" className="m-logo-link" onClick={closeAll}>
+                    <img
+                        src="/logo.jpg"
+                        alt="Bramers Consulting"
+                        className="m-logo"
+                    />
                 </Link>
 
-                <button
-                    className={`m-burger ${open ? "open" : ""}`}
-                    onClick={() => setOpen(!open)}
-                    aria-label="Toggle menu"
-                >
-                    <span></span>
-                    <span></span>
-                </button>
-            </header>
-
-            {/* FULL-SCREEN OVERLAY */}
-            {open && (
-                <div className="m-menu-overlay">
+                <div className="m-header-right">
+                    {/* Language trigger – left of burger */}
                     <button
-                        className="m-close"
-                        onClick={() => setOpen(false)}
-                        aria-label="Close"
+                        type="button"
+                        className="m-lang-trigger"
+                        onClick={() => setView("language")}
                     >
-                        ×
+                        EN
                     </button>
 
-                    <nav className="m-menu-list">
-                        <Link href="/services" onClick={() => setOpen(false)}>
-                            Services
-                        </Link>
-                        <Link href="/case-studies" onClick={() => setOpen(false)}>
-                            Case Studies
-                        </Link>
-                        <Link href="/insights" onClick={() => setOpen(false)}>
-                            Insights
-                        </Link>
-                        <Link href="/about" onClick={() => setOpen(false)}>
-                            About
-                        </Link>
-                        <Link href="/contact" onClick={() => setOpen(false)}>
-                            Contact
-                        </Link>
-                        <Link href="/industries" onClick={() => setOpen(false)}>
-                            Industries →
-                        </Link>
-                    </nav>
+                    {/* Hamburger */}
+                    <button
+                        type="button"
+                        className={`m-burger ${menuOpen ? "open" : ""}`}
+                        aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+                        onClick={() => {
+                            if (menuOpen) {
+                                closeAll();
+                            } else {
+                                setView("nav");
+                            }
+                        }}
+                    >
+                        <span />
+                        <span />
+                    </button>
                 </div>
+            </header>
+
+            {/* FULL-SCREEN OVERLAYS */}
+            {menuOpen && (
+                <MobileNavOverlay
+                    view={view}
+                    setView={setView}
+                    closeAll={closeAll}
+                />
             )}
 
-            {/* MAIN CONTENT */}
+            {/* PAGE CONTENT (pushed down under fixed header) */}
             <div className="m-page">{children}</div>
         </>
     );

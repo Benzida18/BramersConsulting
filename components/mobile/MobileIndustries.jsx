@@ -1,30 +1,36 @@
+// components/mobile/MobileIndustries.jsx
 "use client";
 
-export default function MobileIndustries() {
-    const list = [
-        "Technology",
-        "Financial Services",
-        "Healthcare",
-        "Agribusiness",
-        "Real Estate",
-        "AI Strategy",
-        "Logistics",
-        "Football Advisory",
-        "Infrastructure",
-        "Education",
+export default function MobileIndustries({ onBack, onClose }) {
+
+    const LIST = [
+        ["Agribusiness", "/industries/agribusiness"],
+        ["Real Estate", "/industries/real-estate"],
+        ["Finance", "/industries/finance"],
+        ["Catering & Hospitality", "/industries/catering-hospitality"],
+        ["International Trade", "/industries/international-trade"],
+        ["Football Advisory", "/industries/football-advisory"],
+        ["Coaching & Training", "/industries/coaching-training"],
+        ["AI Strategy", "/industries/ai-strategy"],
+        ["Mining", "/industries/mining"],
     ];
 
     return (
-        <section className="m-section">
-            <h2 className="m-title">Industries We Serve</h2>
+        <div className="m-menu-overlay">
+            <button className="m-back" onClick={onBack}>← Back</button>
+            <button className="m-close" onClick={onClose}>×</button>
 
-            <div className="m-list">
-                {list.map((item) => (
-                    <div key={item} className="m-card">
-                        {item}
-                    </div>
+            <h3 className="m-menu-title">Industries</h3>
+
+            <ul className="m-industry-list">
+                {LIST.map(([label, href]) => (
+                    <li key={href}>
+                        <a href={href} className="m-industry-item" onClick={onClose}>
+                            {label} →
+                        </a>
+                    </li>
                 ))}
-            </div>
-        </section>
+            </ul>
+        </div>
     );
 }

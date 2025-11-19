@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 
 export default function Hero() {
     const lines = [
-        { text: "Bramers.", color: "#0066FF" }, // darker blue
+        { text: "Bramers.", color: "#0066FF" },
         { text: "Bridging Markets.", color: "#FFFFFF" },
-        { text: "Empowering Institutions.", color: "#FFFFFF" }
+        { text: "Empowering Institutions.", color: "#FFFFFF" },
     ];
 
     const [visibleLines, setVisibleLines] = useState(["", "", ""]);
@@ -15,16 +15,15 @@ export default function Hero() {
     useEffect(() => {
         if (lineIndex >= lines.length) return;
 
-        const currentText = lines[lineIndex].text;
-
-        if (charIndex < currentText.length) {
-            const timeout = setTimeout(() => {
+        const current = lines[lineIndex].text;
+        if (charIndex < current.length) {
+            const t = setTimeout(() => {
                 const updated = [...visibleLines];
-                updated[lineIndex] = currentText.slice(0, charIndex + 1);
+                updated[lineIndex] = current.slice(0, charIndex + 1);
                 setVisibleLines(updated);
                 setCharIndex(charIndex + 1);
-            }, 120); // typing speed
-            return () => clearTimeout(timeout);
+            }, 120);
+            return () => clearTimeout(t);
         } else {
             const pause = setTimeout(() => {
                 setLineIndex(lineIndex + 1);
@@ -35,8 +34,7 @@ export default function Hero() {
     }, [charIndex, lineIndex, visibleLines]);
 
     return (
-        <section className="hero-section">
-            {/* Background Video */}
+        <section className="hero-section desktop-hero">
             <video
                 src="/videos/london2.mp4"
                 autoPlay
@@ -46,7 +44,7 @@ export default function Hero() {
                 className="hero-video"
             />
 
-            <div className="hero-heading">
+            <div className="hero-heading hero-heading-desktop">
                 <div style={{ color: lines[0].color }}>{visibleLines[0]}</div>
                 <div style={{ color: lines[1].color }}>{visibleLines[1]}</div>
                 <div style={{ color: lines[2].color }}>{visibleLines[2]}</div>
