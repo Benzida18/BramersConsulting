@@ -15,49 +15,16 @@ export default function IndustryGrid() {
     ];
 
     return (
-        <section
-            style={{
-                width: "100%",
-                padding: "80px 0 120px",
-                background: "var(--color-white)",
-                display: "flex",
-                justifyContent: "center",
-            }}
-        >
-            <div style={{ width: "100%", maxWidth: "1200px", padding: "0 24px" }}>
-                <h2
-                    style={{
-                        fontFamily: "var(--font-playfair), serif",
-                        fontSize: "40px",
-                        marginBottom: "48px",
-                        color: "var(--color-black)",
-                    }}
-                >
-                    Industries We Advise
-                </h2>
+        <section className="industry-grid-section">
+            <div className="industry-grid-container">
+                <h2 className="industry-grid-heading">Industries We Advise</h2>
 
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                        gap: "20px",
-                    }}
-                >
+                <div className="industry-grid-cards">
                     {industries.map((name) => (
                         <a
                             key={name}
                             href="#"
-                            className="industry-card"
-                            style={{
-                                padding: "28px 24px",
-                                border: "1px solid rgba(0,0,0,0.20)",
-                                borderRadius: "8px",
-                                fontFamily: "var(--font-inter), sans-serif",
-                                fontSize: "18px",
-                                color: "var(--color-black)",
-                                textDecoration: "none",
-                                transition: "all 0.28s ease",
-                            }}
+                            className="industry-grid-card"
                         >
                             {name}
                         </a>
@@ -65,30 +32,73 @@ export default function IndustryGrid() {
                 </div>
             </div>
 
-            {/* *** Add this *** */}
             <style jsx>{`
+                .industry-grid-section {
+                    width: 100%;
+                    padding: 80px 0 120px;
+                    background: var(--color-white);
+                    display: flex;
+                    justify-content: center;
+                }
+
+                .industry-grid-container {
+                    width: 100%;
+                    max-width: 1200px;
+                    padding: 0 24px;
+                }
+
+                .industry-grid-heading {
+                    font-family: var(--font-playfair), serif;
+                    font-size: 40px;
+                    margin-bottom: 48px;
+                    color: var(--color-black);
+                }
+
+                .industry-grid-cards {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                    gap: 20px;
+                }
+
+                .industry-grid-card {
+                    padding: 28px 24px;
+                    border: 1px solid rgba(0, 0, 0, 0.2);
+                    border-radius: 8px;
+                    font-family: var(--font-inter), sans-serif;
+                    font-size: 18px;
+                    color: var(--color-black);
+                    text-decoration: none;
+                    transition: all 0.28s ease;
+                }
+
+                .industry-grid-card:hover {
+                    border-color: #1e90ff;
+                    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+                    transform: translateY(-4px);
+                }
+
                 @media (max-width: 900px) {
-                    section {
-                        padding: 50px 0 70px !important;
+                    .industry-grid-section {
+                        padding: 50px 0 70px;
                     }
 
-                    h2 {
-                        font-size: 30px !important;
-                        margin-bottom: 32px !important;
+                    .industry-grid-heading {
+                        font-size: 30px;
+                        margin-bottom: 32px;
                         text-align: center;
                     }
 
-                    .industry-card {
-                        padding: 20px 18px !important;
-                        font-size: 16px !important;
-                        border-radius: 10px !important;
+                    .industry-grid-card {
+                        padding: 20px 18px;
+                        font-size: 16px;
+                        border-radius: 10px;
                     }
+                }
 
-                    @media (max-width: 540px) {
-                        .industry-card {
-                            padding: 18px 16px !important;
-                            font-size: 15px !important;
-                        }
+                @media (max-width: 540px) {
+                    .industry-grid-card {
+                        padding: 18px 16px;
+                        font-size: 15px;
                     }
                 }
             `}</style>

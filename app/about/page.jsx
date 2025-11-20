@@ -92,9 +92,16 @@ export default function AboutPage() {
                     >
                         About Bramers
                     </h1>
-                    <p style={{ fontSize: "20px", opacity: 0.92, maxWidth: 760, margin: "0 auto" }}>
-                        Independent advisory practice based in the United Kingdom, bridging markets and enabling
-                        institutional cooperation across the UK & Africa.
+                    <p
+                        style={{
+                            fontSize: "20px",
+                            opacity: 0.92,
+                            maxWidth: 760,
+                            margin: "0 auto",
+                        }}
+                    >
+                        Independent advisory practice based in the United Kingdom, bridging markets and
+                        enabling institutional cooperation across the UK & Africa.
                     </p>
                 </div>
             </section>
@@ -105,7 +112,8 @@ export default function AboutPage() {
                     maxWidth: 1200,
                     margin: "140px auto 120px",
                     display: "grid",
-                    gridTemplateColumns: "1.05fr 1fr",
+                    // ⬇ responsive: 2 cols on desktop, 1 col on mobile
+                    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
                     gap: 56,
                     padding: "0 24px",
                 }}
@@ -148,18 +156,36 @@ export default function AboutPage() {
                         Founder’s Story
                     </h2>
                     <p style={{ fontSize: 18, lineHeight: 1.75, color: "#444" }}>
-                        Bramers was founded by Bouraima Zida, an advisor who believes progress should be deliberate, context-aware, and built on trust. His work across the United Kingdom and West Africa shaped a practice that blends structured analysis with patient relationship-building — the kind that earns access, not just attention.
-
-                        Early in his career, Bouraima saw how promising initiatives stall when strategy ignores people and place. He also saw how modest, well-sequenced decisions compound into durable results. That discipline informs Bramers today: clarify the goal, align the stakeholders, and move at the right pace — no faster than trust allows, no slower than opportunity requires.
-
-                        Bouraima’s focus areas include business structuring, leadership development, market entry, and cross-border partnership building. He works quietly and thoroughly, favouring clear commitments over broad claims. Clients value the combination of steady communication, cultural fluency, and a bias for documentation — turning complex intentions into workable plans with owners, timelines, and accountability.
-
-                        Bramers remains intentionally lean. That choice keeps the work hands-on and responsive, and it preserves the discretion expected in sensitive contexts. When scale is required, Bouraima coordinates specialist partners under a single, simple principle: clarity first, then consistency, always with respect. The result is an advisory relationship that is measured, human, and built to last.
+                        Bramers was founded by Bouraima Zida, an advisor who believes progress should be
+                        deliberate, context-aware, and built on trust. His work across the United Kingdom and
+                        West Africa shaped a practice that blends structured analysis with patient
+                        relationship-building — the kind that earns access, not just attention.
+                        <br />
+                        <br />
+                        Early in his career, Bouraima saw how promising initiatives stall when strategy ignores
+                        people and place. He also saw how modest, well-sequenced decisions compound into durable
+                        results. That discipline informs Bramers today: clarify the goal, align the
+                        stakeholders, and move at the right pace — no faster than trust allows, no slower than
+                        opportunity requires.
+                        <br />
+                        <br />
+                        Bouraima’s focus areas include business structuring, leadership development, market
+                        entry, and cross-border partnership building. He works quietly and thoroughly, favouring
+                        clear commitments over broad claims. Clients value the combination of steady
+                        communication, cultural fluency, and a bias for documentation — turning complex
+                        intentions into workable plans with owners, timelines, and accountability.
+                        <br />
+                        <br />
+                        Bramers remains intentionally lean. That choice keeps the work hands-on and responsive,
+                        and it preserves the discretion expected in sensitive contexts. When scale is required,
+                        Bouraima coordinates specialist partners under a single, simple principle: clarity
+                        first, then consistency, always with respect. The result is an advisory relationship
+                        that is measured, human, and built to last.
                     </p>
                 </div>
             </section>
 
-            {/* ===== SECTION 2: “What Bramers Does” (reveals; hides when passed; no replay) ===== */}
+            {/* ===== SECTION 2: “What Bramers Does” ===== */}
             <section
                 style={{
                     maxWidth: 1200,
@@ -167,13 +193,31 @@ export default function AboutPage() {
                     padding: "0 24px",
                 }}
             >
-                <div data-reveal="fade-up" className="reveal" style={{ textAlign: "center", marginBottom: 26 }}>
-                    <h2 style={{ fontFamily: "var(--font-playfair)", fontSize: 38, margin: 0 }}>
+                <div
+                    data-reveal="fade-up"
+                    className="reveal"
+                    style={{ textAlign: "center", marginBottom: 26 }}
+                >
+                    <h2
+                        style={{
+                            fontFamily: "var(--font-playfair)",
+                            fontSize: 38,
+                            margin: 0,
+                        }}
+                    >
                         What Bramers Do
                     </h2>
-                    <p style={{ fontSize: 18, color: "#555", maxWidth: 860, margin: "12px auto 0", lineHeight: 1.75 }}>
-                        We help leaders simplify choices, structure initiatives, and set momentum for sustainable outcomes.
-                        The work typically spans three areas that reinforce each other.
+                    <p
+                        style={{
+                            fontSize: 18,
+                            color: "#555",
+                            maxWidth: 860,
+                            margin: "12px auto 0",
+                            lineHeight: 1.75,
+                        }}
+                    >
+                        We help leaders simplify choices, structure initiatives, and set momentum for
+                        sustainable outcomes. The work typically spans three areas that reinforce each other.
                     </p>
                 </div>
 
@@ -221,13 +265,33 @@ export default function AboutPage() {
                         },
                     ].map((card, i) => (
                         <div key={i} className="card">
-                            <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: 22, margin: "2px 0 10px" }}>
+                            <h3
+                                style={{
+                                    fontFamily: "var(--font-playfair)",
+                                    fontSize: 22,
+                                    margin: "2px 0 10px",
+                                }}
+                            >
                                 {card.title}
                             </h3>
-                            <p style={{ fontSize: 15.5, color: "#4a4a4a", lineHeight: 1.66, marginBottom: 14 }}>
+                            <p
+                                style={{
+                                    fontSize: 15.5,
+                                    color: "#4a4a4a",
+                                    lineHeight: 1.66,
+                                    marginBottom: 14,
+                                }}
+                            >
                                 {card.desc}
                             </p>
-                            <ul style={{ paddingLeft: 18, margin: 0, color: "#333", lineHeight: 1.6 }}>
+                            <ul
+                                style={{
+                                    paddingLeft: 18,
+                                    margin: 0,
+                                    color: "#333",
+                                    lineHeight: 1.6,
+                                }}
+                            >
                                 {card.bullets.map((b, j) => (
                                     <li key={j} style={{ marginBottom: 6, listStyle: "disc" }}>
                                         {b}
@@ -245,7 +309,8 @@ export default function AboutPage() {
                     maxWidth: 1100,
                     margin: "0 auto 160px",
                     display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
+                    // ⬇ responsive: 2 cols desktop, 1 col mobile
+                    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
                     gap: 56,
                     padding: "0 24px",
                     alignItems: "center",
@@ -271,66 +336,67 @@ export default function AboutPage() {
                             lineHeight: 1.35,
                         }}
                     >
-                        “Bramers exists to help people move forward with clarity — at the right pace, in the right direction.”
+                        “Bramers exists to help people move forward with clarity — at the right pace, in the
+                        right direction.”
                     </p>
                 </div>
             </section>
 
             {/* ===== Animations & Card styling ===== */}
             <style jsx>{`
-        .reveal {
-          opacity: 0;
-          transform: translateY(18px);
-          transition: opacity 600ms ease, transform 600ms ease;
-          will-change: opacity, transform;
-        }
-        /* first-time entry animations */
-        .reveal[data-reveal='fade-up'].is-visible:not(.has-played) {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        .reveal[data-reveal='slide-left'].is-visible:not(.has-played) {
-          opacity: 1;
-          transform: translateX(0);
-          animation: slideLeftOnce 650ms ease forwards;
-        }
-        .reveal[data-reveal='slide-right'].is-visible:not(.has-played) {
-          opacity: 1;
-          transform: translateX(0);
-          animation: slideRightOnce 650ms ease forwards;
-        }
-        /* after it has played once, simply show/hide without replaying keyframes */
-        .reveal.has-played.is-visible {
-          opacity: 1;
-          transform: none;
-        }
-        .reveal.has-played:not(.is-visible) {
-          opacity: 0; /* hide when scrolled past as you requested */
-        }
+                .reveal {
+                    opacity: 0;
+                    transform: translateY(18px);
+                    transition: opacity 600ms ease, transform 600ms ease;
+                    will-change: opacity, transform;
+                }
+                /* first-time entry animations */
+                .reveal[data-reveal='fade-up'].is-visible:not(.has-played) {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                .reveal[data-reveal='slide-left'].is-visible:not(.has-played) {
+                    opacity: 1;
+                    transform: translateX(0);
+                    animation: slideLeftOnce 650ms ease forwards;
+                }
+                .reveal[data-reveal='slide-right'].is-visible:not(.has-played) {
+                    opacity: 1;
+                    transform: translateX(0);
+                    animation: slideRightOnce 650ms ease forwards;
+                }
+                /* after it has played once, simply show/hide without replaying keyframes */
+                .reveal.has-played.is-visible {
+                    opacity: 1;
+                    transform: none;
+                }
+                .reveal.has-played:not(.is-visible) {
+                    opacity: 0; /* hide when scrolled past as you requested */
+                }
 
-        @keyframes slideLeftOnce {
-          from { opacity: 0; transform: translateX(24px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes slideRightOnce {
-          from { opacity: 0; transform: translateX(-24px); }
-          to   { opacity: 1; transform: translateX(0); }
-        }
+                @keyframes slideLeftOnce {
+                    from { opacity: 0; transform: translateX(24px); }
+                    to   { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideRightOnce {
+                    from { opacity: 0; transform: translateX(-24px); }
+                    to   { opacity: 1; transform: translateX(0); }
+                }
 
-        .cards-grid .card {
-          background: #fff;
-          border-radius: 18px;
-          padding: 26px 28px;
-          border: 1px solid rgba(0,0,0,0.06);
-          box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-          transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
-        }
-        .cards-grid .card:hover {
-          transform: translateY(-6px);
-          border-color: #1E90FF;
-          box-shadow: 0 18px 44px rgba(30,144,255,0.16);
-        }
-      `}</style>
+                .cards-grid .card {
+                    background: #fff;
+                    border-radius: 18px;
+                    padding: 26px 28px;
+                    border: 1px solid rgba(0,0,0,0.06);
+                    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+                    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+                }
+                .cards-grid .card:hover {
+                    transform: translateY(-6px);
+                    border-color: #1E90FF;
+                    box-shadow: 0 18px 44px rgba(30,144,255,0.16);
+                }
+            `}</style>
         </main>
     );
 }

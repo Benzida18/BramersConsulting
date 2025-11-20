@@ -17,7 +17,7 @@ function RevealOnScroll({ children, delay = 0 }) {
                     el.style.opacity = "1";
                     el.style.transform = "translateY(0)";
                 } else {
-                    // allow repeat on scroll (medium animation level)
+                    // allow repeat on scroll
                     el.style.opacity = "0";
                     el.style.transform = "translateY(18px)";
                 }
@@ -118,105 +118,44 @@ export default function ServicesPage() {
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* ---------- HERO (Header sits over this video) ---------- */}
-            <section style={{ position: "relative", height: "88vh", overflow: "hidden" }}>
+            <section className="services-hero">
                 <video
                     src="/videos/office.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        filter: "brightness(60%)",
-                    }}
+                    className="services-hero-video"
                 />
 
-                {/* CENTERED COPY (only change) */}
-                <div
-                    style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%,-50%)",
-                        color: "white",
-                        textAlign: "center",
-                        textShadow: "0 8px 28px rgba(0,0,0,0.5)",
-                        padding: "0 24px",
-                        width: "min(90vw, 900px)",
-                    }}
-                >
+                <div className="services-hero-content">
                     <RevealOnScroll>
-                        <h1
-                            style={{
-                                fontFamily: "var(--font-playfair)",
-                                fontSize: "64px",
-                                margin: 0,
-                            }}
-                        >
-                            Services
-                        </h1>
+                        <h1 className="services-hero-title">Services</h1>
                     </RevealOnScroll>
                     <RevealOnScroll delay={120}>
-                        <p
-                            style={{
-                                fontSize: "20px",
-                                maxWidth: 740,
-                                opacity: 0.95,
-                                margin: "12px auto 0",
-                                lineHeight: 1.6,
-                            }}
-                        >
-                            Advisory built for clarity and steady execution—bridging the UK and
-                            African markets with practical structures, respectful relationships,
-                            and measurable progress.
+                        <p className="services-hero-subtitle">
+                            Advisory built for clarity and steady execution—bridging the UK
+                            and African markets with practical structures, respectful
+                            relationships, and measurable progress.
                         </p>
                     </RevealOnScroll>
                 </div>
             </section>
 
             {/* ---------- SECTION 2: Approach (text left, video right) ---------- */}
-            <section
-                style={{
-                    maxWidth: "1200px",
-                    margin: "120px auto",
-                    display: "grid",
-                    gridTemplateColumns: "1.2fr 1fr",
-                    gap: "56px",
-                    alignItems: "center",
-                    padding: "0 24px",
-                }}
-            >
+            <section className="services-approach">
                 <RevealOnScroll>
-                    <div>
-                        <h2
-                            style={{
-                                fontFamily: "var(--font-playfair)",
-                                fontSize: "38px",
-                                margin: "0 0 16px",
-                            }}
-                        >
-                            Our Approach
-                        </h2>
-                        <p style={{ fontSize: "18px", color: "#444", lineHeight: 1.75 }}>
-                            We start with context: the people, constraints, and levers that actually
-                            move a project forward. Then we co-design a simple operating rhythm—
-                            decisions, reviews, and clear ownership—so momentum is maintained.
-                            We avoid noise, document agreements, and build trusted partnerships that
-                            last. Progress becomes consistent, not frantic.
+                    <div className="services-approach-text">
+                        <h2 className="services-approach-heading">Our Approach</h2>
+                        <p className="services-approach-body">
+                            We start with context: the people, constraints, and levers that
+                            actually move a project forward. Then we co-design a simple
+                            operating rhythm—decisions, reviews, and clear ownership—so
+                            momentum is maintained. We avoid noise, document agreements, and
+                            build trusted partnerships that last. Progress becomes
+                            consistent, not frantic.
                         </p>
-                        <ul
-                            style={{
-                                marginTop: 18,
-                                display: "grid",
-                                gap: 10,
-                                fontSize: 16,
-                                color: "#333",
-                            }}
-                        >
+                        <ul className="services-approach-list">
                             <li>• Clear roles & decisions (no ambiguity).</li>
                             <li>• Lightweight governance and useful reporting.</li>
                             <li>• Respect for culture, timing, and stakeholder priorities.</li>
@@ -226,70 +165,34 @@ export default function ServicesPage() {
                 </RevealOnScroll>
 
                 <RevealOnScroll delay={100}>
-                    <div
-                        style={{
-                            borderRadius: 18,
-                            overflow: "hidden",
-                            boxShadow: "0 20px 50px rgba(0,0,0,0.15)",
-                        }}
-                    >
+                    <div className="services-approach-video">
                         <video
                             src="/videos/customer.mp4"
                             autoPlay
                             loop
                             muted
                             playsInline
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                                display: "block",
-                                filter: "brightness(78%)",
-                            }}
+                            className="services-approach-video-el"
                         />
                     </div>
                 </RevealOnScroll>
             </section>
 
             {/* ---------- SECTION 3: Services grid (9 cards) ---------- */}
-            <section style={{ background: "#fafafa", padding: "100px 0 140px" }}>
-                <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 24px" }}>
+            <section className="services-grid-section">
+                <div className="services-grid-inner">
                     <RevealOnScroll>
-                        <h2
-                            style={{
-                                fontFamily: "var(--font-playfair)",
-                                fontSize: "36px",
-                                margin: "0 0 24px",
-                                textAlign: "center",
-                            }}
-                        >
-                            What We Deliver
-                        </h2>
+                        <h2 className="services-grid-title">What We Deliver</h2>
                     </RevealOnScroll>
                     <RevealOnScroll delay={80}>
-                        <p
-                            style={{
-                                textAlign: "center",
-                                maxWidth: 820,
-                                margin: "0 auto 48px",
-                                fontSize: 18,
-                                color: "#444",
-                                lineHeight: 1.7,
-                            }}
-                        >
-                            Each service mirrors an industry context we know well. Hover to explore
-                            how we work—no clicks required. When ready, book a session to map your
-                            next step with us.
+                        <p className="services-grid-intro">
+                            Each service mirrors an industry context we know well. Hover to
+                            explore how we work—no clicks required. When ready, book a
+                            session to map your next step with us.
                         </p>
                     </RevealOnScroll>
 
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                            gap: 26,
-                        }}
-                    >
+                    <div className="services-grid">
                         {SERVICES.map((s, i) => (
                             <RevealOnScroll key={s.slug} delay={i * 60}>
                                 <ServiceCard service={s} />
@@ -298,6 +201,205 @@ export default function ServicesPage() {
                     </div>
                 </div>
             </section>
+
+            {/* ---------- Scoped CSS for this page ---------- */}
+            <style jsx>{`
+                /* HERO */
+                .services-hero {
+                    position: relative;
+                    height: 88vh;
+                    overflow: hidden;
+                }
+
+                .services-hero-video {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    filter: brightness(60%);
+                }
+
+                .services-hero-content {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    text-align: center;
+                    text-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+                    padding: 0 24px;
+                    width: min(90vw, 900px);
+                }
+
+                .services-hero-title {
+                    font-family: var(--font-playfair);
+                    font-size: 64px;
+                    margin: 0;
+                }
+
+                .services-hero-subtitle {
+                    font-size: 20px;
+                    max-width: 740px;
+                    opacity: 0.95;
+                    margin: 12px auto 0;
+                    line-height: 1.6;
+                }
+
+                /* APPROACH */
+                .services-approach {
+                    max-width: 1200px;
+                    margin: 120px auto;
+                    display: grid;
+                    grid-template-columns: 1.2fr 1fr;
+                    gap: 56px;
+                    align-items: center;
+                    padding: 0 24px;
+                }
+
+                .services-approach-heading {
+                    font-family: var(--font-playfair);
+                    font-size: 38px;
+                    margin: 0 0 16px;
+                }
+
+                .services-approach-body {
+                    font-size: 18px;
+                    color: #444;
+                    line-height: 1.75;
+                    margin: 0;
+                }
+
+                .services-approach-list {
+                    margin-top: 18px;
+                    display: grid;
+                    gap: 10px;
+                    font-size: 16px;
+                    color: #333;
+                    padding: 0;
+                }
+
+                .services-approach-video {
+                    border-radius: 18px;
+                    overflow: hidden;
+                    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+                }
+
+                .services-approach-video-el {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                    filter: brightness(78%);
+                }
+
+                /* GRID SECTION */
+                .services-grid-section {
+                    background: #fafafa;
+                    padding: 100px 0 140px;
+                }
+
+                .services-grid-inner {
+                    max-width: 1240px;
+                    margin: 0 auto;
+                    padding: 0 24px;
+                }
+
+                .services-grid-title {
+                    font-family: var(--font-playfair);
+                    font-size: 36px;
+                    margin: 0 0 24px;
+                    text-align: center;
+                }
+
+                .services-grid-intro {
+                    text-align: center;
+                    max-width: 820px;
+                    margin: 0 auto 48px;
+                    font-size: 18px;
+                    color: #444;
+                    line-height: 1.7;
+                }
+
+                .services-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 26px;
+                }
+
+                /* RESPONSIVE */
+                @media (max-width: 1100px) {
+                    .services-grid {
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                    }
+                }
+
+                @media (max-width: 900px) {
+                    .services-hero-title {
+                        font-size: 40px;
+                    }
+
+                    .services-hero-subtitle {
+                        font-size: 17px;
+                        line-height: 1.6;
+                    }
+
+                    .services-approach {
+                        grid-template-columns: 1fr;
+                        gap: 40px;
+                        margin: 90px auto 100px;
+                    }
+
+                    .services-approach-heading {
+                        font-size: 32px;
+                    }
+
+                    .services-grid-section {
+                        padding: 80px 0 110px;
+                    }
+                }
+
+                @media (max-width: 720px) {
+                    .services-hero {
+                        height: 70vh;
+                    }
+
+                    .services-hero-title {
+                        font-size: 32px;
+                    }
+
+                    .services-hero-subtitle {
+                        font-size: 15px;
+                        margin-top: 10px;
+                    }
+
+                    .services-approach {
+                        margin: 70px auto 90px;
+                    }
+
+                    .services-approach-body {
+                        font-size: 15px;
+                    }
+
+                    .services-approach-list {
+                        font-size: 14px;
+                    }
+
+                    .services-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .services-grid-title {
+                        font-size: 30px;
+                        margin-bottom: 18px;
+                    }
+
+                    .services-grid-intro {
+                        font-size: 16px;
+                        margin-bottom: 36px;
+                    }
+                }
+            `}</style>
         </main>
     );
 }
@@ -347,18 +449,6 @@ function ServiceCard({ service }) {
         transition: "opacity .35s ease, transform .35s ease",
     };
 
-    const btnStyle = {
-        padding: "10px 16px",
-        fontSize: 14.5,
-        fontWeight: 600,
-        borderRadius: 10,
-        border: "1px solid #1E90FF",
-        background: "#1E90FF",
-        color: "#fff",
-        textDecoration: "none",
-    };
-
-    // inline hover via onMouseEnter/Leave to toggle styles
     const wrapRef = useRef(null);
     const moreRef = useRef(null);
     const btnRef = useRef(null);
@@ -438,14 +528,13 @@ function ServiceCard({ service }) {
             <div ref={btnRef} style={btnWrapStyle}>
                 <Link href={`/industries/${service.slug}`} style={{ textDecoration: "none" }}>
                     <button className="learn-more">
-      <span className="circle" aria-hidden="true">
-        <span className="icon arrow"></span>
-      </span>
+                        <span className="circle" aria-hidden="true">
+                            <span className="icon arrow"></span>
+                        </span>
                         <span className="button-text">Learn More</span>
                     </button>
                 </Link>
             </div>
-
         </div>
     );
 }

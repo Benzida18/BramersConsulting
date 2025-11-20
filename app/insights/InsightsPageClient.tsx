@@ -151,8 +151,10 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                     <div
                         style={{
                             display: "grid",
-                            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                            // Responsive: 3 cols on wide, 2 on medium, 1 on mobile
+                            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
                             gap: 26,
+                            alignItems: "stretch",
                         }}
                     >
                         {posts.map((post, i) => (

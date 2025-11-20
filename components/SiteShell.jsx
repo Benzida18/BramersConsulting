@@ -1,15 +1,14 @@
+// components/SiteShell.jsx
 "use client";
 
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import MobileHeader from "@/components/mobile/MobileHeader";
-import MobileFooter from "@/components/mobile/MobileFooter";
+import MobileHeader from "@/components/Mobile/MobileHeader"; // ⬅️ capital M
+// ❌ REMOVE this: import MobileFooter from "@/components/mobile/MobileFooter";
 
 export default function SiteShell({ children }) {
     const pathname = usePathname();
-
-    // Studio pages: no site chrome
     const isStudioRoute = pathname.startsWith("/studio");
 
     if (isStudioRoute) {
@@ -18,12 +17,12 @@ export default function SiteShell({ children }) {
 
     return (
         <>
-            {/* Desktop header wrapper */}
+            {/* Desktop header */}
             <div className="desktop-only">
                 <Header />
             </div>
 
-            {/* Mobile header wrapper */}
+            {/* Mobile header */}
             <div className="mobile-only">
                 <MobileHeader />
             </div>
@@ -36,9 +35,9 @@ export default function SiteShell({ children }) {
                 <Footer />
             </div>
 
-            {/* Mobile footer */}
+            {/* Mobile footer – reuse same Footer for now */}
             <div className="mobile-only">
-                <MobileFooter />
+                <Footer />
             </div>
         </>
     );

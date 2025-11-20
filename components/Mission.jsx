@@ -26,54 +26,15 @@ export default function Mission() {
     ];
 
     return (
-        <section
-            className="mission-section"
-            style={{
-                width: "100%",
-                background: "#FFFFFF",
-                display: "flex",
-                justifyContent: "center",
-                padding: "110px 0 120px"
-            }}
-        >
-            <div
-                className="mission-grid"
-                style={{
-                    width: "100%",
-                    maxWidth: "1320px",
-                    padding: "0 40px",
-                    display: "grid",
-                    gridTemplateColumns: "minmax(0, 1.1fr) minmax(0, 1.1fr)",
-                    gap: "72px"
-                }}
-            >
-
+        <section className="mission-section">
+            <div className="mission-grid">
                 {/* LEFT – copy */}
-                <div>
-                    <p
-                        style={{
-                            fontFamily: "var(--font-inter)",
-                            fontSize: "13px",
-                            letterSpacing: "0.22em",
-                            textTransform: "uppercase",
-                            color: "#7A7A7A",
-                            marginBottom: "18px"
-                        }}
-                    >
+                <div className="mission-copy">
+                    <p className="mission-kicker">
                         Cross-regional advisory
                     </p>
 
-                    <h2
-                        style={{
-                            fontFamily: "var(--font-playfair), serif",
-                            fontSize: "52px",
-                            lineHeight: 1.12,
-                            fontWeight: 500,
-                            margin: 0,
-                            color: "#0A0A0A",
-                            marginBottom: "26px"
-                        }}
-                    >
+                    <h2 className="mission-heading">
                         Strategy, transactions and
                         <br />
                         execution between the UK
@@ -81,16 +42,7 @@ export default function Mission() {
                         &amp; Africa.
                     </h2>
 
-                    <p
-                        style={{
-                            fontFamily: "var(--font-inter)",
-                            fontSize: "17px",
-                            lineHeight: 1.7,
-                            color: "#3b3b3b",
-                            maxWidth: "540px",
-                            marginTop: "16px"
-                        }}
-                    >
+                    <p className="mission-body">
                         Bramers Consulting supports corporates, investors and institutions
                         navigating multi-market growth, with a focus on anglophone and
                         francophone Africa.
@@ -98,13 +50,7 @@ export default function Mission() {
                 </div>
 
                 {/* RIGHT – cards with hover dropdown */}
-                <div
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "22px"
-                    }}
-                >
+                <div className="mission-services">
                     {services.map((item) => (
                         <div key={item.title} className="service-card">
                             <div className="service-main">
@@ -119,8 +65,67 @@ export default function Mission() {
                 </div>
             </div>
 
-            {/* Local styles for hover dropdown + cleaner font (Inter) */}
             <style jsx>{`
+                /* ===========================
+                   LAYOUT – DESKTOP DEFAULT
+                   =========================== */
+                .mission-section {
+                    width: 100%;
+                    background: #ffffff;
+                    display: flex;
+                    justify-content: center;
+                    padding: 110px 0 120px;
+                }
+
+                .mission-grid {
+                    width: 100%;
+                    max-width: 1320px;
+                    padding: 0 40px;
+                    display: grid;
+                    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+                    gap: 72px;
+                }
+
+                .mission-copy {
+                    max-width: 600px;
+                }
+
+                .mission-kicker {
+                    font-family: var(--font-inter);
+                    font-size: 13px;
+                    letter-spacing: 0.22em;
+                    text-transform: uppercase;
+                    color: #7a7a7a;
+                    margin: 0 0 18px;
+                }
+
+                .mission-heading {
+                    font-family: var(--font-playfair), serif;
+                    font-size: 52px;
+                    line-height: 1.12;
+                    font-weight: 500;
+                    margin: 0 0 26px;
+                    color: #0a0a0a;
+                }
+
+                .mission-body {
+                    font-family: var(--font-inter);
+                    font-size: 17px;
+                    line-height: 1.7;
+                    color: #3b3b3b;
+                    max-width: 540px;
+                    margin: 16px 0 0;
+                }
+
+                .mission-services {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 22px;
+                }
+
+                /* ===========================
+                   SERVICE CARDS (same look)
+                   =========================== */
                 .service-card {
                     background: #ffffff;
                     border-radius: 22px;
@@ -128,7 +133,7 @@ export default function Mission() {
                     box-shadow: 0 18px 42px rgba(0, 0, 0, 0.04);
                     border: 1px solid rgba(10, 10, 10, 0.05);
                     transition: transform 0.26s ease, box-shadow 0.26s ease,
-                        border-color 0.26s ease, background 0.26s ease;
+                    border-color 0.26s ease, background 0.26s ease;
                     overflow: hidden;
                     position: relative;
                 }
@@ -139,10 +144,10 @@ export default function Mission() {
                     inset: 0;
                     border-radius: 22px;
                     background: linear-gradient(
-                        135deg,
-                        rgba(30, 144, 255, 0.14),
-                        transparent 45%,
-                        transparent 100%
+                            135deg,
+                            rgba(30, 144, 255, 0.14),
+                            transparent 45%,
+                            transparent 100%
                     );
                     opacity: 0;
                     pointer-events: none;
@@ -167,7 +172,7 @@ export default function Mission() {
 
                 .service-title {
                     font-family: var(--font-inter), system-ui, -apple-system,
-                        "Segoe UI", sans-serif;
+                    "Segoe UI", sans-serif;
                     font-size: 20px;
                     font-weight: 600;
                     letter-spacing: 0.01em;
@@ -177,7 +182,7 @@ export default function Mission() {
 
                 .service-blurb {
                     font-family: var(--font-inter), system-ui, -apple-system,
-                        "Segoe UI", sans-serif;
+                    "Segoe UI", sans-serif;
                     font-size: 15px;
                     line-height: 1.6;
                     color: #4b4b4b;
@@ -190,7 +195,7 @@ export default function Mission() {
                     opacity: 0;
                     transform: translateY(6px);
                     transition: max-height 0.32s ease, opacity 0.26s ease,
-                        transform 0.26s ease;
+                    transform 0.26s ease;
                     position: relative;
                     z-index: 1;
                 }
@@ -203,20 +208,70 @@ export default function Mission() {
 
                 .service-detail {
                     font-family: var(--font-inter), system-ui, -apple-system,
-                        "Segoe UI", sans-serif;
+                    "Segoe UI", sans-serif;
                     font-size: 14px;
                     line-height: 1.6;
                     color: #5c5c5c;
                     margin: 0;
                 }
 
+                /* ===========================
+                   TABLET
+                   =========================== */
                 @media (max-width: 1024px) {
                     .mission-section {
                         padding: 80px 0 90px;
                     }
+
                     .mission-grid {
                         grid-template-columns: 1fr;
                         gap: 44px;
+                    }
+                }
+
+                /* ===========================
+                   MOBILE
+                   =========================== */
+                @media (max-width: 768px) {
+                    .mission-section {
+                        padding: 64px 0 72px;
+                    }
+
+                    .mission-grid {
+                        padding: 0 20px;
+                        gap: 40px;
+                    }
+
+                    .mission-kicker {
+                        font-size: 11px;
+                        letter-spacing: 0.2em;
+                    }
+
+                    .mission-heading {
+                        font-size: 32px;
+                        line-height: 1.25;
+                    }
+
+                    .mission-body {
+                        font-size: 15px;
+                        line-height: 1.7;
+                        max-width: none;
+                    }
+
+                    .service-card {
+                        padding: 20px 18px;
+                    }
+
+                    .service-title {
+                        font-size: 17px;
+                    }
+
+                    .service-blurb {
+                        font-size: 14px;
+                    }
+
+                    .service-detail {
+                        font-size: 13px;
                     }
                 }
             `}</style>

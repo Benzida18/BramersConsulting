@@ -252,20 +252,7 @@ export default function Header() {
                         </li>
                     </ul>
 
-                    {/* MOBILE CONTROLS (shown only on mobile via CSS) */}
                     <div className="mobile-controls">
-                        {/* simple language label next to burger */}
-                        <span
-                            style={{
-                                color: "#ffffff",
-                                fontFamily: "var(--font-playfair)",
-                                fontSize: "18px",
-                                marginRight: "12px",
-                            }}
-                        >
-                            EN
-                        </span>
-
                         <label className="burger">
                             <input
                                 type="checkbox"

@@ -1,0 +1,24 @@
+/* components/mobile/MobileGlobal.css */
+
+/* PHONE LAYOUT ONLY */
+@media (max-width: 768px) {
+    /* Make sure page content starts below the fixed mobile header */
+    main,
+    .page {
+        padding-top: 120px !important; /* room for logo + 2 nav rows */
+    }
+
+    /* No horizontal scrolling on mobile */
+    html,
+    body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    * {
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    /* Do NOT style header/nav here – all that lives in MobileHeader.css */
+}

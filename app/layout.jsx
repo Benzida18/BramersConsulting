@@ -1,8 +1,10 @@
 // app/layout.jsx
 import "./globals.css";
-import "../components/mobile/MobileGlobal.css";
+import "../components/Mobile/MobileGlobal.css";
+import "../components/Mobile/MobileHeader.css";
+
 import { Inter, Playfair_Display } from "next/font/google";
-import SiteShell from "@/components/SiteShell"; // ⬅️ new import
+import SiteShell from "@/components/SiteShell";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -16,7 +18,6 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.className} ${playfair.className}`}>
         <body className="site-body">
-        {/* SiteShell decides if header/footer should show */}
         <SiteShell>{children}</SiteShell>
         </body>
         </html>
