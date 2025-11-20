@@ -1,6 +1,6 @@
 // app/layout.jsx
 import "./globals.css";
-import "../components/mobile/Mobile.css";
+import "../components/mobile/MobileGlobal.css";
 import { Inter, Playfair_Display } from "next/font/google";
 import SiteShell from "@/components/SiteShell"; // ⬅️ new import
 

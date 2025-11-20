@@ -1,5 +1,5 @@
 "use client";
-
+import "./MobileMission.css";
 export default function MobileMission() {
     const services = [
         {

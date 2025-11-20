@@ -1,0 +1,93 @@
+/* ===========================
+   MOBILE FOOTER
+=========================== */
+@media (max-width: 900px) {
+
+    .m-footer {
+        background: #050810;
+        padding: 48px 24px 30px;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        gap: 42px;
+        margin-top: 80px;
+    }
+
+    /* BLOCK WRAPPER */
+    .m-footer-block {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* LOGO */
+    .m-footer-logo {
+        width: 68px;
+        height: 68px;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    /* TITLE */
+    .m-footer-title {
+        font-family: var(--font-playfair);
+        font-size: 22px;
+        margin: 6px 0 4px;
+        font-weight: 600;
+        color: #ffffff;
+    }
+
+    /* DESCRIPTION TEXT */
+    .m-footer-text {
+        font-family: var(--font-inter);
+        font-size: 15px;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.7);
+        max-width: 320px;
+    }
+
+    /* HEADINGS */
+    .m-footer-heading {
+        font-family: var(--font-playfair);
+        font-size: 18px;
+        margin-bottom: 6px;
+        color: #ffffff;
+    }
+
+    /* LINKS */
+    .m-footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .m-footer-links-inline {
+        flex-direction: row !important;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .m-footer-link {
+        font-family: var(--font-inter);
+        font-size: 15px;
+        color: rgba(255,255,255,0.8);
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .m-footer-link:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+
+    /* COPYRIGHT LINE */
+    .m-footer-bottom {
+        margin-top: 10px;
+        padding-top: 18px;
+        font-family: var(--font-inter);
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+        text-align: center;
+        border-top: 1px solid rgba(255,255,255,0.12);
+    }
+}

@@ -1,5 +1,5 @@
 "use client";
-
+import "./MobileIndustryCard.css";
 export default function MobileIndustryCard() {
     const tags = [
         "Market entry & expansion",

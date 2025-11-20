@@ -1,5 +1,5 @@
 "use client";
-
+import "./MobileIndustrySection.css";
 export default function MobileIndustrySection() {
     const sectors = [
         {

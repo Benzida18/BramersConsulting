@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import MobileNavOverlay from "./MobileNavOverlay";
 
 export default function MobileShell({ children }) {
     // view: "none" | "nav" | "industries" | "language"
@@ -12,11 +11,7 @@ export default function MobileShell({ children }) {
 
     // lock body scroll when overlays open
     useEffect(() => {
-        if (menuOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
+        document.body.style.overflow = menuOpen ? "hidden" : "";
         return () => {
             document.body.style.overflow = "";
         };
@@ -37,7 +32,7 @@ export default function MobileShell({ children }) {
                 </Link>
 
                 <div className="m-header-right">
-                    {/* Language trigger – left of burger */}
+
                     <button
                         type="button"
                         className="m-lang-trigger"
@@ -46,17 +41,12 @@ export default function MobileShell({ children }) {
                         EN
                     </button>
 
-                    {/* Hamburger */}
                     <button
                         type="button"
                         className={`m-burger ${menuOpen ? "open" : ""}`}
                         aria-label={menuOpen ? "Close navigation" : "Open navigation"}
                         onClick={() => {
-                            if (menuOpen) {
-                                closeAll();
-                            } else {
-                                setView("nav");
-                            }
+                            menuOpen ? closeAll() : setView("nav");
                         }}
                     >
                         <span />
@@ -65,7 +55,6 @@ export default function MobileShell({ children }) {
                 </div>
             </header>
 
-            {/* FULL-SCREEN OVERLAYS */}
             {menuOpen && (
                 <MobileNavOverlay
                     view={view}
@@ -74,7 +63,6 @@ export default function MobileShell({ children }) {
                 />
             )}
 
-            {/* PAGE CONTENT (pushed down under fixed header) */}
             <div className="m-page">{children}</div>
         </>
     );
