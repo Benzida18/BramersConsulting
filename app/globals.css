@@ -14,8 +14,11 @@
     --headerHeight: 120px;
 }
 
-/* Base */
-html, body {
+/* ============================================== */
+/* BASE                                           */
+/* ============================================== */
+html,
+body {
     margin: 0;
     padding: 0;
     background: var(--color-background);
@@ -23,13 +26,15 @@ html, body {
     font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto;
 }
 
-ul, li {
+ul,
+li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-img, video {
+img,
+video {
     display: block;
     max-width: 100%;
 }
@@ -62,9 +67,35 @@ nav > ul > li > a,
     transition: color 0.25s ease;
 }
 
+/* hover colour */
 nav a:hover,
 .dropdown-trigger:hover {
     color: var(--color-primary) !important;
+}
+
+/* underline animation for nav items */
+nav > ul > li > a,
+.dropdown-trigger {
+    position: relative;
+    overflow: hidden;
+}
+
+nav > ul > li > a::after,
+.dropdown-trigger::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;               /* underline sits at the bottom of the text */
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    transform: translateX(-110%);
+    transition: transform 0.35s ease;
+}
+
+nav > ul > li > a:hover::after,
+.dropdown-trigger:hover::after {
+    transform: translateX(0);
 }
 
 /* Chevron Arrow */
@@ -87,7 +118,7 @@ nav a:hover,
     border-radius: 14px;
     padding: 18px 26px;
     min-width: 180px;
-    box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
     z-index: 99999;
     display: none;
     opacity: 0;
@@ -134,6 +165,7 @@ nav a:hover,
     transform: translateX(4px);
 }
 
+/* Language dropdown (desktop) */
 .language-menu {
     position: absolute;
     right: 0;
@@ -142,7 +174,7 @@ nav a:hover,
     border-radius: 10px;
     min-width: 200px;
     padding: 14px 20px;
-    box-shadow: 0 14px 32px rgba(0,0,0,0.14);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
     z-index: 9999;
 }
 
@@ -153,7 +185,7 @@ nav a:hover,
 }
 
 /* ============================================== */
-/* STUDIO / SITE DIFFERENCES                        */
+/* STUDIO / SITE DIFFERENCES                      */
 /* ============================================== */
 .site-body {
     background: var(--color-background);
@@ -167,7 +199,7 @@ nav a:hover,
 }
 
 /* ============================================== */
-/* ANIMATED BUTTON (Uiverse – global class)        */
+/* ANIMATED BUTTON (Uiverse – global class)       */
 /* ============================================== */
 .fancy-btn {
     background-color: transparent;
@@ -224,7 +256,7 @@ nav a:hover,
 }
 
 /* ============================================== */
-/* GLOBAL NEO CARD (your neumorphic box)           */
+/* GLOBAL NEO CARD (your neumorphic box)          */
 /* ============================================== */
 .neo-card {
     background: #e0e0e0;
@@ -242,7 +274,7 @@ nav a:hover,
 .neo-card:hover {
     transform: translateY(-8px);
     box-shadow:
-            0 12px 36px rgba(30,144,255,0.25),
+            0 12px 36px rgba(30, 144, 255, 0.25),
             15px 15px 30px #bebebe,
             -15px -15px 30px #ffffff;
 }
@@ -262,7 +294,7 @@ nav a:hover,
     left: -70px;
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(30,144,255,0.45), transparent 70%);
+    background: radial-gradient(circle, rgba(30, 144, 255, 0.45), transparent 70%);
 }
 
 .neo-card::after {
@@ -270,11 +302,11 @@ nav a:hover,
     right: -70px;
     width: 260px;
     height: 260px;
-    background: radial-gradient(circle, rgba(30,144,255,0.45), transparent 70%);
+    background: radial-gradient(circle, rgba(30, 144, 255, 0.45), transparent 70%);
 }
 
 /* ============================================== */
-/* SCROLL ANIMATIONS                               */
+/* SCROLL ANIMATIONS                              */
 /* ============================================== */
 .fade-section {
     opacity: 0;
@@ -289,7 +321,7 @@ nav a:hover,
 }
 
 /* ============================================== */
-/* LEARN MORE BUTTON (Uiverse)                     */
+/* LEARN MORE BUTTON (Uiverse)                    */
 /* ============================================== */
 button.learn-more {
     position: relative;
@@ -313,7 +345,7 @@ button.learn-more .circle {
     height: 3rem;
     background: #282936;
     border-radius: 1.625rem;
-    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
 }
 
 button.learn-more .circle .icon.arrow {
@@ -325,7 +357,7 @@ button.learn-more .circle .icon.arrow {
     width: 1.125rem;
     height: 0.125rem;
     background: none;
-    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
 }
 
 button.learn-more .circle .icon.arrow::before {
@@ -350,7 +382,7 @@ button.learn-more .button-text {
     text-transform: uppercase;
     line-height: 1.6;
     text-align: center;
-    transition: all 0.45s cubic-bezier(0.65,0,0.076,1);
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
 }
 
 button.learn-more:hover .circle {
@@ -359,7 +391,7 @@ button.learn-more:hover .circle {
 
 button.learn-more:hover .circle .icon.arrow {
     background: #fff;
-    transform: translate(1rem,0);
+    transform: translate(1rem, 0);
 }
 
 button.learn-more:hover .button-text {
@@ -367,41 +399,249 @@ button.learn-more:hover .button-text {
 }
 
 /* ============================================== */
-/* HEADER RESPONSIVE FIXES — GLOBAL               */
+/* HEADER – FIXED + FADE + SCROLL SHRINK          */
 /* ============================================== */
-header {
-    padding-left: clamp(16px, 5vw, 42px) !important;
-    padding-right: clamp(16px, 5vw, 42px) !important;
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
+    padding: 26px 42px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+
+    transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    animation: headerFadeDown 0.55s ease-out;
 }
 
-header img {
-    height: clamp(48px, 10vw, 100px) !important;
-    width: auto !important;
+/* scrolled state */
+.site-header.is-scrolled {
+    padding: 10px 42px;
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
 }
 
+/* logo size animation */
+.site-header .site-logo {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    transition: height 0.35s ease, transform 0.35s ease;
+}
+
+.site-header.is-scrolled .site-logo {
+    height: 70px;
+}
+
+@keyframes headerFadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* language dropdown alignment inside header */
 .nav-item-language .dropdown-menu {
     right: 0 !important;
     left: auto !important;
     transform: none !important;
 }
 
+/* ============================================== */
+/* MOBILE NAV + HAMBURGER                         */
+/* ============================================== */
+
+/* hide mobile controls on desktop */
+.mobile-controls {
+    display: none;
+    align-items: center;
+    gap: 14px;
+}
+
+/* simple EN pill next to burger on mobile */
+.mobile-lang-label {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff;
+    opacity: 0.85;
+}
+
+/* burger icon */
+.burger {
+    position: relative;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.burger input {
+    display: none;
+}
+
+.burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 999px;
+    background: #ffffff;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    transform-origin: left center;
+}
+
+/* burger animation when checked */
+.burger input:checked ~ span:nth-of-type(1) {
+    transform: translateY(1px) rotate(38deg);
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+    opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+    transform: translateY(-1px) rotate(-38deg);
+}
+
+/* full-screen overlay menu */
+.mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 7, 12, 0.97);
+    z-index: 9990;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 96px 24px 32px;
+}
+
+.mobile-nav-main {
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.mobile-nav-group {
+    margin-bottom: 24px;
+}
+
+.mobile-nav-label {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 10px;
+}
+
+.mobile-nav-links li,
+.mobile-nav-industry-list li {
+    margin-bottom: 10px;
+}
+
+.mobile-nav-links a,
+.mobile-nav-industry-list a {
+    font-family: var(--font-playfair), serif;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-industry-list a:hover {
+    color: var(--color-primary);
+}
+
+/* footer inside mobile menu */
+.mobile-nav-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 16px;
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.mobile-lang-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.mobile-lang-pill {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: #ffffff;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+}
+
+.mobile-lang-pill.active {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* ============================================== */
+/* RESPONSIVE HEADER / NAV                        */
+/* ============================================== */
+@media (max-width: 900px) {
+    /* hero feels higher + header slimmer on mobile */
+    .site-header {
+        padding: 14px 18px;
+        background: rgba(0, 0, 0, 0.55);
+    }
+
+    .site-header.is-scrolled {
+        padding: 10px 18px;
+        background: rgba(0, 0, 0, 0.94);
+    }
+
+    /* hide desktop nav list, show burger + EN */
+    .nav-list {
+        display: none;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    /* hide desktop language dropdown item */
+    .nav-item-language {
+        display: none;
+    }
+
+    .site-header .site-logo {
+        height: 70px;
+    }
+}
+
+/* small desktop tweaks */
 @media (max-width: 1200px) {
     .nav-list .nav-link,
     .dropdown-trigger {
         font-size: clamp(16px, 1.6vw, 20px);
     }
+
     nav ul {
         gap: clamp(28px, 4vw, 48px);
     }
 }
 
 /* ============================================== */
-/* HERO BASE
-============================================= */
-/* ============================================== */
 /* HERO BASE – DESKTOP + MOBILE                   */
 /* ============================================== */
-
 .hero-section {
     position: relative;
     width: 100%;
@@ -425,7 +665,7 @@ header img {
     font-family: var(--font-playfair), serif;
     font-weight: 400;
     line-height: 1.15;
-    text-shadow: 0px 6px 24px rgba(0,0,0,0.55);
+    text-shadow: 0px 6px 24px rgba(0, 0, 0, 0.55);
     font-size: clamp(32px, 6vw, 64px);
 }
 
@@ -433,12 +673,10 @@ header img {
     white-space: nowrap;
 }
 
-/* ================ */
-/* MOBILE OVERRIDES */
-/* ================ */
+/* MOBILE HERO OVERRIDES */
 @media (max-width: 768px) {
     .hero-section {
-        height: 70vh;          /* a bit shorter so you see below the fold */
+        height: 70vh;
         min-height: 420px;
     }
 
@@ -454,17 +692,18 @@ header img {
         text-align: left;
     }
 
-    /* allow lines to wrap naturally on small screens */
     .hero-heading div {
         white-space: normal;
     }
 }
-/* Show desktop stuff by default, hide on mobile */
+
+/* ============================================== */
+/* DESKTOP / MOBILE VISIBILITY HELPERS            */
+/* ============================================== */
 .desktop-only {
     display: block;
 }
 
-/* Hide mobile stuff by default */
 .mobile-only {
     display: none;
 }
@@ -478,24 +717,10 @@ header img {
         display: block;
     }
 }
-.desktop-only {
-    display: block;
-}
 
-.mobile-only {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .desktop-only {
-        display: none !important;
-    }
-
-    .mobile-only {
-        display: block !important;
-    }
-
-}
+/* ============================================== */
+/* TAILWIND DIRECTIVES                            */
+/* ============================================== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

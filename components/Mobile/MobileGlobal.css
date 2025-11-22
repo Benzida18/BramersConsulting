@@ -2,10 +2,12 @@
 
 /* PHONE LAYOUT ONLY */
 @media (max-width: 768px) {
-    /* Make sure page content starts below the fixed mobile header */
+    /* Let the hero video sit right behind the fixed header.
+       Individual pages (home, about, etc.) can add their own spacing
+       if they need it. */
     main,
     .page {
-        padding-top: 120px !important; /* room for logo + 2 nav rows */
+        padding-top: 0 !important;
     }
 
     /* No horizontal scrolling on mobile */
@@ -19,6 +21,4 @@
         box-sizing: border-box !important;
         max-width: 100% !important;
     }
-
-    /* Do NOT style header/nav here – all that lives in MobileHeader.css */
 }

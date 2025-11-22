@@ -111,52 +111,20 @@ export default function Header() {
                 }}
             />
 
-            <header
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    zIndex: 9999,
-                    padding: scrolled ? "10px 42px" : "26px 42px",
-                    background: scrolled ? "rgba(0,0,0,0.85)" : "rgba(0,0,0,0.35)",
-                    backdropFilter: "blur(12px)",
-                    transition: "0.3s ease",
-                }}
-            >
-                <nav
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        overflow: "visible",
-                    }}
-                >
+            {/* HEADER – hooks into .site-header & .site-header.is-scrolled in global.css */}
+            <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+                <nav className="main-nav">
                     {/* logo */}
-                    <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+                    <Link href="/" className="logo-wrap">
                         <img
                             src="/logo.jpg"
                             alt="Bramers Consulting"
-                            style={{
-                                height: scrolled ? "70px" : "100px",
-                                width: "auto",
-                                objectFit: "contain",
-                                transition: "0.35s ease",
-                            }}
+                            className="site-logo"
                         />
                     </Link>
 
-                    {/* DESKTOP NAV LIST (hidden on mobile via CSS @media) */}
-                    <ul
-                        className="nav-list"
-                        style={{
-                            display: "flex",
-                            gap: "48px",
-                            listStyle: "none",
-                            alignItems: "center",
-                            transform: "translateX(-200px)",
-                        }}
-                    >
+                    {/* DESKTOP NAV LIST */}
+                    <ul className="nav-list">
                         {/* INDUSTRIES DROPDOWN */}
                         <li
                             className="nav-item nav-item-industries"
@@ -166,12 +134,6 @@ export default function Header() {
                             <button
                                 type="button"
                                 className="dropdown-trigger"
-                                style={{
-                                    background: "none",
-                                    border: "none",
-                                    padding: 0,
-                                    cursor: "pointer",
-                                }}
                             >
                                 Industries <span className="chevron">▾</span>
                             </button>
@@ -225,12 +187,6 @@ export default function Header() {
                             <button
                                 type="button"
                                 className="dropdown-trigger"
-                                style={{
-                                    background: "none",
-                                    border: "none",
-                                    padding: 0,
-                                    cursor: "pointer",
-                                }}
                             >
                                 EN <span className="chevron">▾</span>
                             </button>
@@ -252,7 +208,16 @@ export default function Header() {
                         </li>
                     </ul>
 
+                    {/* MOBILE: language + burger on the right */}
                     <div className="mobile-controls">
+                        <button
+                            type="button"
+                            className="mobile-lang-pill"
+                            onClick={() => { /* future: toggle language sheet */ }}
+                        >
+                            EN
+                        </button>
+
                         <label className="burger">
                             <input
                                 type="checkbox"
@@ -267,17 +232,54 @@ export default function Header() {
                     </div>
                 </nav>
 
-                {/* top links colour / hover */}
+                {/* LAYOUT STYLES FOR HEADER / NAV */}
                 <style jsx>{`
-                    .nav-link {
+                    .logo-wrap {
+                        display: flex;
+                        align-items: center;
+                        text-decoration: none;
+                    }
+
+                    .main-nav {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        overflow: visible;
+                    }
+
+                    .nav-list {
+                        display: flex;
+                        gap: 48px;
+                        list-style: none;
+                        align-items: center;
+                    }
+
+                    .nav-link,
+                    .dropdown-trigger {
                         font-family: var(--font-playfair);
                         color: #ffffff;
                         text-decoration: none;
                         font-size: 20px;
+                        background: none;
+                        border: none;
+                        padding: 0;
+                        cursor: pointer;
                     }
-                    .nav-link:hover,
-                    .dropdown-trigger:hover {
-                        color: var(--color-primary);
+
+                    .mobile-controls {
+                        display: none;
+                    }
+
+                    @media (max-width: 900px) {
+                        .nav-list {
+                            display: none;
+                        }
+
+                        .mobile-controls {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                        }
                     }
                 `}</style>
 
@@ -285,7 +287,6 @@ export default function Header() {
                 {mobileOpen && (
                     <div className="mobile-nav-overlay">
                         <div className="mobile-nav-main">
-                            {/* Main links */}
                             <div className="mobile-nav-group">
                                 <div className="mobile-nav-label">Main</div>
                                 <ul className="mobile-nav-links">
@@ -317,7 +318,6 @@ export default function Header() {
                                 </ul>
                             </div>
 
-                            {/* Industries list */}
                             <div className="mobile-nav-group" style={{ marginTop: 32 }}>
                                 <div className="mobile-nav-label">Industries</div>
                                 <ul className="mobile-nav-industry-list">
@@ -332,7 +332,6 @@ export default function Header() {
                             </div>
                         </div>
 
-                        {/* Footer inside overlay: language pills */}
                         <div className="mobile-nav-footer">
                             <div className="mobile-nav-label">Language</div>
                             <div className="mobile-lang-row">

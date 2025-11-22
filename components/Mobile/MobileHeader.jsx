@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import "./MobileHeader.css";
 
 const INDUSTRIES = [
     ["Agribusiness", "/industries/agribusiness"],
@@ -17,137 +18,102 @@ const INDUSTRIES = [
 ];
 
 export default function MobileHeader() {
-    const [industriesOpen, setIndustriesOpen] = useState(false);
-    const [langOpen, setLangOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    const closePanels = () => {
-        setIndustriesOpen(false);
-        setLangOpen(false);
-    };
+    const closeMenu = () => setMenuOpen(false);
 
     return (
         <>
+            {/* fixed bar over the hero video */}
             <header className="mobile-header">
-                {/* logo row */}
-                <div className="mobile-logo">
-                    <Link href="/">
+                <div className="mobile-header-inner">
+                    <Link href="/" className="mobile-logo">
                         <img src="/logo.jpg" alt="Bramers Consulting" />
                     </Link>
+
+                    <div className="mobile-header-right">
+                        {/* language label outside the hamburger */}
+                        <span className="mobile-lang-label">EN</span>
+
+                        <button
+                            type="button"
+                            className={`hamburger ${menuOpen ? "is-open" : ""}`}
+                            onClick={() => setMenuOpen((open) => !open)}
+                            aria-label="Toggle navigation menu"
+                        >
+                            <span />
+                            <span />
+                            <span />
+                        </button>
+                    </div>
                 </div>
-
-                {/* grid nav */}
-                <nav className="mobile-nav">
-                    <ul className="nav-list">
-                        <li>
-                            <button
-                                type="button"
-                                className="nav-button"
-                                onClick={() => {
-                                    const next = !industriesOpen;
-                                    setIndustriesOpen(next);
-                                    if (next) setLangOpen(false);
-                                }}
-                            >
-                                Industries
-                            </button>
-                        </li>
-
-                        <li>
-                            <Link className="nav-link" href="/services">
-                                Services
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" href="/case-studies">
-                                Case Studies
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" href="/insights">
-                                Insights
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" href="/about">
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            <Link className="nav-link" href="/contact">
-                                Contact
-                            </Link>
-                        </li>
-
-                        <li className="nav-item-language">
-                            <button
-                                type="button"
-                                className="nav-button"
-                                onClick={() => {
-                                    const next = !langOpen;
-                                    setLangOpen(next);
-                                    if (next) setIndustriesOpen(false);
-                                }}
-                            >
-                                EN ▾
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
             </header>
 
-            {/* Half-screen Industries panel */}
-            {industriesOpen && (
-                <div className="mobile-panel mobile-panel-industries">
-                    <div className="mobile-panel-header">
-                        <span>Industries</span>
-                        <button
-                            type="button"
-                            className="mobile-panel-close"
-                            onClick={closePanels}
-                            aria-label="Close industries menu"
-                        >
-                            ×
-                        </button>
-                    </div>
-                    <div className="mobile-panel-inner">
-                        {INDUSTRIES.map(([label, href]) => (
-                            <Link key={href} href={href} onClick={closePanels}>
-                                {label}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            )}
+            {/* full-screen overlay menu */}
+            {menuOpen && (
+                <div className="mobile-menu-overlay">
+                    <div className="mobile-menu-inner">
+                        {/* MAIN LINKS */}
+                        <div className="mobile-menu-section">
+                            <div className="mobile-menu-label">Main</div>
+                            <ul>
+                                <li>
+                                    <Link href="/services" onClick={closeMenu}>
+                                        Services
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/case-studies" onClick={closeMenu}>
+                                        Case Studies
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/insights" onClick={closeMenu}>
+                                        Insights
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/about" onClick={closeMenu}>
+                                        About
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/contact" onClick={closeMenu}>
+                                        Contact
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
 
-            {/* Language panel (simple for now) */}
-            {langOpen && (
-                <div className="mobile-panel mobile-panel-language">
-                    <div className="mobile-panel-header">
-                        <span>Language</span>
-                        <button
-                            type="button"
-                            className="mobile-panel-close"
-                            onClick={closePanels}
-                            aria-label="Close language menu"
-                        >
-                            ×
-                        </button>
-                    </div>
-                    <div className="mobile-panel-inner">
-                        <button
-                            type="button"
-                            className="nav-button"
-                            onClick={closePanels}
-                        >
-                            English
-                        </button>
-                        <button
-                            type="button"
-                            className="nav-button"
-                            onClick={closePanels}
-                        >
-                            Français
-                        </button>
+                        {/* INDUSTRIES LIST */}
+                        <div className="mobile-menu-section">
+                            <div className="mobile-menu-label">Industries</div>
+                            <ul className="mobile-menu-industries">
+                                {INDUSTRIES.map(([label, href]) => (
+                                    <li key={href}>
+                                        <Link href={href} onClick={closeMenu}>
+                                            {label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* LANGUAGE PILLS */}
+                        <div className="mobile-menu-footer">
+                            <div className="mobile-menu-label">Language</div>
+                            <div className="mobile-lang-row">
+                                <button
+                                    type="button"
+                                    className="mobile-lang-pill active"
+                                >
+                                    English
+                                </button>
+                                <button type="button" className="mobile-lang-pill">
+                                    Français
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
