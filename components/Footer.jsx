@@ -1,10 +1,51 @@
+// components/Footer.jsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageContext";
 
 export default function Footer() {
     const year = new Date().getFullYear();
+    const { language } = useLanguage();
+
+    const TEXT = {
+        en: {
+            brand: "Bramers Consulting",
+            tagline:
+                "Independent advisory bridging leadership, markets, and partnership execution across the UK & Africa.",
+            navigateHeading: "Navigate",
+            connectHeading: "Connect",
+            copyrightSuffix: "Bramers Consulting — All rights reserved.",
+            navLinks: [
+                ["Industries", "/industries"],
+                ["Services", "/services"],
+                ["Case Studies", "/case-studies"],
+                ["Insights", "/insights"],
+                ["About", "/about"],
+                ["Contact", "/contact"],
+            ],
+        },
+        fr: {
+            brand: "Bramers Consulting",
+            tagline:
+                "Cabinet de conseil indépendant reliant leadership, marchés et exécution de partenariats entre le Royaume-Uni et l’Afrique.",
+            navigateHeading: "Navigation",
+            connectHeading: "Contact",
+            copyrightSuffix:
+                "Bramers Consulting — Tous droits réservés.",
+            navLinks: [
+                ["Secteurs", "/industries"],
+                ["Services", "/services"],
+                ["Études de cas", "/case-studies"],
+                ["Analyses", "/insights"],
+                ["À propos", "/about"],
+                ["Contact", "/contact"],
+            ],
+        },
+    };
+
+    const t = TEXT[language] ?? TEXT.en;
 
     return (
         <footer className="site-footer">
@@ -19,27 +60,17 @@ export default function Footer() {
                         className="footer-logo"
                     />
 
-                    <h3 className="footer-brand">Bramers Consulting</h3>
+                    <h3 className="footer-brand">{t.brand}</h3>
 
-                    <p className="footer-text">
-                        Independent advisory bridging leadership, markets, and partnership
-                        execution across the UK &amp; Africa.
-                    </p>
+                    <p className="footer-text">{t.tagline}</p>
                 </div>
 
                 {/* CENTER */}
                 <div className="footer-center">
-                    <h4 className="footer-heading">Navigate</h4>
+                    <h4 className="footer-heading">{t.navigateHeading}</h4>
 
                     <nav className="footer-nav">
-                        {[
-                            ["Industries", "/industries"],
-                            ["Services", "/services"],
-                            ["Case Studies", "/case-studies"],
-                            ["Insights", "/insights"],
-                            ["About", "/about"],
-                            ["Contact", "/contact"],
-                        ].map(([label, href]) => (
+                        {t.navLinks.map(([label, href]) => (
                             <Link key={href} href={href} className="footer-link">
                                 {label}
                             </Link>
@@ -49,7 +80,7 @@ export default function Footer() {
 
                 {/* RIGHT — SOCIAL ICONS */}
                 <div className="footer-right">
-                    <h4 className="footer-heading">Connect</h4>
+                    <h4 className="footer-heading">{t.connectHeading}</h4>
 
                     <div className="footer-social">
                         {/* EMAIL */}
@@ -124,7 +155,7 @@ export default function Footer() {
 
             {/* COPYRIGHT */}
             <div className="footer-copy">
-                © {year} Bramers Consulting — All rights reserved.
+                © {year} {t.copyrightSuffix}
             </div>
 
             <style jsx>{`

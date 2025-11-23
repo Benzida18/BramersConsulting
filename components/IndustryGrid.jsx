@@ -1,26 +1,52 @@
+// components/IndustryGrid.jsx
 "use client";
 
+import { useLanguage } from "@/components/LanguageContext";
+
+const copy = {
+    en: {
+        heading: "Industries We Advise",
+        industries: [
+            "Technology",
+            "Financial Services",
+            "Healthcare",
+            "Renewable Energy",
+            "Agriculture & Agribusiness",
+            "Real Estate & Infrastructure",
+            "Education & Training",
+            "AI & Data Strategy",
+            "Sports & Football Advisory",
+            "Logistics & Trade",
+        ],
+    },
+    fr: {
+        heading: "Secteurs que nous conseillons",
+        industries: [
+            "Technologie",
+            "Services financiers",
+            "Santé",
+            "Énergies renouvelables",
+            "Agriculture & agro-industrie",
+            "Immobilier & infrastructures",
+            "Éducation & formation",
+            "Stratégie IA & données",
+            "Conseil sportif & football",
+            "Logistique & commerce",
+        ],
+    },
+};
+
 export default function IndustryGrid() {
-    const industries = [
-        "Technology",
-        "Financial Services",
-        "Healthcare",
-        "Renewable Energy",
-        "Agriculture & Agribusiness",
-        "Real Estate & Infrastructure",
-        "Education & Training",
-        "AI & Data Strategy",
-        "Sports & Football Advisory",
-        "Logistics & Trade",
-    ];
+    const { language } = useLanguage();
+    const t = copy[language] || copy.en;
 
     return (
         <section className="industry-grid-section">
             <div className="industry-grid-container">
-                <h2 className="industry-grid-heading">Industries We Advise</h2>
+                <h2 className="industry-grid-heading">{t.heading}</h2>
 
                 <div className="industry-grid-cards">
-                    {industries.map((name) => (
+                    {t.industries.map((name) => (
                         <a
                             key={name}
                             href="#"

@@ -1,10 +1,10 @@
-// app/layout.jsx
 import "./globals.css";
 import "../components/Mobile/MobileGlobal.css";
 import "../components/Mobile/MobileHeader.css";
 
 import { Inter, Playfair_Display } from "next/font/google";
 import SiteShell from "@/components/SiteShell";
+import { LanguageProvider } from "@/components/LanguageContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${inter.className} ${playfair.className}`}>
         <body className="site-body">
-        <SiteShell>{children}</SiteShell>
+        <LanguageProvider>
+            <SiteShell>{children}</SiteShell>
+        </LanguageProvider>
         </body>
         </html>
     );

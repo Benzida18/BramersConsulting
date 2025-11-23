@@ -1,6 +1,25 @@
+// app/industries/[slug]/page.jsx
 "use client";
 
+import { useLanguage } from "@/components/LanguageContext";
+
 export const dynamic = "force-dynamic";
+
+// ---------- GENERIC LABELS (EN / FR) ----------
+const LABELS = {
+    en: {
+        sectorOverview: "Sector overview",
+        advisoryFor: "Advisory for leaders in",
+        typicalWork: "Typical work in this sector",
+        whereHelp: "Where we typically help",
+    },
+    fr: {
+        sectorOverview: "Vue d’ensemble du secteur",
+        advisoryFor: "Conseil pour les dirigeants dans le secteur",
+        typicalWork: "Types de missions dans ce secteur",
+        whereHelp: "Où nous intervenons le plus souvent",
+    },
+};
 
 // ---------- CONFIG FOR ALL 9 INDUSTRIES ----------
 const INDUSTRY_CONFIG = {
@@ -291,6 +310,9 @@ export default function IndustrySlugPage({ params }) {
     const { slug } = params;
     const data = INDUSTRY_CONFIG[slug];
 
+    const { language } = useLanguage();
+    const L = LABELS[language] || LABELS.en;
+
     if (!data) {
         return (
             <main style={{ padding: "140px 24px" }}>
@@ -404,7 +426,7 @@ export default function IndustrySlugPage({ params }) {
                             marginBottom: "14px",
                         }}
                     >
-                        Sector overview
+                        {L.sectorOverview}
                     </p>
                     <h2
                         style={{
@@ -414,7 +436,7 @@ export default function IndustrySlugPage({ params }) {
                             color: "#111",
                         }}
                     >
-                        Advisory for leaders in {data.title}.
+                        {L.advisoryFor} {data.title}.
                     </h2>
                     <p
                         style={{
@@ -468,7 +490,7 @@ export default function IndustrySlugPage({ params }) {
                         marginBottom: "18px",
                     }}
                 >
-                    Typical work in this sector
+                    {L.typicalWork}
                 </p>
                 <div
                     style={{
@@ -514,7 +536,7 @@ export default function IndustrySlugPage({ params }) {
                         marginBottom: "16px",
                     }}
                 >
-                    Where we typically help
+                    {L.whereHelp}
                 </p>
 
                 <div

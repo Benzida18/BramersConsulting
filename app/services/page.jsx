@@ -3,6 +3,195 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageContext";
+
+/* ---------- COPY (EN + FR) ---------- */
+const TEXT = {
+    en: {
+        heroTitle: "Services",
+        heroSubtitle:
+            "Advisory built for clarity and steady execution—bridging the UK and African markets with practical structures, respectful relationships, and measurable progress.",
+        approachHeading: "Our Approach",
+        approachBody:
+            "We start with context: the people, constraints, and levers that actually move a project forward. Then we co-design a simple operating rhythm—decisions, reviews, and clear ownership—so momentum is maintained. We avoid noise, document agreements, and build trusted partnerships that last. Progress becomes consistent, not frantic.",
+        approachList: [
+            "Clear roles & decisions (no ambiguity).",
+            "Lightweight governance and useful reporting.",
+            "Respect for culture, timing, and stakeholder priorities.",
+            "Measurable milestones—small wins compounding over time.",
+        ],
+        gridTitle: "What We Deliver",
+        gridIntro:
+            "Each service mirrors an industry context we know well. Hover to explore how we work—no clicks required. When ready, book a session to map your next step with us.",
+        ctaLabel: "Learn More",
+    },
+    fr: {
+        heroTitle: "Services",
+        heroSubtitle:
+            "Un conseil conçu pour la clarté et une exécution régulière — en reliant les marchés du Royaume-Uni et de l’Afrique grâce à des structures pratiques, des relations respectueuses et des progrès mesurables.",
+        approachHeading: "Notre approche",
+        approachBody:
+            "Nous commençons par le contexte : les personnes, les contraintes et les leviers qui font réellement avancer un projet. Ensuite, nous co-construisons un rythme de travail simple — décisions, revues et responsabilités claires — afin de garder l’élan. Nous évitons le bruit, documentons les accords et bâtissons des relations de confiance durables. Les progrès deviennent réguliers, plutôt que précipités.",
+        approachList: [
+            "Rôles et décisions clairs (aucune ambiguïté).",
+            "Gouvernance légère et reporting utile.",
+            "Respect de la culture, du timing et des priorités des parties prenantes.",
+            "Jalons mesurables — de petits gains qui se cumulent dans le temps.",
+        ],
+        gridTitle: "Ce que nous apportons",
+        gridIntro:
+            "Chaque service reflète un contexte sectoriel que nous connaissons bien. Survolez pour découvrir notre manière de travailler. Quand vous êtes prêt, réservez une session pour cartographier votre prochaine étape avec nous.",
+        ctaLabel: "En savoir plus",
+    },
+};
+
+/* ---------- SERVICES PER LANGUAGE (same slugs, translated copy) ---------- */
+const SERVICES_COPY = {
+    en: [
+        {
+            slug: "agribusiness",
+            title: "Agribusiness Advisory",
+            short:
+                "Value-chain mapping, export readiness, and market access across UK–Africa routes.",
+            long:
+                "We align producers, processors, and distributors; design cold-chain/logistics flows; and structure partnerships with reliable off-takers.",
+        },
+        {
+            slug: "real-estate",
+            title: "Real Estate & Infrastructure",
+            short:
+                "Site selection, capital structuring, and delivery governance for resilient assets.",
+            long:
+                "From feasibility to execution, we support JV models, risk allocation, and stakeholder engagement to keep programmes bankable.",
+        },
+        {
+            slug: "finance",
+            title: "Financial Advisory",
+            short: "Capital strategy, investor relations, and transaction preparation.",
+            long:
+                "We help prepare datarooms, refine investment theses, and map suitable sources of capital across institutional and private channels.",
+        },
+        {
+            slug: "catering-hospitality",
+            title: "Catering & Hospitality",
+            short:
+                "Concept design, service standards, and unit economics for premium experiences.",
+            long:
+                "Menu engineering, staffing models, and supplier programmes that balance guest delight with margin discipline.",
+        },
+        {
+            slug: "international-trade",
+            title: "International Trade & Export",
+            short:
+                "Market entry, compliance pathways, and cross-border partnership building.",
+            long:
+                "We clarify tariff and non-tariff barriers, secure distributors, and sequence pilots to de-risk expansion.",
+        },
+        {
+            slug: "football-advisory",
+            title: "Football Advisory",
+            short: "Talent pathways, club relations, and governance alignment.",
+            long:
+                "We design development frameworks, stakeholder protocols, and transparent reporting that protect athlete welfare and value.",
+        },
+        {
+            slug: "coaching-training",
+            title: "Coaching & Leadership",
+            short: "Practical leadership development and team performance systems.",
+            long:
+                "Clarity frameworks, feedback cultures, and cadence rituals that sustain execution without burnout.",
+        },
+        {
+            slug: "ai-strategy",
+            title: "AI Strategy",
+            short:
+                "Pragmatic automation and decision support—grounded in real workflows.",
+            long:
+                "Opportunity scans, vendor selection, and adoption roadmaps that respect data governance and change management.",
+        },
+        {
+            slug: "mining",
+            title: "Mining & Natural Resources",
+            short: "Licensing pathways, ESG alignment, and community engagement.",
+            long:
+                "Stakeholder maps, risk registers, and partnerships that keep projects viable and respectful of local context.",
+        },
+    ],
+    fr: [
+        {
+            slug: "agribusiness",
+            title: "Conseil en agribusiness",
+            short:
+                "Cartographie des chaînes de valeur, préparation à l’export et accès aux marchés sur les corridors Royaume-Uni–Afrique.",
+            long:
+                "Nous alignons producteurs, transformateurs et distributeurs ; concevons les flux logistiques/chaîne du froid ; et structurons des partenariats avec des acheteurs fiables.",
+        },
+        {
+            slug: "real-estate",
+            title: "Immobilier & Infrastructures",
+            short:
+                "Sélection des sites, structuration du capital et gouvernance de livraison pour des actifs résilients.",
+            long:
+                "De la faisabilité à l’exécution, nous accompagnons les JV, l’allocation des risques et l’engagement des parties prenantes pour maintenir la bancabilité des programmes.",
+        },
+        {
+            slug: "finance",
+            title: "Conseil financier",
+            short:
+                "Stratégie de capital, relations investisseurs et préparation des transactions.",
+            long:
+                "Nous aidons à préparer les datarooms, affiner les thèses d’investissement et cartographier les bonnes sources de capital, institutionnelles ou privées.",
+        },
+        {
+            slug: "catering-hospitality",
+            title: "Hôtellerie & Restauration",
+            short:
+                "Conception de concepts, standards de service et économie unitaire pour des expériences premium.",
+            long:
+                "Ingénierie de menu, modèles d’effectifs et programmes fournisseurs qui concilient satisfaction client et discipline de marge.",
+        },
+        {
+            slug: "international-trade",
+            title: "Commerce international & export",
+            short:
+                "Entrée sur de nouveaux marchés, conformité et construction de partenariats transfrontaliers.",
+            long:
+                "Nous clarifions les barrières tarifaires et non tarifaires, sécurisons des distributeurs et séquençons les pilotes pour réduire le risque d’expansion.",
+        },
+        {
+            slug: "football-advisory",
+            title: "Conseil en football",
+            short:
+                "Parcours de talents, relations entre clubs et alignement de la gouvernance.",
+            long:
+                "Nous concevons des cadres de développement, des protocoles avec les parties prenantes et un reporting transparent qui protège la valeur et le bien-être des joueurs.",
+        },
+        {
+            slug: "coaching-training",
+            title: "Coaching & leadership",
+            short:
+                "Développement de leadership pragmatique et systèmes de performance d’équipe.",
+            long:
+                "Cadres de clarté, culture du feedback et rituels de cadence qui soutiennent l’exécution sans épuisement.",
+        },
+        {
+            slug: "ai-strategy",
+            title: "Stratégie d’IA",
+            short:
+                "Automatisation pragmatique et aide à la décision, ancrées dans les flux de travail réels.",
+            long:
+                "Identification des opportunités, sélection des fournisseurs et feuilles de route d’adoption respectueuses de la gouvernance des données et de la conduite du changement.",
+        },
+        {
+            slug: "mining",
+            title: "Mines & ressources naturelles",
+            short:
+                "Parcours d’obtention de licences, alignement ESG et engagement communautaire.",
+            long:
+                "Cartographies des parties prenantes, registres de risques et partenariats qui maintiennent la viabilité des projets tout en respectant le contexte local.",
+        },
+    ],
+};
 
 /* ---------- tiny helper for scroll-in animation ---------- */
 function RevealOnScroll({ children, delay = 0 }) {
@@ -42,79 +231,12 @@ function RevealOnScroll({ children, delay = 0 }) {
     );
 }
 
-/* ---------- data ---------- */
-const SERVICES = [
-    {
-        slug: "agribusiness",
-        title: "Agribusiness Advisory",
-        short:
-            "Value-chain mapping, export readiness, and market access across UK–Africa routes.",
-        long:
-            "We align producers, processors, and distributors; design cold-chain/logistics flows; and structure partnerships with reliable off-takers.",
-    },
-    {
-        slug: "real-estate",
-        title: "Real Estate & Infrastructure",
-        short:
-            "Site selection, capital structuring, and delivery governance for resilient assets.",
-        long:
-            "From feasibility to execution, we support JV models, risk allocation, and stakeholder engagement to keep programmes bankable.",
-    },
-    {
-        slug: "finance",
-        title: "Financial Advisory",
-        short: "Capital strategy, investor relations, and transaction preparation.",
-        long:
-            "We help prepare datarooms, refine investment theses, and map suitable sources of capital across institutional and private channels.",
-    },
-    {
-        slug: "catering-hospitality",
-        title: "Catering & Hospitality",
-        short:
-            "Concept design, service standards, and unit economics for premium experiences.",
-        long:
-            "Menu engineering, staffing models, and supplier programmes that balance guest delight with margin discipline.",
-    },
-    {
-        slug: "international-trade",
-        title: "International Trade & Export",
-        short:
-            "Market entry, compliance pathways, and cross-border partnership building.",
-        long:
-            "We clarify tariff and non-tariff barriers, secure distributors, and sequence pilots to de-risk expansion.",
-    },
-    {
-        slug: "football-advisory",
-        title: "Football Advisory",
-        short: "Talent pathways, club relations, and governance alignment.",
-        long:
-            "We design development frameworks, stakeholder protocols, and transparent reporting that protect athlete welfare and value.",
-    },
-    {
-        slug: "coaching-training",
-        title: "Coaching & Leadership",
-        short: "Practical leadership development and team performance systems.",
-        long:
-            "Clarity frameworks, feedback cultures, and cadence rituals that sustain execution without burnout.",
-    },
-    {
-        slug: "ai-strategy",
-        title: "AI Strategy",
-        short:
-            "Pragmatic automation and decision support—grounded in real workflows.",
-        long:
-            "Opportunity scans, vendor selection, and adoption roadmaps that respect data governance and change management.",
-    },
-    {
-        slug: "mining",
-        title: "Mining & Natural Resources",
-        short: "Licensing pathways, ESG alignment, and community engagement.",
-        long:
-            "Stakeholder maps, risk registers, and partnerships that keep projects viable and respectful of local context.",
-    },
-];
-
+/* ---------- PAGE ---------- */
 export default function ServicesPage() {
+    const { language } = useLanguage();
+    const t = TEXT[language] ?? TEXT.en;
+    const services = SERVICES_COPY[language] ?? SERVICES_COPY.en;
+
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* ---------- HERO (Header sits over this video) ---------- */}
@@ -130,14 +252,10 @@ export default function ServicesPage() {
 
                 <div className="services-hero-content">
                     <RevealOnScroll>
-                        <h1 className="services-hero-title">Services</h1>
+                        <h1 className="services-hero-title">{t.heroTitle}</h1>
                     </RevealOnScroll>
                     <RevealOnScroll delay={120}>
-                        <p className="services-hero-subtitle">
-                            Advisory built for clarity and steady execution—bridging the UK
-                            and African markets with practical structures, respectful
-                            relationships, and measurable progress.
-                        </p>
+                        <p className="services-hero-subtitle">{t.heroSubtitle}</p>
                     </RevealOnScroll>
                 </div>
             </section>
@@ -146,20 +264,14 @@ export default function ServicesPage() {
             <section className="services-approach">
                 <RevealOnScroll>
                     <div className="services-approach-text">
-                        <h2 className="services-approach-heading">Our Approach</h2>
-                        <p className="services-approach-body">
-                            We start with context: the people, constraints, and levers that
-                            actually move a project forward. Then we co-design a simple
-                            operating rhythm—decisions, reviews, and clear ownership—so
-                            momentum is maintained. We avoid noise, document agreements, and
-                            build trusted partnerships that last. Progress becomes
-                            consistent, not frantic.
-                        </p>
+                        <h2 className="services-approach-heading">
+                            {t.approachHeading}
+                        </h2>
+                        <p className="services-approach-body">{t.approachBody}</p>
                         <ul className="services-approach-list">
-                            <li>• Clear roles & decisions (no ambiguity).</li>
-                            <li>• Lightweight governance and useful reporting.</li>
-                            <li>• Respect for culture, timing, and stakeholder priorities.</li>
-                            <li>• Measurable milestones—small wins compounding over time.</li>
+                            {t.approachList.map((item, idx) => (
+                                <li key={idx}>• {item}</li>
+                            ))}
                         </ul>
                     </div>
                 </RevealOnScroll>
@@ -182,20 +294,16 @@ export default function ServicesPage() {
             <section className="services-grid-section">
                 <div className="services-grid-inner">
                     <RevealOnScroll>
-                        <h2 className="services-grid-title">What We Deliver</h2>
+                        <h2 className="services-grid-title">{t.gridTitle}</h2>
                     </RevealOnScroll>
                     <RevealOnScroll delay={80}>
-                        <p className="services-grid-intro">
-                            Each service mirrors an industry context we know well. Hover to
-                            explore how we work—no clicks required. When ready, book a
-                            session to map your next step with us.
-                        </p>
+                        <p className="services-grid-intro">{t.gridIntro}</p>
                     </RevealOnScroll>
 
                     <div className="services-grid">
-                        {SERVICES.map((s, i) => (
+                        {services.map((s, i) => (
                             <RevealOnScroll key={s.slug} delay={i * 60}>
-                                <ServiceCard service={s} />
+                                <ServiceCard service={s} ctaLabel={t.ctaLabel} />
                             </RevealOnScroll>
                         ))}
                     </div>
@@ -405,7 +513,7 @@ export default function ServicesPage() {
 }
 
 /* ---------- card component ---------- */
-function ServiceCard({ service }) {
+function ServiceCard({ service, ctaLabel }) {
     const cardStyle = {
         background: "#ffffff",
         borderRadius: 18,
@@ -526,12 +634,15 @@ function ServiceCard({ service }) {
             </div>
 
             <div ref={btnRef} style={btnWrapStyle}>
-                <Link href={`/industries/${service.slug}`} style={{ textDecoration: "none" }}>
+                <Link
+                    href={`/industries/${service.slug}`}
+                    style={{ textDecoration: "none" }}
+                >
                     <button className="learn-more">
                         <span className="circle" aria-hidden="true">
                             <span className="icon arrow"></span>
                         </span>
-                        <span className="button-text">Learn More</span>
+                        <span className="button-text">{ctaLabel}</span>
                     </button>
                 </Link>
             </div>

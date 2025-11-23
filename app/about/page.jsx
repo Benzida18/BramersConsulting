@@ -1,11 +1,192 @@
 // app/about/page.jsx
 "use client";
-import { useEffect, useRef } from "react";
 
-/** Small helper: add .is-visible the first time an element enters view.
- * It removes .is-visible when you scroll past (hides again),
- * but the animation class .has-played prevents reanimation on backscroll.
- */
+import { useEffect, useRef } from "react";
+import { useLanguage } from "@/components/LanguageContext";
+
+/** TEXT COPY (EN + FR) */
+const copy = {
+    en: {
+        heroTitle: "About Bramers",
+        heroSubtitle: (
+            <>
+                Independent advisory practice based in the United Kingdom, bridging
+                markets and enabling institutional cooperation across the UK & Africa.
+            </>
+        ),
+        founderTitle: "Founder’s Story",
+        founderBody: (
+            <>
+                Bramers was founded by Bouraima Zida, an advisor who believes progress
+                should be deliberate, context-aware, and built on trust. His work across
+                the United Kingdom and West Africa shaped a practice that blends
+                structured analysis with patient relationship-building — the kind that
+                earns access, not just attention.
+                <br />
+                <br />
+                Early in his career, Bouraima saw how promising initiatives stall when
+                strategy ignores people and place. He also saw how modest, well-sequenced
+                decisions compound into durable results. That discipline informs Bramers
+                today: clarify the goal, align the stakeholders, and move at the right
+                pace — no faster than trust allows, no slower than opportunity requires.
+                <br />
+                <br />
+                Bouraima’s focus areas include business structuring, leadership
+                development, market entry, and cross-border partnership building. He
+                works quietly and thoroughly, favouring clear commitments over broad
+                claims. Clients value the combination of steady communication, cultural
+                fluency, and a bias for documentation — turning complex intentions into
+                workable plans with owners, timelines, and accountability.
+                <br />
+                <br />
+                Bramers remains intentionally lean. That choice keeps the work hands-on
+                and responsive, and it preserves the discretion expected in sensitive
+                contexts. When scale is required, Bouraima coordinates specialist partners
+                under a single, simple principle: clarity first, then consistency, always
+                with respect. The result is an advisory relationship that is measured,
+                human, and built to last.
+            </>
+        ),
+        whatTitle: "What Bramers Do",
+        whatBody: (
+            <>
+                We help leaders simplify choices, structure initiatives, and set momentum
+                for sustainable outcomes. The work typically spans three areas that
+                reinforce each other.
+            </>
+        ),
+        cards: [
+            {
+                title: "Market Strategy & Positioning",
+                desc: "Define where to play and how to win. We map demand drivers, entry paths, and competitive edges — then align internal capabilities to the chosen path.",
+                bullets: [
+                    "Opportunity scanning & prioritisation",
+                    "Route-to-market & sequencing",
+                    "Operating model & governance setup",
+                ],
+            },
+            {
+                title: "Institutional & Regulatory Alignment",
+                desc: "Translate intent into workable frameworks. We align private objectives with policy constraints to reduce friction and protect momentum.",
+                bullets: [
+                    "Regulatory navigation & compliance setup",
+                    "Stakeholder mapping & engagement cadence",
+                    "Risk registers & escalation paths",
+                ],
+            },
+            {
+                title: "International Partnerships",
+                desc: "Establish trusted cross-border relationships. We focus on credibility, clarity of value exchange, and durable collaboration mechanisms.",
+                bullets: [
+                    "Partner profiling & introductions",
+                    "Term-sheet scaffolding",
+                    "Delivery PMO & performance reviews",
+                ],
+            },
+        ],
+        quote: (
+            <>
+                “Bramers exists to help people move forward with clarity — at the right
+                pace, in the right direction.”
+            </>
+        ),
+    },
+    fr: {
+        heroTitle: "À propos de Bramers",
+        heroSubtitle: (
+            <>
+                Cabinet de conseil indépendant basé au Royaume-Uni, reliant les marchés
+                et facilitant la coopération institutionnelle entre le Royaume-Uni et
+                l’Afrique.
+            </>
+        ),
+        founderTitle: "L’histoire du fondateur",
+        founderBody: (
+            <>
+                Bramers a été fondé par Bouraima Zida, un conseiller qui est convaincu
+                que le progrès doit être réfléchi, ancré dans le contexte et construit
+                sur la confiance. Son travail entre le Royaume-Uni et l’Afrique de l’Ouest
+                a façonné une pratique qui combine analyse structurée et relations
+                patiemment cultivées — le type de travail qui ouvre des portes plutôt que
+                de seulement attirer l’attention.
+                <br />
+                <br />
+                Très tôt, Bouraima a observé comment des initiatives prometteuses se
+                bloquent lorsque la stratégie ignore les personnes et les réalités
+                locales. Il a également vu comment des décisions modestes mais bien
+                séquencées s’additionnent pour produire des résultats durables. Cette
+                discipline inspire Bramers aujourd’hui : clarifier l’objectif, aligner
+                les parties prenantes et avancer au bon rythme — jamais plus vite que ce
+                que la confiance permet, jamais plus lentement que ce que l’opportunité
+                exige.
+                <br />
+                <br />
+                Ses domaines d’intervention incluent la structuration d’entreprise, le
+                développement du leadership, l’entrée sur de nouveaux marchés et la
+                construction de partenariats transfrontaliers. Il travaille de manière
+                discrète et rigoureuse, privilégiant des engagements clairs à de grandes
+                promesses. Les clients apprécient la combinaison de communication
+                régulière, de sensibilité culturelle et de rigueur dans la
+                documentation — transformer des intentions complexes en plans concrets,
+                avec responsables, échéances et redevabilité.
+                <br />
+                <br />
+                Bramers reste volontairement une structure légère. Ce choix permet un
+                accompagnement pratique et réactif, tout en préservant la discrétion
+                attendue dans les contextes sensibles. Lorsque la taille du projet le
+                nécessite, Bouraima coordonne des partenaires spécialisés autour d’un
+                principe simple : d’abord la clarté, puis la cohérence, toujours avec
+                respect. Le résultat est une relation de conseil mesurée, humaine et
+                construite pour durer.
+            </>
+        ),
+        whatTitle: "Ce que fait Bramers",
+        whatBody: (
+            <>
+                Nous aidons les dirigeants à clarifier leurs choix, structurer leurs
+                initiatives et installer une dynamique durable. Le travail se concentre
+                généralement sur trois axes qui se renforcent mutuellement.
+            </>
+        ),
+        cards: [
+            {
+                title: "Stratégie de marché & positionnement",
+                desc: "Définir où se positionner et comment gagner. Nous analysons les moteurs de la demande, les voies d’entrée et les avantages compétitifs, puis alignons les capacités internes sur la trajectoire choisie.",
+                bullets: [
+                    "Veille d’opportunités & priorisation",
+                    "Séquençage & routes d’entrée sur le marché",
+                    "Mise en place du modèle opérationnel & de la gouvernance",
+                ],
+            },
+            {
+                title: "Alignement institutionnel & réglementaire",
+                desc: "Transformer l’intention en cadres opérationnels solides. Nous alignons les objectifs privés avec les contraintes réglementaires afin de réduire les frictions et protéger l’élan du projet.",
+                bullets: [
+                    "Navigation réglementaire & mise en conformité",
+                    "Cartographie des parties prenantes & rythme d’engagement",
+                    "Registres de risques & voies d’escalade",
+                ],
+            },
+            {
+                title: "Partenariats internationaux",
+                desc: "Établir des relations transfrontalières de confiance. Nous mettons l’accent sur la crédibilité, la clarté de la valeur échangée et des mécanismes de collaboration durables.",
+                bullets: [
+                    "Profilage des partenaires & mises en relation",
+                    "Pré-structuration de term-sheets",
+                    "PMO de mise en œuvre & revues de performance",
+                ],
+            },
+        ],
+        quote: (
+            <>
+                « Bramers existe pour aider les personnes à avancer avec clarté — au bon
+                rythme et dans la bonne direction. »
+            </>
+        ),
+    },
+};
+
+/** Reveal-on-scroll hook (unchanged) */
 function useRevealOnce(selector) {
     const played = useRef(new WeakSet());
 
@@ -24,7 +205,7 @@ function useRevealOnce(selector) {
                             played.current.add(el);
                         }
                     } else {
-                        // Hide when passed (opacity 0), but do NOT remove has-played (no replay)
+                        // Hide when passed, but do NOT remove has-played (no replay)
                         el.classList.remove("is-visible");
                     }
                 });
@@ -38,6 +219,9 @@ function useRevealOnce(selector) {
 }
 
 export default function AboutPage() {
+    const { language } = useLanguage();
+    const t = copy[language] || copy.en;
+
     // Reveal groups
     useRevealOnce("[data-reveal='fade-up']");
     useRevealOnce("[data-reveal='slide-left']");
@@ -47,7 +231,9 @@ export default function AboutPage() {
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* ===== HERO (video with centered copy) ===== */}
-            <section style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+            <section
+                style={{ position: "relative", height: "100vh", overflow: "hidden" }}
+            >
                 <video
                     src="/videos/about.mp4"
                     autoPlay
@@ -90,7 +276,7 @@ export default function AboutPage() {
                             margin: "0 0 14px",
                         }}
                     >
-                        About Bramers
+                        {t.heroTitle}
                     </h1>
                     <p
                         style={{
@@ -100,8 +286,7 @@ export default function AboutPage() {
                             margin: "0 auto",
                         }}
                     >
-                        Independent advisory practice based in the United Kingdom, bridging markets and
-                        enabling institutional cooperation across the UK & Africa.
+                        {t.heroSubtitle}
                     </p>
                 </div>
             </section>
@@ -112,7 +297,6 @@ export default function AboutPage() {
                     maxWidth: 1200,
                     margin: "140px auto 120px",
                     display: "grid",
-                    // ⬇ responsive: 2 cols on desktop, 1 col on mobile
                     gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
                     gap: 56,
                     padding: "0 24px",
@@ -153,34 +337,16 @@ export default function AboutPage() {
                             margin: "6px 0 16px",
                         }}
                     >
-                        Founder’s Story
+                        {t.founderTitle}
                     </h2>
-                    <p style={{ fontSize: 18, lineHeight: 1.75, color: "#444" }}>
-                        Bramers was founded by Bouraima Zida, an advisor who believes progress should be
-                        deliberate, context-aware, and built on trust. His work across the United Kingdom and
-                        West Africa shaped a practice that blends structured analysis with patient
-                        relationship-building — the kind that earns access, not just attention.
-                        <br />
-                        <br />
-                        Early in his career, Bouraima saw how promising initiatives stall when strategy ignores
-                        people and place. He also saw how modest, well-sequenced decisions compound into durable
-                        results. That discipline informs Bramers today: clarify the goal, align the
-                        stakeholders, and move at the right pace — no faster than trust allows, no slower than
-                        opportunity requires.
-                        <br />
-                        <br />
-                        Bouraima’s focus areas include business structuring, leadership development, market
-                        entry, and cross-border partnership building. He works quietly and thoroughly, favouring
-                        clear commitments over broad claims. Clients value the combination of steady
-                        communication, cultural fluency, and a bias for documentation — turning complex
-                        intentions into workable plans with owners, timelines, and accountability.
-                        <br />
-                        <br />
-                        Bramers remains intentionally lean. That choice keeps the work hands-on and responsive,
-                        and it preserves the discretion expected in sensitive contexts. When scale is required,
-                        Bouraima coordinates specialist partners under a single, simple principle: clarity
-                        first, then consistency, always with respect. The result is an advisory relationship
-                        that is measured, human, and built to last.
+                    <p
+                        style={{
+                            fontSize: 18,
+                            lineHeight: 1.75,
+                            color: "#444",
+                        }}
+                    >
+                        {t.founderBody}
                     </p>
                 </div>
             </section>
@@ -205,7 +371,7 @@ export default function AboutPage() {
                             margin: 0,
                         }}
                     >
-                        What Bramers Do
+                        {t.whatTitle}
                     </h2>
                     <p
                         style={{
@@ -216,8 +382,7 @@ export default function AboutPage() {
                             lineHeight: 1.75,
                         }}
                     >
-                        We help leaders simplify choices, structure initiatives, and set momentum for
-                        sustainable outcomes. The work typically spans three areas that reinforce each other.
+                        {t.whatBody}
                     </p>
                 </div>
 
@@ -232,38 +397,7 @@ export default function AboutPage() {
                         marginTop: 32,
                     }}
                 >
-                    {[
-                        {
-                            title: "Market Strategy & Positioning",
-                            desc:
-                                "Define where to play and how to win. We map demand drivers, entry paths, and competitive edges — then align internal capabilities to the chosen path.",
-                            bullets: [
-                                "Opportunity scanning & prioritisation",
-                                "Route-to-market & sequencing",
-                                "Operating model & governance setup",
-                            ],
-                        },
-                        {
-                            title: "Institutional & Regulatory Alignment",
-                            desc:
-                                "Translate intent into workable frameworks. We align private objectives with policy constraints to reduce friction and protect momentum.",
-                            bullets: [
-                                "Regulatory navigation & compliance setup",
-                                "Stakeholder mapping & engagement cadence",
-                                "Risk registers & escalation paths",
-                            ],
-                        },
-                        {
-                            title: "International Partnerships",
-                            desc:
-                                "Establish trusted cross-border relationships. We focus on credibility, clarity of value exchange, and durable collaboration mechanisms.",
-                            bullets: [
-                                "Partner profiling & introductions",
-                                "Term-sheet scaffolding",
-                                "Delivery PMO & performance reviews",
-                            ],
-                        },
-                    ].map((card, i) => (
+                    {t.cards.map((card, i) => (
                         <div key={i} className="card">
                             <h3
                                 style={{
@@ -293,7 +427,13 @@ export default function AboutPage() {
                                 }}
                             >
                                 {card.bullets.map((b, j) => (
-                                    <li key={j} style={{ marginBottom: 6, listStyle: "disc" }}>
+                                    <li
+                                        key={j}
+                                        style={{
+                                            marginBottom: 6,
+                                            listStyle: "disc",
+                                        }}
+                                    >
                                         {b}
                                     </li>
                                 ))}
@@ -309,7 +449,6 @@ export default function AboutPage() {
                     maxWidth: 1100,
                     margin: "0 auto 160px",
                     display: "grid",
-                    // ⬇ responsive: 2 cols desktop, 1 col mobile
                     gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
                     gap: 56,
                     padding: "0 24px",
@@ -336,8 +475,7 @@ export default function AboutPage() {
                             lineHeight: 1.35,
                         }}
                     >
-                        “Bramers exists to help people move forward with clarity — at the right pace, in the
-                        right direction.”
+                        {t.quote}
                     </p>
                 </div>
             </section>
@@ -371,30 +509,43 @@ export default function AboutPage() {
                     transform: none;
                 }
                 .reveal.has-played:not(.is-visible) {
-                    opacity: 0; /* hide when scrolled past as you requested */
+                    opacity: 0;
                 }
 
                 @keyframes slideLeftOnce {
-                    from { opacity: 0; transform: translateX(24px); }
-                    to   { opacity: 1; transform: translateX(0); }
+                    from {
+                        opacity: 0;
+                        transform: translateX(24px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 }
                 @keyframes slideRightOnce {
-                    from { opacity: 0; transform: translateX(-24px); }
-                    to   { opacity: 1; transform: translateX(0); }
+                    from {
+                        opacity: 0;
+                        transform: translateX(-24px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 }
 
                 .cards-grid .card {
                     background: #fff;
                     border-radius: 18px;
                     padding: 26px 28px;
-                    border: 1px solid rgba(0,0,0,0.06);
-                    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-                    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+                    border: 1px solid rgba(0, 0, 0, 0.06);
+                    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+                    transition: transform 250ms ease, box-shadow 250ms ease,
+                    border-color 250ms ease;
                 }
                 .cards-grid .card:hover {
                     transform: translateY(-6px);
-                    border-color: #1E90FF;
-                    box-shadow: 0 18px 44px rgba(30,144,255,0.16);
+                    border-color: #1e90ff;
+                    box-shadow: 0 18px 44px rgba(30, 144, 255, 0.16);
                 }
             `}</style>
         </main>

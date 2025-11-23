@@ -4,6 +4,31 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import type { InsightCardData } from "./page";
+import { useLanguage } from "@/components/LanguageContext";
+
+/* ---------- COPY FOR BOTH LANGUAGES ---------- */
+const LABELS = {
+    en: {
+        heroTitle: "Insights",
+        heroSubtitle:
+            "Sharp perspectives on strategy, governance and cross-border execution — grounded in our work across the UK and African markets.",
+        sectionTitle: "Latest Articles",
+        sectionIntro:
+            "Each article distils a real pattern we see in projects, markets, or policy—written to give you clarity, not jargon.",
+        emptyState: "No insights have been published yet.",
+        cardExcerptFallback: "Click to read the full article.",
+    },
+    fr: {
+        heroTitle: "Analyses",
+        heroSubtitle:
+            "Analyses claires de la stratégie, de la gouvernance et de l’exécution transfrontalière — issues de notre travail entre le Royaume-Uni et les marchés africains.",
+        sectionTitle: "Derniers articles",
+        sectionIntro:
+            "Chaque article résume un schéma réel observé dans nos projets, marchés ou politiques — avec pour objectif la clarté, pas le jargon.",
+        emptyState: "Aucun article n’a encore été publié.",
+        cardExcerptFallback: "Cliquez pour lire l’article complet.",
+    },
+} as const;
 
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
@@ -52,11 +77,20 @@ function RevealOnScroll({
 }
 
 /* ---------- MAIN CLIENT PAGE ---------- */
-export default function InsightsPageClient({ posts }: { posts: InsightCardData[] }) {
+export default function InsightsPageClient({
+                                               posts,
+                                           }: {
+    posts: InsightCardData[];
+}) {
+    const { language } = useLanguage();
+    const t = LABELS[language] ?? LABELS.en;
+
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* ---------- HERO VIDEO (insight.mp4) ---------- */}
-            <section style={{ position: "relative", height: "88vh", overflow: "hidden" }}>
+            <section
+                style={{ position: "relative", height: "88vh", overflow: "hidden" }}
+            >
                 <video
                     src="/videos/insight.mp4"
                     autoPlay
@@ -94,7 +128,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                 margin: 0,
                             }}
                         >
-                            Insights
+                            {t.heroTitle}
                         </h1>
                     </RevealOnScroll>
 
@@ -108,8 +142,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                 lineHeight: 1.6,
                             }}
                         >
-                            Sharp perspectives on strategy, governance and cross-border execution
-                            — grounded in our work across the UK and African markets.
+                            {t.heroSubtitle}
                         </p>
                     </RevealOnScroll>
                 </div>
@@ -117,7 +150,13 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
 
             {/* ---------- GRID OF INSIGHT CARDS ---------- */}
             <section style={{ background: "#fafafa", padding: "100px 0 140px" }}>
-                <div style={{ maxWidth: "1240px", margin: "0 auto", padding: "0 24px" }}>
+                <div
+                    style={{
+                        maxWidth: "1240px",
+                        margin: "0 auto",
+                        padding: "0 24px",
+                    }}
+                >
                     <RevealOnScroll>
                         <h2
                             style={{
@@ -127,7 +166,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                 textAlign: "center",
                             }}
                         >
-                            Latest Articles
+                            {t.sectionTitle}
                         </h2>
                     </RevealOnScroll>
 
@@ -142,8 +181,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                 lineHeight: 1.7,
                             }}
                         >
-                            Each article distils a real pattern we see in projects, markets, or
-                            policy—written to give you clarity, not jargon.
+                            {t.sectionIntro}
                         </p>
                     </RevealOnScroll>
 
@@ -151,21 +189,30 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                     <div
                         style={{
                             display: "grid",
-                            // Responsive: 3 cols on wide, 2 on medium, 1 on mobile
-                            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                            gridTemplateColumns:
+                                "repeat(auto-fit, minmax(260px, 1fr))",
                             gap: 26,
                             alignItems: "stretch",
                         }}
                     >
                         {posts.map((post, i) => (
                             <RevealOnScroll key={post._id} delay={i * 70}>
-                                <InsightCard post={post} />
+                                <InsightCard
+                                    post={post}
+                                    fallback={t.cardExcerptFallback}
+                                />
                             </RevealOnScroll>
                         ))}
 
                         {posts.length === 0 && (
-                            <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#777" }}>
-                                No insights have been published yet.
+                            <p
+                                style={{
+                                    gridColumn: "1 / -1",
+                                    textAlign: "center",
+                                    color: "#777",
+                                }}
+                            >
+                                {t.emptyState}
                             </p>
                         )}
                     </div>
@@ -176,7 +223,13 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
 }
 
 /* ---------- SINGLE CARD (your “cube” with hover) ---------- */
-function InsightCard({ post }: { post: InsightCardData }) {
+function InsightCard({
+                         post,
+                         fallback,
+                     }: {
+    post: InsightCardData;
+    fallback: string;
+}) {
     const wrapRef = useRef<HTMLDivElement | null>(null);
 
     function onEnter() {
@@ -210,7 +263,8 @@ function InsightCard({ post }: { post: InsightCardData }) {
                     padding: "22px 22px 20px",
                     border: "1px solid rgba(0,0,0,0.06)",
                     boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
-                    transition: "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
+                    transition:
+                        "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
                     cursor: "pointer",
                     display: "flex",
                     flexDirection: "column",
@@ -250,7 +304,7 @@ function InsightCard({ post }: { post: InsightCardData }) {
                         flexGrow: 1,
                     }}
                 >
-                    {post.excerpt || "Tap to read the full article."}
+                    {post.excerpt || fallback}
                 </p>
             </div>
         </Link>

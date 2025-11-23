@@ -2,30 +2,68 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/LanguageContext";
 
-const steps = [
-    {
-        title: "01 · Discovery & context",
-        summary:
-            "We start with listening – understanding your mandate, stakeholders and constraints across UK and African markets.",
-        detail:
-            "Typical outputs include a stakeholder map, market context memo and a prioritised list of questions to validate before committing resources.",
+const copy = {
+    en: {
+        kicker: "HOW WE WORK",
+        headingLine1: "Practical, partner-led advisory",
+        headingLine2: "for cross-border decisions.",
+        body: "Our work combines local insight, transaction experience and institutional know-how. We sit between investors, operators and regulators to move projects forward with clarity and discipline.",
+        steps: [
+            {
+                title: "01 · Discovery & context",
+                summary:
+                    "We start with listening – understanding your mandate, stakeholders and constraints across UK and African markets.",
+                detail:
+                    "Typical outputs include a stakeholder map, market context memo and a prioritised list of questions to validate before committing resources.",
+            },
+            {
+                title: "02 · Design & structuring",
+                summary:
+                    "We shape market entry, transaction or partnership options, mapping scenarios, risk and decision paths.",
+                detail:
+                    "We test different transaction and operating models, align internal sponsors and prepare materials for boards, investors and partners.",
+            },
+            {
+                title: "03 · Execution & partner support",
+                summary:
+                    "We work alongside internal teams and external partners to move programmes from paper to implementation.",
+                detail:
+                    "Support can include workstream governance, deal and documentation support, and ongoing advisory as markets or partners evolve.",
+            },
+        ],
     },
-    {
-        title: "02 · Design & structuring",
-        summary:
-            "We shape market entry, transaction or partnership options, mapping scenarios, risk and decision paths.",
-        detail:
-            "We test different transaction and operating models, align internal sponsors and prepare materials for boards, investors and partners.",
+    fr: {
+        kicker: "NOTRE FAÇON DE TRAVAILLER",
+        headingLine1: "Un conseil pratique, porté par les partenaires",
+        headingLine2: "au service des décisions transfrontalières.",
+        body: "Notre travail combine connaissance locale, expérience des transactions et compréhension des institutions. Nous faisons le lien entre investisseurs, opérateurs et régulateurs pour faire avancer les projets avec clarté et discipline.",
+        steps: [
+            {
+                title: "01 · Diagnostic & contexte",
+                summary:
+                    "Nous commençons par l’écoute – comprendre votre mandat, vos parties prenantes et vos contraintes entre le Royaume-Uni et les marchés africains.",
+                detail:
+                    "Les livrables incluent généralement une cartographie des parties prenantes, une note de contexte de marché et une liste priorisée de points à valider avant d’engager des ressources.",
+            },
+            {
+                title: "02 · Conception & structuration",
+                summary:
+                    "Nous construisons les options d’entrée sur le marché, de transaction ou de partenariat, en cartographiant les scénarios, les risques et les chemins de décision.",
+                detail:
+                    "Nous testons différents modèles opérationnels et de transaction, alignons les sponsors internes et préparons les supports pour les conseils d’administration, investisseurs et partenaires.",
+            },
+            {
+                title: "03 · Exécution & accompagnement",
+                summary:
+                    "Nous travaillons aux côtés de vos équipes internes et partenaires externes pour faire passer les programmes de la feuille de route à la mise en œuvre.",
+                detail:
+                    "L’accompagnement peut inclure la gouvernance des chantiers, le support aux négociations et à la documentation, ainsi qu’un conseil continu à mesure que les marchés ou les partenaires évoluent.",
+            },
+        ],
     },
-    {
-        title: "03 · Execution & partner support",
-        summary:
-            "We work alongside internal teams and external partners to move programmes from paper to implementation.",
-        detail:
-            "Support can include workstream governance, deal and documentation support, and ongoing advisory as markets or partners evolve.",
-    },
-];
+};
 
 const cardVariants = {
     hidden: { opacity: 0, y: 25 },
@@ -41,27 +79,26 @@ const cardVariants = {
 };
 
 export default function HowWeWork() {
+    const { language } = useLanguage();
+    const t = copy[language] || copy.en;
+
     return (
         <section className="how-section">
             <div className="how-inner">
                 {/* TOP: heading + intro copy */}
                 <header className="how-header">
-                    <p className="how-kicker">HOW WE WORK</p>
+                    <p className="how-kicker">{t.kicker}</p>
                     <h2 className="how-heading">
-                        Practical, partner-led advisory
+                        {t.headingLine1}
                         <br />
-                        for cross-border decisions.
+                        {t.headingLine2}
                     </h2>
-                    <p className="how-body">
-                        Our work combines local insight, transaction experience and
-                        institutional know-how. We sit between investors, operators and
-                        regulators to move projects forward with clarity and discipline.
-                    </p>
+                    <p className="how-body">{t.body}</p>
                 </header>
 
                 {/* BOTTOM: stacked cards */}
                 <div className="how-card-list">
-                    {steps.map((step, index) => (
+                    {t.steps.map((step, index) => (
                         <motion.article
                             key={step.title}
                             className="how-card"
@@ -85,7 +122,7 @@ export default function HowWeWork() {
                     background: #f6f7fb;
                     display: flex;
                     justify-content: center;
-                    padding: 96px 0 110px; /* top + bottom spacing to breathe but not huge gap */
+                    padding: 96px 0 110px;
                 }
 
                 .how-inner {
@@ -161,8 +198,6 @@ export default function HowWeWork() {
                     margin: 0;
                     color: #6b7280;
                 }
-
-                /* ---------- RESPONSIVE ---------- */
 
                 @media (max-width: 960px) {
                     .how-section {

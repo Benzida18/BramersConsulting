@@ -1,19 +1,38 @@
+// components/IndustryCard.jsx
 "use client";
 
+import { useLanguage } from "@/components/LanguageContext";
+
+const copy = {
+    en: {
+        label: "UK · EUROPE · AFRICA",
+        chips: [
+            "Market entry & expansion",
+            "Cross-border transactions",
+            "Institutional partnerships",
+        ],
+    },
+    fr: {
+        label: "R.-U. · EUROPE · AFRIQUE",
+        chips: [
+            "Entrée et expansion sur les marchés",
+            "Transactions transfrontalières",
+            "Partenariats institutionnels",
+        ],
+    },
+};
+
 export default function IndustryCard() {
-    const chips = [
-        "Market entry & expansion",
-        "Cross-border transactions",
-        "Institutional partnerships",
-    ];
+    const { language } = useLanguage();
+    const t = copy[language] || copy.en;
 
     return (
         <section className="fade-section industry-strip">
             <div className="industry-strip-inner">
-                <p className="industry-strip-label">UK · EUROPE · AFRICA</p>
+                <p className="industry-strip-label">{t.label}</p>
 
                 <div className="industry-strip-chips">
-                    {chips.map((label) => (
+                    {t.chips.map((label) => (
                         <span key={label} className="industry-strip-chip">
                             {label}
                         </span>

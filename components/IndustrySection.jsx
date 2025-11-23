@@ -1,76 +1,155 @@
+// components/IndustrySection.jsx
 "use client";
 
 import Link from "next/link";
+import { useLanguage } from "@/components/LanguageContext";
+
+const copy = {
+    en: {
+        kicker: "Sector focus",
+        heading: (
+            <>
+                Where UK–Africa capital
+                <br />
+                and expertise are most active.
+            </>
+        ),
+        lead: "We advise organisations across sectors where trade, investment and institutional collaboration are shaping the next decade of growth.",
+        sectors: [
+            {
+                title: "Agribusiness",
+                href: "/industries/agribusiness",
+                summary: "Value chains from farm to export markets.",
+            },
+            {
+                title: "Finance",
+                href: "/industries/finance",
+                summary:
+                    "Banks, fintechs, asset managers and impact investors.",
+            },
+            {
+                title: "Real Estate and Infrastructure",
+                href: "/industries/real-estate",
+                summary:
+                    "Urban development, logistics hubs and core infrastructure.",
+            },
+            {
+                title: "Catering and Hospitality",
+                href: "/industries/catering-hospitality",
+                summary:
+                    "Hotels, restaurants and food-service operators across UK–Africa corridors.",
+            },
+            {
+                title: "International Trade and Logistics",
+                href: "/industries/international-trade",
+                summary: "Trade corridors, ports and cross-border supply chains.",
+            },
+            {
+                title: "Sports and Football Advisory",
+                href: "/industries/football-advisory",
+                summary: "Clubs, academies and investors in the football ecosystem.",
+            },
+            {
+                title: "Coaching and Training",
+                href: "/industries/coaching-training",
+                summary:
+                    "Leadership development, coaching and professional training providers.",
+            },
+            {
+                title: "AI Strategy",
+                href: "/industries/ai-strategy",
+                summary: "Applied AI, analytics and responsible data use.",
+            },
+            {
+                title: "Mining",
+                href: "/industries/mining",
+                summary: "Natural resources and critical minerals projects.",
+            },
+        ],
+    },
+    fr: {
+        kicker: "Focus sectoriel",
+        heading: (
+            <>
+                Là où le capital et l’expertise
+                <br />
+                Royaume-Uni–Afrique sont les plus actifs.
+            </>
+        ),
+        lead: "Nous accompagnons des organisations dans les secteurs où le commerce, l’investissement et la coopération institutionnelle façonnent la prochaine décennie de croissance.",
+        sectors: [
+            {
+                title: "Agro-industrie",
+                href: "/industries/agribusiness",
+                summary:
+                    "Des chaînes de valeur, de l’exploitation agricole aux marchés d’exportation.",
+            },
+            {
+                title: "Finance",
+                href: "/industries/finance",
+                summary:
+                    "Banques, fintechs, sociétés de gestion d’actifs et investisseurs à impact.",
+            },
+            {
+                title: "Immobilier et infrastructures",
+                href: "/industries/real-estate",
+                summary:
+                    "Aménagement urbain, hubs logistiques et infrastructures essentielles.",
+            },
+            {
+                title: "Restauration et hôtellerie",
+                href: "/industries/catering-hospitality",
+                summary:
+                    "Hôtels, restaurants et acteurs de la restauration sur les corridors Royaume-Uni–Afrique.",
+            },
+            {
+                title: "Commerce international et logistique",
+                href: "/industries/international-trade",
+                summary:
+                    "Corridors commerciaux, ports et chaînes d’approvisionnement transfrontalières.",
+            },
+            {
+                title: "Conseil sportif et football",
+                href: "/industries/football-advisory",
+                summary:
+                    "Clubs, académies et investisseurs de l’écosystème du football.",
+            },
+            {
+                title: "Coaching et formation",
+                href: "/industries/coaching-training",
+                summary:
+                    "Développement du leadership, coaching et organismes de formation professionnelle.",
+            },
+            {
+                title: "Stratégie IA",
+                href: "/industries/ai-strategy",
+                summary:
+                    "IA appliquée, analytique et usage responsable des données.",
+            },
+            {
+                title: "Mines",
+                href: "/industries/mining",
+                summary:
+                    "Projets de ressources naturelles et minerais stratégiques.",
+            },
+        ],
+    },
+};
 
 export default function IndustrySection() {
-    const sectors = [
-        {
-            title: "Agribusiness",
-            href: "/industries/agribusiness",
-            summary: "Value chains from farm to export markets.",
-        },
-        {
-            title: "Finance",
-            href: "/industries/finance",
-            summary: "Banks, fintechs, asset managers and impact investors.",
-        },
-        {
-            title: "Real Estate and Infrastructure",
-            href: "/industries/real-estate",
-            summary: "Urban development, logistics hubs and core infrastructure.",
-        },
-        {
-            title: "Catering and Hospitality",
-            href: "/industries/catering-hospitality",
-            summary:
-                "Hotels, restaurants and food-service operators across UK–Africa corridors.",
-        },
-        {
-            title: "International Trade and Logistics",
-            href: "/industries/international-trade",
-            summary: "Trade corridors, ports and cross-border supply chains.",
-        },
-        {
-            title: "Sports and Football Advisory",
-            href: "/industries/football-advisory",
-            summary: "Clubs, academies and investors in the football ecosystem.",
-        },
-        {
-            title: "Coaching and Training",
-            href: "/industries/coaching-training",
-            summary:
-                "Leadership development, coaching and professional training providers.",
-        },
-        {
-            title: "AI Strategy",
-            href: "/industries/ai-strategy",
-            summary: "Applied AI, analytics and responsible data use.",
-        },
-        {
-            title: "Mining",
-            href: "/industries/mining",
-            summary: "Natural resources and critical minerals projects.",
-        },
-    ];
+    const { language } = useLanguage();
+    const t = copy[language] || copy.en;
 
     return (
         <section className="industry-section">
             <div className="industry-grid">
                 {/* LEFT – copy + image */}
                 <div className="industry-left">
-                    <p className="industry-kicker">Sector focus</p>
+                    <p className="industry-kicker">{t.kicker}</p>
 
-                    <h2 className="industry-heading">
-                        Where UK–Africa capital
-                        <br />
-                        and expertise are most active.
-                    </h2>
+                    <h2 className="industry-heading">{t.heading}</h2>
 
-                    <p className="industry-lead">
-                        We advise organisations across sectors where trade, investment
-                        and institutional collaboration are shaping the next decade of
-                        growth.
-                    </p>
+                    <p className="industry-lead">{t.lead}</p>
 
                     <div className="industry-image-wrapper">
                         <img
@@ -83,7 +162,7 @@ export default function IndustrySection() {
 
                 {/* RIGHT – sector cards */}
                 <div className="industry-right">
-                    {sectors.map((sector) => (
+                    {t.sectors.map((sector) => (
                         <Link
                             key={sector.href}
                             href={sector.href}

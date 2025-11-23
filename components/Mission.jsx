@@ -1,29 +1,94 @@
 "use client";
 
+import { useLanguage } from "@/components/LanguageContext";
+
 export default function Mission() {
-    const services = [
-        {
-            title: "Market Entry & Expansion",
-            blurb:
-                "From feasibility through execution, we help organisations structure their entry into UK and African markets with clarity and precision.",
-            detail:
-                "We support leadership teams on market sizing, route-to-market, partner selection and regulatory positioning, so expansion decisions are made with confidence."
+    const { language } = useLanguage();
+
+    // ===== TEXT COPY (EN + FR) =====
+    const copy = {
+        en: {
+            kicker: "Cross-regional advisory",
+            heading: (
+                <>
+                    Strategy, transactions and
+                    <br />
+                    execution between the UK
+                    <br />
+                    &amp; Africa.
+                </>
+            ),
+            body:
+                "Bramers Consulting supports corporates, investors and institutions " +
+                "navigating multi-market growth, with a focus on anglophone and " +
+                "francophone Africa.",
+            services: [
+                {
+                    title: "Market Entry & Expansion",
+                    blurb:
+                        "From feasibility through execution, we help organisations structure their entry into UK and African markets with clarity and precision.",
+                    detail:
+                        "We support leadership teams on market sizing, route-to-market, partner selection and regulatory positioning, so expansion decisions are made with confidence.",
+                },
+                {
+                    title: "Deals, Capital & Partnerships",
+                    blurb:
+                        "Support for transactions, JV structures and strategic alliances with regulators, lenders and institutional partners.",
+                    detail:
+                        "Our team advises on deal structuring, investor conversations and cross-border capital flows, ensuring incentives are aligned across all parties.",
+                },
+                {
+                    title: "Operational Excellence & Governance",
+                    blurb:
+                        "We work with leadership teams to strengthen governance, operating models and cross-border ways of working.",
+                    detail:
+                        "We help institutions modernise processes, clarify decision rights and embed governance that stands up to international scrutiny.",
+                },
+            ],
         },
-        {
-            title: "Deals, Capital & Partnerships",
-            blurb:
-                "Support for transactions, JV structures and strategic alliances with regulators, lenders and institutional partners.",
-            detail:
-                "Our team advises on deal structuring, investor conversations and cross-border capital flows, ensuring incentives are aligned across all parties."
+
+        fr: {
+            kicker: "Conseil transrégional",
+            heading: (
+                <>
+                    Stratégie, transactions et
+                    <br />
+                    exécution entre le Royaume-Uni
+                    <br />
+                    et l&apos;Afrique.
+                </>
+            ),
+            body:
+                "Bramers Consulting accompagne les entreprises, investisseurs et institutions " +
+                "dans leur croissance multi-marchés, avec un focus sur l’Afrique anglophone " +
+                "et francophone.",
+            services: [
+                {
+                    title: "Entrée sur le marché & expansion",
+                    blurb:
+                        "De l’étude de faisabilité à l’exécution, nous aidons les organisations à structurer leur entrée sur les marchés britanniques et africains avec clarté et rigueur.",
+                    detail:
+                        "Nous accompagnons les équipes dirigeantes sur la taille de marché, les routes d’accès, le choix de partenaires et le positionnement réglementaire afin que les décisions d’expansion soient prises en toute confiance.",
+                },
+                {
+                    title: "Transactions, capitaux & partenariats",
+                    blurb:
+                        "Accompagnement sur les transactions, les coentreprises et les alliances stratégiques avec les régulateurs, prêteurs et partenaires institutionnels.",
+                    detail:
+                        "Notre équipe conseille sur la structuration des deals, les échanges avec les investisseurs et les flux de capitaux transfrontaliers, en veillant à l’alignement des intérêts de chaque partie.",
+                },
+                {
+                    title: "Excellence opérationnelle & gouvernance",
+                    blurb:
+                        "Nous travaillons avec les directions pour renforcer la gouvernance, les modèles opérationnels et les modes de collaboration transfrontaliers.",
+                    detail:
+                        "Nous aidons les institutions à moderniser leurs processus, clarifier les droits de décision et ancrer une gouvernance conforme aux attentes internationales.",
+                },
+            ],
         },
-        {
-            title: "Operational Excellence & Governance",
-            blurb:
-                "We work with leadership teams to strengthen governance, operating models and cross-border ways of working.",
-            detail:
-                "We help institutions modernise processes, clarify decision rights and embed governance that stands up to international scrutiny."
-        }
-    ];
+    };
+
+    const t = copy[language] ?? copy.en;
 
     return (
         <section className="mission-section">
@@ -31,27 +96,21 @@ export default function Mission() {
                 {/* LEFT – copy */}
                 <div className="mission-copy">
                     <p className="mission-kicker">
-                        Cross-regional advisory
+                        {t.kicker}
                     </p>
 
                     <h2 className="mission-heading">
-                        Strategy, transactions and
-                        <br />
-                        execution between the UK
-                        <br />
-                        &amp; Africa.
+                        {t.heading}
                     </h2>
 
                     <p className="mission-body">
-                        Bramers Consulting supports corporates, investors and institutions
-                        navigating multi-market growth, with a focus on anglophone and
-                        francophone Africa.
+                        {t.body}
                     </p>
                 </div>
 
                 {/* RIGHT – cards with hover dropdown */}
                 <div className="mission-services">
-                    {services.map((item) => (
+                    {t.services.map((item) => (
                         <div key={item.title} className="service-card">
                             <div className="service-main">
                                 <h3 className="service-title">{item.title}</h3>

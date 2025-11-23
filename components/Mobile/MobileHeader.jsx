@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import "./MobileHeader.css";
+import { useLanguage } from "@/components/LanguageContext";
 
 const INDUSTRIES = [
     ["Agribusiness", "/industries/agribusiness"],
@@ -17,10 +18,46 @@ const INDUSTRIES = [
     ["Mining", "/industries/mining"],
 ];
 
+const TEXT = {
+    en: {
+        langShort: "EN",
+        mainLabel: "Main",
+        industriesLabel: "Industries",
+        languageLabel: "Language",
+        navLinks: [
+            ["Services", "/services"],
+            ["Case Studies", "/case-studies"],
+            ["Insights", "/insights"],
+            ["About", "/about"],
+            ["Contact", "/contact"],
+        ],
+        langEn: "English",
+        langFr: "Français",
+    },
+    fr: {
+        langShort: "FR",
+        mainLabel: "Menu principal",
+        industriesLabel: "Secteurs",
+        languageLabel: "Langue",
+        navLinks: [
+            ["Services", "/services"],
+            ["Études de cas", "/case-studies"],
+            ["Analyses", "/insights"],
+            ["À propos", "/about"],
+            ["Contact", "/contact"],
+        ],
+        langEn: "English",
+        langFr: "Français",
+    },
+};
+
 export default function MobileHeader() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const { language, setLanguage } = useLanguage();
 
     const closeMenu = () => setMenuOpen(false);
+
+    const t = TEXT[language] ?? TEXT.en;
 
     return (
         <>
@@ -32,8 +69,16 @@ export default function MobileHeader() {
                     </Link>
 
                     <div className="mobile-header-right">
-                        {/* language label outside the hamburger */}
-                        <span className="mobile-lang-label">EN</span>
+                        {/* small language label outside the hamburger – tap to toggle */}
+                        <button
+                            type="button"
+                            className="mobile-lang-label"
+                            onClick={() =>
+                                setLanguage(language === "en" ? "fr" : "en")
+                            }
+                        >
+                            {t.langShort}
+                        </button>
 
                         <button
                             type="button"
@@ -55,39 +100,23 @@ export default function MobileHeader() {
                     <div className="mobile-menu-inner">
                         {/* MAIN LINKS */}
                         <div className="mobile-menu-section">
-                            <div className="mobile-menu-label">Main</div>
+                            <div className="mobile-menu-label">{t.mainLabel}</div>
                             <ul>
-                                <li>
-                                    <Link href="/services" onClick={closeMenu}>
-                                        Services
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/case-studies" onClick={closeMenu}>
-                                        Case Studies
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/insights" onClick={closeMenu}>
-                                        Insights
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/about" onClick={closeMenu}>
-                                        About
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/contact" onClick={closeMenu}>
-                                        Contact
-                                    </Link>
-                                </li>
+                                {t.navLinks.map(([label, href]) => (
+                                    <li key={href}>
+                                        <Link href={href} onClick={closeMenu}>
+                                            {label}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 
                         {/* INDUSTRIES LIST */}
                         <div className="mobile-menu-section">
-                            <div className="mobile-menu-label">Industries</div>
+                            <div className="mobile-menu-label">
+                                {t.industriesLabel}
+                            </div>
                             <ul className="mobile-menu-industries">
                                 {INDUSTRIES.map(([label, href]) => (
                                     <li key={href}>
@@ -101,16 +130,27 @@ export default function MobileHeader() {
 
                         {/* LANGUAGE PILLS */}
                         <div className="mobile-menu-footer">
-                            <div className="mobile-menu-label">Language</div>
+                            <div className="mobile-menu-label">
+                                {t.languageLabel}
+                            </div>
                             <div className="mobile-lang-row">
                                 <button
                                     type="button"
-                                    className="mobile-lang-pill active"
+                                    className={`mobile-lang-pill ${
+                                        language === "en" ? "active" : ""
+                                    }`}
+                                    onClick={() => setLanguage("en")}
                                 >
-                                    English
+                                    {t.langEn}
                                 </button>
-                                <button type="button" className="mobile-lang-pill">
-                                    Français
+                                <button
+                                    type="button"
+                                    className={`mobile-lang-pill ${
+                                        language === "fr" ? "active" : ""
+                                    }`}
+                                    onClick={() => setLanguage("fr")}
+                                >
+                                    {t.langFr}
                                 </button>
                             </div>
                         </div>
