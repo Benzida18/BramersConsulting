@@ -1,11 +1,11 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
-import "./insights.css"; //
+import "./insights.css";
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
@@ -116,6 +116,12 @@ const SECTIONS = [
 
 const MAX_PER_ROW = 3;
 
+type LangKey = "en" | "fr";
+
+type CardItem =
+    | { type: "real"; post: InsightCardData }
+    | { type: "placeholder"; id: string };
+
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
                             children,
@@ -161,28 +167,44 @@ function RevealOnScroll({
     );
 }
 
-/* ---------- Helper to pick posts per sector + language ---------- */
+// inside InsightsPageClient.tsx
+
 function pickPostsForSection(
     posts: InsightCardData[],
     industryId: string,
-    langKey: "en" | "fr",
+    langKey: "en" | "fr"
 ): InsightCardData[] {
+    // Only posts for this industry
     const allForIndustry = posts.filter((p) => p.industry === industryId);
+
     if (allForIndustry.length === 0) return [];
 
-    const exactLang = allForIndustry.filter((p) => p.language === langKey);
-    if (exactLang.length > 0) return exactLang;
+    // Treat missing language as English by default
+    const withLang = allForIndustry.map((p) => ({
+        ...p,
+        _lang: p.language ?? "en",
+    }));
 
-    const englishFallback = allForIndustry.filter((p) => p.language === "en");
-    if (englishFallback.length > 0) return englishFallback;
+    // 1) First try to show posts that match the current UI language
+    const exactLang = withLang.filter((p) => p._lang === langKey);
+    if (exactLang.length > 0) {
+        return exactLang;
+    }
 
+    // 2) If no FR for this sector, fall back to EN so page is never empty
+    const englishFallback = withLang.filter((p) => p._lang === "en");
+    if (englishFallback.length > 0) {
+        return englishFallback;
+    }
+
+    // 3) Last resort (really old docs): everything in this sector
     return allForIndustry;
 }
 
 /* ---------- MAIN CLIENT PAGE ---------- */
 export default function InsightsPageClient({ posts }: { posts: InsightCardData[] }) {
     const { language } = useLanguage();
-    const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
+    const langKey: LangKey = language === "fr" ? "fr" : "en";
     const t = LABELS[langKey];
 
     const [activePost, setActivePost] = useState<InsightCardData | null>(null);
@@ -288,12 +310,12 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                             langKey,
                         );
 
-                        const realCards = sectionPosts.map((post) => ({
-                            type: "real" as const,
+                        const realCards: CardItem[] = sectionPosts.map((post) => ({
+                            type: "real",
                             post,
                         }));
 
-                        let cards = [...realCards];
+                        let cards: CardItem[] = [...realCards];
 
                         const remainder = cards.length % MAX_PER_ROW;
                         const placeholdersToAdd =
@@ -305,12 +327,12 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
 
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
-                                type: "placeholder" as const,
+                                type: "placeholder",
                                 id: `ph-${section.id}-${i}`,
                             });
                         }
 
-                        const rows: typeof cards[] = [];
+                        const rows: CardItem[][] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
                         }
@@ -343,19 +365,14 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                                             fallback={t.cardExcerptFallback}
                                                             delay={colIdx * 70}
                                                             readLabel={t.readArticle}
-                                                            onOpen={() =>
-                                                                setActivePost(card.post)
-                                                            }
+                                                            onOpen={() => setActivePost(card.post)}
                                                         />
                                                     );
                                                 }
 
                                                 return (
                                                     <PlaceholderCard
-                                                        key={
-                                                            card.id ||
-                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
-                                                        }
+                                                        key={card.id}
                                                     />
                                                 );
                                             })}
@@ -380,6 +397,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                 </div>
             </section>
 
+            {/* MODAL */}
             {activePost && (
                 <InsightModal
                     post={activePost}

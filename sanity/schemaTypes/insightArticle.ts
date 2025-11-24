@@ -1,4 +1,4 @@
-// sanity/schemaTypes/insightArticle.ts (or .js)
+// sanity/schemaTypes/insightArticle.js
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -17,35 +17,14 @@ export default defineType({
             options: { source: "title", maxLength: 96 },
             validation: (r) => r.required(),
         }),
-        defineField({ name: "excerpt", type: "text", rows: 3 }),
-        defineField({ name: "cover", type: "image", options: { hotspot: true } }),
-        defineField({
-            name: "publishedAt",
-            type: "datetime",
-            initialValue: () => new Date().toISOString(),
-        }),
 
-        //
-        defineField({
-            name: "language",
-            title: "Language",
-            type: "string",
-            options: {
-                list: [
-                    { title: "English", value: "en" },
-                    { title: "Français", value: "fr" },
-                ],
-                layout: "radio",
-            },
-            validation: (Rule) => Rule.required(),
-        }),
-
-        //
+        // 🔹 NEW: sector / industry (must match the ids we use in the UI)
         defineField({
             name: "industry",
             title: "Sector / Industry",
             type: "string",
             options: {
+                layout: "dropdown",
                 list: [
                     { title: "Agribusiness", value: "agribusiness" },
                     { title: "Financial Services", value: "finance" },
@@ -61,6 +40,34 @@ export default defineType({
             validation: (Rule) => Rule.required(),
         }),
 
+        // 🔹 NEW: language flag
+        defineField({
+            name: "language",
+            title: "Language",
+            type: "string",
+            options: {
+                layout: "radio",
+                list: [
+                    { title: "English", value: "en" },
+                    { title: "Français", value: "fr" },
+                ],
+            },
+            initialValue: "en",
+        }),
+
+        defineField({ name: "excerpt", type: "text", rows: 3 }),
+        defineField({
+            name: "cover",
+            type: "image",
+            options: { hotspot: true },
+        }),
+        defineField({
+            name: "publishedAt",
+            type: "datetime",
+            initialValue: () => new Date().toISOString(),
+        }),
+
+        // full content used in the modal
         defineField({
             name: "body",
             type: "array",
@@ -68,6 +75,10 @@ export default defineType({
         }),
     ],
     preview: {
-        select: { title: "title", media: "cover", subtitle: "language" },
+        select: {
+            title: "title",
+            media: "cover",
+            subtitle: "industry",
+        },
     },
 });

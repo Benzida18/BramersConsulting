@@ -9,31 +9,31 @@ export type InsightCardData = {
     title: string;
     excerpt?: string;
     slug: string;
+    industry?: string;
+    language?: "en" | "fr";
+    body?: any[];
     cover?: {
         asset?: {
             url?: string;
         };
     };
-    language?: "en" | "fr";
-    industry?: string;
-    body?: any[];
 };
 
 async function getInsights(): Promise<InsightCardData[]> {
     return await client.fetch(`
-    *[_type == "insightArticle"] | order(publishedAt desc) {
-      _id,
-      title,
-      excerpt,
-      "slug": slug.current,
-      "language": language,
-      "industry": industry,
-      body,
-      cover {
-        asset -> { url }
+      *[_type == "insightArticle"] | order(publishedAt desc) {
+        _id,
+        title,
+        excerpt,
+        "slug": slug.current,
+        industry,
+        language,
+        body,
+        cover {
+          asset -> { url }
+        }
       }
-    }
-  `);
+    `);
 }
 
 export default async function InsightsPage() {
