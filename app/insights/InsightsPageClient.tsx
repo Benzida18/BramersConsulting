@@ -1,34 +1,119 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
 
-import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
+import { PortableText } from "@portabletext/react";
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
     en: {
-        heroTitle: "Insights",
+        heroTitle: "Insights Library",
         heroSubtitle:
-            "Sharp perspectives on strategy, governance and cross-border execution — grounded in our work across the UK and African markets.",
-        sectionTitle: "Latest Articles",
+            "A curated collection of articles, reports and interviews we find useful for people and organisations working between the UK and African markets.",
+        sectionTitle: "Articles by Sector",
         sectionIntro:
-            "Each article distils a real pattern we see in projects, markets, or policy—written to give you clarity, not jargon.",
-        emptyState: "No insights have been published yet.",
-        cardExcerptFallback: "Click to read the full article.",
+            "Browse external resources organised by sector. Each link is something we found helpful in understanding markets, policy or practical execution.",
+        emptyState: "No articles have been added to the library yet.",
+        cardExcerptFallback: "Click to open the full article.",
+        readArticle: "Read article",
+        close: "Close",
     },
     fr: {
-        heroTitle: "Analyses",
+        heroTitle: "Bibliothèque d’analyses",
         heroSubtitle:
-            "Analyses claires de la stratégie, de la gouvernance et de l’exécution transfrontalière — issues de notre travail entre le Royaume-Uni et les marchés africains.",
-        sectionTitle: "Derniers articles",
+            "Une sélection d’articles, de rapports et d’entretiens que nous jugeons utiles pour les personnes et organisations travaillant entre le Royaume-Uni et les marchés africains.",
+        sectionTitle: "Articles par secteur",
         sectionIntro:
-            "Chaque article résume un schéma réel observé dans nos projets, marchés ou politiques — avec pour objectif la clarté, pas le jargon.",
-        emptyState: "Aucun article n’a encore été publié.",
-        cardExcerptFallback: "Cliquez pour lire l’article complet.",
+            "Parcourez des ressources externes classées par secteur. Certaines ressources peuvent n’être disponibles qu’en anglais.",
+        emptyState: "Aucun article n’a encore été ajouté à la bibliothèque.",
+        cardExcerptFallback: "Cliquez pour ouvrir l’article complet.",
+        readArticle: "Lire l’article",
+        close: "Fermer",
     },
 } as const;
+
+/* ---------- SECTOR SECTIONS (9 industries) ---------- */
+const SECTIONS = [
+    {
+        id: "agribusiness",
+        label: { en: "Agribusiness", fr: "Agro-industrie" },
+        blurb: {
+            en: "Resources on farming, cooperatives and value chains from farm to market.",
+            fr: "Ressources sur l’agriculture, les coopératives et les chaînes de valeur du champ au marché.",
+        },
+    },
+    {
+        id: "finance",
+        label: { en: "Financial Services", fr: "Services financiers" },
+        blurb: {
+            en: "Resources on banks, fintechs and capital flows between the UK and African markets.",
+            fr: "Ressources sur les banques, les fintechs et les flux de capitaux entre le Royaume-Uni et l’Afrique.",
+        },
+    },
+    {
+        id: "real-estate",
+        label: { en: "Real Estate & Infrastructure", fr: "Immobilier et infrastructures" },
+        blurb: {
+            en: "Resources on urban development, real estate and core infrastructure decisions.",
+            fr: "Ressources sur les projets immobiliers, l’aménagement urbain et les infrastructures clés.",
+        },
+    },
+    {
+        id: "catering-hospitality",
+        label: { en: "Hospitality & Catering", fr: "Hôtellerie et restauration" },
+        blurb: {
+            en: "Resources on hotels, restaurants and food-service operators across UK–Africa links.",
+            fr: "Ressources sur les hôtels, restaurants et la restauration sur les corridors Royaume-Uni–Afrique.",
+        },
+    },
+    {
+        id: "international-trade",
+        label: {
+            en: "International Trade & Logistics",
+            fr: "Commerce international et logistique",
+        },
+        blurb: {
+            en: "Resources on trade corridors, logistics and practical export/import issues.",
+            fr: "Ressources sur les corridors commerciaux, la logistique et les questions pratiques d’import-export.",
+        },
+    },
+    {
+        id: "football-advisory",
+        label: { en: "Sports & Football Advisory", fr: "Conseil sportif et football" },
+        blurb: {
+            en: "Resources on structures, talent and investment in the football ecosystem.",
+            fr: "Ressources sur les structures, les talents et les investissements dans l’écosystème du football.",
+        },
+    },
+    {
+        id: "coaching-training",
+        label: { en: "Coaching & Training", fr: "Coaching et formation" },
+        blurb: {
+            en: "Resources on leadership, skills and ways of working across countries.",
+            fr: "Ressources sur le leadership, les compétences et les modes de travail entre plusieurs pays.",
+        },
+    },
+    {
+        id: "ai-strategy",
+        label: { en: "AI Strategy", fr: "Stratégie IA" },
+        blurb: {
+            en: "Resources on applied AI, analytics and simple, practical use cases.",
+            fr: "Ressources sur l’IA appliquée, l’analytique et des cas d’usage concrets.",
+        },
+    },
+    {
+        id: "mining",
+        label: { en: "Mining & Natural Resources", fr: "Mines et ressources naturelles" },
+        blurb: {
+            en: "Resources on mining projects, communities and investment in natural resources.",
+            fr: "Ressources sur les projets miniers, les communautés et les investissements dans les ressources naturelles.",
+        },
+    },
+] as const;
+
+const MAX_PER_ROW = 3;
 
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
@@ -50,7 +135,6 @@ function RevealOnScroll({
                     el.style.opacity = "1";
                     el.style.transform = "translateY(0)";
                 } else {
-                    // allow re-animate on scroll
                     el.style.opacity = "0";
                     el.style.transform = "translateY(18px)";
                 }
@@ -76,6 +160,26 @@ function RevealOnScroll({
     );
 }
 
+/* ---------- Helper to pick posts per sector + language ---------- */
+function pickPostsForSection(
+    posts: InsightCardData[],
+    industryId: string,
+    langKey: "en" | "fr"
+): InsightCardData[] {
+    const allForIndustry = posts.filter((p) => p.industry === industryId);
+
+    if (allForIndustry.length === 0) return [];
+
+    const exactLang = allForIndustry.filter((p) => p.language === langKey);
+    if (exactLang.length > 0) return exactLang;
+
+    const englishFallback = allForIndustry.filter((p) => p.language === "en");
+    if (englishFallback.length > 0) return englishFallback;
+
+    // last resort: anything in this sector (old docs with no language set)
+    return allForIndustry;
+}
+
 /* ---------- MAIN CLIENT PAGE ---------- */
 export default function InsightsPageClient({
                                                posts,
@@ -83,11 +187,14 @@ export default function InsightsPageClient({
     posts: InsightCardData[];
 }) {
     const { language } = useLanguage();
-    const t = LABELS[language] ?? LABELS.en;
+    const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
+    const t = LABELS[langKey];
+
+    const [activePost, setActivePost] = useState<InsightCardData | null>(null);
 
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
-            {/* ---------- HERO VIDEO (insight.mp4) ---------- */}
+            {/* HERO */}
             <section
                 style={{ position: "relative", height: "88vh", overflow: "hidden" }}
             >
@@ -148,15 +255,9 @@ export default function InsightsPageClient({
                 </div>
             </section>
 
-            {/* ---------- GRID OF INSIGHT CARDS ---------- */}
+            {/* SECTIONS BY INDUSTRY */}
             <section style={{ background: "#fafafa", padding: "100px 0 140px" }}>
-                <div
-                    style={{
-                        maxWidth: "1240px",
-                        margin: "0 auto",
-                        padding: "0 24px",
-                    }}
-                >
+                <div className="insight-grid-container">
                     <RevealOnScroll>
                         <h2
                             style={{
@@ -185,128 +286,277 @@ export default function InsightsPageClient({
                         </p>
                     </RevealOnScroll>
 
-                    {/* 3-column cube grid */}
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns:
-                                "repeat(auto-fit, minmax(260px, 1fr))",
-                            gap: 26,
-                            alignItems: "stretch",
-                        }}
-                    >
-                        {posts.map((post, i) => (
-                            <RevealOnScroll key={post._id} delay={i * 70}>
-                                <InsightCard
-                                    post={post}
-                                    fallback={t.cardExcerptFallback}
-                                />
-                            </RevealOnScroll>
-                        ))}
+                    {SECTIONS.map((section, shelfIdx) => {
+                        const sectionPosts = pickPostsForSection(
+                            posts,
+                            section.id,
+                            langKey
+                        );
 
-                        {posts.length === 0 && (
-                            <p
-                                style={{
-                                    gridColumn: "1 / -1",
-                                    textAlign: "center",
-                                    color: "#777",
-                                }}
+                        const realCards = sectionPosts.map((post) => ({
+                            type: "real" as const,
+                            post,
+                        }));
+
+                        let cards = [...realCards];
+
+                        const remainder = cards.length % MAX_PER_ROW;
+                        let placeholdersToAdd =
+                            remainder === 0
+                                ? cards.length === 0
+                                    ? MAX_PER_ROW
+                                    : 0
+                                : MAX_PER_ROW - remainder;
+
+                        for (let i = 0; i < placeholdersToAdd; i++) {
+                            cards.push({
+                                type: "placeholder" as const,
+                                id: `ph-${section.id}-${i}`,
+                            });
+                        }
+
+                        const rows: typeof cards[] = [];
+                        for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
+                            rows.push(cards.slice(i, i + MAX_PER_ROW));
+                        }
+
+                        return (
+                            <RevealOnScroll
+                                key={section.id}
+                                delay={shelfIdx * 80}
                             >
-                                {t.emptyState}
-                            </p>
-                        )}
-                    </div>
+                                <div className="insight-shelf">
+                                    <header className="insight-shelf-header">
+                                        <p className="insight-shelf-label">
+                                            {langKey === "en" ? "Sector" : "Secteur"}
+                                        </p>
+                                        <h3 className="insight-shelf-title">
+                                            {section.label[langKey]}
+                                        </h3>
+                                        <p className="insight-shelf-blurb">
+                                            {section.blurb[langKey]}
+                                        </p>
+                                    </header>
+
+                                    <div className="insight-shelf-line" />
+
+                                    {rows.map((row, rowIdx) => (
+                                        <div
+                                            className="insight-shelf-row"
+                                            key={rowIdx}
+                                        >
+                                            {row.map((card, colIdx) => {
+                                                if (card.type === "real") {
+                                                    return (
+                                                        <InsightCard
+                                                            key={
+                                                                card.post._id
+                                                            }
+                                                            post={card.post}
+                                                            fallback={
+                                                                t.cardExcerptFallback
+                                                            }
+                                                            delay={colIdx * 70}
+                                                            readLabel={
+                                                                t.readArticle
+                                                            }
+                                                            onOpen={() =>
+                                                                setActivePost(
+                                                                    card.post
+                                                                )
+                                                            }
+                                                        />
+                                                    );
+                                                }
+
+                                                return (
+                                                    <PlaceholderCard
+                                                        key={
+                                                            card.id ||
+                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
+                                                        }
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                    ))}
+                                </div>
+                            </RevealOnScroll>
+                        );
+                    })}
+
+                    {posts.length === 0 && (
+                        <p
+                            style={{
+                                textAlign: "center",
+                                color: "#777",
+                                marginTop: 40,
+                            }}
+                        >
+                            {t.emptyState}
+                        </p>
+                    )}
                 </div>
             </section>
+
+            {/* MODAL */}
+            {activePost && (
+                <InsightModal
+                    post={activePost}
+                    onClose={() => setActivePost(null)}
+                    closeLabel={t.close}
+                />
+            )}
         </main>
     );
 }
 
-/* ---------- SINGLE CARD (your “cube” with hover) ---------- */
+/* ---------- SINGLE CARD ---------- */
 function InsightCard({
                          post,
                          fallback,
+                         delay = 0,
+                         readLabel,
+                         onOpen,
                      }: {
     post: InsightCardData;
     fallback: string;
+    delay?: number;
+    readLabel: string;
+    onOpen: () => void;
 }) {
-    const wrapRef = useRef<HTMLDivElement | null>(null);
+    const ref = useRef<HTMLDivElement | null>(null);
 
-    function onEnter() {
-        const el = wrapRef.current;
+    useEffect(() => {
+        const el = ref.current;
         if (!el) return;
-        el.style.transform = "translateY(-6px)";
-        el.style.boxShadow = "0 18px 42px rgba(30,144,255,0.18)";
-        el.style.borderColor = "#1E90FF";
-    }
 
-    function onLeave() {
-        const el = wrapRef.current;
-        if (!el) return;
-        el.style.transform = "translateY(0)";
-        el.style.boxShadow = "0 8px 24px rgba(0,0,0,0.06)";
-        el.style.borderColor = "rgba(0,0,0,0.06)";
-    }
+        el.style.opacity = "0";
+        el.style.transform = "translateY(18px)";
+
+        const obs = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    el.style.opacity = "1";
+                    el.style.transform = "translateY(0)";
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        obs.observe(el);
+        return () => obs.disconnect();
+    }, []);
+
+    const hasBody = Array.isArray(post.body) && post.body.length > 0;
 
     return (
-        <Link
-            href={`/insights/${post.slug}`}
-            style={{ textDecoration: "none", color: "inherit" }}
+        <div
+            ref={ref}
+            style={{
+                transition: `opacity .5s ease ${delay}ms, transform .5s ease ${delay}ms`,
+            }}
         >
-            <div
-                ref={wrapRef}
-                onMouseEnter={onEnter}
-                onMouseLeave={onLeave}
-                style={{
-                    background: "#ffffff",
-                    borderRadius: 18,
-                    padding: "22px 22px 20px",
-                    border: "1px solid rgba(0,0,0,0.06)",
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
-                    transition:
-                        "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
-                    cursor: "pointer",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                }}
+            <article
+                className="insight-card"
+                onClick={hasBody ? onOpen : undefined}
             >
                 {post.cover?.asset?.url && (
                     <img
                         src={post.cover.asset.url}
                         alt={post.title}
-                        style={{
-                            width: "100%",
-                            height: "210px",
-                            objectFit: "cover",
-                            borderRadius: 14,
-                            marginBottom: 14,
-                        }}
+                        className="insight-card-img"
                     />
                 )}
+                <h3>{post.title}</h3>
+                <p>{post.excerpt || fallback}</p>
 
-                <h3
-                    style={{
-                        fontFamily: "var(--font-playfair)",
-                        fontSize: 22,
-                        margin: "2px 0 8px",
-                        color: "#0A0A0A",
-                    }}
-                >
-                    {post.title}
-                </h3>
+                {hasBody && (
+                    <button
+                        type="button"
+                        className="insight-card-readmore"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onOpen();
+                        }}
+                    >
+                        {readLabel}
+                    </button>
+                )}
+            </article>
+        </div>
+    );
+}
 
-                <p
-                    style={{
-                        fontSize: 15.5,
-                        lineHeight: 1.6,
-                        color: "#444",
-                        flexGrow: 1,
-                    }}
-                >
-                    {post.excerpt || fallback}
-                </p>
+/* ---------- PLACEHOLDER CARD ---------- */
+function PlaceholderCard() {
+    return (
+        <article className="insight-card insight-card-placeholder">
+            <h3 className="insight-placeholder-title">Coming soon</h3>
+            <p className="insight-placeholder-text">
+                More resources for this sector will appear here.
+            </p>
+        </article>
+    );
+}
+
+/* ---------- MODAL (GLASS BLUR BACKGROUND) ---------- */
+function InsightModal({
+                          post,
+                          onClose,
+                          closeLabel,
+                      }: {
+    post: InsightCardData;
+    onClose: () => void;
+    closeLabel: string;
+}) {
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) onClose();
+    };
+
+    const portableComponents = {
+        types: {
+            image: ({ value }: any) =>
+                value?.asset?.url ? (
+                    <img
+                        src={value.asset.url}
+                        alt={value.alt || ""}
+                        className="insight-modal-image"
+                    />
+                ) : null,
+        },
+    };
+
+    return (
+        <div
+            className="insight-modal-backdrop"
+            onClick={handleBackdropClick}
+            role="dialog"
+            aria-modal="true"
+        >
+            <div className="insight-modal-panel">
+                <header className="insight-modal-header">
+                    <h2>{post.title}</h2>
+                    <button
+                        type="button"
+                        className="insight-modal-close"
+                        onClick={onClose}
+                    >
+                        {closeLabel}
+                    </button>
+                </header>
+
+                <div className="insight-modal-body">
+                    {Array.isArray(post.body) && post.body.length > 0 ? (
+                        <PortableText
+                            value={post.body}
+                            components={portableComponents}
+                        />
+                    ) : (
+                        <p>{post.excerpt}</p>
+                    )}
+                </div>
             </div>
-        </Link>
+        </div>
     );
 }

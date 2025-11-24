@@ -7,6 +7,23 @@ export default defineType({
     type: "document",
 
     fields: [
+        // ───────── LANGUAGE ─────────
+        defineField({
+            name: "language",
+            title: "Language",
+            type: "string",
+            options: {
+                list: [
+                    { title: "English", value: "en" },
+                    { title: "French", value: "fr" },
+                ],
+                layout: "radio",
+            },
+            initialValue: "en",
+            description: "Language of this case study.",
+            validation: (Rule) => Rule.required(),
+        }),
+
         // ───────── OVERVIEW / LIST CARD ─────────
         defineField({
             name: "title",

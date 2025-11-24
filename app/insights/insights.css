@@ -74,3 +74,300 @@
     font-size: 16px;
     opacity: 0.8;
 }
+/* ---------- SHELVES PER SECTOR ---------- */
+
+.insight-shelf {
+    margin-bottom: 60px;
+}
+
+.insight-shelf-header {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.insight-shelf-label {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.insight-shelf-title {
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    margin: 0;
+    color: #111;
+}
+
+.insight-shelf-blurb {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 14px;
+    color: #555;
+    max-width: 520px;
+    margin: 0;
+}
+
+.insight-shelf-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+            90deg,
+            rgba(10, 10, 10, 0.1),
+            rgba(10, 10, 10, 0.35),
+            rgba(10, 10, 10, 0.1)
+    );
+    margin-bottom: 22px;
+}
+
+/* Make links around cards clean */
+.insight-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+    .insight-grid-container {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .insight-shelf-title {
+        font-size: 20px;
+    }
+
+    .insight-shelf-blurb {
+        font-size: 13px;
+    }
+}
+/* ---------- SHELVES / ROWS (like case studies) ---------- */
+
+.insight-shelf {
+    margin-bottom: 60px;
+}
+
+.insight-shelf-header {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.insight-shelf-label {
+    font-size: 12px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.insight-shelf-title {
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    margin: 0;
+    color: #111;
+}
+
+.insight-shelf-blurb {
+    font-family: var(--font-inter), sans-serif;
+    font-size: 14px;
+    color: #555;
+    max-width: 520px;
+    margin: 0;
+}
+
+.insight-shelf-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+            90deg,
+            rgba(10, 10, 10, 0.1),
+            rgba(10, 10, 10, 0.35),
+            rgba(10, 10, 10, 0.1)
+    );
+    margin-bottom: 22px;
+}
+
+.insight-shelf-row {
+    display: flex;
+    gap: 26px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* Make cards behave like books on a shelf */
+.insight-shelf-row .insight-card {
+    flex: 1 1 0;
+    max-width: 340px;
+}
+
+/* Placeholder styling */
+.insight-card-placeholder {
+    opacity: 0.8;
+    border-style: dashed;
+    border-color: rgba(0, 0, 0, 0.18);
+    background: #fafafa;
+}
+
+.insight-placeholder-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #666;
+    margin: 4px 0 8px;
+}
+
+.insight-placeholder-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #777;
+}
+
+/* Mobile tweaks: two per row then one per row, like case studies */
+
+@media (max-width: 900px) {
+    .insight-shelf-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .insight-shelf-row .insight-card {
+        flex: 0 1 calc(50% - 12px); /* 2 per row */
+        max-width: none;
+        min-height: 220px;
+    }
+
+    .insight-placeholder-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 640px) {
+    .insight-shelf-row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .insight-shelf-row .insight-card {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+/* ---------- READ MORE BUTTON ON CARD ---------- */
+.insight-card-readmore {
+    margin-top: 14px;
+    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: none;
+    background: transparent;
+    color: #1e90ff;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* ---------- MODAL WITH GLASS BLUR BACKDROP ---------- */
+.insight-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    background: rgba(15, 23, 42, 0.25); /* slight tint */
+    backdrop-filter: blur(10px);         /* glass blur */
+}
+
+.insight-modal-panel {
+    width: 100%;
+    max-width: 900px;
+    max-height: 85vh;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 24px;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.35);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.insight-modal-header {
+    padding: 20px 26px 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.insight-modal-header h2 {
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.insight-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    color: #555;
+}
+
+.insight-modal-close:hover {
+    color: #000;
+}
+
+.insight-modal-body {
+    padding: 20px 26px 24px;
+    overflow-y: auto;
+    font-family: var(--font-inter), sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #333;
+}
+
+/* PortableText basic styling */
+.insight-modal-body p + p {
+    margin-top: 0.7rem;
+}
+
+.insight-modal-body h2,
+.insight-modal-body h3 {
+    margin-top: 1.4rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-playfair), serif;
+}
+
+.insight-modal-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin: 1.1rem 0;
+}
+
+@media (max-width: 640px) {
+    .insight-modal-panel {
+        border-radius: 18px;
+    }
+
+    .insight-modal-header,
+    .insight-modal-body {
+        padding-inline: 18px;
+    }
+
+    .insight-modal-header h2 {
+        font-size: 20px;
+    }
+}
