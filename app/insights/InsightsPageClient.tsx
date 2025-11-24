@@ -1,11 +1,16 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
-import "./insights.css";
+
+/* ---------- TYPES ---------- */
+
+type Card =
+    | { type: "real"; post: InsightCardData }
+    | { type: "placeholder"; id: string };
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
@@ -20,6 +25,9 @@ const LABELS = {
         cardExcerptFallback: "Click to open the full article.",
         readArticle: "Read article",
         close: "Close",
+        sectorLabel: "Sector",
+        comingSoonTitle: "Coming soon",
+        comingSoonText: "More resources for this sector will appear here.",
     },
     fr: {
         heroTitle: "Bibliothèque d’analyses",
@@ -32,6 +40,10 @@ const LABELS = {
         cardExcerptFallback: "Cliquez pour ouvrir l’article complet.",
         readArticle: "Lire l’article",
         close: "Fermer",
+        sectorLabel: "Secteur",
+        comingSoonTitle: "Bientôt disponible",
+        comingSoonText:
+            "D’autres ressources pour ce secteur apparaîtront ici dès leur publication.",
     },
 } as const;
 
@@ -116,12 +128,6 @@ const SECTIONS = [
 
 const MAX_PER_ROW = 3;
 
-type LangKey = "en" | "fr";
-
-type CardItem =
-    | { type: "real"; post: InsightCardData }
-    | { type: "placeholder"; id: string };
-
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
                             children,
@@ -146,7 +152,7 @@ function RevealOnScroll({
                     el.style.transform = "translateY(18px)";
                 }
             },
-            { threshold: 0.15 },
+            { threshold: 0.15 }
         );
 
         obs.observe(el);
@@ -167,47 +173,24 @@ function RevealOnScroll({
     );
 }
 
-// inside InsightsPageClient.tsx
-
-function pickPostsForSection(
-    posts: InsightCardData[],
-    industryId: string,
-    langKey: "en" | "fr"
-): InsightCardData[] {
-    // Only posts for this industry
-    const allForIndustry = posts.filter((p) => p.industry === industryId);
-
-    if (allForIndustry.length === 0) return [];
-
-    // Treat missing language as English by default
-    const withLang = allForIndustry.map((p) => ({
-        ...p,
-        _lang: p.language ?? "en",
-    }));
-
-    // 1) First try to show posts that match the current UI language
-    const exactLang = withLang.filter((p) => p._lang === langKey);
-    if (exactLang.length > 0) {
-        return exactLang;
-    }
-
-    // 2) If no FR for this sector, fall back to EN so page is never empty
-    const englishFallback = withLang.filter((p) => p._lang === "en");
-    if (englishFallback.length > 0) {
-        return englishFallback;
-    }
-
-    // 3) Last resort (really old docs): everything in this sector
-    return allForIndustry;
-}
-
 /* ---------- MAIN CLIENT PAGE ---------- */
 export default function InsightsPageClient({ posts }: { posts: InsightCardData[] }) {
     const { language } = useLanguage();
-    const langKey: LangKey = language === "fr" ? "fr" : "en";
+    const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
     const t = LABELS[langKey];
 
     const [activePost, setActivePost] = useState<InsightCardData | null>(null);
+
+    // 1) Normalise language (missing = "en")
+    const normalised = posts.map((p) => ({
+        ...p,
+        language: (p.language ?? "en") as "en" | "fr",
+    }));
+
+    // 2) HARD filter by current UI language – this is why Case Studies behave cleanly
+    const filtered = normalised.filter((p) =>
+        langKey === "fr" ? p.language === "fr" : p.language === "en"
+    );
 
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
@@ -304,27 +287,21 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                     </RevealOnScroll>
 
                     {SECTIONS.map((section, shelfIdx) => {
-                        const sectionPosts = pickPostsForSection(
-                            posts,
-                            section.id,
-                            langKey,
+                        // Only posts in this sector, *already filtered by language*
+                        const sectionPosts = filtered.filter(
+                            (p) => p.industry === section.id
                         );
 
-                        const realCards: CardItem[] = sectionPosts.map((post) => ({
+                        const realCards: Card[] = sectionPosts.map((post) => ({
                             type: "real",
                             post,
                         }));
 
-                        let cards: CardItem[] = [...realCards];
+                        // We always want at least one full row of 3 cards
+                        const totalNeeded = Math.max(MAX_PER_ROW, realCards.length);
+                        const placeholdersToAdd = totalNeeded - realCards.length;
 
-                        const remainder = cards.length % MAX_PER_ROW;
-                        const placeholdersToAdd =
-                            remainder === 0
-                                ? cards.length === 0
-                                    ? MAX_PER_ROW
-                                    : 0
-                                : MAX_PER_ROW - remainder;
-
+                        const cards: Card[] = [...realCards];
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
                                 type: "placeholder",
@@ -332,7 +309,8 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                             });
                         }
 
-                        const rows: CardItem[][] = [];
+                        // Chunk cards into rows of 3
+                        const rows: Card[][] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
                         }
@@ -342,7 +320,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                 <div className="insight-shelf">
                                     <header className="insight-shelf-header">
                                         <p className="insight-shelf-label">
-                                            {langKey === "en" ? "Sector" : "Secteur"}
+                                            {t.sectorLabel.toUpperCase()}
                                         </p>
                                         <h3 className="insight-shelf-title">
                                             {section.label[langKey]}
@@ -365,7 +343,9 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                                             fallback={t.cardExcerptFallback}
                                                             delay={colIdx * 70}
                                                             readLabel={t.readArticle}
-                                                            onOpen={() => setActivePost(card.post)}
+                                                            onOpen={() =>
+                                                                setActivePost(card.post)
+                                                            }
                                                         />
                                                     );
                                                 }
@@ -373,6 +353,8 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                                 return (
                                                     <PlaceholderCard
                                                         key={card.id}
+                                                        title={t.comingSoonTitle}
+                                                        text={t.comingSoonText}
                                                     />
                                                 );
                                             })}
@@ -383,7 +365,7 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                         );
                     })}
 
-                    {posts.length === 0 && (
+                    {filtered.length === 0 && (
                         <p
                             style={{
                                 textAlign: "center",
@@ -439,7 +421,7 @@ function InsightCard({
                     el.style.transform = "translateY(0)";
                 }
             },
-            { threshold: 0.2 },
+            { threshold: 0.2 }
         );
 
         obs.observe(el);
@@ -487,13 +469,17 @@ function InsightCard({
 }
 
 /* ---------- PLACEHOLDER CARD ---------- */
-function PlaceholderCard() {
+function PlaceholderCard({
+                             title,
+                             text,
+                         }: {
+    title: string;
+    text: string;
+}) {
     return (
         <article className="insight-card insight-card-placeholder">
-            <h3 className="insight-placeholder-title">Coming soon</h3>
-            <p className="insight-placeholder-text">
-                More resources for this sector will appear here.
-            </p>
+            <h3 className="insight-placeholder-title">{title}</h3>
+            <p className="insight-placeholder-text">{text}</p>
         </article>
     );
 }
