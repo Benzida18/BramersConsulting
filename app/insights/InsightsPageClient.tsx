@@ -1,11 +1,22 @@
-// app/insights/InsightsPageClient.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, {
+    useEffect,
+    useRef,
+    useState,
+    type MouseEvent,
+} from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
-import "./insights.css";
+
+/* ---------- TYPES ---------- */
+
+type LangKey = "en" | "fr";
+
+type CardItem =
+    | { type: "real"; post: InsightCardData }
+    | { type: "placeholder"; id: string };
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
@@ -55,7 +66,10 @@ const SECTIONS = [
     },
     {
         id: "real-estate",
-        label: { en: "Real Estate & Infrastructure", fr: "Immobilier et infrastructures" },
+        label: {
+            en: "Real Estate & Infrastructure",
+            fr: "Immobilier et infrastructures",
+        },
         blurb: {
             en: "Resources on urban development, real estate and core infrastructure decisions.",
             fr: "Ressources sur les projets immobiliers, l’aménagement urbain et les infrastructures clés.",
@@ -63,7 +77,10 @@ const SECTIONS = [
     },
     {
         id: "catering-hospitality",
-        label: { en: "Hospitality & Catering", fr: "Hôtellerie et restauration" },
+        label: {
+            en: "Hospitality & Catering",
+            fr: "Hôtellerie et restauration",
+        },
         blurb: {
             en: "Resources on hotels, restaurants and food-service operators across UK–Africa links.",
             fr: "Ressources sur les hôtels, restaurants et la restauration sur les corridors Royaume-Uni–Afrique.",
@@ -82,7 +99,10 @@ const SECTIONS = [
     },
     {
         id: "football-advisory",
-        label: { en: "Sports & Football Advisory", fr: "Conseil sportif et football" },
+        label: {
+            en: "Sports & Football Advisory",
+            fr: "Conseil sportif et football",
+        },
         blurb: {
             en: "Resources on structures, talent and investment in the football ecosystem.",
             fr: "Ressources sur les structures, les talents et les investissements dans l’écosystème du football.",
@@ -106,7 +126,10 @@ const SECTIONS = [
     },
     {
         id: "mining",
-        label: { en: "Mining & Natural Resources", fr: "Mines et ressources naturelles" },
+        label: {
+            en: "Mining & Natural Resources",
+            fr: "Mines et ressources naturelles",
+        },
         blurb: {
             en: "Resources on mining projects, communities and investment in natural resources.",
             fr: "Ressources sur les projets miniers, les communautés et les investissements dans les ressources naturelles.",
@@ -115,12 +138,6 @@ const SECTIONS = [
 ] as const;
 
 const MAX_PER_ROW = 3;
-
-type LangKey = "en" | "fr";
-
-type CardItem =
-    | { type: "real"; post: InsightCardData }
-    | { type: "placeholder"; id: string };
 
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
@@ -167,15 +184,26 @@ function RevealOnScroll({
     );
 }
 
-/* ---------- Helper: pick posts per sector & language (strict) ---------- */
+/* ---------- Helper: pick posts per sector + language ---------- */
 function pickPostsForSection(
     posts: InsightCardData[],
     industryId: string,
     langKey: LangKey
 ): InsightCardData[] {
-    return posts.filter(
-        (p) => p.industry === industryId && p.language === langKey
-    );
+    const allForIndustry = posts.filter((p) => p.industry === industryId);
+
+    if (allForIndustry.length === 0) return [];
+
+    // 1) exact language match
+    const exactLang = allForIndustry.filter((p) => p.language === langKey);
+    if (exactLang.length > 0) return exactLang;
+
+    // 2) fallback to English
+    const englishFallback = allForIndustry.filter((p) => p.language === "en");
+    if (englishFallback.length > 0) return englishFallback;
+
+    // 3) last resort: any article with this sector (old docs with no language set)
+    return allForIndustry;
 }
 
 /* ---------- MAIN CLIENT PAGE ---------- */
@@ -202,7 +230,6 @@ export default function InsightsPageClient({
                     loop
                     muted
                     playsInline
-                    className="insight-video"
                     style={{
                         position: "absolute",
                         inset: 0,
@@ -254,7 +281,7 @@ export default function InsightsPageClient({
                 </div>
             </section>
 
-            {/* SECTIONS BY INDUSTRY */}
+            {/* SECTIONS BY INDUSTRY (ALL 9 ALWAYS SHOWN) */}
             <section style={{ background: "#fafafa", padding: "100px 0 140px" }}>
                 <div className="insight-grid-container">
                     <RevealOnScroll>
@@ -275,24 +302,6 @@ export default function InsightsPageClient({
                             style={{
                                 textAlign: "center",
                                 maxWidth: 820,
-                                margin: "0 auto 16px",
-                                fontSize: 14,
-                                color: "#777",
-                                letterSpacing: "0.12em",
-                                textTransform: "uppercase",
-                            }}
-                        >
-                            {langKey === "en"
-                                ? "Currently showing articles in English"
-                                : "Affichage des articles en français"}
-                        </p>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={120}>
-                        <p
-                            style={{
-                                textAlign: "center",
-                                maxWidth: 820,
                                 margin: "0 auto 48px",
                                 fontSize: 18,
                                 color: "#444",
@@ -304,14 +313,12 @@ export default function InsightsPageClient({
                     </RevealOnScroll>
 
                     {SECTIONS.map((section, shelfIdx) => {
+                        // pick posts for this sector + language
                         const sectionPosts = pickPostsForSection(
                             posts,
                             section.id,
                             langKey
                         );
-
-                        // If no posts in this sector for this language, hide the shelf
-                        if (sectionPosts.length === 0) return null;
 
                         const realCards: CardItem[] = sectionPosts.map((post) => ({
                             type: "real",
@@ -320,10 +327,14 @@ export default function InsightsPageClient({
 
                         let cards: CardItem[] = [...realCards];
 
-                        // Add placeholders to keep 3-per-row layout
+                        // Always keep full rows of MAX_PER_ROW and at least 1 row per sector
                         const remainder = cards.length % MAX_PER_ROW;
                         const placeholdersToAdd =
-                            remainder === 0 ? 0 : MAX_PER_ROW - remainder;
+                            remainder === 0
+                                ? cards.length === 0
+                                    ? MAX_PER_ROW
+                                    : 0
+                                : MAX_PER_ROW - remainder;
 
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
@@ -360,7 +371,7 @@ export default function InsightsPageClient({
                                     {rows.map((row, rowIdx) => (
                                         <div
                                             className="insight-shelf-row"
-                                            key={rowIdx}
+                                            key={`${section.id}-row-${rowIdx}`}
                                         >
                                             {row.map((card, colIdx) => {
                                                 if (card.type === "real") {
@@ -368,22 +379,24 @@ export default function InsightsPageClient({
                                                         <InsightCard
                                                             key={card.post._id}
                                                             post={card.post}
-                                                            fallback={t.cardExcerptFallback}
+                                                            fallback={
+                                                                t.cardExcerptFallback
+                                                            }
                                                             delay={colIdx * 70}
                                                             readLabel={t.readArticle}
                                                             onOpen={() =>
-                                                                setActivePost(card.post)
+                                                                setActivePost(
+                                                                    card.post
+                                                                )
                                                             }
                                                         />
                                                     );
                                                 }
 
+                                                // Placeholder card
                                                 return (
                                                     <PlaceholderCard
-                                                        key={
-                                                            card.id ||
-                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
-                                                        }
+                                                        key={card.id}
                                                     />
                                                 );
                                             })}
@@ -519,7 +532,7 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) onClose();
     };
 
