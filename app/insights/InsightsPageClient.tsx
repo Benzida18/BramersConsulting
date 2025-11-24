@@ -1,10 +1,11 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
+import "./insights.css";
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
@@ -115,17 +116,18 @@ const SECTIONS = [
 
 const MAX_PER_ROW = 3;
 
-/* ---------- Card union types ---------- */
-type RealCard = { type: "real"; post: InsightCardData };
-type PlaceholderCardType = { type: "placeholder"; id: string };
-type Card = RealCard | PlaceholderCardType;
+type LangKey = "en" | "fr";
+
+type CardItem =
+    | { type: "real"; post: InsightCardData }
+    | { type: "placeholder"; id: string };
 
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
                             children,
                             delay = 0,
                         }: {
-    children: ReactNode;
+    children: React.ReactNode;
     delay?: number;
 }) {
     const ref = useRef<HTMLDivElement | null>(null);
@@ -165,24 +167,15 @@ function RevealOnScroll({
     );
 }
 
-/* ---------- Helper to pick posts per sector + language ---------- */
+/* ---------- Helper: pick posts per sector & language (strict) ---------- */
 function pickPostsForSection(
     posts: InsightCardData[],
     industryId: string,
-    langKey: "en" | "fr"
+    langKey: LangKey
 ): InsightCardData[] {
-    const allForIndustry = posts.filter((p) => p.industry === industryId);
-
-    if (allForIndustry.length === 0) return [];
-
-    const exactLang = allForIndustry.filter((p) => p.language === langKey);
-    if (exactLang.length > 0) return exactLang;
-
-    const englishFallback = allForIndustry.filter((p) => p.language === "en");
-    if (englishFallback.length > 0) return englishFallback;
-
-    // last resort: anything in this sector (old docs with no language set)
-    return allForIndustry;
+    return posts.filter(
+        (p) => p.industry === industryId && p.language === langKey
+    );
 }
 
 /* ---------- MAIN CLIENT PAGE ---------- */
@@ -192,7 +185,7 @@ export default function InsightsPageClient({
     posts: InsightCardData[];
 }) {
     const { language } = useLanguage();
-    const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
+    const langKey: LangKey = language === "fr" ? "fr" : "en";
     const t = LABELS[langKey];
 
     const [activePost, setActivePost] = useState<InsightCardData | null>(null);
@@ -209,6 +202,7 @@ export default function InsightsPageClient({
                     loop
                     muted
                     playsInline
+                    className="insight-video"
                     style={{
                         position: "absolute",
                         inset: 0,
@@ -281,6 +275,24 @@ export default function InsightsPageClient({
                             style={{
                                 textAlign: "center",
                                 maxWidth: 820,
+                                margin: "0 auto 16px",
+                                fontSize: 14,
+                                color: "#777",
+                                letterSpacing: "0.12em",
+                                textTransform: "uppercase",
+                            }}
+                        >
+                            {langKey === "en"
+                                ? "Currently showing articles in English"
+                                : "Affichage des articles en français"}
+                        </p>
+                    </RevealOnScroll>
+
+                    <RevealOnScroll delay={120}>
+                        <p
+                            style={{
+                                textAlign: "center",
+                                maxWidth: 820,
                                 margin: "0 auto 48px",
                                 fontSize: 18,
                                 color: "#444",
@@ -298,20 +310,20 @@ export default function InsightsPageClient({
                             langKey
                         );
 
-                        const realCards: RealCard[] = sectionPosts.map((post) => ({
+                        // If no posts in this sector for this language, hide the shelf
+                        if (sectionPosts.length === 0) return null;
+
+                        const realCards: CardItem[] = sectionPosts.map((post) => ({
                             type: "real",
                             post,
                         }));
 
-                        let cards: Card[] = [...realCards];
+                        let cards: CardItem[] = [...realCards];
 
+                        // Add placeholders to keep 3-per-row layout
                         const remainder = cards.length % MAX_PER_ROW;
-                        let placeholdersToAdd =
-                            remainder === 0
-                                ? cards.length === 0
-                                    ? MAX_PER_ROW
-                                    : 0
-                                : MAX_PER_ROW - remainder;
+                        const placeholdersToAdd =
+                            remainder === 0 ? 0 : MAX_PER_ROW - remainder;
 
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
@@ -320,7 +332,7 @@ export default function InsightsPageClient({
                             });
                         }
 
-                        const rows: Card[][] = [];
+                        const rows: CardItem[][] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
                         }
@@ -356,26 +368,22 @@ export default function InsightsPageClient({
                                                         <InsightCard
                                                             key={card.post._id}
                                                             post={card.post}
-                                                            fallback={
-                                                                t.cardExcerptFallback
-                                                            }
+                                                            fallback={t.cardExcerptFallback}
                                                             delay={colIdx * 70}
-                                                            readLabel={
-                                                                t.readArticle
-                                                            }
+                                                            readLabel={t.readArticle}
                                                             onOpen={() =>
-                                                                setActivePost(
-                                                                    card.post
-                                                                )
+                                                                setActivePost(card.post)
                                                             }
                                                         />
                                                     );
                                                 }
 
-                                                // Placeholder
                                                 return (
                                                     <PlaceholderCard
-                                                        key={`placeholder-${section.id}-${rowIdx}-${colIdx}`}
+                                                        key={
+                                                            card.id ||
+                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
+                                                        }
                                                     />
                                                 );
                                             })}
@@ -511,7 +519,7 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
-    const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) onClose();
     };
 

@@ -2,8 +2,8 @@
 export const dynamic = "force-dynamic";
 
 import { client } from "@/sanity/client";
-import "./case-studies.css";
 import CaseStudiesPageClient from "./CaseStudiesPageClient";
+import "./case-studies.css";
 
 const MAX_BOOKS = 9;
 
@@ -27,5 +27,10 @@ async function getCaseStudies() {
 
 export default async function CaseStudiesPage() {
     const cases = await getCaseStudies();
-    return <CaseStudiesPageClient cases={cases} maxBooks={MAX_BOOKS} />;
+
+    // (We still cap to MAX_BOOKS inside the client by slice, but
+    //   you can also leave it all and let the client decide; either is fine.)
+    const visibleCases = (cases || []).slice(0, MAX_BOOKS);
+
+    return <CaseStudiesPageClient cases={visibleCases} />;
 }

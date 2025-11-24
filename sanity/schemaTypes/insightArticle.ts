@@ -1,4 +1,4 @@
-// sanity/schemas/insightArticle.ts
+// sanity/schemaTypes/insightArticle.ts (or .js)
 import { defineField, defineType } from "sanity";
 
 export default defineType({
@@ -17,8 +17,15 @@ export default defineType({
             options: { source: "title", maxLength: 96 },
             validation: (r) => r.required(),
         }),
+        defineField({ name: "excerpt", type: "text", rows: 3 }),
+        defineField({ name: "cover", type: "image", options: { hotspot: true } }),
+        defineField({
+            name: "publishedAt",
+            type: "datetime",
+            initialValue: () => new Date().toISOString(),
+        }),
 
-        // NEW: language of the article
+        //
         defineField({
             name: "language",
             title: "Language",
@@ -26,18 +33,17 @@ export default defineType({
             options: {
                 list: [
                     { title: "English", value: "en" },
-                    { title: "French", value: "fr" },
+                    { title: "Français", value: "fr" },
                 ],
                 layout: "radio",
             },
-            initialValue: "en",
-            validation: (r) => r.required(),
+            validation: (Rule) => Rule.required(),
         }),
 
-        // Industry / sector (we already agreed these values earlier)
+        //
         defineField({
             name: "industry",
-            title: "Industry",
+            title: "Sector / Industry",
             type: "string",
             options: {
                 list: [
@@ -45,37 +51,16 @@ export default defineType({
                     { title: "Financial Services", value: "finance" },
                     { title: "Real Estate & Infrastructure", value: "real-estate" },
                     { title: "Hospitality & Catering", value: "catering-hospitality" },
-                    {
-                        title: "International Trade & Logistics",
-                        value: "international-trade",
-                    },
-                    {
-                        title: "Sports & Football Advisory",
-                        value: "football-advisory",
-                    },
+                    { title: "International Trade & Logistics", value: "international-trade" },
+                    { title: "Sports & Football Advisory", value: "football-advisory" },
                     { title: "Coaching & Training", value: "coaching-training" },
                     { title: "AI Strategy", value: "ai-strategy" },
                     { title: "Mining & Natural Resources", value: "mining" },
                 ],
             },
-            validation: (r) => r.required(),
+            validation: (Rule) => Rule.required(),
         }),
 
-        defineField({
-            name: "excerpt",
-            type: "text",
-            rows: 3,
-        }),
-        defineField({
-            name: "cover",
-            type: "image",
-            options: { hotspot: true },
-        }),
-        defineField({
-            name: "publishedAt",
-            type: "datetime",
-            initialValue: () => new Date().toISOString(),
-        }),
         defineField({
             name: "body",
             type: "array",
@@ -83,10 +68,6 @@ export default defineType({
         }),
     ],
     preview: {
-        select: {
-            title: "title",
-            media: "cover",
-            subtitle: "publishedAt",
-        },
+        select: { title: "title", media: "cover", subtitle: "language" },
     },
 });

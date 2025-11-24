@@ -13,14 +13,13 @@ export default defineType({
             title: "Language",
             type: "string",
             options: {
+                layout: "radio",
                 list: [
                     { title: "English", value: "en" },
-                    { title: "French", value: "fr" },
+                    { title: "Français", value: "fr" },
                 ],
-                layout: "radio",
             },
             initialValue: "en",
-            description: "Language of this case study.",
             validation: (Rule) => Rule.required(),
         }),
 
@@ -138,9 +137,10 @@ export default defineType({
             shelf: "shelf",
             tag: "tag",
             order: "order",
+            language: "language",
         },
         prepare(selection) {
-            const { title, shelf, tag, order } = selection;
+            const { title, shelf, tag, order, language } = selection;
 
             const shelfLabel =
                 shelf === "markets-trade"
@@ -151,9 +151,13 @@ export default defineType({
                             ? "People & Performance"
                             : "Unassigned shelf";
 
+            const langLabel = language === "fr" ? "FR" : "EN";
+
             return {
                 title: title || "Untitled case study",
                 subtitle: [
+                    langLabel,
+                    " · ",
                     shelfLabel,
                     tag ? ` · ${tag}` : "",
                     typeof order === "number" ? ` · #${order}` : "",

@@ -1,100 +1,77 @@
-// app/case-studies/CaseStudiesPageClient.jsx
 "use client";
 
-import Link from "next/link";
 import { useLanguage } from "@/components/LanguageContext";
+import Link from "next/link";
+import "./case-studies.css";
 
-/* ---------- TEXT LABELS (EN / FR) ---------- */
+const MAX_BOOKS = 9;
+
 const LABELS = {
     en: {
         heroTitle: "Case Studies",
-        heroSub:
+        heroSubtitle:
             "A working library of Bramers mandates across markets, capital and people.",
         eyebrow: "Selected Cases",
         intro: "A working shelf of live and upcoming Bramers mandates.",
-        placeholderTitle: "Coming soon",
-        placeholderText: "A future Bramers case study will appear here.",
-        readCase: "Read case study",
+        languageNote: "Currently showing case studies in English.",
+        emptyState: "No case studies are available yet.",
+        multiSector: "Multi-sector",
+        readCta: "Read case study",
     },
     fr: {
         heroTitle: "Études de cas",
-        heroSub:
-            "Une bibliothèque de mandats Bramers couvrant les marchés, le capital et les équipes.",
-        eyebrow: "Cas sélectionnés",
-        intro: "Une étagère vivante de mandats Bramers en cours et à venir.",
-        placeholderTitle: "À venir",
-        placeholderText:
-            "Une future étude de cas Bramers apparaîtra ici.",
-        readCase: "Lire l’étude de cas",
+        heroSubtitle:
+            "Une bibliothèque de missions Bramers sur les marchés, le capital et les équipes.",
+        eyebrow: "Études sélectionnées",
+        intro:
+            "Un ensemble d’études de cas en cours ou réalisées par Bramers.",
+        languageNote: "Affichage des études de cas en français.",
+        emptyState: "Aucune étude de cas n’est encore disponible.",
+        multiSector: "Multi-sectoriel",
+        readCta: "Lire l’étude de cas",
     },
 };
 
-/* ---------- SHELF META (EN / FR) ---------- */
-const SHELF_META = {
-    en: [
-        {
-            label: "Shelf I",
-            title: "Markets & Trade",
-            intro: "Routes, corridors and cross-border trade execution.",
+// Shelf meta – now bilingual
+const SHELF_META = [
+    {
+        label: { en: "Shelf I", fr: "Étagère I" },
+        title: { en: "Markets & Trade", fr: "Marchés & commerce" },
+        intro: {
+            en: "Routes, corridors and cross-border trade execution.",
+            fr: "Corridors, routes commerciales et exécution transfrontalière.",
         },
-        {
-            label: "Shelf II",
-            title: "Capital & Assets",
-            intro: "Capital allocation, real estate and infrastructure decisions.",
+    },
+    {
+        label: { en: "Shelf II", fr: "Étagère II" },
+        title: { en: "Capital & Assets", fr: "Capital & actifs" },
+        intro: {
+            en: "Capital allocation, real estate and infrastructure decisions.",
+            fr: "Allocation du capital, immobilier et décisions d’infrastructure.",
         },
-        {
-            label: "Shelf III",
-            title: "People & Performance",
-            intro: "Leadership, culture and execution across organisations.",
+    },
+    {
+        label: { en: "Shelf III", fr: "Étagère III" },
+        title: { en: "People & Performance", fr: "Personnes & performance" },
+        intro: {
+            en: "Leadership, culture and execution across organisations.",
+            fr: "Leadership, culture et exécution au sein des organisations.",
         },
-    ],
-    fr: [
-        {
-            label: "Rayon I",
-            title: "Marchés & commerce",
-            intro: "Routes, corridors et exécution du commerce transfrontalier.",
-        },
-        {
-            label: "Rayon II",
-            title: "Capital & actifs",
-            intro: "Allocation du capital, immobilier et décisions d’infrastructure.",
-        },
-        {
-            label: "Rayon III",
-            title: "Personnes & performance",
-            intro: "Leadership, culture et exécution au sein des organisations.",
-        },
-    ],
-};
+    },
+];
 
-/* ---------- LANGUAGE FILTER (with fallback) ---------- */
-function pickCasesForLanguage(cases, langKey) {
-    const anyHasLang = cases.some((c) => c.language);
-
-    // If no language set at all yet, just show everything
-    if (!anyHasLang) return cases;
-
-    const exact = cases.filter((c) => c.language === langKey);
-    if (exact.length > 0) return exact;
-
-    const english = cases.filter((c) => c.language === "en");
-    if (english.length > 0) return english;
-
-    return cases;
-}
-
-/* ---------- MAIN CLIENT COMPONENT ---------- */
-export default function CaseStudiesPageClient({ cases, maxBooks }) {
+export default function CaseStudiesPageClient({ cases }) {
     const { language } = useLanguage();
     const langKey = language === "fr" ? "fr" : "en";
-
     const t = LABELS[langKey];
-    const shelfMeta = SHELF_META[langKey];
 
-    const filteredCases = pickCasesForLanguage(cases || [], langKey);
+    // Filter by language (strict)
+    const languageCases = (cases || []).filter(
+        (c) => c.language === langKey
+    );
 
-    const visibleCases = (filteredCases || []).slice(0, maxBooks);
-    const placeholdersNeeded = Math.max(maxBooks - visibleCases.length, 0);
+    const visibleCases = languageCases.slice(0, MAX_BOOKS);
+    const placeholdersNeeded = Math.max(MAX_BOOKS - visibleCases.length, 0);
 
     const cards = [
         ...visibleCases.map((c) => ({ type: "real", data: c })),
@@ -104,7 +81,7 @@ export default function CaseStudiesPageClient({ cases, maxBooks }) {
         })),
     ];
 
-    // 3 shelves x 3 books
+    // Split into 3 shelves of 3
     const rows = [cards.slice(0, 3), cards.slice(3, 6), cards.slice(6, 9)];
 
     return (
@@ -120,7 +97,7 @@ export default function CaseStudiesPageClient({ cases, maxBooks }) {
                 />
                 <div className="case-hero-overlay">
                     <h1>{t.heroTitle}</h1>
-                    <p className="case-hero-sub">{t.heroSub}</p>
+                    <p className="case-hero-sub">{t.heroSubtitle}</p>
                 </div>
             </section>
 
@@ -129,106 +106,137 @@ export default function CaseStudiesPageClient({ cases, maxBooks }) {
                 <div className="case-intro">
                     <p className="case-eyebrow">{t.eyebrow}</p>
                     <p className="case-intro-text">{t.intro}</p>
+                    <p
+                        style={{
+                            fontSize: 12,
+                            letterSpacing: "0.18em",
+                            textTransform: "uppercase",
+                            color: "#9ca3af",
+                            marginTop: 10,
+                        }}
+                    >
+                        {t.languageNote}
+                    </p>
                 </div>
 
-                <div className="case-shelves">
-                    {rows.map((row, rowIdx) => {
-                        const meta = shelfMeta[rowIdx];
+                {languageCases.length === 0 && (
+                    <p
+                        style={{
+                            fontFamily: "var(--font-inter)",
+                            fontSize: 15,
+                            color: "#555",
+                        }}
+                    >
+                        {t.emptyState}
+                    </p>
+                )}
 
-                        return (
-                            <div className="case-shelf" key={rowIdx}>
-                                {meta && (
-                                    <header className="case-shelf-header">
-                                        <p className="case-shelf-label">
-                                            {meta.label}
-                                        </p>
-                                        <h2 className="case-shelf-title">
-                                            {meta.title}
-                                        </h2>
-                                        <p className="case-shelf-intro">
-                                            {meta.intro}
-                                        </p>
-                                    </header>
-                                )}
+                {languageCases.length > 0 && (
+                    <div className="case-shelves">
+                        {rows.map((row, rowIdx) => {
+                            const meta = SHELF_META[rowIdx];
 
-                                <div className="case-shelf-line" />
+                            return (
+                                <div className="case-shelf" key={rowIdx}>
+                                    {meta && (
+                                        <header className="case-shelf-header">
+                                            <p className="case-shelf-label">
+                                                {meta.label[langKey]}
+                                            </p>
+                                            <h2 className="case-shelf-title">
+                                                {meta.title[langKey]}
+                                            </h2>
+                                            <p className="case-shelf-intro">
+                                                {meta.intro[langKey]}
+                                            </p>
+                                        </header>
+                                    )}
 
-                                <div className="case-books-row">
-                                    {row.map((card, colIdx) => {
-                                        if (!card) return null;
+                                    <div className="case-shelf-line" />
 
-                                        if (card.type === "real") {
-                                            const c = card.data;
-                                            const metaBits = [
-                                                c.tag || "Multi-sector",
-                                                c.meta,
-                                            ].filter(Boolean);
+                                    <div className="case-books-row">
+                                        {row.map((card, colIdx) => {
+                                            if (!card) return null;
 
+                                            if (card.type === "real") {
+                                                const c = card.data;
+                                                const metaBits = [
+                                                    c.tag ||
+                                                    t.multiSector,
+                                                    c.meta,
+                                                ].filter(Boolean);
+
+                                                return (
+                                                    <article
+                                                        className="book-card"
+                                                        key={c._id}
+                                                    >
+                                                        <div className="book-spine" />
+                                                        <div className="book-content">
+                                                            {metaBits.length >
+                                                                0 && (
+                                                                    <p className="book-tag">
+                                                                        {metaBits.join(
+                                                                            " · "
+                                                                        )}
+                                                                    </p>
+                                                                )}
+                                                            <h3 className="book-title">
+                                                                {c.title}
+                                                            </h3>
+                                                            {c.summary && (
+                                                                <p className="book-summary">
+                                                                    {c.summary}
+                                                                </p>
+                                                            )}
+                                                            {c.slug?.current && (
+                                                                <Link
+                                                                    href={`/case-studies/${c.slug.current}`}
+                                                                    className="fancy fancy-small book-link"
+                                                                >
+                                                                    <span className="top-key"></span>
+                                                                    <span className="text">
+                                                                        {
+                                                                            t.readCta
+                                                                        }
+                                                                    </span>
+                                                                    <span className="bottom-key-1"></span>
+                                                                    <span className="bottom-key-2"></span>
+                                                                </Link>
+                                                            )}
+                                                        </div>
+                                                    </article>
+                                                );
+                                            }
+
+                                            // Placeholder / Coming soon
                                             return (
                                                 <article
-                                                    className="book-card"
-                                                    key={c._id}
+                                                    className="book-card book-placeholder"
+                                                    key={`placeholder-${rowIdx}-${colIdx}`}
                                                 >
                                                     <div className="book-spine" />
                                                     <div className="book-content">
-                                                        {metaBits.length > 0 && (
-                                                            <p className="book-tag">
-                                                                {metaBits.join(
-                                                                    " · "
-                                                                )}
-                                                            </p>
-                                                        )}
-                                                        <h3 className="book-title">
-                                                            {c.title}
-                                                        </h3>
-                                                        {c.summary && (
-                                                            <p className="book-summary">
-                                                                {c.summary}
-                                                            </p>
-                                                        )}
-                                                        {c.slug?.current && (
-                                                            <Link
-                                                                href={`/case-studies/${c.slug.current}`}
-                                                                className="fancy fancy-small book-link"
-                                                            >
-                                                                <span className="top-key"></span>
-                                                                <span className="text">
-                                                                    {
-                                                                        t.readCase
-                                                                    }
-                                                                </span>
-                                                                <span className="bottom-key-1"></span>
-                                                                <span className="bottom-key-2"></span>
-                                                            </Link>
-                                                        )}
+                                                        <p className="book-coming-soon">
+                                                            {langKey === "en"
+                                                                ? "Coming soon"
+                                                                : "À venir"}
+                                                        </p>
+                                                        <p className="book-coming-note">
+                                                            {langKey === "en"
+                                                                ? "A future Bramers case study will appear here."
+                                                                : "Une future étude de cas Bramers apparaîtra ici."}
+                                                        </p>
                                                     </div>
                                                 </article>
                                             );
-                                        }
-
-                                        // Placeholder / Coming soon
-                                        return (
-                                            <article
-                                                className="book-card book-placeholder"
-                                                key={`placeholder-${rowIdx}-${colIdx}`}
-                                            >
-                                                <div className="book-spine" />
-                                                <div className="book-content">
-                                                    <p className="book-coming-soon">
-                                                        {t.placeholderTitle}
-                                                    </p>
-                                                    <p className="book-coming-note">
-                                                        {t.placeholderText}
-                                                    </p>
-                                                </div>
-                                            </article>
-                                        );
-                                    })}
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </section>
         </main>
     );
