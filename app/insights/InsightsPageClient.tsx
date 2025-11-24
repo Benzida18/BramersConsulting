@@ -1,7 +1,7 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
@@ -115,12 +115,17 @@ const SECTIONS = [
 
 const MAX_PER_ROW = 3;
 
+/* ---------- Card union types ---------- */
+type RealCard = { type: "real"; post: InsightCardData };
+type PlaceholderCardType = { type: "placeholder"; id: string };
+type Card = RealCard | PlaceholderCardType;
+
 /* ---------- Scroll-in animation wrapper ---------- */
 function RevealOnScroll({
                             children,
                             delay = 0,
                         }: {
-    children: React.ReactNode;
+    children: ReactNode;
     delay?: number;
 }) {
     const ref = useRef<HTMLDivElement | null>(null);
@@ -293,12 +298,12 @@ export default function InsightsPageClient({
                             langKey
                         );
 
-                        const realCards = sectionPosts.map((post) => ({
-                            type: "real" as const,
+                        const realCards: RealCard[] = sectionPosts.map((post) => ({
+                            type: "real",
                             post,
                         }));
 
-                        let cards = [...realCards];
+                        let cards: Card[] = [...realCards];
 
                         const remainder = cards.length % MAX_PER_ROW;
                         let placeholdersToAdd =
@@ -310,12 +315,12 @@ export default function InsightsPageClient({
 
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
-                                type: "placeholder" as const,
+                                type: "placeholder",
                                 id: `ph-${section.id}-${i}`,
                             });
                         }
 
-                        const rows: typeof cards[] = [];
+                        const rows: Card[][] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
                         }
@@ -349,9 +354,7 @@ export default function InsightsPageClient({
                                                 if (card.type === "real") {
                                                     return (
                                                         <InsightCard
-                                                            key={
-                                                                card.post._id
-                                                            }
+                                                            key={card.post._id}
                                                             post={card.post}
                                                             fallback={
                                                                 t.cardExcerptFallback
@@ -369,12 +372,10 @@ export default function InsightsPageClient({
                                                     );
                                                 }
 
+                                                // Placeholder
                                                 return (
                                                     <PlaceholderCard
-                                                        key={
-                                                            card.id ||
-                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
-                                                        }
+                                                        key={`placeholder-${section.id}-${rowIdx}-${colIdx}`}
                                                     />
                                                 );
                                             })}
@@ -510,7 +511,7 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) onClose();
     };
 
