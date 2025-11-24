@@ -484,7 +484,7 @@ function PlaceholderCard({
     );
 }
 
-/* ---------- MODAL (GLASS BLUR BACKGROUND) ---------- */
+/* ---------- MODAL (GLASS BLUR BACKGROUND, BETTER TYPOGRAPHY) ---------- */
 function InsightModal({
                           post,
                           onClose,
@@ -494,6 +494,15 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
+    // Lock background scroll while modal is open
+    useEffect(() => {
+        const originalOverflow = window.getComputedStyle(document.body).overflow;
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = originalOverflow;
+        };
+    }, []);
+
     const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) onClose();
     };
@@ -520,7 +529,11 @@ function InsightModal({
         >
             <div className="insight-modal-panel">
                 <header className="insight-modal-header">
-                    <h2>{post.title}</h2>
+                    <div>
+                        <p className="insight-modal-kicker">External article</p>
+                        <h2>{post.title}</h2>
+                    </div>
+
                     <button
                         type="button"
                         className="insight-modal-close"
@@ -531,14 +544,16 @@ function InsightModal({
                 </header>
 
                 <div className="insight-modal-body">
-                    {Array.isArray(post.body) && post.body.length > 0 ? (
-                        <PortableText
-                            value={post.body}
-                            components={portableComponents}
-                        />
-                    ) : (
-                        <p>{post.excerpt}</p>
-                    )}
+                    <div className="insight-modal-body-inner">
+                        {Array.isArray(post.body) && post.body.length > 0 ? (
+                            <PortableText
+                                value={post.body}
+                                components={portableComponents}
+                            />
+                        ) : (
+                            <p>{post.excerpt}</p>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
