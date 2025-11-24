@@ -7,7 +7,7 @@ import { useLanguage } from "@/components/LanguageContext";
 const copy = {
     en: {
         kicker: "HOW WE WORK",
-        headingLine1: "Practical, partner-led advisory",
+        headingLine1: "Practical, Partner Led Advisory",
         headingLine2: "for cross-border decisions.",
         body: "Our work combines local insight, transaction experience and institutional know-how. We sit between investors, operators and regulators to move projects forward with clarity and discipline.",
         steps: [

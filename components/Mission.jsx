@@ -8,81 +8,73 @@ export default function Mission() {
     // ===== TEXT COPY (EN + FR) =====
     const copy = {
         en: {
-            kicker: "Cross-regional advisory",
+            kicker: "Work between the UK and Africa",
             heading: (
                 <>
-                    Strategy, transactions and
-                    <br />
-                    execution between the UK
-                    <br />
-                    &amp; Africa.
+                    Practical support for projects between the UK, & West Africa.
                 </>
             ),
             body:
-                "Bramers Consulting supports corporates, investors and institutions " +
-                "navigating multi-market growth, with a focus on anglophone and " +
-                "francophone Africa.",
+                "Bramers is a UK based consulting practice with roots in Côte d’Ivoire. " +
+                "We help people and businesses who want to move products, services or " +
+                "investment between the UK and African markets, starting with Côte d’Ivoire.",
             services: [
                 {
-                    title: "Market Entry & Expansion",
+                    title: "Market Understanding & Entry",
                     blurb:
-                        "From feasibility through execution, we help organisations structure their entry into UK and African markets with clarity and precision.",
+                        "We help you understand how the UK and Ivorian markets work before you commit time and money.",
                     detail:
-                        "We support leadership teams on market sizing, route-to-market, partner selection and regulatory positioning, so expansion decisions are made with confidence.",
+                        "Bramers works with you to clarify your idea, look at basic market demand, competition, pricing and key rules. The goal is simple: give you a clearer view so you can decide if, when and how to enter a market in a realistic way.",
                 },
                 {
-                    title: "Deals, Capital & Partnerships",
+                    title: "Trade, Products & Logistics",
                     blurb:
-                        "Support for transactions, JV structures and strategic alliances with regulators, lenders and institutional partners.",
+                        "Support with the practical steps of moving products between the UK and African markets.",
                     detail:
-                        "Our team advises on deal structuring, investor conversations and cross-border capital flows, ensuring incentives are aligned across all parties.",
+                        "We help you think through suppliers, routes, costs and basic paperwork for shipping between the UK and countries like Côte d’Ivoire. Bramers does not replace specialist legal, tax or customs advice, but we help you ask the right questions and prepare better conversations with those experts.",
                 },
                 {
-                    title: "Operational Excellence & Governance",
+                    title: "Business Support & Partnerships",
                     blurb:
-                        "We work with leadership teams to strengthen governance, operating models and cross-border ways of working.",
+                        "Helping you structure your project and speak the language of both the UK and African sides.",
                     detail:
-                        "We help institutions modernise processes, clarify decision rights and embed governance that stands up to international scrutiny.",
+                        "We work with you to organise your project, prepare clear summaries for banks, partners or clients, and identify the type of local professionals you may need. Bramers cannot promise funding or approvals, but we help you present your case more clearly and build more credible relationships on both sides.",
                 },
             ],
         },
 
         fr: {
-            kicker: "Conseil transrégional",
+            kicker: "Travail Entre Le Royaume-Uni Et l'Afrique",
             heading: (
                 <>
-                    Stratégie, transactions et
-                    <br />
-                    exécution entre le Royaume-Uni
-                    <br />
-                    et l&apos;Afrique.
+                    Un soutien pratique pour les projets entre le Royaume-Uni et l'Afrique de l'Ouest.
                 </>
             ),
             body:
-                "Bramers Consulting accompagne les entreprises, investisseurs et institutions " +
-                "dans leur croissance multi-marchés, avec un focus sur l’Afrique anglophone " +
-                "et francophone.",
+                "Bramers est un cabinet de conseil basé au Royaume-Uni, avec des racines en Côte d'Ivoire. " +
+                "Nous aidons les personnes et les entreprises qui souhaitent déplacer des produits, des services " +
+                "ou des investissements entre le Royaume-Uni et les marchés africains, en commençant par la Côte d'Ivoire.",
             services: [
                 {
-                    title: "Entrée sur le marché & expansion",
+                    title: "Compréhension Du Marché & Entrée",
                     blurb:
-                        "De l’étude de faisabilité à l’exécution, nous aidons les organisations à structurer leur entrée sur les marchés britanniques et africains avec clarté et rigueur.",
+                        "Nous vous aidons à comprendre comment fonctionnent les marchés britannique et ivoirien avant d'y consacrer du temps et de l'argent.",
                     detail:
-                        "Nous accompagnons les équipes dirigeantes sur la taille de marché, les routes d’accès, le choix de partenaires et le positionnement réglementaire afin que les décisions d’expansion soient prises en toute confiance.",
+                        "Bramers travaille avec vous pour clarifier votre idée, analyser la demande de base, la concurrence, les niveaux de prix et les principales règles. L'objectif est simple : vous donner une vision plus claire afin que vous puissiez décider si, quand et comment entrer sur un marché de manière réaliste.",
                 },
                 {
-                    title: "Transactions, capitaux & partenariats",
+                    title: "Commerce, Produits & Logistique",
                     blurb:
-                        "Accompagnement sur les transactions, les coentreprises et les alliances stratégiques avec les régulateurs, prêteurs et partenaires institutionnels.",
+                        "Un accompagnement sur les étapes pratiques pour faire circuler des produits entre le Royaume-Uni et les marchés africains.",
                     detail:
-                        "Notre équipe conseille sur la structuration des deals, les échanges avec les investisseurs et les flux de capitaux transfrontaliers, en veillant à l’alignement des intérêts de chaque partie.",
+                        "Nous vous aidons à réfléchir aux fournisseurs, aux routes, aux coûts et aux démarches administratives de base pour l'expédition entre le Royaume-Uni et des pays comme la Côte d'Ivoire. Bramers ne remplace pas les conseils juridiques, fiscaux ou douaniers spécialisés, mais nous vous aidons à poser les bonnes questions et à mieux préparer vos échanges avec ces experts.",
                 },
                 {
-                    title: "Excellence opérationnelle & gouvernance",
+                    title: "Appui aux Entreprises & Partenariats",
                     blurb:
-                        "Nous travaillons avec les directions pour renforcer la gouvernance, les modèles opérationnels et les modes de collaboration transfrontaliers.",
+                        "Nous vous aidons à structurer votre projet et à parler le langage des deux parties, britannique et africaine.",
                     detail:
-                        "Nous aidons les institutions à moderniser leurs processus, clarifier les droits de décision et ancrer une gouvernance conforme aux attentes internationales.",
+                        "Nous travaillons avec vous pour organiser votre projet, préparer des synthèses claires pour les banques, partenaires ou clients, et identifier les types de professionnels locaux dont vous pourriez avoir besoin. Bramers ne peut pas promettre de financements ni d'autorisations, mais nous vous aidons à présenter votre dossier plus clairement et à créer des relations plus crédibles des deux côtés.",
                 },
             ],
         },

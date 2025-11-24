@@ -71,24 +71,24 @@ const copy = {
         kicker: "Focus sectoriel",
         heading: (
             <>
-                Là où le capital et l’expertise
+                Là où le capital et l'expertise
                 <br />
                 Royaume-Uni–Afrique sont les plus actifs.
             </>
         ),
-        lead: "Nous accompagnons des organisations dans les secteurs où le commerce, l’investissement et la coopération institutionnelle façonnent la prochaine décennie de croissance.",
+        lead: "Nous accompagnons des organisations dans les secteurs où le commerce, l'investissement et la coopération institutionnelle façonnent la prochaine décennie de croissance.",
         sectors: [
             {
                 title: "Agro-industrie",
                 href: "/industries/agribusiness",
                 summary:
-                    "Des chaînes de valeur, de l’exploitation agricole aux marchés d’exportation.",
+                    "Des chaînes de valeur, de l'exploitation agricole aux marchés d'exportation.",
             },
             {
                 title: "Finance",
                 href: "/industries/finance",
                 summary:
-                    "Banques, fintechs, sociétés de gestion d’actifs et investisseurs à impact.",
+                    "Banques, fintechs, sociétés de gestion d'actifs et investisseurs à impact.",
             },
             {
                 title: "Immobilier et infrastructures",
@@ -106,13 +106,13 @@ const copy = {
                 title: "Commerce international et logistique",
                 href: "/industries/international-trade",
                 summary:
-                    "Corridors commerciaux, ports et chaînes d’approvisionnement transfrontalières.",
+                    "Corridors commerciaux, ports et chaînes d'approvisionnement transfrontalières.",
             },
             {
                 title: "Conseil sportif et football",
                 href: "/industries/football-advisory",
                 summary:
-                    "Clubs, académies et investisseurs de l’écosystème du football.",
+                    "Clubs, académies et investisseurs de l'écosystème du football.",
             },
             {
                 title: "Coaching et formation",

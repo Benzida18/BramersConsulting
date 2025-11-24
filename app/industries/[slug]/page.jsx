@@ -1,4 +1,3 @@
-// app/industries/[slug]/page.jsx
 "use client";
 
 import { useLanguage } from "@/components/LanguageContext";
@@ -9,297 +8,584 @@ export const dynamic = "force-dynamic";
 const LABELS = {
     en: {
         sectorOverview: "Sector overview",
-        advisoryFor: "Advisory for leaders in",
+        advisoryFor: "Support for people working in",
         typicalWork: "Typical work in this sector",
-        whereHelp: "Where we typically help",
+        whereHelp: "Where we usually help",
     },
     fr: {
-        sectorOverview: "Vue d’ensemble du secteur",
-        advisoryFor: "Conseil pour les dirigeants dans le secteur",
+        sectorOverview: "Vue d'ensemble du secteur",
+        advisoryFor: "Accompagnement pour les acteurs du secteur",
         typicalWork: "Types de missions dans ce secteur",
-        whereHelp: "Où nous intervenons le plus souvent",
+        whereHelp: "Là où nous intervenons le plus souvent",
     },
 };
 
 // ---------- CONFIG FOR ALL 9 INDUSTRIES ----------
 const INDUSTRY_CONFIG = {
     agribusiness: {
-        title: "Agribusiness",
-        tagline: "Sustainable value chains from farm to export markets.",
         video: "/videos/agribusiness.mp4",
         image: "/images/agribusiness.jpg",
+
+        title: "Agribusiness",
+        title_fr: "Agro-industrie",
+
+        tagline: "Practical support along the value chain, from farm to export.",
+        tagline_fr:
+            "Un appui concret le long de la chaîne de valeur, de l'exploitation agricole jusqu'à l'export.",
+
         overview:
-            "At Bramers Consulting, we work with producers, traders and sector institutions to professionalise agribusiness value chains. We support organisations in building resilient supply networks, improving yield and quality, and connecting African producers to UK and global demand.",
+            "Bramers works with farmers, cooperatives, traders and small processors who want to connect local production with UK and African demand. We help clarify where the value sits, what buyers expect, and the basic steps needed to move from harvest to market.",
+        overview_fr:
+            "Bramers accompagne des agriculteurs, coopératives, commerçants et petits transformateurs qui souhaitent connecter la production locale à la demande au Royaume-Uni et en Afrique. Nous aidons à clarifier où se situe la valeur, ce qu'attendent les acheteurs et les étapes essentielles pour passer de la récolte au marché.",
+
         detailPoints: [
-            "Mapping end-to-end value chains and identifying where margin, leakage and strategic risk sit.",
-            "Designing commercial models that balance smallholder livelihoods with investor returns and export standards.",
-            "Supporting clients to meet traceability, sustainability and certification requirements demanded by international buyers.",
+            "Helping farmers and intermediaries understand quality, pricing and contract expectations from buyers.",
+            "Clarifying the roles of cooperatives, traders and logistics partners along the value chain.",
+            "Supporting basic planning around volumes, storage, simple documentation and first export steps.",
         ],
+        detailPoints_fr: [
+            "Aider les producteurs et intermédiaires à comprendre les attentes des acheteurs en matière de qualité, de prix et de contrats.",
+            "Clarifier le rôle des coopératives, commerçants et partenaires logistiques dans la chaîne de valeur.",
+            "Accompagner la planification de base autour des volumes, du stockage, de la documentation simple et des premiers pas vers l'export.",
+        ],
+
         pillars: [
             {
-                title: "Market Strategy & Positioning",
-                desc: "Clarifying demand across UK–Africa corridors, defining your competitive edge, and prioritising the markets, partners and channels that matter most.",
+                title: "Understanding demand",
+                desc: "Making clear who buys what, at which quality, and on which basic commercial terms between the UK and West Africa.",
             },
             {
-                title: "Institutional & Regulatory Alignment",
-                desc: "Working with ministries, regulators and sector bodies to align incentives, frameworks and programmes that support long-term agribusiness growth.",
+                title: "Structuring the value chain",
+                desc: "Helping clients think through how farmers, cooperatives, traders and buyers work together in a simple, realistic way.",
             },
             {
-                title: "International Partnership Development",
-                desc: "Structuring partnerships with off-takers, financiers and development partners while addressing ESG, climate and food-security risks.",
+                title: "First steps towards export",
+                desc: "Supporting early conversations on logistics, documentation and partners, without replacing customs or legal specialists.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Comprendre la demande",
+                desc: "Rendre plus lisible qui achète quoi, à quel niveau de qualité et sur quelles bases commerciales entre le Royaume-Uni et l'Afrique de l'Ouest.",
+            },
+            {
+                title: "Structurer la chaîne de valeur",
+                desc: "Aider à réfléchir au rôle des agriculteurs, coopératives, commerçants et acheteurs de manière simple et réaliste.",
+            },
+            {
+                title: "Premiers pas vers l'export",
+                desc: "Accompagner les premières réflexions sur la logistique, la documentation et les partenaires, sans remplacer les spécialistes douaniers ou juridiques.",
+            },
+        ],
+
         quote:
-            "In agriculture, the real value is created when small productivity gains are scaled across millions of people.",
+            "In agriculture, small improvements become powerful when they are repeated year after year along the whole chain.",
+        quote_fr:
+            "En agriculture, de petits progrès deviennent puissants lorsqu'ils se répètent année après année sur l'ensemble de la chaîne.",
         quoteAuthor: "Strive Masiyiwa",
     },
 
     "ai-strategy": {
-        title: "AI Strategy",
-        tagline: "Applied AI and data for responsible growth.",
         video: "/videos/ai-strategy.mp4",
         image: "/images/ai-strategy.jpg",
+
+        title: "AI Strategy",
+        title_fr: "Stratégie IA",
+
+        tagline: "Simple, practical AI uses — not buzzwords.",
+        tagline_fr: "Des usages IA simples et concrets, loin des mots à la mode.",
+
         overview:
-            "We help boards and leadership teams move from AI buzzwords to clear, value-creating use cases. Our work focuses on responsible deployment, practical data foundations and change programmes that bring people and technology together.",
+            "We help organisations move from vague ideas about AI to a few practical use cases that fit their size, data and budget. The focus is on understanding what problem you want to solve, what data you actually have, and what is realistic for you today.",
+        overview_fr:
+            "Nous aidons les organisations à passer d'idées vagues sur l'IA à quelques cas d'usage concrets adaptés à leur taille, leurs données et leur budget. L'objectif est de clarifier le problème à résoudre, les données réellement disponibles et ce qui est réaliste aujourd'hui pour vous.",
+
         detailPoints: [
-            "Identifying high-impact AI opportunities across operations, customer experience and risk management.",
-            "Designing data, governance and model-risk frameworks that meet regulatory and ethical expectations.",
-            "Supporting pilots, vendor selection and scale-up of AI initiatives across multi-country operations.",
+            "Clarifying where AI or simple analytics could save time, reduce errors or improve basic decision-making.",
+            "Helping you prioritise a small number of use cases instead of chasing every new tool.",
+            "Preparing you to speak with technical or vendor partners in a clear, structured way.",
         ],
+        detailPoints_fr: [
+            "Clarifier où l'IA ou une simple analyse de données peuvent faire gagner du temps, réduire les erreurs ou améliorer des décisions de base.",
+            "Aider à prioriser un petit nombre de cas d'usage au lieu de courir après chaque nouvel outil.",
+            "Préparer vos échanges avec des partenaires techniques ou des fournisseurs de manière claire et structurée.",
+        ],
+
         pillars: [
             {
-                title: "AI Roadmapping & Use-Case Design",
-                desc: "Clarifying where AI can unlock measurable value in your organisation and sequencing initiatives to match your data and talent maturity.",
+                title: "From idea to use case",
+                desc: "Translating broad AI interest into 2–3 specific questions or processes where technology can genuinely help.",
             },
             {
-                title: "Data & Governance Foundations",
-                desc: "Defining the policies, controls and operating models needed for responsible AI deployment across geographies and business units.",
+                title: "Data reality check",
+                desc: "Reviewing what information you actually collect today and what would need to change before doing more advanced work.",
             },
             {
-                title: "Change, Talent & Delivery",
-                desc: "Supporting leadership, product and engineering teams to embed AI into day-to-day decision-making and frontline processes.",
+                title: "Talking to the right partners",
+                desc: "Helping you prepare simple briefs and questions so that discussions with AI vendors or developers are more productive.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "De l'idée au cas d'usage",
+                desc: "Transformer un intérêt général pour l'IA en 2 ou 3 questions ou processus précis où la technologie peut vraiment aider.",
+            },
+            {
+                title: "Vérifier la réalité des données",
+                desc: "Revoir les informations que vous collectez déjà et ce qu'il faudrait améliorer avant d'aller vers des solutions plus avancées.",
+            },
+            {
+                title: "Parler aux bons partenaires",
+                desc: "Vous aider à préparer des cahiers des charges simples et des questions claires pour rendre les échanges avec les prestataires IA plus efficaces.",
+            },
+        ],
+
         quote:
-            "Without data, you’re just another person with an opinion. With discipline, data becomes an unfair advantage.",
-        quoteAuthor: "W. Edwards Deming",
+            "Good technology projects start with a clear problem, not with a tool.",
+        quote_fr:
+            "Les bons projets technologiques commencent par un problème clair, pas par un outil.",
+        quoteAuthor: "Inspired by W. Edwards Deming",
     },
 
     "catering-hospitality": {
-        title: "Hospitality & Catering",
-        tagline: "Service excellence across hotels, restaurants and leisure.",
         video: "/videos/catering-hospitality.mp4",
         image: "/images/catering-hospitality.jpg",
+
+        title: "Hospitality & Catering",
+        title_fr: "Hôtellerie et restauration",
+
+        tagline: "Helping operators improve concept, service and basics.",
+        tagline_fr:
+            "Aider les opérateurs à clarifier le concept, le service et les fondamentaux.",
+
         overview:
-            "We advise hospitality groups, independent operators and investors on concept strategy, guest experience and operational performance. Our work spans both mature UK markets and fast-growing African destinations.",
+            "Bramers supports hotel, restaurant and catering operators who work between the UK and African markets or draw on both cultures. We focus on simple but important questions: who is your guest, what do they expect, and how do you make the numbers work.",
+        overview_fr:
+            "Bramers accompagne des hôtels, restaurants et services de restauration qui opèrent entre le Royaume-Uni et l'Afrique ou s'inspirent des deux cultures. Nous travaillons sur des questions simples mais clés : qui est votre client, qu'attend-il et comment faire fonctionner l'économie du lieu.",
+
         detailPoints: [
-            "Shaping concepts and formats that match evolving guest expectations and local demand.",
-            "Improving unit economics through menu engineering, labour optimisation and procurement discipline.",
-            "Supporting operators and investors with expansion, franchising and partnership decisions.",
+            "Clarifying your concept and target guest for local, diaspora or international audiences.",
+            "Looking at menu, pricing and basic cost structure to see where small improvements are possible.",
+            "Thinking through expansion, partnerships or a first site in the UK or West Africa.",
         ],
+        detailPoints_fr: [
+            "Clarifier votre concept et votre clientèle cible, qu'elle soit locale, issue de la diaspora ou internationale.",
+            "Examiner le menu, les prix et les coûts de base pour identifier des pistes d'amélioration.",
+            "Réfléchir à l'expansion, aux partenariats ou à une première implantation au Royaume-Uni ou en Afrique de l'Ouest.",
+        ],
+
         pillars: [
             {
-                title: "Concept & Market Strategy",
-                desc: "Aligning brand, format and price-point with local demand, tourist flows and competitive dynamics.",
+                title: "Concept and positioning",
+                desc: "Helping you express clearly what your venue stands for and who it is really built for.",
             },
             {
-                title: "Guest Experience & Operations",
-                desc: "Redesigning service journeys, back-of-house processes and performance dashboards to raise quality and profitability.",
+                title: "Economics and operations",
+                desc: "Reviewing basic costs, pricing and simple processes that shape service and margin.",
             },
             {
-                title: "Growth, Partnerships & Franchising",
-                desc: "Advising on new site decisions, franchise structures and international brand partnerships across UK–Africa corridors.",
+                title: "Growth and new locations",
+                desc: "Supporting early thinking around new sites, partnerships or cross-border concepts.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Concept et positionnement",
+                desc: "Vous aider à exprimer clairement l'identité de votre établissement et le public auquel il s'adresse réellement.",
+            },
+            {
+                title: "Économie et opérations",
+                desc: "Revoir les coûts de base, la tarification et certains processus clés qui influencent le service et la marge.",
+            },
+            {
+                title: "Croissance et nouvelles implantations",
+                desc: "Accompagner vos premières réflexions sur de nouveaux sites, des partenariats ou des concepts entre plusieurs pays.",
+            },
+        ],
+
         quote:
-            "In hospitality, every detail is a decision about how seriously you take your guest.",
-        quoteAuthor: "Danny Meyer",
+            "In hospitality, consistency on the basics matters more than perfection once in a while.",
+        quote_fr:
+            "Dans l'hôtellerie-restauration, la régularité sur les fondamentaux compte plus que la perfection ponctuelle.",
+        quoteAuthor: "Adapted from industry practice",
     },
 
     "coaching-training": {
-        title: "Coaching & Leadership Development",
-        tagline: "Building leaders and teams fit for cross-border growth.",
         video: "/videos/coaching-training.mp4",
         image: "/images/coaching-training.jpg",
+
+        title: "Coaching & Leadership Development",
+        title_fr: "Coaching et développement du leadership",
+
+        tagline: "Support for leaders and teams working across countries.",
+        tagline_fr:
+            "Un appui pour des dirigeants et équipes qui travaillent entre plusieurs pays.",
+
         overview:
-            "We support executives, founder-led businesses and institutions to develop leadership capability that matches their ambitions. Our work blends coaching, advisory and practical tools that help teams execute with clarity.",
+            "We work with owners, managers and teams who are growing businesses across the UK and African markets. The focus is on practical leadership questions: roles, decisions, communication and how to keep people aligned when they are not in the same place.",
+        overview_fr:
+            "Nous accompagnons des dirigeants, responsables et équipes qui développent des activités entre le Royaume-Uni et l'Afrique. Nous nous concentrons sur des questions de leadership très concrètes : rôles, décisions, communication et alignement lorsque tout le monde n'est pas au même endroit.",
+
         detailPoints: [
-            "Working with CEOs and senior leaders on mandate clarity, decision-making and stakeholder management.",
-            "Designing leadership programmes for high-potential talent across multiple markets.",
-            "Embedding performance rituals, feedback loops and simple tools that strengthen accountability.",
+            "Helping leaders clarify their role and the few decisions that really sit with them.",
+            "Supporting managers in giving clearer direction and feedback to their teams.",
+            "Designing simple routines that make cross-country collaboration easier.",
         ],
+        detailPoints_fr: [
+            "Aider les dirigeants à clarifier leur rôle et les quelques décisions qui leur reviennent vraiment.",
+            "Accompagner les managers pour donner des consignes et des retours plus clairs à leurs équipes.",
+            "Mettre en place des routines simples pour faciliter le travail entre plusieurs pays.",
+        ],
+
         pillars: [
             {
-                title: "Executive & Team Coaching",
-                desc: "One-to-one and small-group coaching focused on the real decisions leaders are making across markets.",
+                title: "One-to-one and small-group coaching",
+                desc: "Creating space for leaders to think through real situations and choose next steps with more clarity.",
             },
             {
-                title: "Leadership Programmes",
-                desc: "Designing and delivering tailored programmes that build capability in strategy, execution and collaboration.",
+                title: "Practical leadership skills",
+                desc: "Working on communication, delegation and follow-up in the context of your actual business.",
             },
             {
-                title: "Culture & Ways of Working",
-                desc: "Helping organisations define clear behaviours, meeting rhythms and decision rights that scale with growth.",
+                title: "Ways of working across borders",
+                desc: "Helping teams agree simple habits for meetings, information sharing and accountability between the UK and Africa.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Coaching individuel et en petit groupe",
+                desc: "Offrir aux dirigeants un espace pour réfléchir à des situations réelles et choisir des prochaines étapes plus claires.",
+            },
+            {
+                title: "Compétences de leadership pratiques",
+                desc: "Travailler la communication, la délégation et le suivi dans le contexte concret de votre activité.",
+            },
+            {
+                title: "Modes de fonctionnement transfrontaliers",
+                desc: "Aider les équipes à se mettre d'accord sur des habitudes simples de réunions, de partage d'information et de responsabilité entre le Royaume-Uni et l'Afrique.",
+            },
+        ],
+
         quote:
-            "Before you are a leader, success is about growing yourself. When you become a leader, success is about growing others.",
-        quoteAuthor: "Jack Welch",
+            "Leadership shows up in the small, repeated choices you make with your team every week.",
+        quote_fr:
+            "Le leadership se voit dans les petits choix répétés que vous faites avec votre équipe chaque semaine.",
+        quoteAuthor: "Bramers perspective",
     },
 
     finance: {
-        title: "Financial Services",
-        tagline: "Capital, risk and growth across UK–Africa markets.",
         video: "/videos/finance.mp4",
         image: "/images/finance.jpg",
+
+        title: "Financial Services",
+        title_fr: "Services financiers",
+
+        tagline: "Helping financial actors serve real businesses and people.",
+        tagline_fr:
+            "Aider les acteurs financiers à mieux servir les entreprises et les personnes.",
+
         overview:
-            "We advise banks, fintechs, asset managers and investment platforms on strategy, product, partnerships and regulation. Our work supports institutions in navigating competition, technology change and cross-border capital flows.",
+            "Bramers supports banks, smaller financial institutions and fintechs that work between the UK and African markets. We focus on simple questions: which clients are you really serving, what problems are you solving, and how can products and partnerships reflect that.",
+        overview_fr:
+            "Bramers accompagne des banques, institutions financières de moindre taille et fintechs qui opèrent entre le Royaume-Uni et l'Afrique. Nous travaillons sur des questions simples : quels clients servez-vous réellement, quels problèmes résolvez-vous et comment vos produits et partenariats peuvent mieux le refléter.",
+
         detailPoints: [
-            "Clarifying portfolio priorities across retail, SME, corporate and institutional segments.",
-            "Designing products, pricing and partnership models for target client segments.",
-            "Supporting regulatory engagement and stakeholder communications for strategic initiatives.",
+            "Clarifying priority segments such as SMEs, traders, professionals or diaspora clients.",
+            "Thinking through basic product features, pricing logic and partner roles.",
+            "Helping prepare clearer narratives for regulators, investors or development partners.",
         ],
+        detailPoints_fr: [
+            "Clarifier les segments prioritaires, par exemple les PME, commerçants, professionnels ou clients de la diaspora.",
+            "Réfléchir aux caractéristiques essentielles des produits, à la logique de tarification et au rôle des partenaires.",
+            "Aider à préparer des messages plus clairs pour les régulateurs, investisseurs ou bailleurs de développement.",
+        ],
+
         pillars: [
             {
-                title: "Strategy & Portfolio Choices",
-                desc: "Helping leadership teams make clear, data-driven decisions on where to compete and how to allocate scarce capital and talent.",
+                title: "Client and segment clarity",
+                desc: "Making it clear which customers you focus on and what you want to be known for.",
             },
             {
-                title: "Product, Digital & Partnerships",
-                desc: "Shaping offerings, journeys and alliances that improve client economics and widen distribution.",
+                title: "Products and partnerships",
+                desc: "Supporting early thinking on offers, channels and collaboration with other institutions.",
             },
             {
-                title: "Risk, Regulation & Governance",
-                desc: "Bringing together risk, legal and business teams to deliver growth within robust control and governance frameworks.",
+                title: "Telling your story",
+                desc: "Helping you prepare simple materials that explain your strategy to key stakeholders.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Clarté sur les clients et segments",
+                desc: "Rendre explicite les clients que vous ciblez et l'image que vous souhaitez construire.",
+            },
+            {
+                title: "Offres et partenariats",
+                desc: "Accompagner les premières réflexions sur vos produits, vos canaux et la collaboration avec d'autres institutions.",
+            },
+            {
+                title: "Raconter votre projet",
+                desc: "Aider à préparer des supports simples qui expliquent votre stratégie aux parties prenantes clés.",
+            },
+        ],
+
         quote:
-            "The most important investment you can make is in building a disciplined framework for decisions.",
-        quoteAuthor: "Warren Buffett",
+            "In finance, trust grows when people understand clearly who you serve and how you make decisions.",
+        quote_fr:
+            "Dans la finance, la confiance grandit lorsque l'on comprend clairement qui vous servez et comment vous prenez vos décisions.",
+        quoteAuthor: "Bramers perspective",
     },
 
     "football-advisory": {
-        title: "Sports & Football Advisory",
-        tagline: "Performance, governance and long-term value in football.",
         video: "/videos/football-advisory.mp4",
         image: "/images/football-advisory.jpg",
+
+        title: "Sports & Football Advisory",
+        title_fr: "Conseil sportif et football",
+
+        tagline: "Connecting football structures, talent and investors.",
+        tagline_fr:
+            "Connecter structures, talents et investisseurs dans le football.",
+
         overview:
-            "We work with clubs, academies, investors and federations to strengthen football structures on and off the pitch. Our focus is on building sustainable pathways, governance and commercial models that outlast individual seasons.",
+            "We work with clubs, academies, investors and project owners who want to build more solid football structures between Africa and Europe, including the UK. Bramers focuses on the basics: roles, agreements and long-term thinking around players and projects.",
+        overview_fr:
+            "Nous travaillons avec des clubs, académies, investisseurs et porteurs de projets qui souhaitent construire des structures de football plus solides entre l'Afrique et l'Europe, y compris le Royaume-Uni. Bramers se concentre sur les fondamentaux : rôles, accords et vision de long terme autour des joueurs et des projets.",
+
         detailPoints: [
-            "Supporting club owners and boards on strategy, governance and stakeholder management.",
-            "Designing academy and talent-pathway models that balance development and financial sustainability.",
-            "Advising investors and partners on transactions, due diligence and long-term value creation.",
+            "Helping academies and clubs think through player pathways and partnership models.",
+            "Clarifying expectations and responsibilities in agreements between local and international partners.",
+            "Supporting investors or project owners in preparing for conversations with clubs and federations.",
         ],
+        detailPoints_fr: [
+            "Aider les académies et clubs à réfléchir aux parcours joueurs et aux modèles de partenariat.",
+            "Clarifier les attentes et responsabilités dans les accords entre partenaires locaux et internationaux.",
+            "Accompagner les investisseurs ou porteurs de projets dans la préparation de leurs échanges avec clubs et fédérations.",
+        ],
+
         pillars: [
             {
-                title: "Club & Federation Strategy",
-                desc: "Clarifying the long-term sporting and commercial direction, and aligning stakeholders behind a realistic plan.",
+                title: "Structures and pathways",
+                desc: "Thinking through how young players move from local football to more professional environments.",
             },
             {
-                title: "Talent, Pathways & Academies",
-                desc: "Building structures that identify, develop and retain talent while protecting welfare and education outcomes.",
+                title: "Partnerships and agreements",
+                desc: "Helping parties discuss roles, timelines and basic protections in football projects.",
             },
             {
-                title: "Governance, Investments & Deals",
-                desc: "Advising on ownership structures, investor relations and football-specific transaction dynamics.",
+                title: "Investor and project support",
+                desc: "Supporting those who want to invest or build in football to present realistic, long-term plans.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Structures et parcours",
+                desc: "Réfléchir à la manière dont les jeunes joueurs passent du football local à des environnements plus professionnels.",
+            },
+            {
+                title: "Partenariats et accords",
+                desc: "Aider les parties prenantes à discuter des rôles, des délais et des protections de base dans les projets football.",
+            },
+            {
+                title: "Appui aux investisseurs et projets",
+                desc: "Accompagner ceux qui souhaitent investir ou développer un projet dans le football pour présenter des plans réalistes et de long terme.",
+            },
+        ],
+
         quote:
-            "You don’t build a team by collecting names; you build it by aligning purpose, standards and culture.",
-        quoteAuthor: "Sir Alex Ferguson",
+            "Real success in football comes when the structure is as strong as the talent.",
+        quote_fr:
+            "Le vrai succès dans le football vient lorsque la structure est aussi solide que le talent.",
+        quoteAuthor: "Bramers perspective",
     },
 
     "international-trade": {
-        title: "International Trade & Logistics",
-        tagline: "Routes, partners and risk across borders.",
         video: "/videos/international-trade.mp4",
         image: "/images/international-trade.jpg",
+
+        title: "International Trade & Logistics",
+        title_fr: "Commerce international et logistique",
+
+        tagline: "Helping you think through routes, partners and paperwork.",
+        tagline_fr:
+            "Vous aider à réfléchir aux routes, aux partenaires et aux démarches.",
+
         overview:
-            "We support exporters, importers and logistics operators as they expand along UK–Africa trade corridors. Our work helps clients understand demand, structure partnerships and navigate regulatory and operational complexity.",
+            "This is at the heart of Bramers' work. We help people and companies who want to move goods between the UK and African markets, especially Côte d’Ivoire and West Africa. Our role is to explain the steps, highlight key questions and prepare you for discussions with specialists.",
+        overview_fr:
+            "C'est au cœur du travail de Bramers. Nous aidons des personnes et des entreprises qui souhaitent faire circuler des marchandises entre le Royaume-Uni et les marchés africains, en particulier la Côte d'Ivoire et l'Afrique de l'Ouest. Notre rôle est d'expliquer les étapes, de faire ressortir les questions clés et de vous préparer à vos échanges avec les spécialistes.",
+
         detailPoints: [
-            "Assessing market opportunities, route economics and competitive positioning for priority products.",
-            "Structuring distributor, agent and joint-venture agreements that balance control and reach.",
-            "Mapping customs, compliance and trade-finance requirements across jurisdictions.",
+            "Clarifying the basic journey of goods from supplier to buyer across borders.",
+            "Helping you think through incoterms at a high level, responsibilities and cost implications.",
+            "Supporting you in preparing questions and documents for freight forwarders, customs agents and banks.",
         ],
+        detailPoints_fr: [
+            "Clarifier le parcours de base des marchandises, du fournisseur à l'acheteur, au-delà des frontières.",
+            "Vous aider à réfléchir, à un niveau simple, aux incoterms, responsabilités et implications sur les coûts.",
+            "Vous accompagner dans la préparation de questions et de documents pour les transitaires, les douanes et les banques.",
+        ],
+
         pillars: [
             {
-                title: "Market Entry & Route-to-Market",
-                desc: "Clarifying which markets, channels and partners offer the best path to sustainable scale.",
+                title: "Understanding the trade flow",
+                desc: "Making visible each step in the export or import journey and who is involved.",
             },
             {
-                title: "Partnerships & Distribution",
-                desc: "Designing contracts, incentives and governance for distributors, agents and logistics partners.",
+                title: "Roles, risks and costs",
+                desc: "Highlighting who is responsible for what, where risk passes and which costs you need to plan for.",
             },
             {
-                title: "Trade Risk & Compliance",
-                desc: "Supporting clients to manage regulatory, sanctions, FX and operational risks in cross-border trade.",
+                title: "Preparing for specialist support",
+                desc: "Helping you arrive better prepared when you speak to customs, logistics or banking partners.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Comprendre le flux commercial",
+                desc: "Rendre visibles les étapes clés du parcours export ou import et les acteurs impliqués.",
+            },
+            {
+                title: "Rôles, risques et coûts",
+                desc: "Mettre en évidence qui est responsable de quoi, où le risque se transmet et quels coûts anticiper.",
+            },
+            {
+                title: "Préparer l'appui des spécialistes",
+                desc: "Vous aider à arriver mieux préparé lors de vos échanges avec les douanes, la logistique ou les banques.",
+            },
+        ],
+
         quote:
-            "Trade flows follow confidence. Confidence follows clarity on risk, rules and relationships.",
-        quoteAuthor: "Anonymous trade financier",
+            "Moving goods across borders becomes easier when everyone understands their role and the basic rules.",
+        quote_fr:
+            "Le commerce transfrontalier devient plus simple lorsque chacun comprend son rôle et les règles de base.",
+        quoteAuthor: "Bramers perspective",
     },
 
     mining: {
-        title: "Mining & Natural Resources",
-        tagline: "Responsible, long-term resource development.",
         video: "/videos/mining.mp4",
         image: "/images/mining.jpg",
+
+        title: "Mining & Natural Resources",
+        title_fr: "Mines et ressources naturelles",
+
+        tagline: "Helping local projects speak to investors and authorities.",
+        tagline_fr:
+            "Aider les projets locaux à mieux dialoguer avec investisseurs et autorités.",
+
         overview:
-            "We advise mining companies, investors and public institutions on strategy, stakeholder management and governance in the resources sector. Our work balances commercial imperatives with ESG, community and national-development priorities.",
+            "Bramers does not replace technical or legal advisors in mining. Instead, we help project owners, local partners and institutions organise their story, understand key expectations and prepare for conversations with more specialised stakeholders.",
+        overview_fr:
+            "Bramers ne remplace pas les conseillers techniques ou juridiques dans le secteur minier. Nous aidons plutôt les porteurs de projets, partenaires locaux et institutions à structurer leur récit, comprendre les attentes clés et se préparer à dialoguer avec des parties prenantes plus spécialisées.",
+
         detailPoints: [
-            "Assessing project portfolios, country risk and long-term demand dynamics for key commodities.",
-            "Designing stakeholder engagement strategies with governments, communities and partners.",
-            "Supporting ESG, transparency and reporting improvements aligned with global expectations.",
+            "Clarifying the basic outline of a project: who is involved, what is proposed and what is still uncertain.",
+            "Helping local actors understand investor, community and government perspectives at a high level.",
+            "Preparing simple materials to support early-stage discussions with technical, legal or financial experts.",
         ],
+        detailPoints_fr: [
+            "Clarifier les grandes lignes d'un projet : qui est impliqué, ce qui est proposé et ce qui reste incertain.",
+            "Aider les acteurs locaux à mieux comprendre, à un niveau général, les attentes des investisseurs, des communautés et des autorités.",
+            "Préparer des supports simples pour les premières discussions avec des experts techniques, juridiques ou financiers.",
+        ],
+
         pillars: [
             {
-                title: "Strategy & Portfolio",
-                desc: "Clarifying which projects to advance, partner on or exit based on risk, returns and strategic positioning.",
+                title: "Structuring the project story",
+                desc: "Organising information about the project so others can quickly see what is on the table.",
             },
             {
-                title: "Stakeholders & Communities",
-                desc: "Building structured engagement with governments, communities and civil-society stakeholders.",
+                title: "Understanding stakeholder expectations",
+                desc: "Highlighting, in simple language, what investors and authorities often look for in resource projects.",
             },
             {
-                title: "ESG, Governance & Reporting",
-                desc: "Strengthening governance, disclosure and sustainability practices in line with global standards.",
+                title: "Connecting to specialist advice",
+                desc: "Helping you arrive more prepared when you start formal work with technical or legal advisors.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Structurer le récit du projet",
+                desc: "Organiser les informations clés pour que les autres comprennent rapidement ce qui est en jeu.",
+            },
+            {
+                title: "Comprendre les attentes des parties prenantes",
+                desc: "Expliquer, en termes simples, ce que recherchent souvent investisseurs et autorités dans les projets de ressources.",
+            },
+            {
+                title: "Préparer le recours aux experts",
+                desc: "Vous aider à être mieux préparé lorsque vous engagez un travail formel avec des conseillers techniques ou juridiques.",
+            },
+        ],
+
         quote:
-            "In resources, a licence to operate is earned daily in the way you treat people and the environment.",
-        quoteAuthor: "Former mining CEO",
+            "In resources, clear and honest information is the starting point for any serious conversation.",
+        quote_fr:
+            "Dans les ressources naturelles, une information claire et honnête est le point de départ de toute discussion sérieuse.",
+        quoteAuthor: "Bramers perspective",
     },
 
     "real-estate": {
-        title: "Real Estate & Infrastructure",
-        tagline: "Investment, development and asset performance.",
         video: "/videos/real-estate.mp4",
         image: "/images/real-estate.jpg",
+
+        title: "Real Estate & Infrastructure",
+        title_fr: "Immobilier et infrastructures",
+
+        tagline: "Helping owners and partners think through projects and sites.",
+        tagline_fr:
+            "Aider propriétaires et partenaires à réfléchir à leurs projets et sites.",
+
         overview:
-            "We partner with developers, asset owners, funds and public institutions on real-estate and infrastructure strategy. Our work spans concept design, feasibility, capital structure and operational performance.",
+            "We support project owners, small developers and partners who are working on real estate or basic infrastructure linked to African and UK markets. Bramers focuses on early-stage thinking: demand, simple numbers, roles and how to explain the project to others.",
+        overview_fr:
+            "Nous accompagnons des porteurs de projets, petits développeurs et partenaires impliqués dans des projets immobiliers ou d'infrastructures liés aux marchés africains et britanniques. Bramers se concentre sur les premières réflexions : demande, chiffres simples, rôles et façon d'expliquer le projet aux autres.",
+
         detailPoints: [
-            "Testing demand, pricing and positioning for new developments and regeneration projects.",
-            "Designing capital structures and partnership models between public, private and development-finance partners.",
-            "Improving asset performance through better leasing, operations and data-driven decision-making.",
+            "Clarifying who the project is for and what problem it is trying to solve.",
+            "Looking at basic assumptions on demand, pricing and costs, without replacing detailed feasibility studies.",
+            "Helping prepare simple presentations for potential partners, authorities or financiers.",
         ],
+        detailPoints_fr: [
+            "Clarifier à qui s'adresse le projet et quel problème il cherche à résoudre.",
+            "Examiner des hypothèses de base sur la demande, les prix et les coûts, sans remplacer les études de faisabilité détaillées.",
+            "Aider à préparer des présentations simples pour des partenaires, autorités ou financeurs potentiels.",
+        ],
+
         pillars: [
             {
-                title: "Concept, Feasibility & Positioning",
-                desc: "Defining the right use-mix, target segments and financial profile for new or repositioned assets.",
+                title: "Clarifying the idea",
+                desc: "Putting into words the core of the project so that others can quickly understand it.",
             },
             {
-                title: "Capital, Partnerships & Structuring",
-                desc: "Supporting clients to structure deals, joint ventures and PPPs that align incentives across stakeholders.",
+                title: "Checking basic assumptions",
+                desc: "Reviewing simple numbers and scenarios before you invest in heavy studies.",
             },
             {
-                title: "Asset & Portfolio Performance",
-                desc: "Helping owners use data, technology and governance to enhance returns across portfolios.",
+                title: "Talking to partners",
+                desc: "Helping you present the project in a way that invites constructive discussion.",
             },
         ],
+        pillars_fr: [
+            {
+                title: "Clarifier l'idée",
+                desc: "Mettre par écrit l'essentiel du projet pour que les autres le comprennent rapidement.",
+            },
+            {
+                title: "Tester quelques hypothèses",
+                desc: "Revoir quelques chiffres et scénarios de base avant d'engager des études lourdes.",
+            },
+            {
+                title: "Parler aux partenaires",
+                desc: "Vous aider à présenter le projet de manière à susciter un échange constructif.",
+            },
+        ],
+
         quote:
-            "Great real estate is a long-term discipline: seeing the city not as it is today, but as it will be in thirty years.",
-        quoteAuthor: "Global real-estate investor",
+            "The first step in any project is being able to explain it simply to someone else.",
+        quote_fr:
+            "La première étape de tout projet consiste à pouvoir l'expliquer simplement à quelqu'un d'autre.",
+        quoteAuthor: "Bramers perspective",
     },
 };
 
@@ -312,6 +598,7 @@ export default function IndustrySlugPage({ params }) {
 
     const { language } = useLanguage();
     const L = LABELS[language] || LABELS.en;
+    const isFr = language === "fr";
 
     if (!data) {
         return (
@@ -337,6 +624,19 @@ export default function IndustrySlugPage({ params }) {
             </main>
         );
     }
+
+    const title = isFr && data.title_fr ? data.title_fr : data.title;
+    const tagline = isFr && data.tagline_fr ? data.tagline_fr : data.tagline;
+    const overview =
+        isFr && data.overview_fr ? data.overview_fr : data.overview;
+    const detailPoints =
+        isFr && data.detailPoints_fr
+            ? data.detailPoints_fr
+            : data.detailPoints;
+    const pillars =
+        isFr && data.pillars_fr ? data.pillars_fr : data.pillars;
+    const quote = isFr && data.quote_fr ? data.quote_fr : data.quote;
+    const quoteAuthor = data.quoteAuthor;
 
     return (
         <main
@@ -386,7 +686,7 @@ export default function IndustrySlugPage({ params }) {
                             marginBottom: "14px",
                         }}
                     >
-                        {data.title}
+                        {title}
                     </h1>
                     <p
                         style={{
@@ -397,7 +697,7 @@ export default function IndustrySlugPage({ params }) {
                             margin: "0 auto",
                         }}
                     >
-                        {data.tagline}
+                        {tagline}
                     </p>
                 </div>
             </section>
@@ -436,7 +736,7 @@ export default function IndustrySlugPage({ params }) {
                             color: "#111",
                         }}
                     >
-                        {L.advisoryFor} {data.title}.
+                        {L.advisoryFor} {title}.
                     </h2>
                     <p
                         style={{
@@ -446,7 +746,7 @@ export default function IndustrySlugPage({ params }) {
                             color: "#333",
                         }}
                     >
-                        {data.overview}
+                        {overview}
                     </p>
                 </div>
 
@@ -459,7 +759,7 @@ export default function IndustrySlugPage({ params }) {
                 >
                     <img
                         src={data.image}
-                        alt={data.title}
+                        alt={title}
                         style={{
                             width: "100%",
                             height: "100%",
@@ -495,11 +795,12 @@ export default function IndustrySlugPage({ params }) {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(260px, 1fr))",
                         gap: "22px",
                     }}
                 >
-                    {data.detailPoints.map((text, idx) => (
+                    {detailPoints.map((text, idx) => (
                         <p
                             key={idx}
                             className="detail-block"
@@ -542,11 +843,12 @@ export default function IndustrySlugPage({ params }) {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(280px, 1fr))",
                         gap: "28px",
                     }}
                 >
-                    {data.pillars.map((card, i) => (
+                    {pillars.map((card, i) => (
                         <div key={i} className="pillar-card">
                             <h3
                                 style={{
@@ -592,7 +894,7 @@ export default function IndustrySlugPage({ params }) {
                         marginBottom: "18px",
                     }}
                 >
-                    “{data.quote}”
+                    “{quote}”
                 </p>
                 <p
                     style={{
@@ -603,7 +905,7 @@ export default function IndustrySlugPage({ params }) {
                         color: "#888",
                     }}
                 >
-                    {data.quoteAuthor}
+                    {quoteAuthor}
                 </p>
             </section>
 
