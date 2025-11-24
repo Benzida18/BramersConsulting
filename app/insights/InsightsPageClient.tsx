@@ -494,12 +494,12 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
-    // Lock background scroll while modal is open
+    // prevent background from scrolling when modal is open
     useEffect(() => {
-        const originalOverflow = window.getComputedStyle(document.body).overflow;
+        const original = document.body.style.overflow;
         document.body.style.overflow = "hidden";
         return () => {
-            document.body.style.overflow = originalOverflow;
+            document.body.style.overflow = original;
         };
     }, []);
 
@@ -520,6 +520,8 @@ function InsightModal({
         },
     };
 
+    const hasBody = Array.isArray(post.body) && post.body.length > 0;
+
     return (
         <div
             className="insight-modal-backdrop"
@@ -530,10 +532,9 @@ function InsightModal({
             <div className="insight-modal-panel">
                 <header className="insight-modal-header">
                     <div>
-                        <p className="insight-modal-kicker">External article</p>
+                        <p className="insight-modal-eyebrow">External article</p>
                         <h2>{post.title}</h2>
                     </div>
-
                     <button
                         type="button"
                         className="insight-modal-close"
@@ -543,9 +544,20 @@ function InsightModal({
                     </button>
                 </header>
 
+                {/* Optional hero image from the cover field */}
+                {post.cover?.asset?.url && (
+                    <div className="insight-modal-hero-wrap">
+                        <img
+                            src={post.cover.asset.url}
+                            alt={post.title}
+                            className="insight-modal-hero"
+                        />
+                    </div>
+                )}
+
                 <div className="insight-modal-body">
                     <div className="insight-modal-body-inner">
-                        {Array.isArray(post.body) && post.body.length > 0 ? (
+                        {hasBody ? (
                             <PortableText
                                 value={post.body}
                                 components={portableComponents}
