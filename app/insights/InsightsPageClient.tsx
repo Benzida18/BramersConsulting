@@ -1,22 +1,11 @@
+// app/insights/InsightsPageClient.tsx
 "use client";
 
-import React, {
-    useEffect,
-    useRef,
-    useState,
-    type MouseEvent,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
 import { PortableText } from "@portabletext/react";
-
-/* ---------- TYPES ---------- */
-
-type LangKey = "en" | "fr";
-
-type CardItem =
-    | { type: "real"; post: InsightCardData }
-    | { type: "placeholder"; id: string };
+import "./insights.css"; //
 
 /* ---------- COPY FOR BOTH LANGUAGES ---------- */
 const LABELS = {
@@ -66,10 +55,7 @@ const SECTIONS = [
     },
     {
         id: "real-estate",
-        label: {
-            en: "Real Estate & Infrastructure",
-            fr: "Immobilier et infrastructures",
-        },
+        label: { en: "Real Estate & Infrastructure", fr: "Immobilier et infrastructures" },
         blurb: {
             en: "Resources on urban development, real estate and core infrastructure decisions.",
             fr: "Ressources sur les projets immobiliers, l’aménagement urbain et les infrastructures clés.",
@@ -77,10 +63,7 @@ const SECTIONS = [
     },
     {
         id: "catering-hospitality",
-        label: {
-            en: "Hospitality & Catering",
-            fr: "Hôtellerie et restauration",
-        },
+        label: { en: "Hospitality & Catering", fr: "Hôtellerie et restauration" },
         blurb: {
             en: "Resources on hotels, restaurants and food-service operators across UK–Africa links.",
             fr: "Ressources sur les hôtels, restaurants et la restauration sur les corridors Royaume-Uni–Afrique.",
@@ -99,10 +82,7 @@ const SECTIONS = [
     },
     {
         id: "football-advisory",
-        label: {
-            en: "Sports & Football Advisory",
-            fr: "Conseil sportif et football",
-        },
+        label: { en: "Sports & Football Advisory", fr: "Conseil sportif et football" },
         blurb: {
             en: "Resources on structures, talent and investment in the football ecosystem.",
             fr: "Ressources sur les structures, les talents et les investissements dans l’écosystème du football.",
@@ -126,10 +106,7 @@ const SECTIONS = [
     },
     {
         id: "mining",
-        label: {
-            en: "Mining & Natural Resources",
-            fr: "Mines et ressources naturelles",
-        },
+        label: { en: "Mining & Natural Resources", fr: "Mines et ressources naturelles" },
         blurb: {
             en: "Resources on mining projects, communities and investment in natural resources.",
             fr: "Ressources sur les projets miniers, les communautés et les investissements dans les ressources naturelles.",
@@ -163,7 +140,7 @@ function RevealOnScroll({
                     el.style.transform = "translateY(18px)";
                 }
             },
-            { threshold: 0.15 }
+            { threshold: 0.15 },
         );
 
         obs.observe(el);
@@ -184,36 +161,28 @@ function RevealOnScroll({
     );
 }
 
-/* ---------- Helper: pick posts per sector + language ---------- */
+/* ---------- Helper to pick posts per sector + language ---------- */
 function pickPostsForSection(
     posts: InsightCardData[],
     industryId: string,
-    langKey: LangKey
+    langKey: "en" | "fr",
 ): InsightCardData[] {
     const allForIndustry = posts.filter((p) => p.industry === industryId);
-
     if (allForIndustry.length === 0) return [];
 
-    // 1) exact language match
     const exactLang = allForIndustry.filter((p) => p.language === langKey);
     if (exactLang.length > 0) return exactLang;
 
-    // 2) fallback to English
     const englishFallback = allForIndustry.filter((p) => p.language === "en");
     if (englishFallback.length > 0) return englishFallback;
 
-    // 3) last resort: any article with this sector (old docs with no language set)
     return allForIndustry;
 }
 
 /* ---------- MAIN CLIENT PAGE ---------- */
-export default function InsightsPageClient({
-                                               posts,
-                                           }: {
-    posts: InsightCardData[];
-}) {
+export default function InsightsPageClient({ posts }: { posts: InsightCardData[] }) {
     const { language } = useLanguage();
-    const langKey: LangKey = language === "fr" ? "fr" : "en";
+    const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
     const t = LABELS[langKey];
 
     const [activePost, setActivePost] = useState<InsightCardData | null>(null);
@@ -281,7 +250,7 @@ export default function InsightsPageClient({
                 </div>
             </section>
 
-            {/* SECTIONS BY INDUSTRY (ALL 9 ALWAYS SHOWN) */}
+            {/* SECTIONS BY INDUSTRY */}
             <section style={{ background: "#fafafa", padding: "100px 0 140px" }}>
                 <div className="insight-grid-container">
                     <RevealOnScroll>
@@ -313,21 +282,19 @@ export default function InsightsPageClient({
                     </RevealOnScroll>
 
                     {SECTIONS.map((section, shelfIdx) => {
-                        // pick posts for this sector + language
                         const sectionPosts = pickPostsForSection(
                             posts,
                             section.id,
-                            langKey
+                            langKey,
                         );
 
-                        const realCards: CardItem[] = sectionPosts.map((post) => ({
-                            type: "real",
+                        const realCards = sectionPosts.map((post) => ({
+                            type: "real" as const,
                             post,
                         }));
 
-                        let cards: CardItem[] = [...realCards];
+                        let cards = [...realCards];
 
-                        // Always keep full rows of MAX_PER_ROW and at least 1 row per sector
                         const remainder = cards.length % MAX_PER_ROW;
                         const placeholdersToAdd =
                             remainder === 0
@@ -338,21 +305,18 @@ export default function InsightsPageClient({
 
                         for (let i = 0; i < placeholdersToAdd; i++) {
                             cards.push({
-                                type: "placeholder",
+                                type: "placeholder" as const,
                                 id: `ph-${section.id}-${i}`,
                             });
                         }
 
-                        const rows: CardItem[][] = [];
+                        const rows: typeof cards[] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
                         }
 
                         return (
-                            <RevealOnScroll
-                                key={section.id}
-                                delay={shelfIdx * 80}
-                            >
+                            <RevealOnScroll key={section.id} delay={shelfIdx * 80}>
                                 <div className="insight-shelf">
                                     <header className="insight-shelf-header">
                                         <p className="insight-shelf-label">
@@ -369,34 +333,29 @@ export default function InsightsPageClient({
                                     <div className="insight-shelf-line" />
 
                                     {rows.map((row, rowIdx) => (
-                                        <div
-                                            className="insight-shelf-row"
-                                            key={`${section.id}-row-${rowIdx}`}
-                                        >
+                                        <div className="insight-shelf-row" key={rowIdx}>
                                             {row.map((card, colIdx) => {
                                                 if (card.type === "real") {
                                                     return (
                                                         <InsightCard
                                                             key={card.post._id}
                                                             post={card.post}
-                                                            fallback={
-                                                                t.cardExcerptFallback
-                                                            }
+                                                            fallback={t.cardExcerptFallback}
                                                             delay={colIdx * 70}
                                                             readLabel={t.readArticle}
                                                             onOpen={() =>
-                                                                setActivePost(
-                                                                    card.post
-                                                                )
+                                                                setActivePost(card.post)
                                                             }
                                                         />
                                                     );
                                                 }
 
-                                                // Placeholder card
                                                 return (
                                                     <PlaceholderCard
-                                                        key={card.id}
+                                                        key={
+                                                            card.id ||
+                                                            `placeholder-${section.id}-${rowIdx}-${colIdx}`
+                                                        }
                                                     />
                                                 );
                                             })}
@@ -421,7 +380,6 @@ export default function InsightsPageClient({
                 </div>
             </section>
 
-            {/* MODAL */}
             {activePost && (
                 <InsightModal
                     post={activePost}
@@ -463,7 +421,7 @@ function InsightCard({
                     el.style.transform = "translateY(0)";
                 }
             },
-            { threshold: 0.2 }
+            { threshold: 0.2 },
         );
 
         obs.observe(el);
@@ -532,7 +490,7 @@ function InsightModal({
     onClose: () => void;
     closeLabel: string;
 }) {
-    const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) onClose();
     };
 
