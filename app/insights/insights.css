@@ -394,10 +394,12 @@
 
 .insight-modal-image {
     width: 100%;
-    max-height: 420px;
-    object-fit: cover;
+    max-height: 460px;          /* can show a bit more */
+    object-fit: contain;        /* show the whole image, no cropping */
+    background: #f3f4f6;        /* soft backdrop so “empty” parts don’t look harsh */
     border-radius: 16px;
     margin: 1.1rem 0;
+    padding: 8px;               /* slight frame around the picture */
 }
 
 @media (max-width: 640px) {
