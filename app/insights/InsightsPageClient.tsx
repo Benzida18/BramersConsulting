@@ -1,6 +1,6 @@
 // app/insights/InsightsPageClient.tsx
 "use client";
-
+import "./insights.css";
 import { useEffect, useRef, useState } from "react";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
