@@ -1,4 +1,4 @@
-/* ---------- HERO VIDEO ---------- */
+/* ---------- HERO VIDEO (if you ever hook CSS instead of inline) ---------- */
 .insight-hero {
     position: relative;
     width: 100%;
@@ -27,32 +27,37 @@
     font-family: var(--font-playfair), serif;
 }
 
-/* ---------- GRID ---------- */
+/* ---------- GRID / PAGE CONTAINER ---------- */
+
 .insight-grid-container {
     max-width: 1300px;
     margin: 60px auto;
     padding: 0 30px;
 }
-/* GRID LAYOUT */
+
+/* Card grid (used inside each shelf row on smaller screens) */
 .insight-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 32px;
 }
 
-/* INDIVIDUAL CARD */
+/* ---------- CARD (BOOK) ---------- */
+
 .insight-card {
-    background: white;
+    background: #ffffff;
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .insight-card:hover {
     transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 .insight-card-img {
@@ -74,52 +79,6 @@
     font-size: 16px;
     opacity: 0.8;
 }
-/* ---------- SHELVES PER SECTOR ---------- */
-
-.insight-shelf {
-    margin-bottom: 60px;
-}
-
-.insight-shelf-header {
-    margin-bottom: 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.insight-shelf-label {
-    font-size: 12px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: #999;
-}
-
-.insight-shelf-title {
-    font-family: var(--font-playfair), serif;
-    font-size: 24px;
-    margin: 0;
-    color: #111;
-}
-
-.insight-shelf-blurb {
-    font-family: var(--font-inter), sans-serif;
-    font-size: 14px;
-    color: #555;
-    max-width: 520px;
-    margin: 0;
-}
-
-.insight-shelf-line {
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(
-            90deg,
-            rgba(10, 10, 10, 0.1),
-            rgba(10, 10, 10, 0.35),
-            rgba(10, 10, 10, 0.1)
-    );
-    margin-bottom: 22px;
-}
 
 /* Make links around cards clean */
 .insight-card-link {
@@ -127,21 +86,6 @@
     color: inherit;
 }
 
-/* Mobile tweaks */
-@media (max-width: 768px) {
-    .insight-grid-container {
-        margin: 40px auto;
-        padding: 0 20px;
-    }
-
-    .insight-shelf-title {
-        font-size: 20px;
-    }
-
-    .insight-shelf-blurb {
-        font-size: 13px;
-    }
-}
 /* ---------- SHELVES / ROWS (like case studies) ---------- */
 
 .insight-shelf {
@@ -202,7 +146,8 @@
     max-width: 340px;
 }
 
-/* Placeholder styling */
+/* ---------- PLACEHOLDER CARDS ("Coming soon") ---------- */
+
 .insight-card-placeholder {
     opacity: 0.8;
     border-style: dashed;
@@ -224,7 +169,169 @@
     color: #777;
 }
 
-/* Mobile tweaks: two per row then one per row, like case studies */
+/* ---------- READ MORE BUTTON ON CARD ---------- */
+
+.insight-card-readmore {
+    margin-top: 14px;
+    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border: none;
+    background: transparent;
+    color: #1e90ff;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* ---------- MODAL WITH GLASS BLUR BACKDROP ---------- */
+
+.insight-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 96px 24px 32px;             /* keeps panel below fixed header */
+    background: rgba(15, 23, 42, 0.25);  /* slight tint */
+    backdrop-filter: blur(10px);         /* glass blur */
+}
+
+/* Whole card scrolls (image + text together) */
+.insight-modal-panel {
+    width: 100%;
+    max-width: 960px;
+    max-height: 85vh;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 24px;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.35);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header row */
+
+.insight-modal-header {
+    padding: 18px 26px 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.insight-modal-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin: 0 0 4px;
+}
+
+.insight-modal-header h2 {
+    font-family: var(--font-playfair), serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.insight-modal-close {
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    cursor: pointer;
+    color: #555;
+}
+
+.insight-modal-close:hover {
+    color: #000;
+}
+
+/* Hero image at top of article */
+
+.insight-modal-hero-wrap {
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.insight-modal-hero {
+    display: block;
+    width: 100%;
+    height: auto;          /* no cropping */
+    object-fit: contain;   /* make sure whole image is visible */
+}
+
+/* Body and inner column */
+
+.insight-modal-body {
+    padding: 22px 26px 26px;
+    font-family: var(--font-inter), sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.insight-modal-body-inner {
+    width: 100%;
+    max-width: 760px;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Paragraph rhythm */
+.insight-modal-body-inner p {
+    margin: 0 0 0.9rem;
+}
+
+/* Optional “magazine” drop cap on first paragraph */
+.insight-modal-body-inner p:first-of-type::first-letter {
+    font-family: var(--font-playfair), serif;
+    font-size: 2.5em;
+    float: left;
+    line-height: 0.9;
+    padding-right: 8px;
+    padding-top: 4px;
+    color: #111827;
+}
+
+/* Headings inside PortableText */
+.insight-modal-body-inner h2,
+.insight-modal-body-inner h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-playfair), serif;
+}
+
+.insight-modal-body-inner strong {
+    font-weight: 600;
+}
+
+/* Lists – useful for “Top 10” style articles */
+.insight-modal-body-inner ul,
+.insight-modal-body-inner ol {
+    margin: 0.75rem 0 1rem;
+    padding-left: 1.4rem;
+}
+
+.insight-modal-body-inner li + li {
+    margin-top: 0.25rem;
+}
+
+/* Images embedded inside the article body */
+.insight-modal-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 1.1rem 0 1.4rem;
+    object-fit: contain;
+}
+
+/* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 900px) {
     .insight-shelf-row {
@@ -248,6 +355,21 @@
     }
 }
 
+@media (max-width: 768px) {
+    .insight-grid-container {
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    .insight-shelf-title {
+        font-size: 20px;
+    }
+
+    .insight-shelf-blurb {
+        font-size: 13px;
+    }
+}
+
 @media (max-width: 640px) {
     .insight-shelf-row {
         flex-direction: column;
@@ -259,237 +381,22 @@
         flex: 1 1 auto;
         width: 100%;
     }
-}
-/* ---------- READ MORE BUTTON ON CARD ---------- */
-.insight-card-readmore {
-    margin-top: 14px;
-    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    border: none;
-    background: transparent;
-    color: #1e90ff;
-    padding: 0;
-    cursor: pointer;
-}
 
-/* ---------- MODAL WITH GLASS BLUR BACKDROP ---------- */
-.insight-modal-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 96px 24px 32px;          /* pushes panel below the fixed header */
-    background: rgba(15, 23, 42, 0.25); /* slight tint */
-    backdrop-filter: blur(10px);        /* glass blur */
-}
-
-.insight-modal-panel {
-    width: 100%;
-    max-width: 960px;
-    max-height: 85vh;
-    background: rgba(255, 255, 255, 0.94);
-    border-radius: 24px;
-    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.35);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.insight-modal-header {
-    padding: 20px 26px 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.insight-modal-header h2 {
-    font-family: var(--font-playfair), serif;
-    font-size: 24px;
-    margin: 0;
-}
-
-.insight-modal-body {
-    padding: 20px 26px 24px;
-    overflow-y: auto;
-    font-family: var(--font-inter), sans-serif;
-    font-size: 15px;
-    line-height: 1.8;
-    color: #333;
-}
-/* Small label above the title */
-.insight-modal-kicker {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #9ca3af;
-    margin: 0 0 6px;
-}
-
-/* Keep body text in a nice column */
-.insight-modal-body-inner {
-    max-width: 720px;
-    margin: 0 auto;
-}
-
-/* Paragraph rhythm */
-.insight-modal-body p {
-    margin: 0 0 0.9rem;
-}
-
-/* Optional drop cap on the first paragraph for a bit of “magazine” feel */
-.insight-modal-body p:first-of-type::first-letter {
-    font-family: var(--font-playfair), serif;
-    font-size: 2.5em;
-    float: left;
-    line-height: 0.9;
-    padding-right: 8px;
-    padding-top: 4px;
-    color: #111827;
-}
-
-/* Lists inside the article */
-.insight-modal-body ul,
-.insight-modal-body ol {
-    margin: 0.4rem 0 0.9rem 1.4rem;
-    padding: 0;
-}
-
-/* Mobile tweaks */
-@media (max-width: 640px) {
     .insight-modal-backdrop {
-        padding: 80px 12px 16px; /* still below header, but tighter */
+        padding: 80px 12px 16px;
     }
 
-    .insight-modal-panel {
-        border-radius: 18px;
-    }
-
-    .insight-modal-header,
-    .insight-modal-body {
-        padding-inline: 18px;
-    }
-
-    .insight-modal-header h2 {
-        font-size: 20px;
-    }
-}
-
-/* PortableText basic styling */
-.insight-modal-body p + p {
-    margin-top: 0.7rem;
-}
-
-.insight-modal-body h2,
-.insight-modal-body h3 {
-    margin-top: 1.4rem;
-    margin-bottom: 0.4rem;
-    font-family: var(--font-playfair), serif;
-}
-
-.insight-modal-image {
-    width: 100%;
-    max-height: 460px;          /* can show a bit more */
-    object-fit: contain;        /* show the whole image, no cropping */
-    background: #f3f4f6;        /* soft backdrop so “empty” parts don’t look harsh */
-    border-radius: 16px;
-    margin: 1.1rem 0;
-    padding: 8px;               /* slight frame around the picture */
-}
-
-@media (max-width: 640px) {
-    .insight-modal-panel {
-        border-radius: 18px;
-    }
-
-    .insight-modal-header,
-    .insight-modal-body {
-        padding-inline: 18px;
-    }
-
-    .insight-modal-header h2 {
-        font-size: 20px;
-    }
-}
-/* Eyebrow in modal header */
-.insight-modal-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: #9ca3af;
-    margin: 0 0 4px;
-}
-
-/* Hero image area inside modal */
-.insight-modal-hero-wrap {
-    width: 100%;
-    max-height: 260px;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.insight-modal-hero {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-}
-
-/* Body now has inner column for nicer reading width */
-.insight-modal-body {
-    padding: 22px 26px 26px;
-    overflow-y: auto;
-    font-family: var(--font-inter), sans-serif;
-    color: #333;
-    display: flex;
-    justify-content: center;
-}
-
-.insight-modal-body-inner {
-    width: 100%;
-    max-width: 760px;
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-/* Typography inside article */
-.insight-modal-body-inner p + p {
-    margin-top: 0.75rem;
-}
-
-.insight-modal-body-inner h2,
-.insight-modal-body-inner h3 {
-    margin-top: 1.6rem;
-    margin-bottom: 0.4rem;
-    font-family: var(--font-playfair), serif;
-}
-
-.insight-modal-body-inner strong {
-    font-weight: 600;
-}
-
-/* Lists – useful for “Top 10” style articles */
-.insight-modal-body-inner ul,
-.insight-modal-body-inner ol {
-    margin: 0.75rem 0 1rem;
-    padding-left: 1.4rem;
-}
-
-.insight-modal-body-inner li + li {
-    margin-top: 0.25rem;
-}
-
-@media (max-width: 640px) {
     .insight-modal-panel {
         border-radius: 18px;
         max-height: 90vh;
     }
 
+    .insight-modal-header,
     .insight-modal-body {
         padding-inline: 18px;
+    }
+
+    .insight-modal-header h2 {
+        font-size: 20px;
     }
 }
