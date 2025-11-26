@@ -10,16 +10,16 @@ const TEXT = {
     en: {
         heroTitle: "Services",
         heroSubtitle:
-            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow through.",
-        approachHeading: "How We Work",
+            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow-through.",
+        approachHeading: "How we work",
         approachBody:
-            "Most of our work starts with a conversation: where you are today, who is involved, and what decision or project is stuck. We then suggest a short, practical plan usually a few pages, not a big report and stay close while you test it. The aim is not to promise everything, but to move one step at a time with less noise and more clarity.",
+            "Most engagements start with a straightforward conversation: where you are today, who is involved, and which decision or project feels stuck. We then suggest a short, practical plan – usually a few pages rather than a long report – and stay close while you test it. The aim is not to promise everything, but to move one step at a time with less noise and more clarity.",
         approachList: [
-            "Start with a short diagnostic call and a clear follow-up note.",
+            "Begin with a short diagnostic call and a clear follow-up note.",
             "Agree who does what and by when, including Bramers’ role.",
             "Stay available between sessions for quick questions and course-corrections.",
         ],
-        gridTitle: "Service Areas",
+        gridTitle: "Service areas",
         gridIntro:
             "Most assignments sit in one of these areas. Each project is different, but the pattern is similar: understand your context, shape a realistic plan, and support you while you deliver.",
         ctaLabel: "Learn more",
@@ -27,14 +27,14 @@ const TEXT = {
     fr: {
         heroTitle: "Services",
         heroSubtitle:
-            "Bramers aide les dirigeants et leurs équipes à planifier, structurer et faire avancer leurs projets entre le Royaume-Uni et les marchés africains. Nous privilégions les échanges clairs, des documents simples et un accompagnement régulier.",
+            "Bramers aide les dirigeants, les propriétaires et leurs équipes à planifier, structurer et faire avancer leurs projets entre le Royaume-Uni et les marchés africains. Nous privilégions les échanges clairs, des documents simples et un accompagnement régulier.",
         approachHeading: "Notre manière de travailler",
         approachBody:
-            "La plupart des missions commencent par une conversation : votre situation actuelle, les personnes impliquées et la décision ou le projet qui bloque. Nous proposons ensuite un plan court et concret généralement quelques pages, pas un long rapport et restons présents pendant les premières étapes. L’objectif n’est pas de tout promettre, mais d’avancer pas à pas avec moins de bruit et plus de clarté.",
+            "La plupart des missions commencent par une conversation directe : votre situation actuelle, les personnes impliquées et la décision ou le projet qui bloque. Nous proposons ensuite un plan court et concret – généralement quelques pages plutôt qu’un long rapport – et restons présents pendant les premières étapes. L’objectif n’est pas de tout promettre, mais d’avancer pas à pas avec moins de bruit et plus de clarté.",
         approachList: [
             "Démarrer par un échange de diagnostic et une note de synthèse claire.",
-            "Accord précis sur qui fait quoi et pour quand, y compris le rôle de Bramers.",
-            "Disponibilité entre les séances pour les questions rapides et les ajustements.",
+            "S’accorder précisément sur qui fait quoi et pour quand, y compris le rôle de Bramers.",
+            "Rester disponible entre les séances pour les questions rapides et les ajustements.",
         ],
         gridTitle: "Domaines d’intervention",
         gridIntro:
@@ -48,15 +48,15 @@ const SERVICES_COPY = {
     en: [
         {
             slug: "agribusiness",
-            title: "Agribusiness Advisory",
+            title: "Agribusiness advisory",
             short:
                 "Support for cooperatives, processors and traders working with regional or overseas buyers.",
             long:
-                "Typical work includes mapping the value chain, clarifying roles between farmers, aggregators and off takers, reviewing basic unit economics and preparing simple export or supply agreements.",
+                "Typical work includes mapping the value chain, clarifying roles between farmers, aggregators and off-takers, checking basic unit economics and preparing simple export or supply agreements.",
         },
         {
             slug: "real-estate",
-            title: "Real Estate & Infrastructure",
+            title: "Real estate & infrastructure",
             short:
                 "Help for families, developers and partners to organise land and building projects.",
             long:
@@ -64,15 +64,14 @@ const SERVICES_COPY = {
         },
         {
             slug: "finance",
-            title: "Financial Support & Preparation",
-            short:
-                "Preparing for conversations with banks, investors and partners.",
+            title: "Financial support & preparation",
+            short: "Preparing for conversations with banks, investors and partners.",
             long:
-                "We help you explain your story in plain language, organise key numbers, prepare pitch decks or data packs, and think through what different funders will want to see.",
+                "We help you explain your story in plain language, organise key numbers, prepare pitch decks or data packs, and think through what different funders will expect to see.",
         },
         {
             slug: "catering-hospitality",
-            title: "Catering & Hospitality",
+            title: "Catering & hospitality",
             short:
                 "Support for restaurants, cafés and hospitality projects with concept and operations.",
             long:
@@ -80,7 +79,7 @@ const SERVICES_COPY = {
         },
         {
             slug: "international-trade",
-            title: "International Trade & Logistics",
+            title: "International trade & logistics",
             short:
                 "Practical help for businesses moving goods between the UK and African markets.",
             long:
@@ -88,7 +87,7 @@ const SERVICES_COPY = {
         },
         {
             slug: "football-advisory",
-            title: "Football & Sports Advisory",
+            title: "Football & sports advisory",
             short:
                 "Support around talent pathways, club relationships and key decisions.",
             long:
@@ -96,27 +95,24 @@ const SERVICES_COPY = {
         },
         {
             slug: "coaching-training",
-            title: "Coaching & Leadership",
-            short:
-                "One to one and small group sessions for leaders and teams.",
+            title: "Coaching & leadership",
+            short: "One-to-one and small-group sessions for leaders and teams.",
             long:
                 "We focus on clarity of role, communication habits, meeting structure and simple routines that keep projects moving without burning people out.",
         },
         {
             slug: "ai-strategy",
-            title: "Lightweight AI & Workflow Support",
-            short:
-                "Small, practical uses of automation and data in everyday work.",
+            title: "Lightweight AI & workflow support",
+            short: "Small, practical uses of automation and data in everyday work.",
             long:
-                "We review current processes and tools, identify a few high value use cases (often starting with spreadsheets or no-code tools), and outline safe first steps rather than large, risky roll-outs.",
+                "We review current processes and tools, identify a few high-value use cases (often starting with spreadsheets or no-code tools), and outline safe first steps rather than large, risky roll-outs.",
         },
         {
             slug: "mining",
-            title: "Mining & Natural Resources",
-            short:
-                "Early stage support on documentation, stakeholders and cooperation.",
+            title: "Mining & natural resources",
+            short: "Early-stage support on documentation, stakeholders and cooperation.",
             long:
-                "Typical work includes high level stakeholder mapping, basic ESG and community considerations, and preparing clear notes for partners, advisers or authorities.",
+                "Typical work includes high-level stakeholder mapping, basic ESG and community considerations, and preparing clear notes for partners, advisers or authorities.",
         },
     ],
     fr: [
@@ -126,7 +122,7 @@ const SERVICES_COPY = {
             short:
                 "Accompagnement des coopératives, transformateurs et négociants travaillant avec des acheteurs régionaux ou internationaux.",
             long:
-                "Nous aidons à cartographier la chaîne de valeur, clarifier les rôles entre producteurs, intermédiaires et acheteurs, revoir les bases économiques et préparer des accords d’approvisionnement ou d’export simples.",
+                "Nous aidons à cartographier la chaîne de valeur, clarifier les rôles entre producteurs, intermédiaires et acheteurs, vérifier les bases économiques et préparer des accords d’approvisionnement ou d’export simples.",
         },
         {
             slug: "real-estate",
@@ -142,7 +138,7 @@ const SERVICES_COPY = {
             short:
                 "Préparer les échanges avec banques, investisseurs et partenaires financiers.",
             long:
-                "Nous aidons à raconter votre histoire de façon claire, organiser les chiffres clés, préparer présentations et dossiers, et réfléchir à ce que différents financeurs attendront de voir.",
+                "Nous aidons à raconter votre histoire de façon claire, à organiser les chiffres clés, à préparer présentations et dossiers, et à réfléchir à ce que différents financeurs attendront de voir.",
         },
         {
             slug: "catering-hospitality",
@@ -182,7 +178,7 @@ const SERVICES_COPY = {
             short:
                 "Petits usages concrets de l’automatisation et des données dans le quotidien.",
             long:
-                "Nous analysons vos processus et outils actuels, identifions quelques cas d’usage à forte valeur (souvent à partir de tableurs ou d’outils no-code) et proposons des premiers pas sécurisés, plutôt que de grands déploiements risqués.",
+                "Nous analysons vos processus et outils actuels, identifions quelques cas d’usage à forte valeur – souvent à partir de tableurs ou d’outils no-code – et proposons des premiers pas sécurisés plutôt que de grands déploiements risqués.",
         },
         {
             slug: "mining",
@@ -520,8 +516,8 @@ function ServiceCard({ service, ctaLabel }) {
         background: "#ffffff",
         borderRadius: 18,
         padding: "26px 26px 22px",
-        border: "1px solid rgba(0,0,0,0.06)",
-        boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+        border: "1px solid rgba(0, 0, 0, 0.06)",
+        boxShadow: "0 8px 24px rgba(0, 0, 0, 0.06)",
         transition: "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
         cursor: "default",
         position: "relative",
