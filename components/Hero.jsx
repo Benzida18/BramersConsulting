@@ -9,12 +9,12 @@ export default function Hero() {
     // 1) Text for EN + FR
     const lineSets = {
         en: [
-            { text: "Bramers.", color: "#000000" },
+            { text: "Bramers.", color: "#ffffff" },
             { text: "Bridging Markets.", color: "#FFFFFF" },
             { text: "Empowering Institutions.", color: "#FFFFFF" },
         ],
         fr: [
-            { text: "Bramers.", color: "#000000" },
+            { text: "Bramers.", color: "#ffffff" },
             { text: "Relier les marchés.", color: "#FFFFFF" },
             { text: "Renforcer les institutions.", color: "#FFFFFF" },
         ],
