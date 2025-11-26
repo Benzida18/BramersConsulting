@@ -14,54 +14,55 @@ const copy = {
                 markets and enabling institutional cooperation across the UK & Africa.
             </>
         ),
-        founderTitle: "Founder’s Story",
+        founderTitle: "Why Bramers Exists",
         founderBody: (
             <>
-                Bramers was founded by Bouraima Zida, an advisor who believes progress
-                should be deliberate, context-aware, and built on trust. His work across
-                the United Kingdom and West Africa shaped a practice that blends
-                structured analysis with patient relationship-building — the kind that
-                earns access, not just attention.
+                Bramers grew out of a simple observation: many good ideas fail not
+                because they lack ambition, but because they lack structure, trusted
+                relationships, and the right pace. Too often, organisations try to move
+                quickly in complex environments without first aligning people, context
+                and execution.
                 <br />
                 <br />
-                Early in his career, Bouraima saw how promising initiatives stall when
-                strategy ignores people and place. He also saw how modest, well-sequenced
-                decisions compound into durable results. That discipline informs Bramers
-                today: clarify the goal, align the stakeholders, and move at the right
-                pace — no faster than trust allows, no slower than opportunity requires.
+                The firm was founded by Bouraima Zida after years working between the
+                United Kingdom and West Africa, where he saw the same pattern repeat:
+                projects with strong intent but unclear ownership, fragmented
+                communication and little documentation. Bramers was created to be a
+                different kind of partner one that takes the time to understand the
+                ground reality, then helps leaders move forward in a measured, organised
+                way.
                 <br />
                 <br />
-                Bouraima’s focus areas include business structuring, leadership
-                development, market entry, and cross-border partnership building. He
-                works quietly and thoroughly, favouring clear commitments over broad
-                claims. Clients value the combination of steady communication, cultural
-                fluency, and a bias for documentation — turning complex intentions into
-                workable plans with owners, timelines, and accountability.
+                Today, Bramers works with clients on questions of market entry,
+                cross border partnerships, leadership and organisational design. The
+                practice is deliberately lean so that work stays hands on and discreet.
+                Rather than chasing scale, Bramers focuses on a small number of
+                relationships where clarity, trust and continuity matter more than
+                visibility.
                 <br />
                 <br />
-                Bramers remains intentionally lean. That choice keeps the work hands-on
-                and responsive, and it preserves the discretion expected in sensitive
-                contexts. When scale is required, Bouraima coordinates specialist partners
-                under a single, simple principle: clarity first, then consistency, always
-                with respect. The result is an advisory relationship that is measured,
-                human, and built to last.
+                Every mandate follows the same principle: define the goal in plain
+                language, map the constraints, document the plan, and build momentum
+                step by step. That is the core of Bramers a steady, quietly rigorous
+                advisory practice for people who need to make decisions that will still
+                make sense years from now.
             </>
         ),
         whatTitle: "What Bramers Do",
         whatBody: (
             <>
-                We help leaders simplify choices, structure initiatives, and set momentum
-                for sustainable outcomes. The work typically spans three areas that
-                reinforce each other.
+                We help leaders simplify choices, structure initiatives, and set
+                momentum for sustainable outcomes. The work typically spans three areas
+                that reinforce each other.
             </>
         ),
         cards: [
             {
                 title: "Market Strategy & Positioning",
-                desc: "Define where to play and how to win. We map demand drivers, entry paths, and competitive edges — then align internal capabilities to the chosen path.",
+                desc: "Define where to play and how to win. We map demand drivers, entry paths, and competitive edges then align internal capabilities to the chosen path.",
                 bullets: [
                     "Opportunity scanning & prioritisation",
-                    "Route-to-market & sequencing",
+                    "Route to market & sequencing",
                     "Operating model & governance setup",
                 ],
             },
@@ -76,17 +77,17 @@ const copy = {
             },
             {
                 title: "International Partnerships",
-                desc: "Establish trusted cross-border relationships. We focus on credibility, clarity of value exchange, and durable collaboration mechanisms.",
+                desc: "Establish trusted cross border relationships. We focus on credibility, clarity of value exchange, and durable collaboration mechanisms.",
                 bullets: [
                     "Partner profiling & introductions",
-                    "Term-sheet scaffolding",
+                    "Term sheet scaffolding",
                     "Delivery PMO & performance reviews",
                 ],
             },
         ],
         quote: (
             <>
-                “Bramers exists to help people move forward with clarity — at the right
+                “Bramers exists to help people move forward with clarity at the right
                 pace, in the right direction.”
             </>
         ),
@@ -100,44 +101,40 @@ const copy = {
                 l’Afrique.
             </>
         ),
-        founderTitle: "L’histoire du fondateur",
+        founderTitle: "Pourquoi Bramers existe",
         founderBody: (
             <>
-                Bramers a été fondé par Bouraima Zida, un conseiller qui est convaincu
-                que le progrès doit être réfléchi, ancré dans le contexte et construit
-                sur la confiance. Son travail entre le Royaume-Uni et l’Afrique de l’Ouest
-                a façonné une pratique qui combine analyse structurée et relations
-                patiemment cultivées — le type de travail qui ouvre des portes plutôt que
-                de seulement attirer l’attention.
+                Bramers est né d’un constat simple : beaucoup de bonnes idées échouent
+                non pas par manque d’ambition, mais par manque de structure, de
+                relations de confiance et de bon tempo. Trop souvent, les organisations
+                veulent aller vite dans des environnements complexes sans avoir d’abord
+                aligné les personnes, le contexte et l’exécution.
                 <br />
                 <br />
-                Très tôt, Bouraima a observé comment des initiatives prometteuses se
-                bloquent lorsque la stratégie ignore les personnes et les réalités
-                locales. Il a également vu comment des décisions modestes mais bien
-                séquencées s’additionnent pour produire des résultats durables. Cette
-                discipline inspire Bramers aujourd’hui : clarifier l’objectif, aligner
-                les parties prenantes et avancer au bon rythme — jamais plus vite que ce
-                que la confiance permet, jamais plus lentement que ce que l’opportunité
-                exige.
+                Le cabinet a été fondé par Bouraima Zida après plusieurs années passées
+                entre le Royaume-Uni et l’Afrique de l’Ouest, où il a vu le même schéma
+                se répéter : des projets portés par une forte intention, mais avec une
+                gouvernance floue, une communication fragmentée et très peu de
+                documentation. Bramers a été créé pour offrir un autre type d’appui un
+                partenaire qui prend le temps de comprendre la réalité du terrain, puis
+                aide les dirigeants à avancer de manière mesurée et organisée.
                 <br />
                 <br />
-                Ses domaines d’intervention incluent la structuration d’entreprise, le
-                développement du leadership, l’entrée sur de nouveaux marchés et la
-                construction de partenariats transfrontaliers. Il travaille de manière
-                discrète et rigoureuse, privilégiant des engagements clairs à de grandes
-                promesses. Les clients apprécient la combinaison de communication
-                régulière, de sensibilité culturelle et de rigueur dans la
-                documentation — transformer des intentions complexes en plans concrets,
-                avec responsables, échéances et redevabilité.
+                Aujourd’hui, Bramers accompagne ses clients sur des sujets d’entrée de
+                marché, de partenariats transfrontaliers, de leadership et de
+                conception organisationnelle. La structure est volontairement légère
+                afin de garder un travail pratique, proche des dossiers, et de préserver
+                la discrétion attendue dans les contextes sensibles. Plutôt que de
+                rechercher la taille, Bramers se concentre sur un nombre limité de
+                relations où la clarté, la confiance et la continuité comptent plus que
+                la visibilité.
                 <br />
                 <br />
-                Bramers reste volontairement une structure légère. Ce choix permet un
-                accompagnement pratique et réactif, tout en préservant la discrétion
-                attendue dans les contextes sensibles. Lorsque la taille du projet le
-                nécessite, Bouraima coordonne des partenaires spécialisés autour d’un
-                principe simple : d’abord la clarté, puis la cohérence, toujours avec
-                respect. Le résultat est une relation de conseil mesurée, humaine et
-                construite pour durer.
+                Chaque mandat suit le même principe : définir l’objectif en termes
+                simples, cartographier les contraintes, documenter le plan et construire
+                l’élan étape par étape. C’est l’ADN de Bramers une pratique de conseil
+                rigoureuse mais discrète, pour des décisions qui doivent encore avoir du
+                sens dans plusieurs années.
             </>
         ),
         whatTitle: "Ce que fait Bramers",
@@ -172,21 +169,21 @@ const copy = {
                 desc: "Établir des relations transfrontalières de confiance. Nous mettons l’accent sur la crédibilité, la clarté de la valeur échangée et des mécanismes de collaboration durables.",
                 bullets: [
                     "Profilage des partenaires & mises en relation",
-                    "Pré-structuration de term-sheets",
+                    "Pré structuration de term sheets",
                     "PMO de mise en œuvre & revues de performance",
                 ],
             },
         ],
         quote: (
             <>
-                « Bramers existe pour aider les personnes à avancer avec clarté — au bon
+                « Bramers existe pour aider les personnes à avancer avec clarté au bon
                 rythme et dans la bonne direction. »
             </>
         ),
     },
 };
 
-/** Reveal-on-scroll hook (unchanged) */
+/** Reveal-on-scroll hook */
 function useRevealOnce(selector) {
     const played = useRef(new WeakSet());
 
@@ -195,8 +192,8 @@ function useRevealOnce(selector) {
         if (!els.length) return;
 
         const io = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((e) => {
+            entries => {
+                entries.forEach(e => {
                     const el = e.target;
                     if (e.isIntersecting) {
                         el.classList.add("is-visible");
@@ -206,14 +203,14 @@ function useRevealOnce(selector) {
                         }
                     } else {
                         // Hide when passed, but do NOT remove has-played (no replay)
-                        el.classList.remove("is-visible");
+                        el.classList.remove("is-visible"); // ✅ fixed
                     }
                 });
             },
             { threshold: 0.25 }
         );
 
-        els.forEach((el) => io.observe(el));
+        els.forEach(el => io.observe(el));
         return () => io.disconnect();
     }, [selector]);
 }
@@ -351,7 +348,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ===== SECTION 2: “What Bramers Does” ===== */}
+            {/* ===== SECTION 2: “What Bramers Do” ===== */}
             <section
                 style={{
                     maxWidth: 1200,
@@ -386,7 +383,7 @@ export default function AboutPage() {
                     </p>
                 </div>
 
-                {/* Premium cards */}
+                {/* Premium cards with subtle blue gradient */}
                 <div
                     data-reveal="cards"
                     className="reveal cards-grid"
@@ -411,7 +408,7 @@ export default function AboutPage() {
                             <p
                                 style={{
                                     fontSize: 15.5,
-                                    color: "#4a4a4a",
+                                    color: "#1f2933",
                                     lineHeight: 1.66,
                                     marginBottom: 14,
                                 }}
@@ -422,7 +419,7 @@ export default function AboutPage() {
                                 style={{
                                     paddingLeft: 18,
                                     margin: 0,
-                                    color: "#333",
+                                    color: "#111827",
                                     lineHeight: 1.6,
                                 }}
                             >
@@ -488,6 +485,7 @@ export default function AboutPage() {
                     transition: opacity 600ms ease, transform 600ms ease;
                     will-change: opacity, transform;
                 }
+
                 /* first-time entry animations */
                 .reveal[data-reveal='fade-up'].is-visible:not(.has-played) {
                     opacity: 1;
@@ -503,6 +501,7 @@ export default function AboutPage() {
                     transform: translateX(0);
                     animation: slideRightOnce 650ms ease forwards;
                 }
+
                 /* after it has played once, simply show/hide without replaying keyframes */
                 .reveal.has-played.is-visible {
                     opacity: 1;
@@ -533,19 +532,34 @@ export default function AboutPage() {
                     }
                 }
 
+                /* Gradient cards */
                 .cards-grid .card {
-                    background: #fff;
+                    position: relative;
+                    background: radial-gradient(
+                            circle at top left,
+                            rgba(30, 144, 255, 0.18),
+                            transparent 55%
+                    ),
+                    #ffffff;
                     border-radius: 18px;
                     padding: 26px 28px;
-                    border: 1px solid rgba(0, 0, 0, 0.06);
-                    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+                    border: 1px solid rgba(148, 163, 184, 0.5);
+                    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
                     transition: transform 250ms ease, box-shadow 250ms ease,
-                    border-color 250ms ease;
+                    border-color 250ms ease, background 250ms ease;
+                    backdrop-filter: blur(4px);
                 }
+
                 .cards-grid .card:hover {
                     transform: translateY(-6px);
                     border-color: #1e90ff;
-                    box-shadow: 0 18px 44px rgba(30, 144, 255, 0.16);
+                    box-shadow: 0 20px 60px rgba(30, 144, 255, 0.25);
+                    background: radial-gradient(
+                            circle at top left,
+                            rgba(30, 144, 255, 0.26),
+                            transparent 60%
+                    ),
+                    #ffffff;
                 }
             `}</style>
         </main>

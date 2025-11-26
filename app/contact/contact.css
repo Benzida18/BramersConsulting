@@ -291,3 +291,68 @@
         font-size: 36px;
     }
 }
+/* ====== INDUSTRY CHECKBOX GRID ====== */
+
+.interests-group {
+    margin-top: 6px;
+}
+
+.interests-heading {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #05060fb0;
+    margin: 4px 0 8px;
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+}
+
+.interests-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #222;
+    cursor: pointer;
+}
+
+/* nicer checkbox */
+.interests-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    border: 1.5px solid rgba(15, 23, 42, 0.35);
+    appearance: none;
+    -webkit-appearance: none;
+    background: #ffffff;
+    display: inline-block;
+    position: relative;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interests-option input[type="checkbox"]:checked {
+    background: #4f46e5;
+    border-color: #4338ca;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+}
+
+.interests-option input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 4px;
+    background: white;
+    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M6.173 12.414 2.11 8.35l1.414-1.414 2.65 2.65 6.3-6.3 1.414 1.414z'/%3E%3C/svg%3E");
+    mask-size: 12px 12px;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+@media (max-width: 640px) {
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+}

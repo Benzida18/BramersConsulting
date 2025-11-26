@@ -14,11 +14,21 @@ const COPY = {
 
         eyebrow: "Contact",
         headline: "Start a conversation about your next cross-border decision.",
-        body: "Share a brief outline of your organisation, the markets you operate in and the question you're currently working through. We will respond with a considered reply rather than a generic template.",
-        bullets: [
-            "Discreet, partner-level response – no mailing lists.",
-            "Comfortable signing NDAs where appropriate.",
-            "Advisory across the UK, Europe and African markets.",
+        body: "Share a short note about your organisation, the markets you operate in, and the question you are working through. We will read it carefully and respond with a considered reply rather than a generic template.",
+
+        // NEW: sector selection copy
+        interestHeading: "Which sectors are you interested in?",
+        interestOptions: [
+            { value: "Agribusiness", label: "Agribusiness" },
+            { value: "Real estate & infrastructure", label: "Real Estate & Infrastructure" },
+            { value: "Financial services", label: "Financial services" },
+            { value: "Hospitality & catering", label: "Hospitality & Catering" },
+            { value: "International trade & logistics", label: "International Trade & Logistics" },
+            { value: "Sports & football advisory", label: "Sports & Football Advisory" },
+            { value: "Coaching & training", label: "Coaching & Training" },
+            { value: "AI strategy", label: "AI Strategy" },
+            { value: "Mining & natural resources", label: "Mining & Natural Resources" },
+            { value: "Other / not sure", label: "Other / not sure yet" },
         ],
 
         firstName: "First name",
@@ -36,18 +46,43 @@ const COPY = {
         eyebrow: "Contact",
         headline:
             "Engageons une conversation sur votre prochaine décision transfrontalière.",
-        body: "Partagez une brève description de votre organisation, des marchés dans lesquels vous opérez et de la question que vous examinez actuellement. Nous répondrons avec un avis réfléchi plutôt qu’un modèle générique.",
-        bullets: [
-            "Réponse discrète au niveau partenaire – aucune liste de diffusion.",
-            "Habitués à signer des accords de confidentialité (NDA) lorsque nécessaire.",
-            "Conseil couvrant les marchés du Royaume-Uni, de l’Europe et de l’Afrique.",
+        body: "Envoyez-nous quelques lignes sur votre organisation, les marchés dans lesquels vous opérez et la question que vous examinez actuellement. Nous lirons votre message avec attention et répondrons par un avis réfléchi, pas par un modèle générique.",
+
+        // NEW: sector selection copy (FR)
+        interestHeading: "Quels secteurs vous intéressent ?",
+        interestOptions: [
+            { value: "Agribusiness", label: "Agro-industrie" },
+            {
+                value: "Real estate & infrastructure",
+                label: "Immobilier et infrastructures",
+            },
+            { value: "Financial services", label: "Services financiers" },
+            {
+                value: "Hospitality & catering",
+                label: "Hôtellerie & restauration",
+            },
+            {
+                value: "International trade & logistics",
+                label: "Commerce international & logistique",
+            },
+            {
+                value: "Sports & football advisory",
+                label: "Conseil sportif & football",
+            },
+            { value: "Coaching & training", label: "Coaching & formation" },
+            { value: "AI strategy", label: "Stratégie IA" },
+            {
+                value: "Mining & natural resources",
+                label: "Mines & ressources naturelles",
+            },
+            { value: "Other / not sure", label: "Autre / incertain pour l’instant" },
         ],
 
         firstName: "Prénom",
         surname: "Nom de famille",
         email: "Adresse e-mail",
         phone: "Numéro de téléphone",
-        messageLabel: "Comment pouvons-nous vous aider ?",
+        messageLabel: "Comment pouvons nous vous aider ?",
         messagePlaceholder:
             "Partagez un bref résumé de votre mandat, de vos marchés et de vos échéances.",
         sendText: "Envoyer le message",
@@ -81,11 +116,6 @@ export default function ContactPage() {
                     <p className="contact-eyebrow-small">{t.eyebrow}</p>
                     <h2 className="contact-copy-title">{t.headline}</h2>
                     <p className="contact-copy-text">{t.body}</p>
-                    <ul className="contact-copy-bullets">
-                        {t.bullets.map((item) => (
-                            <li key={item}>{item}</li>
-                        ))}
-                    </ul>
                 </div>
 
                 <div className="contact-card">
@@ -94,7 +124,7 @@ export default function ContactPage() {
                         method="POST"
                         className="contact-form"
                     >
-                        {/* Web3Forms config – unchanged */}
+                        {/* Web3Forms config */}
                         <input
                             type="hidden"
                             name="access_key"
@@ -173,6 +203,27 @@ export default function ContactPage() {
                                         autoComplete: "tel",
                                     }}
                                 />
+                            </div>
+                        </div>
+
+                        {/* NEW: SECTOR CHECKBOXES */}
+                        <div className="input-group interests-group">
+                            <p className="interests-heading">{t.interestHeading}</p>
+                            <div className="interests-grid">
+                                {t.interestOptions.map((opt) => (
+                                    <label
+                                        key={opt.value}
+                                        className="interests-option"
+                                    >
+                                        {/* all share the same name so Web3Forms groups them */}
+                                        <input
+                                            type="checkbox"
+                                            name="industries"
+                                            value={opt.value}
+                                        />
+                                        <span>{opt.label}</span>
+                                    </label>
+                                ))}
                             </div>
                         </div>
 
