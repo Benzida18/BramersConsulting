@@ -85,7 +85,7 @@ export default function HowWeWork() {
     return (
         <section className="how-section">
             <div className="how-inner">
-                {/* TOP: text left, image right */}
+                {/* TOP: text left, video right */}
                 <div className="how-top">
                     <header className="how-header">
                         <p className="how-kicker">{t.kicker}</p>
@@ -98,9 +98,12 @@ export default function HowWeWork() {
                     </header>
 
                     <div className="how-image-wrap" aria-hidden="true">
-                        <img
-                            src="/images/london.jpg"
-                            alt="London skyline"
+                        <video
+                            src="/videos/london.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
                             className="how-image"
                         />
                     </div>
