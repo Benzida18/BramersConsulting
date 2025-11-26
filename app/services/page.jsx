@@ -10,37 +10,35 @@ const TEXT = {
     en: {
         heroTitle: "Services",
         heroSubtitle:
-            "Advisory built for clarity and steady execution—bridging the UK and African markets with practical structures, respectful relationships, and measurable progress.",
-        approachHeading: "Our Approach",
+            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow through.",
+        approachHeading: "How We Work",
         approachBody:
-            "We start with context: the people, constraints, and levers that actually move a project forward. Then we co-design a simple operating rhythm—decisions, reviews, and clear ownership—so momentum is maintained. We avoid noise, document agreements, and build trusted partnerships that last. Progress becomes consistent, not frantic.",
+            "Most of our work starts with a conversation: where you are today, who is involved, and what decision or project is stuck. We then suggest a short, practical plan usually a few pages, not a big report and stay close while you test it. The aim is not to promise everything, but to move one step at a time with less noise and more clarity.",
         approachList: [
-            "Clear roles & decisions (no ambiguity).",
-            "Lightweight governance and useful reporting.",
-            "Respect for culture, timing, and stakeholder priorities.",
-            "Measurable milestones—small wins compounding over time.",
+            "Start with a short diagnostic call and a clear follow-up note.",
+            "Agree who does what and by when, including Bramers’ role.",
+            "Stay available between sessions for quick questions and course-corrections.",
         ],
-        gridTitle: "What We Deliver",
+        gridTitle: "Service Areas",
         gridIntro:
-            "Each service mirrors an industry context we know well. Hover to explore how we work—no clicks required. When ready, book a session to map your next step with us.",
-        ctaLabel: "Learn More",
+            "Most assignments sit in one of these areas. Each project is different, but the pattern is similar: understand your context, shape a realistic plan, and support you while you deliver.",
+        ctaLabel: "Learn more",
     },
     fr: {
         heroTitle: "Services",
         heroSubtitle:
-            "Un conseil conçu pour la clarté et une exécution régulière — en reliant les marchés du Royaume-Uni et de l’Afrique grâce à des structures pratiques, des relations respectueuses et des progrès mesurables.",
-        approachHeading: "Notre approche",
+            "Bramers aide les dirigeants et leurs équipes à planifier, structurer et faire avancer leurs projets entre le Royaume-Uni et les marchés africains. Nous privilégions les échanges clairs, des documents simples et un accompagnement régulier.",
+        approachHeading: "Notre manière de travailler",
         approachBody:
-            "Nous commençons par le contexte : les personnes, les contraintes et les leviers qui font réellement avancer un projet. Ensuite, nous co-construisons un rythme de travail simple — décisions, revues et responsabilités claires — afin de garder l’élan. Nous évitons le bruit, documentons les accords et bâtissons des relations de confiance durables. Les progrès deviennent réguliers, plutôt que précipités.",
+            "La plupart des missions commencent par une conversation : votre situation actuelle, les personnes impliquées et la décision ou le projet qui bloque. Nous proposons ensuite un plan court et concret généralement quelques pages, pas un long rapport et restons présents pendant les premières étapes. L’objectif n’est pas de tout promettre, mais d’avancer pas à pas avec moins de bruit et plus de clarté.",
         approachList: [
-            "Rôles et décisions clairs (aucune ambiguïté).",
-            "Gouvernance légère et reporting utile.",
-            "Respect de la culture, du timing et des priorités des parties prenantes.",
-            "Jalons mesurables — de petits gains qui se cumulent dans le temps.",
+            "Démarrer par un échange de diagnostic et une note de synthèse claire.",
+            "Accord précis sur qui fait quoi et pour quand, y compris le rôle de Bramers.",
+            "Disponibilité entre les séances pour les questions rapides et les ajustements.",
         ],
-        gridTitle: "Ce que nous apportons",
+        gridTitle: "Domaines d’intervention",
         gridIntro:
-            "Chaque service reflète un contexte sectoriel que nous connaissons bien. Survolez pour découvrir notre manière de travailler. Quand vous êtes prêt, réservez une session pour cartographier votre prochaine étape avec nous.",
+            "La plupart des missions entrent dans l’un de ces domaines. Chaque contexte est particulier, mais la logique reste la même : comprendre votre réalité, définir un plan réaliste et vous accompagner dans l’exécution.",
         ctaLabel: "En savoir plus",
     },
 };
@@ -52,69 +50,73 @@ const SERVICES_COPY = {
             slug: "agribusiness",
             title: "Agribusiness Advisory",
             short:
-                "Value-chain mapping, export readiness, and market access across UK–Africa routes.",
+                "Support for cooperatives, processors and traders working with regional or overseas buyers.",
             long:
-                "We align producers, processors, and distributors; design cold-chain/logistics flows; and structure partnerships with reliable off-takers.",
+                "Typical work includes mapping the value chain, clarifying roles between farmers, aggregators and off takers, reviewing basic unit economics and preparing simple export or supply agreements.",
         },
         {
             slug: "real-estate",
             title: "Real Estate & Infrastructure",
             short:
-                "Site selection, capital structuring, and delivery governance for resilient assets.",
+                "Help for families, developers and partners to organise land and building projects.",
             long:
-                "From feasibility to execution, we support JV models, risk allocation, and stakeholder engagement to keep programmes bankable.",
+                "We work on feasibility notes, stakeholder maps, simple JV structures and delivery rhythms so that decisions, approvals and payments move in a sensible order.",
         },
         {
             slug: "finance",
-            title: "Financial Advisory",
-            short: "Capital strategy, investor relations, and transaction preparation.",
+            title: "Financial Support & Preparation",
+            short:
+                "Preparing for conversations with banks, investors and partners.",
             long:
-                "We help prepare datarooms, refine investment theses, and map suitable sources of capital across institutional and private channels.",
+                "We help you explain your story in plain language, organise key numbers, prepare pitch decks or data packs, and think through what different funders will want to see.",
         },
         {
             slug: "catering-hospitality",
             title: "Catering & Hospitality",
             short:
-                "Concept design, service standards, and unit economics for premium experiences.",
+                "Support for restaurants, cafés and hospitality projects with concept and operations.",
             long:
-                "Menu engineering, staffing models, and supplier programmes that balance guest delight with margin discipline.",
+                "Assignments often cover offer design, simple unit economics, staffing patterns and supplier relationships, so that the guest experience and the numbers work together.",
         },
         {
             slug: "international-trade",
-            title: "International Trade & Export",
+            title: "International Trade & Logistics",
             short:
-                "Market entry, compliance pathways, and cross-border partnership building.",
+                "Practical help for businesses moving goods between the UK and African markets.",
             long:
-                "We clarify tariff and non-tariff barriers, secure distributors, and sequence pilots to de-risk expansion.",
+                "We look at routes, partners, basic compliance steps and paperwork, then agree a simple sequence for pilots so you can learn without taking unnecessary risk.",
         },
         {
             slug: "football-advisory",
-            title: "Football Advisory",
-            short: "Talent pathways, club relations, and governance alignment.",
+            title: "Football & Sports Advisory",
+            short:
+                "Support around talent pathways, club relationships and key decisions.",
             long:
-                "We design development frameworks, stakeholder protocols, and transparent reporting that protect athlete welfare and value.",
+                "Work can include mapping options for young players, reviewing trial or scholarship opportunities, and helping families or clubs prepare for discussions and agreements.",
         },
         {
             slug: "coaching-training",
             title: "Coaching & Leadership",
-            short: "Practical leadership development and team performance systems.",
+            short:
+                "One to one and small group sessions for leaders and teams.",
             long:
-                "Clarity frameworks, feedback cultures, and cadence rituals that sustain execution without burnout.",
+                "We focus on clarity of role, communication habits, meeting structure and simple routines that keep projects moving without burning people out.",
         },
         {
             slug: "ai-strategy",
-            title: "AI Strategy",
+            title: "Lightweight AI & Workflow Support",
             short:
-                "Pragmatic automation and decision support—grounded in real workflows.",
+                "Small, practical uses of automation and data in everyday work.",
             long:
-                "Opportunity scans, vendor selection, and adoption roadmaps that respect data governance and change management.",
+                "We review current processes and tools, identify a few high value use cases (often starting with spreadsheets or no-code tools), and outline safe first steps rather than large, risky roll-outs.",
         },
         {
             slug: "mining",
             title: "Mining & Natural Resources",
-            short: "Licensing pathways, ESG alignment, and community engagement.",
+            short:
+                "Early stage support on documentation, stakeholders and cooperation.",
             long:
-                "Stakeholder maps, risk registers, and partnerships that keep projects viable and respectful of local context.",
+                "Typical work includes high level stakeholder mapping, basic ESG and community considerations, and preparing clear notes for partners, advisers or authorities.",
         },
     ],
     fr: [
@@ -122,73 +124,73 @@ const SERVICES_COPY = {
             slug: "agribusiness",
             title: "Conseil en agribusiness",
             short:
-                "Cartographie des chaînes de valeur, préparation à l’export et accès aux marchés sur les corridors Royaume-Uni–Afrique.",
+                "Accompagnement des coopératives, transformateurs et négociants travaillant avec des acheteurs régionaux ou internationaux.",
             long:
-                "Nous alignons producteurs, transformateurs et distributeurs ; concevons les flux logistiques/chaîne du froid ; et structurons des partenariats avec des acheteurs fiables.",
+                "Nous aidons à cartographier la chaîne de valeur, clarifier les rôles entre producteurs, intermédiaires et acheteurs, revoir les bases économiques et préparer des accords d’approvisionnement ou d’export simples.",
         },
         {
             slug: "real-estate",
-            title: "Immobilier & Infrastructures",
+            title: "Immobilier & infrastructures",
             short:
-                "Sélection des sites, structuration du capital et gouvernance de livraison pour des actifs résilients.",
+                "Soutien aux familles, promoteurs et partenaires pour organiser des projets fonciers et immobiliers.",
             long:
-                "De la faisabilité à l’exécution, nous accompagnons les JV, l’allocation des risques et l’engagement des parties prenantes pour maintenir la bancabilité des programmes.",
+                "Nous travaillons sur des notes de faisabilité, des cartes des parties prenantes, des structures de partenariat simples et un rythme de suivi pour que décisions, validations et paiements s’enchaînent dans le bon ordre.",
         },
         {
             slug: "finance",
-            title: "Conseil financier",
+            title: "Préparation financière",
             short:
-                "Stratégie de capital, relations investisseurs et préparation des transactions.",
+                "Préparer les échanges avec banques, investisseurs et partenaires financiers.",
             long:
-                "Nous aidons à préparer les datarooms, affiner les thèses d’investissement et cartographier les bonnes sources de capital, institutionnelles ou privées.",
+                "Nous aidons à raconter votre histoire de façon claire, organiser les chiffres clés, préparer présentations et dossiers, et réfléchir à ce que différents financeurs attendront de voir.",
         },
         {
             slug: "catering-hospitality",
-            title: "Hôtellerie & Restauration",
+            title: "Hôtellerie & restauration",
             short:
-                "Conception de concepts, standards de service et économie unitaire pour des expériences premium.",
+                "Soutien aux restaurants, cafés et projets hôteliers sur le concept et l’exploitation.",
             long:
-                "Ingénierie de menu, modèles d’effectifs et programmes fournisseurs qui concilient satisfaction client et discipline de marge.",
+                "Les missions portent souvent sur l’offre, l’économie unitaire de base, l’organisation des équipes et la relation fournisseurs, afin d’aligner expérience client et viabilité économique.",
         },
         {
             slug: "international-trade",
-            title: "Commerce international & export",
+            title: "Commerce international & logistique",
             short:
-                "Entrée sur de nouveaux marchés, conformité et construction de partenariats transfrontaliers.",
+                "Aide pratique pour les entreprises qui déplacent des biens entre le Royaume-Uni et l’Afrique.",
             long:
-                "Nous clarifions les barrières tarifaires et non tarifaires, sécurisons des distributeurs et séquençons les pilotes pour réduire le risque d’expansion.",
+                "Nous examinons les routes possibles, les partenaires, les étapes de conformité et la documentation, puis convenons d’une séquence de pilotes pour apprendre sans prendre de risque excessif.",
         },
         {
             slug: "football-advisory",
-            title: "Conseil en football",
+            title: "Conseil en football & sport",
             short:
-                "Parcours de talents, relations entre clubs et alignement de la gouvernance.",
+                "Accompagnement sur les parcours de talents, les relations avec les clubs et les décisions clés.",
             long:
-                "Nous concevons des cadres de développement, des protocoles avec les parties prenantes et un reporting transparent qui protège la valeur et le bien-être des joueurs.",
+                "Le travail peut inclure la cartographie des options pour les jeunes joueurs, l’examen d’essais ou de bourses, et la préparation des familles ou des clubs aux discussions et aux accords.",
         },
         {
             slug: "coaching-training",
             title: "Coaching & leadership",
             short:
-                "Développement de leadership pragmatique et systèmes de performance d’équipe.",
+                "Séances individuelles et en petits groupes pour dirigeants et équipes.",
             long:
-                "Cadres de clarté, culture du feedback et rituels de cadence qui soutiennent l’exécution sans épuisement.",
+                "Nous travaillons sur la clarté des rôles, les habitudes de communication, la structure des réunions et des routines simples qui permettent d’avancer sans épuiser les personnes.",
         },
         {
             slug: "ai-strategy",
-            title: "Stratégie d’IA",
+            title: "IA légère & organisation du travail",
             short:
-                "Automatisation pragmatique et aide à la décision, ancrées dans les flux de travail réels.",
+                "Petits usages concrets de l’automatisation et des données dans le quotidien.",
             long:
-                "Identification des opportunités, sélection des fournisseurs et feuilles de route d’adoption respectueuses de la gouvernance des données et de la conduite du changement.",
+                "Nous analysons vos processus et outils actuels, identifions quelques cas d’usage à forte valeur (souvent à partir de tableurs ou d’outils no-code) et proposons des premiers pas sécurisés, plutôt que de grands déploiements risqués.",
         },
         {
             slug: "mining",
             title: "Mines & ressources naturelles",
             short:
-                "Parcours d’obtention de licences, alignement ESG et engagement communautaire.",
+                "Soutien en amont sur la documentation, les parties prenantes et la coopération.",
             long:
-                "Cartographies des parties prenantes, registres de risques et partenariats qui maintiennent la viabilité des projets tout en respectant le contexte local.",
+                "Les missions incluent souvent une cartographie des acteurs, les premiers éléments ESG et communautaires, et la préparation de notes claires pour les partenaires, conseillers ou autorités.",
         },
     ],
 };
