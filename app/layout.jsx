@@ -5,6 +5,7 @@ import "../components/Mobile/MobileHeader.css";
 import { Inter, Playfair_Display } from "next/font/google";
 import SiteShell from "@/components/SiteShell";
 import { LanguageProvider } from "@/components/LanguageContext";
+import { Analytics } from "@vercel/analytics/react"; // 👈 NEW
 
 const inter = Inter({ subsets: ["latin"] });
 const playfair = Playfair_Display({ subsets: ["latin"] });
@@ -21,6 +22,9 @@ export default function RootLayout({ children }) {
         <LanguageProvider>
             <SiteShell>{children}</SiteShell>
         </LanguageProvider>
+
+        {/* 👇 Add Analytics once at the bottom of body */}
+        <Analytics />
         </body>
         </html>
     );
