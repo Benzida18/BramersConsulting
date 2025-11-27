@@ -19,16 +19,17 @@ const copy = {
             <>
                 Bramers grew out of a simple observation: many good ideas fail not
                 because they lack ambition, but because they lack structure, trusted
-                relationships, and the right pace. Too often, organisations try to move
+                relationships and the right pace. Too often, organisations try to move
                 quickly in complex environments without first aligning people, context
                 and execution.
                 <br />
                 <br />
                 The firm was founded by Bouraima Zida after years working between the
-                United Kingdom and West Africa, where he saw the same pattern repeat:
-                projects with strong intent but unclear ownership, fragmented
+                United Kingdom and West Africa, across banking, catering and hospitality,
+                and coaching and training. In each setting he saw the same pattern
+                repeat: projects with strong intent but unclear ownership, fragmented
                 communication and little documentation. Bramers was created to be a
-                different kind of partner one that takes the time to understand the
+                different kind of partner, one that takes the time to understand the
                 ground reality, then helps leaders move forward in a measured, organised
                 way.
                 <br />
@@ -42,8 +43,8 @@ const copy = {
                 <br />
                 <br />
                 Every mandate follows the same principle: define the goal in plain
-                language, map the constraints, document the plan, and build momentum
-                step by step. That is the core of Bramers a steady, quietly rigorous
+                language, map the constraints, document the plan and build momentum
+                step by step. That is the core of Bramers, a steady, quietly rigorous
                 advisory practice for people who need to make decisions that will still
                 make sense years from now.
             </>
@@ -51,7 +52,7 @@ const copy = {
         whatTitle: "What Bramers Do",
         whatBody: (
             <>
-                We help leaders simplify choices, structure initiatives, and set
+                We help leaders simplify choices, structure initiatives and set
                 momentum for sustainable outcomes. The work typically spans three areas
                 that reinforce each other.
             </>
@@ -59,7 +60,7 @@ const copy = {
         cards: [
             {
                 title: "Market Strategy & Positioning",
-                desc: "Define where to play and how to win. We map demand drivers, entry paths, and competitive edges then align internal capabilities to the chosen path.",
+                desc: "Define where to play and how to win. We map demand drivers, entry paths and competitive edges, then align internal capabilities to the chosen path.",
                 bullets: [
                     "Opportunity scanning & prioritisation",
                     "Route to market & sequencing",
@@ -77,7 +78,7 @@ const copy = {
             },
             {
                 title: "International Partnerships",
-                desc: "Establish trusted cross border relationships. We focus on credibility, clarity of value exchange, and durable collaboration mechanisms.",
+                desc: "Establish trusted cross border relationships. We focus on credibility, clarity of value exchange and durable collaboration mechanisms.",
                 bullets: [
                     "Partner profiling & introductions",
                     "Term sheet scaffolding",
@@ -112,12 +113,14 @@ const copy = {
                 <br />
                 <br />
                 Le cabinet a été fondé par Bouraima Zida après plusieurs années passées
-                entre le Royaume-Uni et l’Afrique de l’Ouest, où il a vu le même schéma
-                se répéter : des projets portés par une forte intention, mais avec une
-                gouvernance floue, une communication fragmentée et très peu de
-                documentation. Bramers a été créé pour offrir un autre type d’appui un
-                partenaire qui prend le temps de comprendre la réalité du terrain, puis
-                aide les dirigeants à avancer de manière mesurée et organisée.
+                entre le Royaume-Uni et l’Afrique de l’Ouest, dans la banque,
+                l’hôtellerie-restauration et des missions de coaching et de formation.
+                Partout, il a constaté la même situation : des projets portés par une
+                forte intention, mais avec une gouvernance floue, une communication
+                fragmentée et très peu de documentation. Bramers a été créé pour offrir
+                un autre type d’appui, un partenaire qui prend le temps de comprendre la
+                réalité du terrain, puis aide les dirigeants à avancer de manière
+                mesurée et organisée.
                 <br />
                 <br />
                 Aujourd’hui, Bramers accompagne ses clients sur des sujets d’entrée de
@@ -130,9 +133,9 @@ const copy = {
                 la visibilité.
                 <br />
                 <br />
-                Chaque mandat suit le même principe : définir l’objectif en termes
+                Chaque mandat suit le même principe : définir l’objectif avec des mots
                 simples, cartographier les contraintes, documenter le plan et construire
-                l’élan étape par étape. C’est l’ADN de Bramers une pratique de conseil
+                l’élan étape par étape. C’est l’ADN de Bramers, une pratique de conseil
                 rigoureuse mais discrète, pour des décisions qui doivent encore avoir du
                 sens dans plusieurs années.
             </>
@@ -176,7 +179,7 @@ const copy = {
         ],
         quote: (
             <>
-                « Bramers existe pour aider les personnes à avancer avec clarté au bon
+                « Bramers existe pour aider les personnes à avancer avec clarté, au bon
                 rythme et dans la bonne direction. »
             </>
         ),
@@ -198,12 +201,12 @@ function useRevealOnce(selector) {
                     if (e.isIntersecting) {
                         el.classList.add("is-visible");
                         if (!played.current.has(el)) {
-                            el.classList.add("has-played"); // animation runs once
+                            el.classList.add("has-played");
                             played.current.add(el);
                         }
                     } else {
-                        // Hide when passed, but do NOT remove has-played (no replay)
-                        el.classList.remove("is-visible"); // ✅ fixed
+                        // Hide when passed, but do not remove has-played (no replay)
+                        el.classList.remove("is-visible");
                     }
                 });
             },
@@ -502,7 +505,7 @@ export default function AboutPage() {
                     animation: slideRightOnce 650ms ease forwards;
                 }
 
-                /* after it has played once, simply show/hide without replaying keyframes */
+                /* after it has played once, simply show or hide without replaying keyframes */
                 .reveal.has-played.is-visible {
                     opacity: 1;
                     transform: none;

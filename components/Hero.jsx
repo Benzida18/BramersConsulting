@@ -15,8 +15,8 @@ export default function Hero() {
         ],
         fr: [
             { text: "Bramers.", color: "#ffffff" },
-            { text: "Relier les marchés.", color: "#FFFFFF" },
-            { text: "Renforcer les institutions.", color: "#FFFFFF" },
+            { text: "Relier les marchés.", color: "#ffffff" },
+            { text: "Renforcer les institutions.", color: "#ffffff" },
         ],
     };
 
