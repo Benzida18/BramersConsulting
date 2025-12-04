@@ -27,7 +27,7 @@ const INDUSTRY_CONFIG = {
         image: "/images/agribusiness.jpg",
 
         title: "Agribusiness",
-        title_fr: "Agro-industrie",
+        title_fr: "Agro-Industriel",
 
         tagline: "Practical support along the value chain, from farm to export.",
         tagline_fr:

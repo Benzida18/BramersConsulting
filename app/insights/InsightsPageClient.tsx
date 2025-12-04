@@ -51,7 +51,7 @@ const LABELS = {
 const SECTIONS = [
     {
         id: "agribusiness",
-        label: { en: "Agribusiness", fr: "Agro-industrie" },
+        label: { en: "Agribusiness", fr: "Agro industriel" },
         blurb: {
             en: "Resources on farming, cooperatives and value chains from farm to market.",
             fr: "Ressources sur l’agriculture, les coopératives et les chaînes de valeur du champ au marché.",

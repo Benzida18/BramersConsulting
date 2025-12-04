@@ -26,7 +26,7 @@ const copy = {
             "Services financiers",
             "Santé",
             "Énergies renouvelables",
-            "Agriculture & agro-industrie",
+            "Agriculture & agro-industriel",
             "Immobilier & infrastructures",
             "Éducation & formation",
             "Stratégie IA & données",

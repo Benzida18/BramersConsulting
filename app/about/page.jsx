@@ -33,7 +33,7 @@ const copy = {
                 <br />
                 <br />
                 The firm was founded by Bouraima Zida who has got a international trade and maritime management educational background.
-                After years of working in the Banking, Finance, Media, Data Analysis, Hospitality, Real Estate sectors between the
+                After years of working in the Banking, Finance, Media, Data Analysis, Hospitality and Real Estate sectors between the
                 United Kingdom and West Africa. Bouraima Zida felt the need to create Bramers Consulting to serve as a bridge between companies
                 that operate in both regions.
                 <br />
@@ -41,7 +41,8 @@ const copy = {
                 Today, Bramers focuses on practical questions of market entry, cross
                 border partnerships, leadership and organisational design. The practice
                 stays deliberately lean so the work remains hands on, discreet and close
-                to decision makers. Rather than chasing visibility, Bramers concentrates
+                to decision makers.
+                Bramers concentrates
                 on a small number of relationships where clarity, trust and continuity
                 matter more than noise.
             </>
