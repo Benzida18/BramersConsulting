@@ -11,78 +11,75 @@ const copy = {
         heroSubtitle: (
             <>
                 Independent advisory practice based in the United Kingdom, bridging
-                markets and enabling institutional cooperation across the UK & Africa.
+                markets and enabling institutional cooperation across the UK and Africa.
             </>
         ),
-        founderTitle: "Why Bramers Exists",
+        founderTitle: "Why Bramers?",
         founderBody: (
             <>
-                Bramers grew out of a simple observation: many good ideas fail not
-                because they lack ambition, but because they lack structure, trusted
-                relationships and the right pace. Too often, organisations try to move
-                quickly in complex environments without first aligning people, context
-                and execution.
+                Bramers was created to make it easier for people in the United Kingdom
+                and West Africa to work together in a clear, organised way. The core
+                purpose is simple: to act as a bridge between businesses in Francophone
+                markets and the UK, so that opportunities on both sides are easier to
+                see, explain and execute.
                 <br />
                 <br />
-                The firm was founded by Bouraima Zida after years working between the
-                United Kingdom and West Africa, across banking, catering and hospitality,
-                and coaching and training. In each setting he saw the same pattern
-                repeat: projects with strong intent but unclear ownership, fragmented
-                communication and little documentation. Bramers was created to be a
-                different kind of partner, one that takes the time to understand the
-                ground reality, then helps leaders move forward in a measured, organised
-                way.
+                On one side, Bramers helps companies from French speaking West African
+                markets understand how to present themselves, structure deals and build
+                trust with UK partners. On the other side, Bramers supports UK based
+                firms that want to enter or expand in West Africa by giving them plain
+                language insight into local markets, stakeholders and ways of working.
+                The aim is to reduce misunderstanding, not to over promise.
                 <br />
                 <br />
-                Today, Bramers works with clients on questions of market entry,
-                cross border partnerships, leadership and organisational design. The
-                practice is deliberately lean so that work stays hands on and discreet.
-                Rather than chasing scale, Bramers focuses on a small number of
-                relationships where clarity, trust and continuity matter more than
-                visibility.
+                The firm was founded by Bouraima Zida who has got a international trade and maritime management educational background.
+                After years of working in the Banking, Finance, Media, Data Analysis, Hospitality, Real Estate sectors between the
+                United Kingdom and West Africa. Bouraima Zida felt the need to create Bramers Consulting to serve as a bridge between companies
+                that operate in both regions.
                 <br />
                 <br />
-                Every mandate follows the same principle: define the goal in plain
-                language, map the constraints, document the plan and build momentum
-                step by step. That is the core of Bramers, a steady, quietly rigorous
-                advisory practice for people who need to make decisions that will still
-                make sense years from now.
+                Today, Bramers focuses on practical questions of market entry, cross
+                border partnerships, leadership and organisational design. The practice
+                stays deliberately lean so the work remains hands on, discreet and close
+                to decision makers. Rather than chasing visibility, Bramers concentrates
+                on a small number of relationships where clarity, trust and continuity
+                matter more than noise.
             </>
         ),
         whatTitle: "What Bramers Do",
         whatBody: (
             <>
-                We help leaders simplify choices, structure initiatives and set
-                momentum for sustainable outcomes. The work typically spans three areas
-                that reinforce each other.
+                We help leaders simplify choices, structure initiatives and build
+                momentum in a way that fits their reality. The work typically spans
+                three areas that reinforce each other.
             </>
         ),
         cards: [
             {
-                title: "Market Strategy & Positioning",
-                desc: "Define where to play and how to win. We map demand drivers, entry paths and competitive edges, then align internal capabilities to the chosen path.",
+                title: "Market Strategy and Positioning",
+                desc: "Define where to play and how to compete. We map demand drivers, entry paths and competitive edges, then align internal capabilities to the chosen direction.",
                 bullets: [
-                    "Opportunity scanning & prioritisation",
-                    "Route to market & sequencing",
-                    "Operating model & governance setup",
+                    "Opportunity scanning and prioritisation",
+                    "Route to market and sequencing",
+                    "Operating model and governance setup",
                 ],
             },
             {
-                title: "Institutional & Regulatory Alignment",
+                title: "Institutional and Regulatory Alignment",
                 desc: "Translate intent into workable frameworks. We align private objectives with policy constraints to reduce friction and protect momentum.",
                 bullets: [
-                    "Regulatory navigation & compliance setup",
-                    "Stakeholder mapping & engagement cadence",
-                    "Risk registers & escalation paths",
+                    "Regulatory navigation and compliance setup",
+                    "Stakeholder mapping and engagement rhythm",
+                    "Risk registers and escalation paths",
                 ],
             },
             {
                 title: "International Partnerships",
                 desc: "Establish trusted cross border relationships. We focus on credibility, clarity of value exchange and durable collaboration mechanisms.",
                 bullets: [
-                    "Partner profiling & introductions",
+                    "Partner profiling and introductions",
                     "Term sheet scaffolding",
-                    "Delivery PMO & performance reviews",
+                    "Delivery PMO and performance reviews",
                 ],
             },
         ],
@@ -97,83 +94,83 @@ const copy = {
         heroTitle: "À propos de Bramers",
         heroSubtitle: (
             <>
-                Cabinet de conseil indépendant basé au Royaume-Uni, reliant les marchés
-                et facilitant la coopération institutionnelle entre le Royaume-Uni et
+                Cabinet de conseil indépendant basé au Royaume Uni, reliant les marchés
+                et facilitant la coopération institutionnelle entre le Royaume Uni et
                 l’Afrique.
             </>
         ),
         founderTitle: "Pourquoi Bramers existe",
         founderBody: (
             <>
-                Bramers est né d’un constat simple : beaucoup de bonnes idées échouent
-                non pas par manque d’ambition, mais par manque de structure, de
-                relations de confiance et de bon tempo. Trop souvent, les organisations
-                veulent aller vite dans des environnements complexes sans avoir d’abord
-                aligné les personnes, le contexte et l’exécution.
+                Bramers a été créé pour faciliter le travail en commun entre le Royaume Uni
+                et l’Afrique de l’Ouest, de manière claire et organisée. Sa vocation
+                principale est simple : servir de pont entre les entreprises des marchés
+                francophones et celles du Royaume Uni, afin que les opportunités des deux
+                côtés soient plus faciles à voir, à expliquer et à concrétiser.
                 <br />
                 <br />
-                Le cabinet a été fondé par Bouraima Zida après plusieurs années passées
-                entre le Royaume-Uni et l’Afrique de l’Ouest, dans la banque,
-                l’hôtellerie-restauration et des missions de coaching et de formation.
-                Partout, il a constaté la même situation : des projets portés par une
-                forte intention, mais avec une gouvernance floue, une communication
-                fragmentée et très peu de documentation. Bramers a été créé pour offrir
-                un autre type d’appui, un partenaire qui prend le temps de comprendre la
-                réalité du terrain, puis aide les dirigeants à avancer de manière
-                mesurée et organisée.
+                D’un côté, Bramers aide les entreprises issues de marchés ouest africains
+                francophones à savoir se présenter, structurer leurs accords et construire
+                la confiance avec des partenaires au Royaume Uni. De l’autre côté, Bramers
+                accompagne les sociétés basées au Royaume Uni qui souhaitent entrer ou se
+                développer en Afrique de l’Ouest en leur apportant une lecture simple des
+                marchés locaux, des parties prenantes et des façons de travailler. L’objectif
+                est de réduire les incompréhensions, pas de tout promettre.
                 <br />
                 <br />
-                Aujourd’hui, Bramers accompagne ses clients sur des sujets d’entrée de
-                marché, de partenariats transfrontaliers, de leadership et de
-                conception organisationnelle. La structure est volontairement légère
-                afin de garder un travail pratique, proche des dossiers, et de préserver
-                la discrétion attendue dans les contextes sensibles. Plutôt que de
-                rechercher la taille, Bramers se concentre sur un nombre limité de
-                relations où la clarté, la confiance et la continuité comptent plus que
-                la visibilité.
+                Le cabinet a été fondé par Bouraima Zida, qui a une formation en commerce
+                international et gestion maritime. Après plusieurs années d’expérience
+                dans les secteurs de la banque, de la finance, des médias, de l’analyse
+                de données, de l’hôtellerie restauration et de l’immobilier entre le
+                Royaume Uni et l’Afrique de l’Ouest, il a ressenti le besoin de créer
+                Bramers Consulting pour servir de passerelle entre les entreprises qui
+                opèrent dans ces deux régions.
                 <br />
                 <br />
-                Chaque mandat suit le même principe : définir l’objectif avec des mots
-                simples, cartographier les contraintes, documenter le plan et construire
-                l’élan étape par étape. C’est l’ADN de Bramers, une pratique de conseil
-                rigoureuse mais discrète, pour des décisions qui doivent encore avoir du
-                sens dans plusieurs années.
+                Aujourd’hui, Bramers se concentre sur des questions pratiques
+                d’entrée de marché, de partenariats transfrontaliers, de leadership et
+                de conception organisationnelle. La structure reste volontairement
+                légère pour que le travail reste concret, discret et proche des
+                décideurs. Plutôt que de rechercher la visibilité, Bramers se
+                concentre sur un nombre limité de relations où la clarté, la
+                confiance et la continuité comptent plus que le bruit.
             </>
         ),
         whatTitle: "Ce que fait Bramers",
         whatBody: (
             <>
                 Nous aidons les dirigeants à clarifier leurs choix, structurer leurs
-                initiatives et installer une dynamique durable. Le travail se concentre
-                généralement sur trois axes qui se renforcent mutuellement.
+                initiatives et installer une dynamique adaptée à leur réalité. Le
+                travail se concentre généralement sur trois axes qui se renforcent
+                mutuellement.
             </>
         ),
         cards: [
             {
-                title: "Stratégie de marché & positionnement",
-                desc: "Définir où se positionner et comment gagner. Nous analysons les moteurs de la demande, les voies d’entrée et les avantages compétitifs, puis alignons les capacités internes sur la trajectoire choisie.",
+                title: "Stratégie de marché et positionnement",
+                desc: "Définir où se positionner et comment se différencier. Nous analysons les moteurs de la demande, les voies d’entrée et les avantages compétitifs, puis alignons les capacités internes sur la trajectoire choisie.",
                 bullets: [
-                    "Veille d’opportunités & priorisation",
-                    "Séquençage & routes d’entrée sur le marché",
-                    "Mise en place du modèle opérationnel & de la gouvernance",
+                    "Veille d’opportunités et priorisation",
+                    "Séquençage et routes d’entrée sur le marché",
+                    "Mise en place du modèle opérationnel et de la gouvernance",
                 ],
             },
             {
-                title: "Alignement institutionnel & réglementaire",
+                title: "Alignement institutionnel et réglementaire",
                 desc: "Transformer l’intention en cadres opérationnels solides. Nous alignons les objectifs privés avec les contraintes réglementaires afin de réduire les frictions et protéger l’élan du projet.",
                 bullets: [
-                    "Navigation réglementaire & mise en conformité",
-                    "Cartographie des parties prenantes & rythme d’engagement",
-                    "Registres de risques & voies d’escalade",
+                    "Navigation réglementaire et mise en conformité",
+                    "Cartographie des parties prenantes et rythme d’engagement",
+                    "Registres de risques et voies d’escalade",
                 ],
             },
             {
                 title: "Partenariats internationaux",
                 desc: "Établir des relations transfrontalières de confiance. Nous mettons l’accent sur la crédibilité, la clarté de la valeur échangée et des mécanismes de collaboration durables.",
                 bullets: [
-                    "Profilage des partenaires & mises en relation",
+                    "Profilage des partenaires et mises en relation",
                     "Pré structuration de term sheets",
-                    "PMO de mise en œuvre & revues de performance",
+                    "PMO de mise en œuvre et revues de performance",
                 ],
             },
         ],
@@ -195,17 +192,17 @@ function useRevealOnce(selector) {
         if (!els.length) return;
 
         const io = new IntersectionObserver(
-            entries => {
-                entries.forEach(e => {
+            (entries) => {
+                entries.forEach((e) => {
                     const el = e.target;
                     if (e.isIntersecting) {
                         el.classList.add("is-visible");
                         if (!played.current.has(el)) {
-                            el.classList.add("has-played");
+                            el.classList.add("has-played"); // animation runs once
                             played.current.add(el);
                         }
                     } else {
-                        // Hide when passed, but do not remove has-played (no replay)
+                        // Hide when passed, but do NOT remove has-played (no replay)
                         el.classList.remove("is-visible");
                     }
                 });
@@ -213,7 +210,7 @@ function useRevealOnce(selector) {
             { threshold: 0.25 }
         );
 
-        els.forEach(el => io.observe(el));
+        els.forEach((el) => io.observe(el));
         return () => io.disconnect();
     }, [selector]);
 }
@@ -505,7 +502,7 @@ export default function AboutPage() {
                     animation: slideRightOnce 650ms ease forwards;
                 }
 
-                /* after it has played once, simply show or hide without replaying keyframes */
+                /* after it has played once, simply show/hide without replaying keyframes */
                 .reveal.has-played.is-visible {
                     opacity: 1;
                     transform: none;
@@ -538,18 +535,22 @@ export default function AboutPage() {
                 /* Gradient cards */
                 .cards-grid .card {
                     position: relative;
-                    background: radial-gradient(
-                            circle at top left,
-                            rgba(30, 144, 255, 0.18),
-                            transparent 55%
-                    ),
-                    #ffffff;
+                    background:
+                            radial-gradient(
+                                    circle at top left,
+                                    rgba(30, 144, 255, 0.18),
+                                    transparent 55%
+                            ),
+                            #ffffff;
                     border-radius: 18px;
                     padding: 26px 28px;
                     border: 1px solid rgba(148, 163, 184, 0.5);
                     box-shadow: 0 14px 40px rgba(15, 23, 42, 0.12);
-                    transition: transform 250ms ease, box-shadow 250ms ease,
-                    border-color 250ms ease, background 250ms ease;
+                    transition:
+                            transform 250ms ease,
+                            box-shadow 250ms ease,
+                            border-color 250ms ease,
+                            background 250ms ease;
                     backdrop-filter: blur(4px);
                 }
 
@@ -557,12 +558,13 @@ export default function AboutPage() {
                     transform: translateY(-6px);
                     border-color: #1e90ff;
                     box-shadow: 0 20px 60px rgba(30, 144, 255, 0.25);
-                    background: radial-gradient(
-                            circle at top left,
-                            rgba(30, 144, 255, 0.26),
-                            transparent 60%
-                    ),
-                    #ffffff;
+                    background:
+                            radial-gradient(
+                                    circle at top left,
+                                    rgba(30, 144, 255, 0.26),
+                                    transparent 60%
+                            ),
+                            #ffffff;
                 }
             `}</style>
         </main>
