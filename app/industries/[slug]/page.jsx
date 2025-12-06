@@ -8,13 +8,13 @@ export const dynamic = "force-dynamic";
 const LABELS = {
     en: {
         sectorOverview: "Sector overview",
-        advisoryFor: "Support for people working in",
+        advisoryFor: "Advisory for organisations in",
         typicalWork: "Typical work in this sector",
         whereHelp: "Where we usually help",
     },
     fr: {
         sectorOverview: "Vue d'ensemble du secteur",
-        advisoryFor: "Accompagnement pour les acteurs du secteur",
+        advisoryFor: "Conseil pour les acteurs du",
         typicalWork: "Types de missions dans ce secteur",
         whereHelp: "Là où nous intervenons le plus souvent",
     },
@@ -28,6 +28,10 @@ const INDUSTRY_CONFIG = {
 
         title: "Agribusiness",
         title_fr: "Agro-Industriel",
+
+        sectorLine_en: "Working with producers, cooperatives and traders in agribusiness.",
+        sectorLine_fr:
+            "Accompagnement des producteurs, coopératives et négociants de l'agro-industrie.",
 
         tagline: "Practical support along the value chain, from farm to export.",
         tagline_fr:
@@ -92,6 +96,10 @@ const INDUSTRY_CONFIG = {
         title: "AI Strategy",
         title_fr: "Stratégie IA",
 
+        sectorLine_en: "Helping organisations turn AI ideas into practical projects.",
+        sectorLine_fr:
+            "Aider les organisations à transformer leurs idées IA en projets concrets.",
+
         tagline: "Simple, practical AI uses — not buzzwords.",
         tagline_fr: "Des usages IA simples et concrets, loin des mots à la mode.",
 
@@ -154,6 +162,11 @@ const INDUSTRY_CONFIG = {
         title: "Hospitality & Catering",
         title_fr: "Hôtellerie et restauration",
 
+        sectorLine_en:
+            "Working with hospitality and catering operators across the UK and Africa.",
+        sectorLine_fr:
+            "Travailler avec des acteurs de l'hôtellerie-restauration au Royaume-Uni et en Afrique.",
+
         tagline: "Helping operators improve concept, service and basics.",
         tagline_fr:
             "Aider les opérateurs à clarifier le concept, le service et les fondamentaux.",
@@ -207,7 +220,7 @@ const INDUSTRY_CONFIG = {
             "In hospitality, consistency on the basics matters more than perfection once in a while.",
         quote_fr:
             "Dans l'hôtellerie-restauration, la régularité sur les fondamentaux compte plus que la perfection ponctuelle.",
-        quoteAuthor: "Adapted from industry practice",
+        quoteAuthor: "Bramers Consulting",
     },
 
     "coaching-training": {
@@ -215,7 +228,12 @@ const INDUSTRY_CONFIG = {
         image: "/images/coaching-training.jpg",
 
         title: "Coaching & Leadership Development",
-        title_fr: "Coaching et développement du leadership",
+        title_fr: "Coaching & Développement Du Leadership",
+
+        sectorLine_en:
+            "Supporting leaders and teams with coaching and leadership development.",
+        sectorLine_fr:
+            "Coaching & Développement Du Leadership.",
 
         tagline: "Support for leaders and teams working across countries.",
         tagline_fr:
@@ -224,7 +242,7 @@ const INDUSTRY_CONFIG = {
         overview:
             "We work with owners, managers and teams who are growing businesses across the UK and African markets. The focus is on practical leadership questions: roles, decisions, communication and how to keep people aligned when they are not in the same place.",
         overview_fr:
-            "Nous accompagnons des dirigeants, responsables et équipes qui développent des activités entre le Royaume-Uni et l'Afrique. Nous nous concentrons sur des questions de leadership très concrètes : rôles, décisions, communication et alignement lorsque tout le monde n'est pas au même endroit.",
+            "Nous accompagnons des dirigeants, responsables et équipes qui développent leurs activités entre le Royaume-Uni et l’Afrique. Notre travail porte sur des questions de leadership très concrètes : rôles, décisions, communication, coordination et manière de garder tout le monde aligné entre les deux régions.",
 
         detailPoints: [
             "Helping leaders clarify their role and the few decisions that really sit with them.",
@@ -280,14 +298,19 @@ const INDUSTRY_CONFIG = {
         title: "Financial Services",
         title_fr: "Services financiers",
 
+        sectorLine_en:
+            "Advisory for fintechs and other financial services providers.",
+        sectorLine_fr:
+            "Conseil pour fintechs et autres acteurs des services financiers.",
+
         tagline: "Helping financial actors serve real businesses and people.",
         tagline_fr:
             "Aider les acteurs financiers à mieux servir les entreprises et les personnes.",
 
         overview:
-            "Bramers supports banks, smaller financial institutions and fintechs that work between the UK and African markets. We focus on simple questions: which clients are you really serving, what problems are you solving, and how can products and partnerships reflect that.",
+            "Bramers supports smaller financial institutions and fintechs that work between the UK and African markets. We focus on simple questions: which clients are you really serving, what problems are you solving, and how can products and partnerships reflect that.",
         overview_fr:
-            "Bramers accompagne des banques, institutions financières de moindre taille et fintechs qui opèrent entre le Royaume-Uni et l'Afrique. Nous travaillons sur des questions simples : quels clients servez-vous réellement, quels problèmes résolvez-vous et comment vos produits et partenariats peuvent mieux le refléter.",
+            "Bramers Consulting accompagne institutions financières de moindre taille et fintechs qui opèrent entre le Royaume-Uni et l'Afrique. Nous travaillons sur des questions simples : quels clients servez-vous réellement, quels problèmes résolvez-vous et comment vos produits et partenariats peuvent mieux le refléter.",
 
         detailPoints: [
             "Clarifying priority segments such as SMEs, traders, professionals or diaspora clients.",
@@ -340,17 +363,22 @@ const INDUSTRY_CONFIG = {
         video: "/videos/football-advisory.mp4",
         image: "/images/football-advisory.jpg",
 
-        title: "Sports & Football Advisory",
-        title_fr: "Conseil sportif et football",
+        title: "Football Business",
+        title_fr: "oeuvrant dans le domain du foot-Business",
+
+        sectorLine_en:
+            "Partnering with clubs, academies and investors in football business.",
+        sectorLine_fr:
+            "Aux côtés de clubs, académies et investisseurs du foot-business.",
 
         tagline: "Connecting football structures, talent and investors.",
         tagline_fr:
             "Connecter structures, talents et investisseurs dans le football.",
 
         overview:
-            "We work with clubs, academies, investors and project owners who want to build more solid football structures between Africa and Europe, including the UK. Bramers focuses on the basics: roles, agreements and long-term thinking around players and projects.",
+            "We work with clubs, academies, investors and project owners who want to build more solid football structures between Africa and Europe. Bramers focuses on the basics: roles, agreements and long-term thinking around players and projects.",
         overview_fr:
-            "Nous travaillons avec des clubs, académies, investisseurs et porteurs de projets qui souhaitent construire des structures de football plus solides entre l'Afrique et l'Europe, y compris le Royaume-Uni. Bramers se concentre sur les fondamentaux : rôles, accords et vision de long terme autour des joueurs et des projets.",
+            "Nous travaillons avec des clubs, académies, investisseurs et porteurs de projets qui souhaitent construire des structures de football plus solides entre l'Afrique et l'Europe. Bramers se concentre sur les fondamentaux : rôles, accords et vision de long terme autour des joueurs et des projets.",
 
         detailPoints: [
             "Helping academies and clubs think through player pathways and partnership models.",
@@ -404,7 +432,12 @@ const INDUSTRY_CONFIG = {
         image: "/images/international-trade.jpg",
 
         title: "International Trade & Logistics",
-        title_fr: "Commerce international et logistique",
+        title_fr: "Commerce International & Logistique",
+
+        sectorLine_en:
+            "Practical guidance on international trade and logistics between the UK and Africa.",
+        sectorLine_fr:
+            "Un accompagnement pratique en commerce international et logistique entre le Royaume-Uni et l'Afrique.",
 
         tagline: "Helping you think through routes, partners and paperwork.",
         tagline_fr:
@@ -467,7 +500,12 @@ const INDUSTRY_CONFIG = {
         image: "/images/mining.jpg",
 
         title: "Mining & Natural Resources",
-        title_fr: "Mines et ressources naturelles",
+        title_fr: "Mines & Ressources Naturelles",
+
+        sectorLine_en:
+            "Early stage support for mining and natural resources projects.",
+        sectorLine_fr:
+            "Un appui en amont pour les projets miniers et de ressources naturelles.",
 
         tagline: "Helping local projects speak to investors and authorities.",
         tagline_fr:
@@ -476,12 +514,12 @@ const INDUSTRY_CONFIG = {
         overview:
             "Bramers does not replace technical or legal advisors in mining. Instead, we help project owners, local partners and institutions organise their story, understand key expectations and prepare for conversations with more specialised stakeholders.",
         overview_fr:
-            "Bramers ne remplace pas les conseillers techniques ou juridiques dans le secteur minier. Nous aidons plutôt les porteurs de projets, partenaires locaux et institutions à structurer leur récit, comprendre les attentes clés et se préparer à dialoguer avec des parties prenantes plus spécialisées.",
+            "Bramers Consulting ne remplace pas les conseillers techniques ou juridiques dans le secteur minier. Nous aidons plutôt les porteurs de projets, partenaires locaux et institutions à structurer leur récit, comprendre les attentes clés et se préparer à dialoguer avec des parties prenantes plus spécialisées.",
 
         detailPoints: [
             "Clarifying the basic outline of a project: who is involved, what is proposed and what is still uncertain.",
             "Helping local actors understand investor, community and government perspectives at a high level.",
-            "Preparing simple materials to support early-stage discussions with technical, legal or financial experts.",
+            "Preparing simple materials to support early stage discussions with technical, legal or financial experts.",
         ],
         detailPoints_fr: [
             "Clarifier les grandes lignes d'un projet : qui est impliqué, ce qui est proposé et ce qui reste incertain.",
@@ -530,14 +568,18 @@ const INDUSTRY_CONFIG = {
         image: "/images/real-estate.jpg",
 
         title: "Real Estate & Infrastructure",
-        title_fr: "Immobilier et infrastructures",
+        title_fr: "Immobilier & Infrastructures",
+
+        sectorLine_en: "Advisory around real estate and infrastructure projects.",
+        sectorLine_fr:
+            "Conseil autour de projets immobiliers et d'infrastructures.",
 
         tagline: "Helping owners and partners think through projects and sites.",
         tagline_fr:
             "Aider propriétaires et partenaires à réfléchir à leurs projets et sites.",
 
         overview:
-            "We support project owners, small developers and partners who are working on real estate or basic infrastructure linked to African and UK markets. Bramers focuses on early-stage thinking: demand, simple numbers, roles and how to explain the project to others.",
+            "We support project owners, small developers and partners who are working on real estate or basic infrastructure linked to African and UK markets. Bramers focuses on early stage thinking: demand, simple numbers, roles and how to explain the project to others.",
         overview_fr:
             "Nous accompagnons des porteurs de projets, petits développeurs et partenaires impliqués dans des projets immobiliers ou d'infrastructures liés aux marchés africains et britanniques. Bramers se concentre sur les premières réflexions : demande, chiffres simples, rôles et façon d'expliquer le projet aux autres.",
 
@@ -630,13 +672,17 @@ export default function IndustrySlugPage({ params }) {
     const overview =
         isFr && data.overview_fr ? data.overview_fr : data.overview;
     const detailPoints =
-        isFr && data.detailPoints_fr
-            ? data.detailPoints_fr
-            : data.detailPoints;
-    const pillars =
-        isFr && data.pillars_fr ? data.pillars_fr : data.pillars;
+        isFr && data.detailPoints_fr ? data.detailPoints_fr : data.detailPoints;
+    const pillars = isFr && data.pillars_fr ? data.pillars_fr : data.pillars;
     const quote = isFr && data.quote_fr ? data.quote_fr : data.quote;
     const quoteAuthor = data.quoteAuthor;
+
+    const sectorLine =
+        isFr && data.sectorLine_fr
+            ? data.sectorLine_fr
+            : data.sectorLine_en
+                ? data.sectorLine_en
+                : `${L.advisoryFor} ${title}.`;
 
     return (
         <main
@@ -736,7 +782,7 @@ export default function IndustrySlugPage({ params }) {
                             color: "#111",
                         }}
                     >
-                        {L.advisoryFor} {title}.
+                        {sectorLine}
                     </h2>
                     <p
                         style={{
@@ -754,7 +800,7 @@ export default function IndustrySlugPage({ params }) {
                     style={{
                         borderRadius: "24px",
                         overflow: "hidden",
-                        boxShadow: "0 22px 60px rgba(0,0,0,0.24)",
+                        boxShadow: "0 22px 60px rgba(0, 0, 0, 0.24)",
                     }}
                 >
                     <img

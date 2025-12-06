@@ -10,7 +10,7 @@ const TEXT = {
     en: {
         heroTitle: "Services",
         heroSubtitle:
-            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow-through.",
+            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow-through, across nine main service areas.",
         approachHeading: "How we work",
         approachBody:
             "Most engagements start with a straightforward conversation: where you are today, who is involved, and which decision or project feels stuck. We then suggest a short, practical plan – usually a few pages rather than a long report – and stay close while you test it. The aim is not to promise everything, but to move one step at a time with less noise and more clarity.",
@@ -21,13 +21,13 @@ const TEXT = {
         ],
         gridTitle: "Service areas",
         gridIntro:
-            "Most assignments sit in one of these areas. Each project is different, but the pattern is similar: understand your context, shape a realistic plan, and support you while you deliver.",
+            "Most assignments sit in one of these nine areas. Each project is different, but the pattern is similar: understand your context, shape a realistic plan, and support you while you deliver.",
         ctaLabel: "Learn more",
     },
     fr: {
         heroTitle: "Services",
         heroSubtitle:
-            "Bramers aide les dirigeants, les propriétaires et leurs équipes à planifier, structurer et faire avancer leurs projets entre le Royaume-Uni et les marchés africains. Nous privilégions les échanges clairs, des documents simples et un accompagnement régulier.",
+            "Bramers aide les dirigeants, propriétaires et équipes à planifier, structurer et faire avancer leurs projets entre le Royaume-Uni et les marchés africains. Nous privilégions les échanges clairs, des documents simples et un accompagnement régulier, autour de neuf grands domaines d’intervention.",
         approachHeading: "Notre manière de travailler",
         approachBody:
             "La plupart des missions commencent par une conversation directe : votre situation actuelle, les personnes impliquées et la décision ou le projet qui bloque. Nous proposons ensuite un plan court et concret – généralement quelques pages plutôt qu’un long rapport – et restons présents pendant les premières étapes. L’objectif n’est pas de tout promettre, mais d’avancer pas à pas avec moins de bruit et plus de clarté.",
@@ -38,7 +38,7 @@ const TEXT = {
         ],
         gridTitle: "Domaines d’intervention",
         gridIntro:
-            "La plupart des missions entrent dans l’un de ces domaines. Chaque contexte est particulier, mais la logique reste la même : comprendre votre réalité, définir un plan réaliste et vous accompagner dans l’exécution.",
+            "La plupart des missions entrent dans l’un de ces neuf domaines. Chaque contexte est particulier, mais la logique reste la même : comprendre votre réalité, définir un plan réaliste et vous accompagner dans l’exécution.",
         ctaLabel: "En savoir plus",
     },
 };
@@ -48,145 +48,149 @@ const SERVICES_COPY = {
     en: [
         {
             slug: "agribusiness",
-            title: "Agribusiness advisory",
+            title: "Agribusiness Advisory",
             short:
-                "Support for cooperatives, processors and traders working with regional or overseas buyers.",
+                "Support for farmers, cooperatives, traders and small processors connecting local production to UK and African demand.",
             long:
-                "Typical work includes mapping the value chain, clarifying roles between farmers, aggregators and off-takers, checking basic unit economics and preparing simple export or supply agreements.",
+                "Typical work includes mapping the value chain, clarifying roles between producers, intermediaries and buyers, checking simple unit economics and preparing basic supply or export agreements.",
         },
         {
             slug: "real-estate",
-            title: "Real estate & infrastructure",
+            title: "Real Estate & Infrastructure",
             short:
-                "Help for families, developers and partners to organise land and building projects.",
+                "Early stage support for real estate and basic infrastructure projects linked to African and UK markets.",
             long:
-                "We work on feasibility notes, stakeholder maps, simple JV structures and delivery rhythms so that decisions, approvals and payments move in a sensible order.",
+                "We help clarify who the project is for, what problem it is trying to solve, and which assumptions on demand, pricing and costs really matter – then prepare simple notes and decks to share with partners, authorities or financiers.",
         },
         {
             slug: "finance",
-            title: "Financial support & preparation",
-            short: "Preparing for conversations with banks, investors and partners.",
+            title: "Financial Services Advisory",
+            short:
+                "Advisory for smaller financial institutions and fintechs working between the UK and African markets.",
             long:
-                "We help you explain your story in plain language, organise key numbers, prepare pitch decks or data packs, and think through what different funders will expect to see.",
+                "We work on client and segment clarity, basic product and pricing logic, partnership ideas and simple materials that help you explain your strategy to regulators, investors or development partners.",
         },
         {
             slug: "catering-hospitality",
-            title: "Catering & hospitality",
+            title: "Hospitality & Catering",
             short:
-                "Support for restaurants, cafés and hospitality projects with concept and operations.",
+                "Support for hotels, restaurants and catering operators that draw on UK and African markets or cultures.",
             long:
-                "Assignments often cover offer design, simple unit economics, staffing patterns and supplier relationships, so that the guest experience and the numbers work together.",
+                "Assignments often cover concept and positioning, target guest, menu and pricing, simple cost structure and early thinking around new locations or partnerships so that the guest experience and the numbers work together.",
         },
         {
             slug: "international-trade",
-            title: "International trade & logistics",
+            title: "International Trade & Logistics",
             short:
-                "Practical help for businesses moving goods between the UK and African markets.",
+                "Practical guidance on international trade and logistics between the UK and African markets.",
             long:
-                "We look at routes, partners, basic compliance steps and paperwork, then agree a simple sequence for pilots so you can learn without taking unnecessary risk.",
+                "We help you make the journey of goods visible, think through roles, risks and incoterms at a high level, and prepare questions and documentation for freight forwarders, customs agents and banks so you arrive better prepared with specialists.",
         },
         {
             slug: "football-advisory",
-            title: "Football & sports advisory",
+            title: "Football Business Advisory",
             short:
-                "Support around talent pathways, club relationships and key decisions.",
+                "Support for clubs, academies, investors and project owners in football business between Africa and Europe.",
             long:
-                "Work can include mapping options for young players, reviewing trial or scholarship opportunities, and helping families or clubs prepare for discussions and agreements.",
+                "Typical work includes thinking through player pathways and structures, clarifying expectations and responsibilities in agreements, and helping investors or project owners prepare for discussions with clubs, federations and other partners.",
         },
         {
             slug: "coaching-training",
-            title: "Coaching & leadership",
-            short: "One-to-one and small-group sessions for leaders and teams.",
+            title: "Coaching & Leadership",
+            short:
+                "One to one and small group coaching for leaders and teams working across countries.",
             long:
-                "We focus on clarity of role, communication habits, meeting structure and simple routines that keep projects moving without burning people out.",
+                "We focus on very practical leadership questions: roles and decisions, communication and feedback, meeting structure and simple routines that keep people aligned between regions without burning them out.",
         },
         {
             slug: "ai-strategy",
-            title: "Lightweight AI & workflow support",
-            short: "Small, practical uses of automation and data in everyday work.",
+            title: "AI Strategy & Workflow Support",
+            short:
+                "Helping organisations turn broad AI ideas into a few realistic, practical use cases.",
             long:
-                "We review current processes and tools, identify a few high-value use cases (often starting with spreadsheets or no-code tools), and outline safe first steps rather than large, risky roll-outs.",
+                "We clarify the problem you want to solve, review what data and tools you actually have, prioritise 2–3 use cases and help you prepare simple briefs so conversations with AI vendors or technical partners are more focused and useful.",
         },
         {
             slug: "mining",
-            title: "Mining & natural resources",
-            short: "Early-stage support on documentation, stakeholders and cooperation.",
+            title: "Mining & Natural Resources",
+            short:
+                "Early stage support for mining and natural resources projects.",
             long:
-                "Typical work includes high-level stakeholder mapping, basic ESG and community considerations, and preparing clear notes for partners, advisers or authorities.",
+                "Typical work includes structuring the project story, mapping key stakeholders, highlighting high-level ESG and community considerations, and preparing clear notes for technical, legal, financial advisers or authorities.",
         },
     ],
     fr: [
         {
             slug: "agribusiness",
-            title: "Conseil en agribusiness",
+            title: "Conseil En Agribusiness",
             short:
-                "Accompagnement des coopératives, transformateurs et négociants travaillant avec des acheteurs régionaux ou internationaux.",
+                "Accompagnement des agriculteurs, coopératives, commerçants et petits transformateurs reliant la production locale à la demande au Royaume-Uni et en Afrique.",
             long:
-                "Nous aidons à cartographier la chaîne de valeur, clarifier les rôles entre producteurs, intermédiaires et acheteurs, vérifier les bases économiques et préparer des accords d’approvisionnement ou d’export simples.",
+                "Nous aidons à cartographier la chaîne de valeur, clarifier les rôles entre producteurs, intermédiaires et acheteurs, vérifier quelques bases économiques et préparer des accords d’approvisionnement ou d’export simples.",
         },
         {
             slug: "real-estate",
-            title: "Immobilier & infrastructures",
+            title: "Immobilier & Infrastructures",
             short:
-                "Soutien aux familles, promoteurs et partenaires pour organiser des projets fonciers et immobiliers.",
+                "Soutien en amont pour des projets immobiliers et d’infrastructures liés aux marchés africains et britanniques.",
             long:
-                "Nous travaillons sur des notes de faisabilité, des cartes des parties prenantes, des structures de partenariat simples et un rythme de suivi pour que décisions, validations et paiements s’enchaînent dans le bon ordre.",
+                "Nous aidons à préciser à qui s’adresse le projet, quel problème il cherche à résoudre et quelles hypothèses de demande, de prix et de coûts sont vraiment critiques, puis à préparer des notes et présentations simples pour partenaires, autorités ou financeurs.",
         },
         {
             slug: "finance",
-            title: "Préparation financière",
+            title: "Conseil En Services Financiers",
             short:
-                "Préparer les échanges avec banques, investisseurs et partenaires financiers.",
+                "Accompagnement d’institutions financières de moindre taille et de fintechs actives entre le Royaume-Uni et l’Afrique.",
             long:
-                "Nous aidons à raconter votre histoire de façon claire, à organiser les chiffres clés, à préparer présentations et dossiers, et à réfléchir à ce que différents financeurs attendront de voir.",
+                "Nous travaillons sur la clarté des clients et segments, les grandes lignes des offres et de la tarification, les pistes de partenariiat et des supports simples pour expliquer votre stratégie aux régulateurs, investisseurs ou bailleurs.",
         },
         {
             slug: "catering-hospitality",
-            title: "Hôtellerie & restauration",
+            title: "Hôtellerie & Restauration",
             short:
-                "Soutien aux restaurants, cafés et projets hôteliers sur le concept et l’exploitation.",
+                "Soutien aux hôtels, restaurants et acteurs de la restauration qui s’inspirent des marchés et cultures britannique et africaines.",
             long:
-                "Les missions portent souvent sur l’offre, l’économie unitaire de base, l’organisation des équipes et la relation fournisseurs, afin d’aligner expérience client et viabilité économique.",
+                "Les missions portent souvent sur le concept et le positionnement, la clientèle cible, le menu et les prix, quelques éléments de coûts et les premières réflexions sur de nouveaux sites ou partenariats afin d’aligner expérience client et viabilité économique.",
         },
         {
             slug: "international-trade",
-            title: "Commerce international & logistique",
+            title: "Commerce International & Logistique",
             short:
-                "Aide pratique pour les entreprises qui déplacent des biens entre le Royaume-Uni et l’Afrique.",
+                "Aide pratique pour le commerce et la logistique entre le Royaume-Uni et les marchés africains.",
             long:
-                "Nous examinons les routes possibles, les partenaires, les étapes de conformité et la documentation, puis convenons d’une séquence de pilotes pour apprendre sans prendre de risque excessif.",
+                "Nous clarifions le parcours des marchandises, mettons en évidence les rôles, risques et incoterms à un niveau simple, et préparons avec vous questions et documentation pour transitaires, douanes et banques afin d’arriver mieux préparé auprès des spécialistes.",
         },
         {
             slug: "football-advisory",
-            title: "Conseil en football & sport",
+            title: "Conseil En Foot-Business",
             short:
-                "Accompagnement sur les parcours de talents, les relations avec les clubs et les décisions clés.",
+                "Accompagnement de clubs, académies, investisseurs et porteurs de projets dans le foot-business entre l’Afrique et l’Europe.",
             long:
-                "Le travail peut inclure la cartographie des options pour les jeunes joueurs, l’examen d’essais ou de bourses, et la préparation des familles ou des clubs aux discussions et aux accords.",
+                "Le travail inclut souvent la réflexion sur les structures et parcours joueurs, la clarification des attentes et responsabilités dans les accords, ainsi que la préparation des investisseurs ou porteurs de projets aux échanges avec clubs, fédérations et autres partenaires.",
         },
         {
             slug: "coaching-training",
-            title: "Coaching & leadership",
+            title: "Coaching & Leadership",
             short:
-                "Séances individuelles et en petits groupes pour dirigeants et équipes.",
+                "Séances individuelles et en petits groupes pour dirigeants et équipes qui travaillent entre plusieurs pays.",
             long:
-                "Nous travaillons sur la clarté des rôles, les habitudes de communication, la structure des réunions et des routines simples qui permettent d’avancer sans épuiser les personnes.",
+                "Nous nous concentrons sur des questions très concrètes de leadership : rôles et décisions, communication et feedback, structure des réunions et routines simples pour garder tout le monde aligné entre les régions.",
         },
         {
             slug: "ai-strategy",
-            title: "IA légère & organisation du travail",
+            title: "Stratégie IA & Organisation Du Travail",
             short:
-                "Petits usages concrets de l’automatisation et des données dans le quotidien.",
+                "Aider les organisations à transformer des idées générales sur l’IA en quelques cas d’usage concrets et réalistes.",
             long:
-                "Nous analysons vos processus et outils actuels, identifions quelques cas d’usage à forte valeur – souvent à partir de tableurs ou d’outils no-code – et proposons des premiers pas sécurisés plutôt que de grands déploiements risqués.",
+                "Nous clarifions le problème à résoudre, revoyons les données et outils réellement disponibles, priorisons 2 ou 3 cas d’usage et vous aidons à préparer des cahiers des charges simples pour des échanges plus efficaces avec les prestataires ou équipes techniques.",
         },
         {
             slug: "mining",
-            title: "Mines & ressources naturelles",
+            title: "Mines & Ressources Naturelles",
             short:
-                "Soutien en amont sur la documentation, les parties prenantes et la coopération.",
+                "Soutien en amont pour des projets miniers et de ressources naturelles.",
             long:
-                "Les missions incluent souvent une cartographie des acteurs, les premiers éléments ESG et communautaires, et la préparation de notes claires pour les partenaires, conseillers ou autorités.",
+                "Les missions incluent souvent la structuration du récit du projet, une première cartographie des parties prenantes, quelques considérations ESG et communautaires et la préparation de notes claires pour les conseillers techniques, juridiques, financiers ou les autorités.",
         },
     ],
 };

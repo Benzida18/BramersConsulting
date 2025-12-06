@@ -17,7 +17,7 @@ export default function Mission() {
             body:
                 "Bramers is a UK based consulting practice with roots in Côte d’Ivoire. " +
                 "We help people and businesses who want to move products, services or " +
-                "investment between the UK and African markets, starting with Côte d’Ivoire.",
+                "investment between the UK and African markets.",
             services: [
                 {
                     title: "Market Understanding & Entry",
