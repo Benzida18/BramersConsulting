@@ -205,9 +205,9 @@ export default function IndustriesIndexPage() {
                     box-shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
                     border: 1px solid rgba(15, 23, 42, 0.05);
                     transition: transform 0.25s ease,
-                        box-shadow 0.25s ease,
-                        border-color 0.25s ease,
-                        background 0.25s ease;
+                    box-shadow 0.25s ease,
+                    border-color 0.25s ease,
+                    background 0.25s ease;
                 }
 
                 .industry-card-body h3 {
@@ -235,9 +235,9 @@ export default function IndustriesIndexPage() {
                     box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
                     border-color: #1e90ff;
                     background: linear-gradient(
-                        135deg,
-                        #ffffff,
-                        #f4f6ff
+                            135deg,
+                            #ffffff,
+                            #f4f6ff
                     );
                 }
 

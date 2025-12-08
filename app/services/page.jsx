@@ -10,7 +10,7 @@ const TEXT = {
     en: {
         heroTitle: "Services",
         heroSubtitle:
-            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets. We focus on clear conversations, simple documents and steady follow-through, across nine main service areas.",
+            "Bramers helps owners, managers and teams plan, structure and move work forward between the UK and African markets.",
         approachHeading: "How we work",
         approachBody:
             "Most engagements start with a straightforward conversation: where you are today, who is involved, and which decision or project feels stuck. We then suggest a short, practical plan – usually a few pages rather than a long report – and stay close while you test it. The aim is not to promise everything, but to move one step at a time with less noise and more clarity.",
