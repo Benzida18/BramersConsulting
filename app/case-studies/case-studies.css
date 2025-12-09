@@ -11,14 +11,24 @@
 }
 
 /* HERO WITH VIDEO – centred title only */
+/* HERO WITH VIDEO – centred title + fade in */
 .case-hero {
     position: relative;
     height: 60vh;
     min-height: 380px;
     width: 100%;
     overflow: hidden;
+
+    /* visible while video loads */
+    background: radial-gradient(
+            circle at top,
+            #050814,
+            #020308 55%,
+            #000000 100%
+    );
 }
 
+/* video fades in */
 .case-hero video {
     position: absolute;
     inset: 0;
@@ -26,8 +36,12 @@
     height: 100%;
     object-fit: cover;
     filter: brightness(58%);
+    opacity: 0;
+    animation: caseHeroVideoFade 900ms ease-out forwards;
+    will-change: opacity;
 }
 
+/* overlay (text) fades slightly after video starts */
 .case-hero-overlay {
     position: absolute;
     inset: 0;
@@ -39,6 +53,10 @@
     text-align: center;
     color: #fff;
     text-shadow: 0 14px 38px rgba(0, 0, 0, 0.55);
+
+    opacity: 0;
+    animation: caseHeroTextFade 800ms ease-out 260ms forwards;
+    will-change: opacity;
 }
 
 .case-hero-overlay h1 {
@@ -46,6 +64,37 @@
     font-size: 54px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+}
+
+/* hero responsive tweaks */
+@media (max-width: 640px) {
+    .case-hero {
+        height: 52vh;
+        min-height: 320px;
+    }
+
+    .case-hero-overlay h1 {
+        font-size: 36px;
+    }
+}
+
+/* keyframes for hero */
+@keyframes caseHeroVideoFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes caseHeroTextFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* BODY LAYOUT */

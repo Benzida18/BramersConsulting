@@ -1,100 +1,32 @@
 /* ---------- HERO VIDEO (if you ever hook CSS instead of inline) ---------- */
-/* ---------- HERO VIDEO WITH FADE + GRADIENT ---------- */
 .insight-hero {
     position: relative;
     width: 100%;
     height: 75vh;
-    min-height: 420px;
     overflow: hidden;
-    /* visible while video is loading */
-    background: radial-gradient(
-            circle at top,
-            #050814,
-            #020308 55%,
-            #000000 100%
-    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* video fades in like About/Services/Industries */
 .insight-video {
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    animation: insightVideoFade 900ms ease-out forwards;
-    will-change: opacity;
-    filter: brightness(0.6);
 }
 
-/* subtle dark gradient overlay for text contrast */
-.insight-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.6) 0%,
-            rgba(0, 0, 0, 0.32) 40%,
-            rgba(0, 0, 0, 0.12) 100%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* text fades in slightly after video starts */
 .insight-hero-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-align: center;
     color: white;
-    padding: 0 24px;
-    z-index: 2;
-
-    opacity: 0;
-    animation: insightTextFade 800ms ease-out 260ms forwards;
-    will-change: opacity;
 }
 
 .insight-hero-text h1 {
     font-size: 72px;
     font-weight: 700;
     font-family: var(--font-playfair), serif;
-    margin: 0;
 }
 
-/* hero responsive tweaks */
-@media (max-width: 768px) {
-    .insight-hero {
-        height: 60vh;
-        min-height: 340px;
-    }
-
-    .insight-hero-text h1 {
-        font-size: 40px;
-    }
-}
-
-/* keyframes */
-@keyframes insightVideoFade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes insightTextFade {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 /* ---------- GRID / PAGE CONTAINER ---------- */
 
 .insight-grid-container {
@@ -152,6 +84,31 @@
 .insight-card-link {
     text-decoration: none;
     color: inherit;
+}
+
+/* Wrapper for the CTA inside a card */
+.insight-card-readmore-link {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Smaller variant of the global .learn-more button for insight cards */
+.learn-more.learn-more-small {
+    transform: scale(0.88);
+    transform-origin: left center;
+    padding: 0.55em 1.4em;
+}
+
+.learn-more.learn-more-small .button-text {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+}
+
+.learn-more.learn-more-small .circle {
+    width: 34px;
+    height: 34px;
 }
 
 /* ---------- SHELVES / ROWS (like case studies) ---------- */
@@ -237,7 +194,7 @@
     color: #777;
 }
 
-/* ---------- READ MORE BUTTON ON CARD ---------- */
+/* ---------- (OLD) TEXT BUTTON ON CARD (now just a fallback) ---------- */
 
 .insight-card-readmore {
     margin-top: 14px;
@@ -253,7 +210,7 @@
     cursor: pointer;
 }
 
-/* ---------- MODAL WITH GLASS BLUR BACKDROP ---------- */
+/* ---------- MODAL WITH GLASS BLUR BACKDROP (used in old design) ---------- */
 
 .insight-modal-backdrop {
     position: fixed;
@@ -262,9 +219,9 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 96px 24px 32px;             /* keeps panel below fixed header */
-    background: rgba(15, 23, 42, 0.25);  /* slight tint */
-    backdrop-filter: blur(10px);         /* glass blur */
+    padding: 96px 24px 32px; /* keeps panel below fixed header */
+    background: rgba(15, 23, 42, 0.25); /* slight tint */
+    backdrop-filter: blur(10px); /* glass blur */
 }
 
 /* Whole card scrolls (image + text together) */
@@ -329,8 +286,8 @@
 .insight-modal-hero {
     display: block;
     width: 100%;
-    height: auto;          /* no cropping */
-    object-fit: contain;   /* make sure whole image is visible */
+    height: auto; /* no cropping */
+    object-fit: contain; /* make sure whole image is visible */
 }
 
 /* Body and inner column */
@@ -399,9 +356,196 @@
     object-fit: contain;
 }
 
+/* ---------- INSIGHT DETAIL PAGE (NEW) ---------- */
+
+.insight-detail-page {
+    min-height: 100vh;
+    padding: 8rem 1.5rem 4.5rem; /* a bit more space under the fixed header */
+    background: radial-gradient(circle at top, #f4f7ff 0, #f3f4f6 45%, #eef2f7 100%);
+}
+
+.insight-detail-article {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Hero image block */
+.insight-detail-hero {
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.35);
+    background: #020617;
+    margin-bottom: 2.8rem;
+}
+
+.insight-detail-hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Header text */
+.insight-detail-header {
+    margin-bottom: 1.8rem;
+}
+
+.insight-detail-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+}
+
+.insight-detail-title {
+    font-family: var(--font-playfair), "Times New Roman", serif;
+    font-size: 2.4rem;
+    line-height: 1.3;
+    color: #111827;
+    margin: 0 0 0.75rem;
+}
+
+.insight-detail-dek {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #374151;
+    max-width: 52rem;
+}
+
+/* Body text card */
+.insight-detail-body {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 22px;
+    padding: 1.9rem 2.2rem 2.2rem;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    font-family: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #1f2933;
+    font-size: 0.99rem;
+    line-height: 1.85;
+}
+
+.insight-detail-body p {
+    margin: 0 0 0.95rem;
+}
+
+/* drop cap on first paragraph */
+.insight-detail-body p:first-of-type::first-letter {
+    font-family: var(--font-playfair), serif;
+    font-size: 2.6em;
+    float: left;
+    line-height: 0.9;
+    padding-right: 8px;
+    padding-top: 4px;
+    color: #111827;
+}
+
+.insight-detail-body h2,
+.insight-detail-body h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-playfair), serif;
+}
+
+.insight-detail-body ul,
+.insight-detail-body ol {
+    margin: 0.75rem 0 1rem;
+    padding-left: 1.4rem;
+}
+
+.insight-detail-body li + li {
+    margin-top: 0.25rem;
+}
+
+/* images embedded via PortableText */
+.insight-detail-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 1.1rem 0 1.4rem;
+    object-fit: contain;
+}
+
+/* Footer / back button */
+.insight-detail-footer {
+    margin-top: 2.6rem;
+}
+
+/* Same style language as the case-study / industries back button */
+.insight-detail-back {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 36px;
+    border: 2px solid #111;
+    background: #ffffff;
+    color: #111;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.insight-detail-back-line {
+    width: 32px;
+    height: 2px;
+    background: #111;
+    transition: transform 0.35s ease;
+}
+
+.insight-detail-back-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* sliding frame lines */
+.insight-detail-back::before,
+.insight-detail-back::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 40%;
+    background: #111;
+    transition: transform 0.35s ease;
+}
+
+.insight-detail-back::before {
+    top: 0;
+    left: 0;
+    transform: translateX(-110%);
+}
+
+.insight-detail-back::after {
+    bottom: 0;
+    right: 0;
+    transform: translateX(110%);
+}
+
+/* hover animations */
+.insight-detail-back:hover::before,
+.insight-detail-back:focus-visible::before {
+    transform: translateX(0);
+}
+
+.insight-detail-back:hover::after,
+.insight-detail-back:focus-visible::after {
+    transform: translateX(0);
+}
+
+.insight-detail-back:hover .insight-detail-back-line,
+.insight-detail-back:focus-visible .insight-detail-back-line {
+    transform: scaleX(1.3);
+}
+
 /* ---------- RESPONSIVE ---------- */
 
-@media (max-width: 900px) {
+@media (max-width: 640px) {
     .insight-shelf-row {
         flex-direction: row;
         flex-wrap: wrap;
@@ -421,6 +565,10 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+
+    .insight-detail-page {
+        padding-top: 6.5rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -435,6 +583,15 @@
 
     .insight-shelf-blurb {
         font-size: 13px;
+    }
+
+    .insight-detail-body {
+        padding: 1.6rem 1.6rem 1.9rem;
+        border-radius: 18px;
+    }
+
+    .insight-detail-title {
+        font-size: 1.9rem;
     }
 }
 
@@ -466,5 +623,20 @@
 
     .insight-modal-header h2 {
         font-size: 20px;
+    }
+
+    .insight-detail-page {
+        padding-inline: 1.25rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .insight-detail-back::before,
+    .insight-detail-back::after {
+        display: none;
+    }
+
+    .insight-detail-back {
+        width: 100%;
+        justify-content: center;
     }
 }

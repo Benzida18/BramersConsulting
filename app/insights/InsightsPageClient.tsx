@@ -1,10 +1,10 @@
-// app/insights/InsightsPageClient.tsx
 "use client";
 import "./insights.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { InsightCardData } from "./page";
 import { useLanguage } from "@/components/LanguageContext";
-import { PortableText } from "@portabletext/react";
 
 /* ---------- TYPES ---------- */
 
@@ -24,7 +24,6 @@ const LABELS = {
         emptyState: "No articles have been added to the library yet.",
         cardExcerptFallback: "Click to open the full article.",
         readArticle: "Read article",
-        close: "Close",
         sectorLabel: "Sector",
         comingSoonTitle: "Coming soon",
         comingSoonText: "More resources for this sector will appear here.",
@@ -39,7 +38,6 @@ const LABELS = {
         emptyState: "Aucun article n’a encore été ajouté à la bibliothèque.",
         cardExcerptFallback: "Cliquez pour ouvrir l’article complet.",
         readArticle: "Lire l’article",
-        close: "Fermer",
         sectorLabel: "Secteur",
         comingSoonTitle: "Bientôt disponible",
         comingSoonText:
@@ -179,15 +177,13 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
     const langKey: "en" | "fr" = language === "fr" ? "fr" : "en";
     const t = LABELS[langKey];
 
-    const [activePost, setActivePost] = useState<InsightCardData | null>(null);
-
     // 1) Normalise language (missing = "en")
     const normalised = posts.map((p) => ({
         ...p,
         language: (p.language ?? "en") as "en" | "fr",
     }));
 
-    // 2) HARD filter by current UI language – this is why Case Studies behave cleanly
+    // 2) HARD filter by current UI language
     const filtered = normalised.filter((p) =>
         langKey === "fr" ? p.language === "fr" : p.language === "en"
     );
@@ -195,19 +191,63 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* HERO */}
-            <section className="insight-hero">
+            <section
+                style={{ position: "relative", height: "88vh", overflow: "hidden" }}
+            >
                 <video
-                    className="insight-video"
                     src="/videos/insight.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        filter: "brightness(60%)",
+                    }}
                 />
-                <div className="insight-hero-overlay" />
-                <div className="insight-hero-text">
-                    <h1>{t.heroTitle}</h1>
-                    <p>{t.heroSubtitle}</p>
+
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        color: "white",
+                        textShadow: "0 8px 28px rgba(0,0,0,0.5)",
+                        padding: "0 24px",
+                        width: "min(90vw, 900px)",
+                    }}
+                >
+                    <RevealOnScroll>
+                        <h1
+                            style={{
+                                fontFamily: "var(--font-playfair)",
+                                fontSize: "64px",
+                                margin: 0,
+                            }}
+                        >
+                            {t.heroTitle}
+                        </h1>
+                    </RevealOnScroll>
+
+                    <RevealOnScroll delay={120}>
+                        <p
+                            style={{
+                                fontSize: "20px",
+                                maxWidth: 740,
+                                opacity: 0.95,
+                                margin: "12px auto 0",
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            {t.heroSubtitle}
+                        </p>
+                    </RevealOnScroll>
                 </div>
             </section>
 
@@ -243,7 +283,6 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                     </RevealOnScroll>
 
                     {SECTIONS.map((section, shelfIdx) => {
-                        // Only posts in this sector, *already filtered by language*
                         const sectionPosts = filtered.filter(
                             (p) => p.industry === section.id
                         );
@@ -253,7 +292,6 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                             post,
                         }));
 
-                        // We always want at least one full row of 3 cards
                         const totalNeeded = Math.max(MAX_PER_ROW, realCards.length);
                         const placeholdersToAdd = totalNeeded - realCards.length;
 
@@ -265,7 +303,6 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                             });
                         }
 
-                        // Chunk cards into rows of 3
                         const rows: Card[][] = [];
                         for (let i = 0; i < cards.length; i += MAX_PER_ROW) {
                             rows.push(cards.slice(i, i + MAX_PER_ROW));
@@ -299,9 +336,6 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                                                             fallback={t.cardExcerptFallback}
                                                             delay={colIdx * 70}
                                                             readLabel={t.readArticle}
-                                                            onOpen={() =>
-                                                                setActivePost(card.post)
-                                                            }
                                                         />
                                                     );
                                                 }
@@ -334,15 +368,6 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
                     )}
                 </div>
             </section>
-
-            {/* MODAL */}
-            {activePost && (
-                <InsightModal
-                    post={activePost}
-                    onClose={() => setActivePost(null)}
-                    closeLabel={t.close}
-                />
-            )}
         </main>
     );
 }
@@ -353,15 +378,14 @@ function InsightCard({
                          fallback,
                          delay = 0,
                          readLabel,
-                         onOpen,
                      }: {
     post: InsightCardData;
     fallback: string;
     delay?: number;
     readLabel: string;
-    onOpen: () => void;
 }) {
     const ref = useRef<HTMLDivElement | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const el = ref.current;
@@ -385,6 +409,13 @@ function InsightCard({
     }, []);
 
     const hasBody = Array.isArray(post.body) && post.body.length > 0;
+    const href = `/insights/${post.slug}`;
+
+    const handleOpen = () => {
+        if (hasBody) {
+            router.push(href);
+        }
+    };
 
     return (
         <div
@@ -395,7 +426,7 @@ function InsightCard({
         >
             <article
                 className="insight-card"
-                onClick={hasBody ? onOpen : undefined}
+                onClick={hasBody ? handleOpen : undefined}
             >
                 {post.cover?.asset?.url && (
                     <img
@@ -408,16 +439,18 @@ function InsightCard({
                 <p>{post.excerpt || fallback}</p>
 
                 {hasBody && (
-                    <button
-                        type="button"
-                        className="insight-card-readmore"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onOpen();
-                        }}
-                    >
-                        {readLabel}
-                    </button>
+                    <Link href={href} onClick={(e) => e.stopPropagation()}>
+                        <button
+                            type="button"
+                            className="learn-more insight-read-btn"
+                            aria-label={readLabel}
+                        >
+            <span className="circle" aria-hidden="true">
+                <span className="icon arrow"></span>
+            </span>
+                            <span className="button-text">{readLabel.toUpperCase()}</span>
+                        </button>
+                    </Link>
                 )}
             </article>
         </div>
@@ -437,93 +470,5 @@ function PlaceholderCard({
             <h3 className="insight-placeholder-title">{title}</h3>
             <p className="insight-placeholder-text">{text}</p>
         </article>
-    );
-}
-
-/* ---------- MODAL (GLASS BLUR BACKGROUND, BETTER TYPOGRAPHY) ---------- */
-function InsightModal({
-                          post,
-                          onClose,
-                          closeLabel,
-                      }: {
-    post: InsightCardData;
-    onClose: () => void;
-    closeLabel: string;
-}) {
-    // prevent background from scrolling when modal is open
-    useEffect(() => {
-        const original = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = original;
-        };
-    }, []);
-
-    const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (e.target === e.currentTarget) onClose();
-    };
-
-    const portableComponents = {
-        types: {
-            image: ({ value }: any) =>
-                value?.asset?.url ? (
-                    <img
-                        src={value.asset.url}
-                        alt={value.alt || ""}
-                        className="insight-modal-image"
-                    />
-                ) : null,
-        },
-    };
-
-    const hasBody = Array.isArray(post.body) && post.body.length > 0;
-
-    return (
-        <div
-            className="insight-modal-backdrop"
-            onClick={handleBackdropClick}
-            role="dialog"
-            aria-modal="true"
-        >
-            <div className="insight-modal-panel">
-                <header className="insight-modal-header">
-                    <div>
-                        <p className="insight-modal-eyebrow">External article</p>
-                        <h2>{post.title}</h2>
-                    </div>
-                    <button
-                        type="button"
-                        className="insight-modal-close"
-                        onClick={onClose}
-                    >
-                        {closeLabel}
-                    </button>
-                </header>
-
-                {/* Optional hero image from the cover field */}
-                {post.cover?.asset?.url && (
-                    <div className="insight-modal-hero-wrap">
-                        <img
-                            src={post.cover.asset.url}
-                            alt={post.title}
-                            className="insight-modal-hero"
-                        />
-                    </div>
-                )}
-
-                <div className="insight-modal-body">
-                    <div className="insight-modal-body-inner">
-                        {hasBody ? (
-                            <PortableText
-                                value={post.body}
-                                components={portableComponents}
-                            />
-                        ) : (
-                            <p>{post.excerpt}</p>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
     );
 }
