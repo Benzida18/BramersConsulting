@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/LanguageContext";
+import HeroVideo from "@/components/HeroVideo";
 
 export const dynamic = "force-dynamic";
 

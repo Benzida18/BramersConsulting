@@ -38,7 +38,24 @@ video {
     display: block;
     max-width: 100%;
 }
+/* Smooth global page fade-in (header + content + hero) */
+.site-body {
+    opacity: 0;
+    transform: translateY(4px);
+    animation: pageFadeIn 700ms ease-out forwards;
+    animation-delay: 120ms; /* tiny delay so it's super subtle */
+}
 
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 /* ============================================== */
 /* NAVIGATION + DROPDOWNS (Desktop only)          */
 /* ============================================== */

@@ -11,7 +11,7 @@ export default function Mission() {
             kicker: "Work between the UK and Africa",
             heading: (
                 <>
-                    Practical support for projects between the UK, & West Africa.
+                    Practical support for Businesses between the UK & West Africa.
                 </>
             ),
             body:

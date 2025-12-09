@@ -1,7 +1,8 @@
 // app/about/page.jsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/components/LanguageContext";
 
 /** TEXT COPY (EN + FR) */
@@ -41,10 +42,9 @@ const copy = {
                 Today, Bramers focuses on practical questions of market entry, cross
                 border partnerships, leadership and organisational design. The practice
                 stays deliberately lean so the work remains hands on, discreet and close
-                to decision makers.
-                Bramers concentrates
-                on a small number of relationships where clarity, trust and continuity
-                matter more than noise.
+                to decision makers. Bramers concentrates on a small number of
+                relationships where clarity, trust and continuity matter more than
+                noise.
             </>
         ),
         whatTitle: "What Bramers Do",
@@ -115,8 +115,8 @@ const copy = {
                 la confiance avec des partenaires au Royaume Uni. De l’autre côté, Bramers
                 accompagne les sociétés basées au Royaume Uni qui souhaitent entrer ou se
                 développer en Afrique de l’Ouest en leur apportant une lecture simple des
-                marchés locaux, des parties prenantes et des façons de travailler. L’objectif
-                est de réduire les incompréhensions, pas de tout promettre.
+                marchés locaux, des parties prenantes et des façons de travailler.
+                L’objectif est de réduire les incompréhensions, pas de tout promettre.
                 <br />
                 <br />
                 Le cabinet a été fondé par Bouraima Zida, qui a une formation en commerce
@@ -226,10 +226,20 @@ export default function AboutPage() {
     useRevealOnce("[data-reveal='slide-right']");
     useRevealOnce("[data-reveal='cards']");
 
+    // Control hero text fade so it re-plays on every mount
+    const [heroAnimate, setHeroAnimate] = useState(false);
+
+    useEffect(() => {
+        setHeroAnimate(false);
+        const id = requestAnimationFrame(() => setHeroAnimate(true));
+        return () => cancelAnimationFrame(id);
+    }, []);
+
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* ===== HERO (video with centered copy) ===== */}
             <section
+                className="about-hero"
                 style={{ position: "relative", height: "100vh", overflow: "hidden" }}
             >
                 <video
@@ -252,10 +262,13 @@ export default function AboutPage() {
                         position: "absolute",
                         inset: 0,
                         background:
-                            "linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.1) 100%)",
+                            "linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.32) 40%, rgba(0,0,0,0.12) 100%)",
                     }}
                 />
                 <div
+                    className={`about-hero-content ${
+                        heroAnimate ? "hero-animate" : ""
+                    }`}
                     style={{
                         position: "absolute",
                         top: "50%",
@@ -454,11 +467,14 @@ export default function AboutPage() {
                 }}
             >
                 <div data-reveal="slide-right" className="reveal">
-                    <img
+                    <Image
                         src="/images/coast.jpg"
                         alt="Coast"
+                        width={1100}
+                        height={750}
                         style={{
                             width: "100%",
+                            height: "auto",
                             borderRadius: 18,
                             objectFit: "cover",
                             boxShadow: "0 18px 48px rgba(0,0,0,0.18)",
@@ -478,8 +494,53 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* ===== Animations & Card styling ===== */}
+            {/* ===== Animations, Hero & Card styling ===== */}
             <style jsx>{`
+                /* HERO: dark background + simple fade-in for the video */
+                .about-hero {
+                    background: radial-gradient(
+                            circle at top,
+                            #050814,
+                            #020308 55%,
+                            #000000 100%
+                    ); /* visible while video is loading */
+                }
+
+                .about-hero video {
+                    opacity: 0;
+                    animation: heroVideoFade 900ms ease-out forwards;
+                    will-change: opacity;
+                }
+
+                @keyframes heroVideoFade {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                /* HERO TEXT: fade only; re-triggered via hero-animate class */
+                .about-hero-content {
+                    opacity: 0;
+                }
+
+                .about-hero-content.hero-animate {
+                    animation: heroTextFade 850ms ease-out forwards;
+                    animation-delay: 350ms; /* starts just after video begins to appear */
+                    will-change: opacity;
+                }
+
+                @keyframes heroTextFade {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
                 .reveal {
                     opacity: 0;
                     transform: translateY(18px);
@@ -488,16 +549,16 @@ export default function AboutPage() {
                 }
 
                 /* first-time entry animations */
-                .reveal[data-reveal='fade-up'].is-visible:not(.has-played) {
+                .reveal[data-reveal="fade-up"].is-visible:not(.has-played) {
                     opacity: 1;
                     transform: translateY(0);
                 }
-                .reveal[data-reveal='slide-left'].is-visible:not(.has-played) {
+                .reveal[data-reveal="slide-left"].is-visible:not(.has-played) {
                     opacity: 1;
                     transform: translateX(0);
                     animation: slideLeftOnce 650ms ease forwards;
                 }
-                .reveal[data-reveal='slide-right'].is-visible:not(.has-played) {
+                .reveal[data-reveal="slide-right"].is-visible:not(.has-played) {
                     opacity: 1;
                     transform: translateX(0);
                     animation: slideRightOnce 650ms ease forwards;

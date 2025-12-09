@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLanguage } from "@/components/LanguageContext";
 
+
 const INDUSTRIES = [
     {
         slug: "agribusiness",
