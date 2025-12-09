@@ -1,7 +1,8 @@
+// app/industries/[slug]/page.jsx
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageContext";
-import HeroVideo from "@/components/HeroVideo";
 
 export const dynamic = "force-dynamic";
 
@@ -685,6 +686,15 @@ export default function IndustrySlugPage({ params }) {
                 ? data.sectorLine_en
                 : `${L.advisoryFor} ${title}.`;
 
+    // hero text fade-in (replays on mount / slug change)
+    const [heroAnimate, setHeroAnimate] = useState(false);
+
+    useEffect(() => {
+        setHeroAnimate(false);
+        const id = requestAnimationFrame(() => setHeroAnimate(true));
+        return () => cancelAnimationFrame(id);
+    }, [slug]);
+
     return (
         <main
             style={{
@@ -716,6 +726,9 @@ export default function IndustrySlugPage({ params }) {
                     }}
                 />
                 <div
+                    className={`industry-hero-content ${
+                        heroAnimate ? "hero-animate" : ""
+                    }`}
                     style={{
                         position: "absolute",
                         top: "50%",
@@ -956,11 +969,51 @@ export default function IndustrySlugPage({ params }) {
                 </p>
             </section>
 
-            {/* local styles for hover / gradient + responsive */}
+            {/* local styles for hero fade, hover / gradient + responsive */}
             <style jsx>{`
                 .industry-hero {
                     height: 65vh;
                     min-height: 420px;
+                    background: radial-gradient(
+                            circle at top,
+                            #050814,
+                            #020308 55%,
+                            #000000 100%
+                    );
+                }
+
+                .industry-hero video {
+                    opacity: 0;
+                    animation: heroVideoFade 900ms ease-out forwards;
+                    will-change: opacity;
+                }
+
+                @keyframes heroVideoFade {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                .industry-hero-content {
+                    opacity: 0;
+                }
+
+                .industry-hero-content.hero-animate {
+                    animation: heroTextFade 850ms ease-out forwards;
+                    animation-delay: 350ms;
+                    will-change: opacity;
+                }
+
+                @keyframes heroTextFade {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
                 }
 
                 .pillar-card {
@@ -971,8 +1024,11 @@ export default function IndustrySlugPage({ params }) {
                     border: 1px solid rgba(0, 0, 0, 0.06);
                     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.06);
                     overflow: hidden;
-                    transition: transform 0.3s ease, box-shadow 0.3s ease,
-                    border-color 0.3s ease, background 0.3s ease;
+                    transition:
+                            transform 0.3s ease,
+                            box-shadow 0.3s ease,
+                            border-color 0.3s ease,
+                            background 0.3s ease;
                 }
 
                 .pillar-card::before {
