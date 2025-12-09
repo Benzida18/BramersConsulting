@@ -251,6 +251,8 @@ export default function ServicesPage() {
                     playsInline
                     className="services-hero-video"
                 />
+                {/* subtle gradient overlay, like About/Industries */}
+                <div className="services-hero-overlay" />
 
                 <div className="services-hero-content">
                     <RevealOnScroll>
@@ -319,6 +321,12 @@ export default function ServicesPage() {
                     position: relative;
                     height: 88vh;
                     overflow: hidden;
+                    background: radial-gradient(
+                            circle at top,
+                            #050814,
+                            #020308 55%,
+                            #000000 100%
+                    ); /* visible while video is loading */
                 }
 
                 .services-hero-video {
@@ -328,6 +336,22 @@ export default function ServicesPage() {
                     height: 100%;
                     object-fit: cover;
                     filter: brightness(60%);
+                    opacity: 0;
+                    animation: heroVideoFade 900ms ease-out forwards;
+                    will-change: opacity;
+                }
+
+                .services-hero-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(
+                            0deg,
+                            rgba(0, 0, 0, 0.6) 0%,
+                            rgba(0, 0, 0, 0.32) 40%,
+                            rgba(0, 0, 0, 0.12) 100%
+                    );
+                    pointer-events: none;
+                    z-index: 1;
                 }
 
                 .services-hero-content {
@@ -340,6 +364,7 @@ export default function ServicesPage() {
                     text-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
                     padding: 0 24px;
                     width: min(90vw, 900px);
+                    z-index: 2;
                 }
 
                 .services-hero-title {
@@ -354,6 +379,15 @@ export default function ServicesPage() {
                     opacity: 0.95;
                     margin: 12px auto 0;
                     line-height: 1.6;
+                }
+
+                @keyframes heroVideoFade {
+                    from {
+                        opacity: 0;
+                    }
+                    to {
+                        opacity: 1;
+                    }
                 }
 
                 /* APPROACH */
@@ -522,7 +556,8 @@ function ServiceCard({ service, ctaLabel }) {
         padding: "26px 26px 22px",
         border: "1px solid rgba(0, 0, 0, 0.06)",
         boxShadow: "0 8px 24px rgba(0, 0, 0, 0.06)",
-        transition: "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
+        transition:
+            "transform .35s ease, box-shadow .35s ease, border-color .35s ease",
         cursor: "default",
         position: "relative",
         overflow: "hidden",
@@ -532,7 +567,7 @@ function ServiceCard({ service, ctaLabel }) {
         fontFamily: "var(--font-playfair)",
         fontSize: 22,
         margin: "2px 0 8px",
-        color: "#0A0A0A",
+        color: "#0a0a0a",
     };
 
     const shortStyle = {

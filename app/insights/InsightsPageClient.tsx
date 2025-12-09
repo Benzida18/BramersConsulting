@@ -195,63 +195,19 @@ export default function InsightsPageClient({ posts }: { posts: InsightCardData[]
     return (
         <main style={{ fontFamily: "var(--font-inter)", color: "#111" }}>
             {/* HERO */}
-            <section
-                style={{ position: "relative", height: "88vh", overflow: "hidden" }}
-            >
+            <section className="insight-hero">
                 <video
+                    className="insight-video"
                     src="/videos/insight.mp4"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        filter: "brightness(60%)",
-                    }}
                 />
-
-                <div
-                    style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        textAlign: "center",
-                        color: "white",
-                        textShadow: "0 8px 28px rgba(0,0,0,0.5)",
-                        padding: "0 24px",
-                        width: "min(90vw, 900px)",
-                    }}
-                >
-                    <RevealOnScroll>
-                        <h1
-                            style={{
-                                fontFamily: "var(--font-playfair)",
-                                fontSize: "64px",
-                                margin: 0,
-                            }}
-                        >
-                            {t.heroTitle}
-                        </h1>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={120}>
-                        <p
-                            style={{
-                                fontSize: "20px",
-                                maxWidth: 740,
-                                opacity: 0.95,
-                                margin: "12px auto 0",
-                                lineHeight: 1.6,
-                            }}
-                        >
-                            {t.heroSubtitle}
-                        </p>
-                    </RevealOnScroll>
+                <div className="insight-hero-overlay" />
+                <div className="insight-hero-text">
+                    <h1>{t.heroTitle}</h1>
+                    <p>{t.heroSubtitle}</p>
                 </div>
             </section>
 

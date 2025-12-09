@@ -1,32 +1,100 @@
 /* ---------- HERO VIDEO (if you ever hook CSS instead of inline) ---------- */
+/* ---------- HERO VIDEO WITH FADE + GRADIENT ---------- */
 .insight-hero {
     position: relative;
     width: 100%;
     height: 75vh;
+    min-height: 420px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* visible while video is loading */
+    background: radial-gradient(
+            circle at top,
+            #050814,
+            #020308 55%,
+            #000000 100%
+    );
 }
 
+/* video fades in like About/Services/Industries */
 .insight-video {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    opacity: 0;
+    animation: insightVideoFade 900ms ease-out forwards;
+    will-change: opacity;
+    filter: brightness(0.6);
 }
 
+/* subtle dark gradient overlay for text contrast */
+.insight-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.6) 0%,
+            rgba(0, 0, 0, 0.32) 40%,
+            rgba(0, 0, 0, 0.12) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* text fades in slightly after video starts */
 .insight-hero-text {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     color: white;
+    padding: 0 24px;
+    z-index: 2;
+
+    opacity: 0;
+    animation: insightTextFade 800ms ease-out 260ms forwards;
+    will-change: opacity;
 }
 
 .insight-hero-text h1 {
     font-size: 72px;
     font-weight: 700;
     font-family: var(--font-playfair), serif;
+    margin: 0;
 }
 
+/* hero responsive tweaks */
+@media (max-width: 768px) {
+    .insight-hero {
+        height: 60vh;
+        min-height: 340px;
+    }
+
+    .insight-hero-text h1 {
+        font-size: 40px;
+    }
+}
+
+/* keyframes */
+@keyframes insightVideoFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes insightTextFade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 /* ---------- GRID / PAGE CONTAINER ---------- */
 
 .insight-grid-container {
