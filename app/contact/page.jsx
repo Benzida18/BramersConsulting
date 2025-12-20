@@ -51,7 +51,7 @@ const COPY = {
         // NEW: sector selection copy (FR)
         interestHeading: "Quels secteurs vous intéressent ?",
         interestOptions: [
-            { value: "Agribusiness", label: "Agro-industriel" },
+            { value: "Agribusiness", label: "Agro-industrie" },
             {
                 value: "Real estate & infrastructure",
                 label: "Immobilier et infrastructures",

@@ -7,7 +7,7 @@ const INDUSTRIES = [
     {
         slug: "agribusiness",
         title_en: "Agribusiness",
-        title_fr: "Agro-Industriel",
+        title_fr: "Agro-Industrie",
         blurb_en:
             "Producers, cooperatives and traders structuring value chains and export links.",
         blurb_fr:

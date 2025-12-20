@@ -29,7 +29,7 @@ const INDUSTRY_CONFIG = {
         image: "/images/agribusiness.jpg",
 
         title: "Agribusiness",
-        title_fr: "Agro-Industriel",
+        title_fr: "Agro-Industrie",
 
         sectorLine_en: "Working with producers, cooperatives and traders in agribusiness.",
         sectorLine_fr:
